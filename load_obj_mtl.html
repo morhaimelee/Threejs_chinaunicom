@@ -12,8 +12,8 @@
     }
 
     .label {
-      width: 200px;
-      height: 200px;
+      width: 100px;
+      height: 50px;
       color: #FFF;
       font-family: sans-serif;
       padding: 2px;
@@ -22,8 +22,8 @@
       text-align: center;
       cursor: pointer;
       position: absolute;
-      top: 10px;
-      line-height: 200px;
+      top: 500px;
+      line-height: 50px;
     }
 
     .moveDiv {
@@ -37,6 +37,24 @@
       line-height: 100px;
       cursor: pointer;
     }
+
+    #bianjie {
+      position: absolute;
+      top: 0;
+      left: 30%;
+      width: 100px;
+      height: 20px;
+      color: #fff;
+
+    }
+    #testDiv {
+      width: 300px;
+      height: 300px;
+      background-color: #FFF;
+      text-align: center;
+      font-size: 20px;
+      color: #fff;
+    }
   </style>
   <script src="https://cdn.staticfile.org/jquery/3.5.0/jquery.min.js"></script>
   <!--引入three.js三维引擎-->
@@ -49,12 +67,16 @@
   <script src="./js/stats.min.js"></script>
   <!--加载控制器-->
   <script src="./js/TrackballControls.js"></script>
+  <!-- 2D渲染器 -->
+  <script src="./js/CSS2DRenderer.js"></script>
   <!--加载缓动插件-->
   <script src="./js/TweenMax.min.js"></script>
 </head>
 
 <body>
   <div class="moveDiv" value="play()">点击移动</div>
+  <!-- <div id="bianjie">便捷通行</div> -->
+  <div id="testDiv">test</div>
   <canvas id="cc"></canvas>
   <script>
     let mixer = null;
@@ -74,10 +96,12 @@
     let model_floor1, model_floor2, model_floor3, model_floor4, model_floor5;
     let model_video1, model_video2, model_video3, model_video4, model_video5;
 
-    let video_path1 = './assets/sexiangtou1.gltf'
-    let video_path2 = './assets/sexiangtou2.gltf'
-    let video_path3 = './assets/sexiangtou3.gltf'
-    let video_path4 = './assets/sexiangtou4.gltf'
+    // let video_path1 = './assets/sexiangtou1.gltf'
+    // let video_path2 = './assets/sexiangtou2.gltf'
+    // let video_path3 = './assets/sexiangtou3.gltf'
+    // let video_path4 = './assets/sexiangtou4.gltf'
+
+    let video_path = './assets/sexiangtou.gltf'
 
     let model_all = [] //所有模型
     let model_all_floor1 = [] //每层所有模型
@@ -89,6 +113,7 @@
     let model_all_floor7 = []
     let model_all_floor8 = []
     let model_all_floor9 = []
+    let model_all_floorB1 = []
 
     // stats
     stats = new Stats();
@@ -98,6 +123,7 @@
     // controls = new THREE.OrbitControls(camera, renderer.domElement);
 
     init();
+
     animate();
 
     function init() {
@@ -117,10 +143,12 @@
       width = window.innerWidth; //窗口宽度
       height = window.innerHeight; //窗口高度
       k = width / height; //窗口宽
-      s = 800; //三维场景显示范围控制系数，系数越大，显示的范围越大
+      // s = 300; //三维场景显示范围控制系数，系数越大，显示的范围越大
+      s = 250;
       //创建相机对象
       camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 20000);
-      camera.position.set(1000, 1000, 2000); //设置相机位置
+      camera.position.set(300, 100, -150); //设置相机位置
+      // camera.position.set(1000, 1000, 2000); //设置相机位置
       // camera.position.z = 2000
 
       // //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
@@ -158,21 +186,16 @@
       ambient = new THREE.AmbientLight(0x72b1ff);
       scene.add(ambient);
 
-      loadModel(video_path1, 'video1');
-      loadModel(video_path2, 'video2');
-      loadModel(video_path3, 'video3');
-      loadModel(video_path4, 'video4');
-
       //非交互模型加载
       GLTFLoader_AllBuild = new THREE.GLTFLoader();
-      GLTFLoader_AllBuild.load('./assets/road2.gltf', function (obj) { //道路及大楼
+      GLTFLoader_AllBuild.load('./assets/index.gltf', function (obj) { //道路及大楼
         objAll = obj
         obj.scene.name = "all"
         scene.add(obj.scene)
       })
 
       GLTFLoader_First = new THREE.GLTFLoader();
-      GLTFLoader_First.load('./assets/firstfloor.gltf', function (obj) { //第一层楼
+      GLTFLoader_First.load('./assets/1floor.gltf', function (obj) { //第一层楼
         model_floor1 = obj.scene
         scene.add(obj.scene)
         obj.scene.name = "1floor"
@@ -234,20 +257,54 @@
         obj.scene.name = "9floor"
       })
 
+      // GLTFLoader_VideoB1 = new THREE.GLTFLoader();
+      // GLTFLoader_VideoB1.load('./assets/b1.gltf', function (obj) {
+      //   model_floorB1 = obj.scene
+      //   scene.add(obj.scene)
+      //   obj.scene.name = "B1floor"
+      // })
+
+      loadModel(video_path, 'video1', 1, -50.132, 30.287, 195.904)
+      loadModel(video_path, 'video2', 1, -47.173, 30.287, 171.65)
+      loadModel(video_path, 'video3', 1, -0.72, 2.4, -6.34)
+      loadModel(video_path, 'video4', 1, -5.72, 2.4, -6.34)
+
+      var testDiv = document.getElementById('testDiv');
+      var moonLabel = new THREE.CSS2DObject(testDiv);
+      moonLabel.position.set(0, 1, 0);
+      scene.add(moonLabel)
+
+      // var labelRenderer = new THREE.CSS2DRenderer();
+      // labelRenderer.setSize(window.innerWidth, window.innerHeight);
+      // labelRenderer.domElement.style.position = 'absolute';
+      // labelRenderer.domElement.style.top = 0;
+      // labelRenderer.render( scene, camera );
     }
 
     // 点击隐藏
     var moonDiv = document.createElement('div');
     moonDiv.className = 'label';
-    moonDiv.textContent = '点击返回';
+    moonDiv.textContent = '点击折叠';
     let bodyDom = document.body;
     bodyDom.insertBefore(moonDiv, bodyDom.lastChild);
 
 
-    let tween1, tween2, tween3, tween4, tween5, tween6, tween7, tween8, tween9;
+    let model_all_num = {}
+    model_all_num['model_all_floor' + 1] = []
+    model_all_num['model_all_floor' + 2] = []
+    model_all_num['model_all_floor' + 3] = []
+    model_all_num['model_all_floor' + 4] = []
+    model_all_num['model_all_floor' + 5] = []
+    model_all_num['model_all_floor' + 6] = []
+    model_all_num['model_all_floor' + 7] = []
+    model_all_num['model_all_floor' + 8] = []
+    model_all_num['model_all_floor' + 9] = []
+
+
+    let tween1, tween2, tween3, tween4, tween5, tween6, tween7, tween8, tween9, tween10;
 
     $('.label').on('click', function () {
-      if (model_floor1.position.y != -800) {
+      if (model_floor1.position.y != -120) {
         return
       } else {
         tween1.reversed(!tween1.reversed())
@@ -259,6 +316,7 @@
         tween7.reversed(!tween7.reversed())
         tween8.reversed(!tween8.reversed())
         tween9.reversed(!tween9.reversed())
+        // tween10.reversed(!tween10.reversed())
       }
 
     })
@@ -270,14 +328,13 @@
         return
       } else {
         //获取摄像头模型
-        model_video1 = scene.getObjectByName('video1')
-        model_video2 = scene.getObjectByName('video2')
-        model_video3 = scene.getObjectByName('video3')
-        model_video4 = scene.getObjectByName('video4')
+        // model_video1 = scene.getObjectByName('video1')
+        // model_video2 = scene.getObjectByName('video2')
+        // model_video3 = scene.getObjectByName('video3')
+        // model_video4 = scene.getObjectByName('video4')
 
         //增加每层模型
-        model_all_floor1.push(model_floor1.position, model_video1.position, model_video2.position, model_video3
-          .position, model_video4.position)
+        model_all_num['model_all_floor' + 1].push(model_floor1.position)
         model_all_floor2.push(model_floor2.position)
         model_all_floor3.push(model_floor3.position)
         model_all_floor4.push(model_floor4.position)
@@ -286,43 +343,48 @@
         model_all_floor7.push(model_floor7.position)
         model_all_floor8.push(model_floor8.position)
         model_all_floor9.push(model_floor9.position)
+        // model_all_floorB1.push(model_floorB1.position)
 
-        tween1 = TweenMax.to(model_all_floor1, 2, {
-          y: -800,
+        tween1 = TweenMax.to(model_all_num['model_all_floor' + 1], 2, {
+          y: -120,
           ease: Power3.easeOut //Linear.easeNone
         });
         tween2 = TweenMax.to(model_all_floor2, 2, {
-          y: -500,
+          y: -90,
           ease: Power3.easeOut
         });
         tween3 = TweenMax.to(model_all_floor3, 2, {
-          y: -200,
+          y: -60,
           ease: Power3.easeOut
         });
         tween4 = TweenMax.to(model_all_floor4, 2, {
-          y: 100,
+          y: -30,
           ease: Power3.easeOut
         });
         tween5 = TweenMax.to(model_all_floor5, 2, {
-          y: 300,
+          y: 0,
           ease: Power3.easeOut
         });
         tween6 = TweenMax.to(model_all_floor6, 2, {
-          y: 500,
+          y: 30,
           ease: Power3.easeOut
         });
         tween7 = TweenMax.to(model_all_floor7, 2, {
-          y: 700,
+          y: 60,
           ease: Power3.easeOut
         });
         tween8 = TweenMax.to(model_all_floor8, 2, {
-          y: 900,
+          y: 90,
           ease: Power3.easeOut
         });
         tween9 = TweenMax.to(model_all_floor9, 2, {
-          y: 1100,
+          y: 120,
           ease: Power3.easeOut
         });
+        // tween10 = TweenMax.to(model_all_floorB1, 2, {
+        //   y: -1000,
+        //   ease: Power3.easeOut
+        // });
         // modelTraverse()
         // removeEntity(objAll)
         // moveFloor()
@@ -335,6 +397,7 @@
         tween7.play()
         tween8.play()
         tween9.play()
+        // tween10.play()
       }
 
       // let component = model_floor1.getObjectByName('1floor')
@@ -342,29 +405,6 @@
 
     var test = 'model_video'
     let model_position
-
-    //楼层移动动画
-    function moveFloor() {
-      // var myTween = new TweenMax()
-
-      // TweenMax.to(model_all_floor1, 2, {
-      //   y: -500,
-      //   ease: Power3.easeOut,
-      //   onStart: function () {
-      //     TweenMax.to(model_floor2.position, 2, {
-      //       y: -200,
-      //       ease: Power3.easeOut,
-      //       onStart: function () {
-      //         TweenMax.to(model_floor3.position, 2, {
-      //           y: 200,
-      //           ease: Power3.easeOut
-      //         });
-      //       }
-      //     });
-      //   }
-      // });
-    }
-    //移动模型
 
     //隐藏模型 
     function removeEntity(object) {
@@ -393,19 +433,24 @@
       renderer.render(scene, camera);
     }
 
-    function loadModel(path, gltf_name) {
-      new THREE.GLTFLoader().load(path, function (gltf) {
-        gltf.scene.name = gltf_name
-        model = gltf.scene.children[0];
 
+    function loadModel(path, gltf_name, floor_num, pst_x, pst_y, pst_z) {
+      new THREE.GLTFLoader().load(path, function (gltf) {
+        gltf.scene.name = gltf_name //set模型名字
+        gltf.scene.position.set(pst_x, pst_y, pst_z);//set模型位置
+
+        model_all_num['model_all_floor' + floor_num].push(gltf.scene.position)//添加模型所在楼层位置
+
+        console.log(model_all_num['model_all_floor' + floor_num])
         // model.position.set(0, 60, 0);
-        // let sc = 1;
+        let sc = 2;
+        model = gltf.scene.children[0];
         model.traverse(function (child) {
           //对模型体内的每个几何体进行遍历
           if (child.isMesh) {
             child.castShadow = true; //允许模型本身对自己产生阴影
             child.receiveShadow = true; //接受阴影渲染
-            // child.scale.set(sc, sc, sc); //模型重置比例放大。
+            child.scale.set(sc, sc, sc); //模型重置比例放大。
 
             Vplace1.push(child);
           }
@@ -451,7 +496,7 @@
       var intersects = raycaster.intersectObjects(Bplace); //Bplace为需要被点击的目标体池集合
 
       if (intersects.length > 0) {
-        // console.log('拾取到了');
+        console.log('拾取到了');
         let obj = intersects[0].object;
 
         //递归找爹
