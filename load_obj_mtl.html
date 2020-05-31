@@ -11,7 +11,7 @@
       /* 隐藏body窗口区域滚动条 */
     }
 
-    .label {
+    /* .label {
       width: 100px;
       height: 50px;
       color: #FFF;
@@ -24,7 +24,7 @@
       position: absolute;
       top: 500px;
       line-height: 50px;
-    }
+    } */
 
     .moveDiv {
       width: 150px;
@@ -55,7 +55,15 @@
       line-height: 1;
       border-radius: 5px;
     }
+
+    .videoIcon {
+      width: 37px;
+      height: 47px;
+      position: absolute;
+      background: url('./assets/imgs/摄像头.png') center center no-repeat;
+    }
   </style>
+  <link rel="stylesheet" href="./css/index.css">
   <script src="https://cdn.staticfile.org/jquery/3.5.0/jquery.min.js"></script>
   <!--引入three.js三维引擎-->
   <script src="./js/three.js"></script>
@@ -74,10 +82,27 @@
 </head>
 
 <body onload="draw();">
-  <div class="moveDiv" value="play()">点击移动</div>
+  <!-- <div class="moveDiv">点击移动</div> -->
   <!-- <div id="bianjie">便捷通行</div> -->
   <div class="testDiv"></div>
   <canvas id="cc"></canvas>
+  <div class="topleft"></div>
+  <nav class="nav">
+    <ul>
+      <li class="fl">人员通行</li>
+      <li class="fl">综合安防</li>
+      <li class="fl">能源管理</li>
+      <li class="fl">环境管理</li>
+      <li class="fl">办公运营</li>
+    </ul>
+  </nav>
+  <div class="rightBox"></div>
+  <div class="rightTop"></div>
+  <div class="btn_left" id="people_moni">人员监控</div>
+  <div class="btn_left" id="import_ex">闸机</div>
+  <div class="btn_left" id="in_ex_floor" value="play()">进入楼层</div>
+  <div class="btn_left" id="fold_floor">折叠楼层</div>
+
   <script>
     let mixer = null;
     let objAll = null;
@@ -183,21 +208,21 @@
       scene.add(ambient);
 
       //天空盒
-      var path = "./assets/background/";//设置路径
-      var directions = ["px", "nx", "py", "ny", "pz", "nz"];//获取对象
-      var format = ".png";//格式
+      var path = "./assets/background/"; //设置路径
+      var directions = ["px", "nx", "py", "ny", "pz", "nz"]; //获取对象
+      var format = ".png"; //格式
       //创建盒子，并设置盒子的大小为( 5000, 5000, 5000 )
       var skyGeometry = new THREE.BoxGeometry(1000, 1000, 1000);
       //设置盒子材质
       var materialArray = [];
       for (var i = 0; i < 6; i++)
         materialArray.push(new THREE.MeshBasicMaterial({
-          map: THREE.ImageUtils.loadTexture(path + directions[i] + format),//将图片纹理贴上
-          side: THREE.BackSide/*镜像翻转，如果设置镜像翻转，那么只会看到黑漆漆的一片，因为你身处在盒子的内部，所以一定要设置镜像翻转。*/
+          map: THREE.ImageUtils.loadTexture(path + directions[i] + format), //将图片纹理贴上
+          side: THREE.BackSide /*镜像翻转，如果设置镜像翻转，那么只会看到黑漆漆的一片，因为你身处在盒子的内部，所以一定要设置镜像翻转。*/
         }));
       var skyMaterial = new THREE.MeshFaceMaterial(materialArray);
-      var skyBox = new THREE.Mesh(skyGeometry, skyMaterial);//创建一个完整的天空盒，填入几何模型和材质的参数
-      scene.add(skyBox);//在场景中加入天空盒
+      var skyBox = new THREE.Mesh(skyGeometry, skyMaterial); //创建一个完整的天空盒，填入几何模型和材质的参数
+      scene.add(skyBox); //在场景中加入天空盒
 
       //非交互模型加载
       // GLTFLoader_AllBuild = new THREE.GLTFLoader();
@@ -275,11 +300,11 @@
 
 
     // 点击隐藏
-    var moonDiv = document.createElement('div');
-    moonDiv.className = 'label';
-    moonDiv.textContent = '点击折叠';
-    let bodyDom = document.body;
-    bodyDom.insertBefore(moonDiv, bodyDom.lastChild);
+    // var moonDiv = document.createElement('div');
+    // moonDiv.className = 'label';
+    // moonDiv.textContent = '点击折叠';
+    // let bodyDom = document.body;
+    // bodyDom.insertBefore(moonDiv, bodyDom.lastChild);
 
 
     let model_all_num = {}
@@ -296,7 +321,7 @@
 
     let tween1, tween2, tween3, tween4, tween5, tween6, tween7, tween8, tween9, tween10;
 
-    $('.label').on('click', function () {
+    $('#fold_floor').on('click', function () {
       if (model_floor1.position.y != -120) {
         return
       } else {
@@ -314,7 +339,7 @@
 
     })
     //点击移动
-    $('.moveDiv').on('click', function () {
+    $('#in_ex_floor').on('click', function () {
       console.log(model_floor1.position.y)
       removeEntity('all')
       if (model_floor1.position.y != 0) {
@@ -422,10 +447,10 @@
 
     function draw() {
       init();
-      loadModel(video_path, 'video1', 3, 50.132, 30.287, 195.904)
-      loadModel(video_path, 'video2', 3, 47.173, 30.287, 171.65)
-      loadModel(video_path, 'video3', 3, -0.72, 2.4, -6.34)
-      loadModel(video_path, 'video4', 5, 0, 0, 0)
+      loadModel(video_path, 'video1', 3, -25.2, 0, 0)
+      loadModel(video_path, 'video2', 3, -23.93, 0, -53.375)
+      loadModel(video_path, 'video3', 3, 4.84, 0, 70.834)
+      loadModel(video_path, 'video4', 3, 0, 0, 0)
       initStats();
       animate()
     }
@@ -446,41 +471,44 @@
     }
     // 更新div的位置
     function renderDiv(object, intersect) {
-      let { point: { x, y, z } } = intersect;
+      let {
+        point: {
+          x,
+          y,
+          z
+        }
+      } = intersect;
       let position = world2Screen(x, y, z);
-
-      $(".testDiv").text(object.name).css({ 'left': position.x + 'px', 'top': position.y + 'px' });
+      console.log(createIcon(object.name))
+      // let testIcon = createIcon(object.name)
+      createIcon(object.name).css({
+        'left': position.x + (-20) + 'px',
+        'top': position.y + (-55) + 'px'
+      })
+      $(".testDiv").text(object.name).css({
+        'left': position.x + 'px',
+        'top': position.y + 25 + 'px'
+      });
     }
-    // function renderDiv(object) {
-    //   // var vector = new THREE.Vector3();
-    //   // 获取窗口的一半高度和宽度
-    //   let halfWidth = window.innerWidth / 2;
-    //   let halfHeight = window.innerHeight / 2;
 
-    //   // let vector1 = object.position.clone().project(camera);
-
-    //   object.updateMatrixWorld();//更新下对象的世界坐标/世界矩阵
-
-    //   // 逆转相机求出二维坐标
-    //   let vector = object.position.clone().project(camera);
-    //   // vector.setFromMatrixPosition(object.matrixWorld);
-    //   // vector.project(camera);
-
-    //   console.log((vector.x * halfWidth) + halfWidth)
-    //   console.log(-(vector.y * halfHeight) + halfHeight)
-    //   // 修改 div 的位置
-    //   $(".testDiv").css({
-    //     left: Math.round((vector.x * halfWidth) + halfWidth),// - object.position.x,
-    //     top: Math.round(-(vector.y * halfHeight) + halfHeight)
-    //   });
-    //   // 显示模型信息
-    //   $(".testDiv").text("name:" + object.name);
-    // }
+    //添加ICON的dom
+    function createIcon(video_id) {
+      let iconDiv = document.createElement('div');
+      iconDiv.className = 'videoIcon';
+      iconDiv.id = video_id
+      // moonDiv.textContent = '点击折叠';
+      let bodyDom = document.body
+      bodyDom.insertBefore(iconDiv, bodyDom.lastChild);
+      // let iconDivid = document.getElementById(video_id)
+      let iconDivid = $('#' + video_id)
+      return iconDivid
+    }
 
     function animate() {
       // setTimeout(() => {
       //   renderDiv(scene.getObjectByName('video1'))
       // }, 10000);
+
       stats.update();
       controls.update();
       renderer.render(scene, camera);
@@ -490,9 +518,9 @@
     function loadModel(path, gltf_name, floor_num, pst_x, pst_y, pst_z) {
       new THREE.GLTFLoader().load(path, function (gltf) {
         gltf.scene.name = gltf_name //set模型名字
-        gltf.scene.position.set(pst_x, pst_y, pst_z);//set模型位置
+        gltf.scene.position.set(pst_x, pst_y, pst_z); //set模型位置
 
-        model_all_num['model_all_floor' + floor_num].push(gltf.scene.position)//添加模型所在楼层位置
+        model_all_num['model_all_floor' + floor_num].push(gltf.scene.position) //添加模型所在楼层位置
 
         console.log(model_all_num['model_all_floor' + floor_num])
         // model.position.set(0, 60, 0);
@@ -518,7 +546,9 @@
     }, false);
 
     function getGroup(groupName, mesh) {
-      let { parent } = mesh;
+      let {
+        parent
+      } = mesh;
       while (parent) {
         if (parent.isGroup && parent.name === groupName) {
           return parent;
@@ -601,17 +631,6 @@
         }
 
         // console.log(`hello ${name}`) 
-
-        // let model;
-        // for (let i = 0; i < scene.children.length; i++) {
-        //   let child = scene.children[i];
-        //   if (child.isGroup) {
-
-        //     model = child.children[0];
-        //     console.log(model)
-        //     console.log(model.children[0])
-        //   }
-        // }
 
       }
     }
