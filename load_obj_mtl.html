@@ -232,68 +232,68 @@
       //   scene.add(obj.scene)
       // })
 
-      GLTFLoader_First = new THREE.GLTFLoader();
-      GLTFLoader_First.load('./assets/1floor.gltf', function (obj) { //第一层楼
-        model_floor1 = obj.scene
-        scene.add(obj.scene)
-        obj.scene.name = "1floor"
-      })
+      // GLTFLoader_First = new THREE.GLTFLoader();
+      // GLTFLoader_First.load('./assets/1floor.gltf', function (obj) { //第一层楼
+      //   model_floor1 = obj.scene
+      //   scene.add(obj.scene)
+      //   obj.scene.name = "1floor"
+      // })
 
-      GLTFLoader_Video2 = new THREE.GLTFLoader();
-      GLTFLoader_Video2.load('./assets/2floor.gltf', function (obj) {
-        model_floor2 = obj.scene
-        scene.add(obj.scene)
-        obj.scene.name = "2floor"
-      })
+      // GLTFLoader_Video2 = new THREE.GLTFLoader();
+      // GLTFLoader_Video2.load('./assets/2floor.gltf', function (obj) {
+      //   model_floor2 = obj.scene
+      //   scene.add(obj.scene)
+      //   obj.scene.name = "2floor"
+      // })
 
-      GLTFLoader_Video3 = new THREE.GLTFLoader();
-      GLTFLoader_Video3.load('./assets/3floor.gltf', function (obj) {
-        model_floor3 = obj.scene
-        scene.add(obj.scene)
-        obj.scene.name = "3floor"
-      })
+      // GLTFLoader_Video3 = new THREE.GLTFLoader();
+      // GLTFLoader_Video3.load('./assets/3floor.gltf', function (obj) {
+      //   model_floor3 = obj.scene
+      //   scene.add(obj.scene)
+      //   obj.scene.name = "3floor"
+      // })
 
-      GLTFLoader_Video4 = new THREE.GLTFLoader();
-      GLTFLoader_Video4.load('./assets/4floor.gltf', function (obj) {
-        model_floor4 = obj.scene
-        scene.add(obj.scene)
-        obj.scene.name = "4floor"
-      })
+      // GLTFLoader_Video4 = new THREE.GLTFLoader();
+      // GLTFLoader_Video4.load('./assets/4floor.gltf', function (obj) {
+      //   model_floor4 = obj.scene
+      //   scene.add(obj.scene)
+      //   obj.scene.name = "4floor"
+      // })
 
-      GLTFLoader_Video5 = new THREE.GLTFLoader();
-      GLTFLoader_Video5.load('./assets/5floor.gltf', function (obj) {
-        model_floor5 = obj.scene
-        scene.add(obj.scene)
-        obj.scene.name = "5floor"
-      })
+      // GLTFLoader_Video5 = new THREE.GLTFLoader();
+      // GLTFLoader_Video5.load('./assets/5floor.gltf', function (obj) {
+      //   model_floor5 = obj.scene
+      //   scene.add(obj.scene)
+      //   obj.scene.name = "5floor"
+      // })
 
-      GLTFLoader_Video6 = new THREE.GLTFLoader();
-      GLTFLoader_Video6.load('./assets/6floor.gltf', function (obj) {
-        model_floor6 = obj.scene
-        scene.add(obj.scene)
-        obj.scene.name = "6floor"
-      })
+      // GLTFLoader_Video6 = new THREE.GLTFLoader();
+      // GLTFLoader_Video6.load('./assets/6floor.gltf', function (obj) {
+      //   model_floor6 = obj.scene
+      //   scene.add(obj.scene)
+      //   obj.scene.name = "6floor"
+      // })
 
-      GLTFLoader_Video7 = new THREE.GLTFLoader();
-      GLTFLoader_Video7.load('./assets/7floor.gltf', function (obj) {
-        model_floor7 = obj.scene
-        scene.add(obj.scene)
-        obj.scene.name = "7floor"
-      })
+      // GLTFLoader_Video7 = new THREE.GLTFLoader();
+      // GLTFLoader_Video7.load('./assets/7floor.gltf', function (obj) {
+      //   model_floor7 = obj.scene
+      //   scene.add(obj.scene)
+      //   obj.scene.name = "7floor"
+      // })
 
-      GLTFLoader_Video8 = new THREE.GLTFLoader();
-      GLTFLoader_Video8.load('./assets/8floor.gltf', function (obj) {
-        model_floor8 = obj.scene
-        scene.add(obj.scene)
-        obj.scene.name = "8floor"
-      })
+      // GLTFLoader_Video8 = new THREE.GLTFLoader();
+      // GLTFLoader_Video8.load('./assets/8floor.gltf', function (obj) {
+      //   model_floor8 = obj.scene
+      //   scene.add(obj.scene)
+      //   obj.scene.name = "8floor"
+      // })
 
-      GLTFLoader_Video9 = new THREE.GLTFLoader();
-      GLTFLoader_Video9.load('./assets/9floor.gltf', function (obj) {
-        model_floor9 = obj.scene
-        scene.add(obj.scene)
-        obj.scene.name = "9floor"
-      })
+      // GLTFLoader_Video9 = new THREE.GLTFLoader();
+      // GLTFLoader_Video9.load('./assets/9floor.gltf', function (obj) {
+      //   model_floor9 = obj.scene
+      //   scene.add(obj.scene)
+      //   obj.scene.name = "9floor"
+      // })
 
 
     }
@@ -470,26 +470,26 @@
       return result;
     }
     // 更新div的位置
-    function renderDiv(object, intersect) {
-      let {
-        point: {
-          x,
-          y,
-          z
-        }
-      } = intersect;
-      let position = world2Screen(x, y, z);
-      console.log(createIcon(object.name))
-      // let testIcon = createIcon(object.name)
-      createIcon(object.name).css({
-        'left': position.x + (-20) + 'px',
-        'top': position.y + (-55) + 'px'
-      })
-      $(".testDiv").text(object.name).css({
-        'left': position.x + 'px',
-        'top': position.y + 25 + 'px'
-      });
-    }
+    // function renderDiv(object, intersect) {
+    //   let {
+    //     point: {
+    //       x,
+    //       y,
+    //       z
+    //     }
+    //   } = intersect;
+    //   let position = world2Screen(x, y, z);
+    //   console.log(createIcon(object.name))
+    //   // let testIcon = createIcon(object.name)
+    // createIcon(object.name).css({
+    //   'left': position.x + (-20) + 'px',
+    //   'top': position.y + (-55) + 'px'
+    // })
+    //   $(".testDiv").text(object.name).css({
+    //     'left': position.x + 'px',
+    //     'top': position.y + 25 + 'px'
+    //   });
+    // }
 
     //添加ICON的dom
     function createIcon(video_id) {
@@ -504,15 +504,57 @@
       return iconDivid
     }
 
-    function animate() {
-      // setTimeout(() => {
-      //   renderDiv(scene.getObjectByName('video1'))
-      // }, 10000);
+    function renderDiv() {
+      let halfWidth = window.innerWidth / 2;
+      let halfHeight = window.innerHeight / 2;
 
+      let xOffset = -18;
+      let yOffset = -60;
+
+      let testDiv = $(".testDiv");
+      let groupNames = ['video1', 'video2', 'video3', 'video4'];
+      for (let i = 0; i < groupNames.length; i++) {
+        let groupName = groupNames[i];
+        let group = scene.getObjectByName(groupName);
+        if (group) {
+          let mesh;
+          group.traverse(function (child) {
+            if (child.isMesh) {
+              mesh = child;
+            }
+          });
+
+          let vector = new THREE.Vector3();
+          mesh.getWorldPosition(vector);
+          vector.project(camera);
+          // $("#" + groupName).css({
+          //   left: vector.x * halfWidth + halfWidth + xOffset,
+          //   top: -vector.y * halfHeight + halfHeight + yOffset
+          // });
+          createIcon(groupName).css({
+            'left': vector.x * halfWidth + halfWidth + (-20) + 'px',
+            'top': -vector.y * halfHeight + halfHeight + (-55) + 'px'
+          })
+
+          let g = testDiv.data('group');
+          if (g === groupName) {
+            $(".testDiv").text(groupName).css({
+              left: vector.x * halfWidth + halfWidth + 10,
+              top: -vector.y * halfHeight + halfHeight + 10
+            });
+          }
+        }
+      }
+    }
+
+    function animate() {
       stats.update();
       controls.update();
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
+
+      renderDiv()
+
     }
 
     function loadModel(path, gltf_name, floor_num, pst_x, pst_y, pst_z) {
@@ -592,46 +634,24 @@
         console.log('拾取到了');
 
         let obj = intersects[0].object;
-        if (getGroup("video4", obj)) {
 
-          let child = getGroup("video4", obj)
-          renderDiv(child, intersects[0]);
-          child.traverse(function (obj) {
-            if (obj.isMesh) {
-              obj.material.color.set(0xff0000);
-            }
-          })
-        } else if (getGroup("video3", obj)) {
+        let groupNames = ['video1', 'video2', 'video3', 'video4'];
+        for (let i = 0; i < groupNames.length; i++) {
+          let groupName = groupNames[i];
+          let group = scene.getObjectByName(groupName);
 
-          let child = getGroup("video3", obj)
-          renderDiv(child, intersects[0]);
-          child.traverse(function (obj) {
-            if (obj.isMesh) {
-              obj.material.color.set(0xff0000);
-            }
-          })
-        } else if (getGroup("video2", obj)) {
+          if (getGroup(groupName, obj)) {
+            let child = scene.getObjectByName(groupName);
+            child.traverse(function (obj) {
+              if (obj.isMesh) {
+                obj.material.color.set(0xff0000);
+              }
+            });
 
-          let child = getGroup("video2", obj)
-          renderDiv(child, intersects[0]);
-          child.traverse(function (obj) {
-            if (obj.isMesh) {
-              obj.material.color.set(0xff0000);
-            }
-          })
-        } else if (getGroup("video1", obj)) {
-
-          let child = getGroup("video1", obj)
-          renderDiv(child, intersects[0]);
-          child.traverse(function (obj) {
-            if (obj.isMesh) {
-              obj.material.color.set(0xff0000);
-            }
-          })
+            $("#" + groupName).show();
+            $(".testDiv").data('group', groupName);
+          }
         }
-
-        // console.log(`hello ${name}`) 
-
       }
     }
   </script>
