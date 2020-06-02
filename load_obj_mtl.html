@@ -61,6 +61,7 @@
       height: 47px;
       position: absolute;
       background: url('./assets/imgs/摄像头.png') center center no-repeat;
+      display: none;
     }
   </style>
   <link rel="stylesheet" href="./css/index.css">
@@ -225,75 +226,75 @@
       scene.add(skyBox); //在场景中加入天空盒
 
       //非交互模型加载
-      // GLTFLoader_AllBuild = new THREE.GLTFLoader();
-      // GLTFLoader_AllBuild.load('./assets/index.gltf', function (obj) { //道路及大楼
-      //   objAll = obj
-      //   obj.scene.name = "all"
-      //   scene.add(obj.scene)
-      // })
+      GLTFLoader_AllBuild = new THREE.GLTFLoader();
+      GLTFLoader_AllBuild.load('./assets/index.gltf', function (obj) { //道路及大楼
+        objAll = obj
+        obj.scene.name = "all"
+        scene.add(obj.scene)
+      })
 
-      // GLTFLoader_First = new THREE.GLTFLoader();
-      // GLTFLoader_First.load('./assets/1floor.gltf', function (obj) { //第一层楼
-      //   model_floor1 = obj.scene
-      //   scene.add(obj.scene)
-      //   obj.scene.name = "1floor"
-      // })
+      GLTFLoader_First = new THREE.GLTFLoader();
+      GLTFLoader_First.load('./assets/1floor.gltf', function (obj) { //第一层楼
+        model_floor1 = obj.scene
+        scene.add(obj.scene)
+        obj.scene.name = "1floor"
+      })
 
-      // GLTFLoader_Video2 = new THREE.GLTFLoader();
-      // GLTFLoader_Video2.load('./assets/2floor.gltf', function (obj) {
-      //   model_floor2 = obj.scene
-      //   scene.add(obj.scene)
-      //   obj.scene.name = "2floor"
-      // })
+      GLTFLoader_Video2 = new THREE.GLTFLoader();
+      GLTFLoader_Video2.load('./assets/2floor.gltf', function (obj) {
+        model_floor2 = obj.scene
+        scene.add(obj.scene)
+        obj.scene.name = "2floor"
+      })
 
-      // GLTFLoader_Video3 = new THREE.GLTFLoader();
-      // GLTFLoader_Video3.load('./assets/3floor.gltf', function (obj) {
-      //   model_floor3 = obj.scene
-      //   scene.add(obj.scene)
-      //   obj.scene.name = "3floor"
-      // })
+      GLTFLoader_Video3 = new THREE.GLTFLoader();
+      GLTFLoader_Video3.load('./assets/3floor.gltf', function (obj) {
+        model_floor3 = obj.scene
+        scene.add(obj.scene)
+        obj.scene.name = "3floor"
+      })
 
-      // GLTFLoader_Video4 = new THREE.GLTFLoader();
-      // GLTFLoader_Video4.load('./assets/4floor.gltf', function (obj) {
-      //   model_floor4 = obj.scene
-      //   scene.add(obj.scene)
-      //   obj.scene.name = "4floor"
-      // })
+      GLTFLoader_Video4 = new THREE.GLTFLoader();
+      GLTFLoader_Video4.load('./assets/4floor.gltf', function (obj) {
+        model_floor4 = obj.scene
+        scene.add(obj.scene)
+        obj.scene.name = "4floor"
+      })
 
-      // GLTFLoader_Video5 = new THREE.GLTFLoader();
-      // GLTFLoader_Video5.load('./assets/5floor.gltf', function (obj) {
-      //   model_floor5 = obj.scene
-      //   scene.add(obj.scene)
-      //   obj.scene.name = "5floor"
-      // })
+      GLTFLoader_Video5 = new THREE.GLTFLoader();
+      GLTFLoader_Video5.load('./assets/5floor.gltf', function (obj) {
+        model_floor5 = obj.scene
+        scene.add(obj.scene)
+        obj.scene.name = "5floor"
+      })
 
-      // GLTFLoader_Video6 = new THREE.GLTFLoader();
-      // GLTFLoader_Video6.load('./assets/6floor.gltf', function (obj) {
-      //   model_floor6 = obj.scene
-      //   scene.add(obj.scene)
-      //   obj.scene.name = "6floor"
-      // })
+      GLTFLoader_Video6 = new THREE.GLTFLoader();
+      GLTFLoader_Video6.load('./assets/6floor.gltf', function (obj) {
+        model_floor6 = obj.scene
+        scene.add(obj.scene)
+        obj.scene.name = "6floor"
+      })
 
-      // GLTFLoader_Video7 = new THREE.GLTFLoader();
-      // GLTFLoader_Video7.load('./assets/7floor.gltf', function (obj) {
-      //   model_floor7 = obj.scene
-      //   scene.add(obj.scene)
-      //   obj.scene.name = "7floor"
-      // })
+      GLTFLoader_Video7 = new THREE.GLTFLoader();
+      GLTFLoader_Video7.load('./assets/7floor.gltf', function (obj) {
+        model_floor7 = obj.scene
+        scene.add(obj.scene)
+        obj.scene.name = "7floor"
+      })
 
-      // GLTFLoader_Video8 = new THREE.GLTFLoader();
-      // GLTFLoader_Video8.load('./assets/8floor.gltf', function (obj) {
-      //   model_floor8 = obj.scene
-      //   scene.add(obj.scene)
-      //   obj.scene.name = "8floor"
-      // })
+      GLTFLoader_Video8 = new THREE.GLTFLoader();
+      GLTFLoader_Video8.load('./assets/8floor.gltf', function (obj) {
+        model_floor8 = obj.scene
+        scene.add(obj.scene)
+        obj.scene.name = "8floor"
+      })
 
-      // GLTFLoader_Video9 = new THREE.GLTFLoader();
-      // GLTFLoader_Video9.load('./assets/9floor.gltf', function (obj) {
-      //   model_floor9 = obj.scene
-      //   scene.add(obj.scene)
-      //   obj.scene.name = "9floor"
-      // })
+      GLTFLoader_Video9 = new THREE.GLTFLoader();
+      GLTFLoader_Video9.load('./assets/9floor.gltf', function (obj) {
+        model_floor9 = obj.scene
+        scene.add(obj.scene)
+        obj.scene.name = "9floor"
+      })
 
 
     }
@@ -452,7 +453,11 @@
       loadModel(video_path, 'video3', 3, 4.84, 0, 70.834)
       loadModel(video_path, 'video4', 3, 0, 0, 0)
       initStats();
-      animate()
+      animate();
+      createIcon('video1')
+      createIcon('video2')
+      createIcon('video3')
+      createIcon('video4')
     }
 
     function world2Screen(x, y, z) {
@@ -493,16 +498,18 @@
 
     //添加ICON的dom
     function createIcon(video_id) {
+
       let iconDiv = document.createElement('div');
       iconDiv.className = 'videoIcon';
       iconDiv.id = video_id
-      // moonDiv.textContent = '点击折叠';
       let bodyDom = document.body
       bodyDom.insertBefore(iconDiv, bodyDom.lastChild);
-      // let iconDivid = document.getElementById(video_id)
       let iconDivid = $('#' + video_id)
+      console.log(iconDivid)
       return iconDivid
     }
+
+
 
     function renderDiv() {
       let halfWidth = window.innerWidth / 2;
@@ -513,6 +520,8 @@
 
       let testDiv = $(".testDiv");
       let groupNames = ['video1', 'video2', 'video3', 'video4'];
+
+
       for (let i = 0; i < groupNames.length; i++) {
         let groupName = groupNames[i];
         let group = scene.getObjectByName(groupName);
@@ -531,10 +540,10 @@
           //   left: vector.x * halfWidth + halfWidth + xOffset,
           //   top: -vector.y * halfHeight + halfHeight + yOffset
           // });
-          createIcon(groupName).css({
-            'left': vector.x * halfWidth + halfWidth + (-20) + 'px',
-            'top': -vector.y * halfHeight + halfHeight + (-55) + 'px'
-          })
+          $("#" + groupName).css({
+            left: vector.x * halfWidth + halfWidth + xOffset,
+            top: -vector.y * halfHeight + halfHeight + yOffset
+          });
 
           let g = testDiv.data('group');
           if (g === groupName) {
@@ -552,9 +561,7 @@
       controls.update();
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
-
       renderDiv()
-
     }
 
     function loadModel(path, gltf_name, floor_num, pst_x, pst_y, pst_z) {
@@ -654,6 +661,10 @@
         }
       }
     }
+    //人员监控按钮
+    $('#people_moni').on('click', function () {
+
+    })
   </script>
 
 </body>
