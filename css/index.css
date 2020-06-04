@@ -147,3 +147,31 @@ ul,ol,li{
   top: 290px;
   left: 40px;
 }
+.selected {
+    color: #4DFFFF;
+}
+#bottomFloor {
+    width: 380px;
+    height: 32px;
+    background: url('../assets/imgs/中间.png') center center no-repeat;
+    position: absolute;
+    bottom: 84px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    line-height: 32px;
+    text-align: center;
+}
+#bottomFloor ul {
+    width: 360px;
+    display: flex;
+    padding: 0 10px 0 10px;
+}
+#bottomFloor ul li {
+    width: 40px;
+    flex: auto;
+    cursor: pointer;
+}
+/* #bottomFloor ul li:nth-child(1) {
+    margin-left: 20px;
+} */

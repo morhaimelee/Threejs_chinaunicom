@@ -61,7 +61,7 @@
       height: 47px;
       position: absolute;
       background: url('./assets/imgs/摄像头.png') center center no-repeat;
-      display: none;
+      /* display: none; */
     }
   </style>
   <link rel="stylesheet" href="./css/index.css">
@@ -90,7 +90,7 @@
   <div class="topleft"></div>
   <nav class="nav">
     <ul>
-      <li class="fl">人员通行</li>
+      <li class="fl selected" id="people_pass">人员通行</li>
       <li class="fl">综合安防</li>
       <li class="fl">能源管理</li>
       <li class="fl">环境管理</li>
@@ -103,6 +103,20 @@
   <div class="btn_left" id="import_ex">闸机</div>
   <div class="btn_left" id="in_ex_floor" value="play()">进入楼层</div>
   <div class="btn_left" id="fold_floor">折叠楼层</div>
+
+  <div id="bottomFloor">
+    <ul>
+      <li class="fl" id="f1">F1</li>
+      <li class="fl" id="f2">F2</li>
+      <li class="fl" id="f3">F3</li>
+      <li class="fl" id="f4">F4</li>
+      <li class="fl" id="f5">F5</li>
+      <li class="fl" id="f6">F6</li>
+      <li class="fl" id="f7">F7</li>
+      <li class="fl" id="f8">F8</li>
+      <li class="fl" id="f9">F9</li>
+    </ul>
+  </div>
 
   <script>
     let mixer = null;
@@ -234,7 +248,7 @@
       })
 
       GLTFLoader_First = new THREE.GLTFLoader();
-      GLTFLoader_First.load('./assets/1floor.gltf', function (obj) { //第一层楼
+      GLTFLoader_First.load('./assets/1floor_new.gltf', function (obj) { //第一层楼
         model_floor1 = obj.scene
         scene.add(obj.scene)
         obj.scene.name = "1floor"
@@ -341,8 +355,8 @@
     })
     //点击移动
     $('#in_ex_floor').on('click', function () {
-      console.log(model_floor1.position.y)
-      removeEntity('all')
+      // removeEntity('all')
+      hiddenObject('all')
       if (model_floor1.position.y != 0) {
         return
       } else {
@@ -406,7 +420,7 @@
         //   ease: Power3.easeOut
         // });
         // modelTraverse()
-        // removeEntity(objAll)
+
         // moveFloor()
         tween1.play()
         tween2.play()
@@ -426,9 +440,15 @@
     var test = 'model_video'
     let model_position
 
-    //隐藏模型 
+    //隐藏模型
+    function hiddenObject(obj) {
+      let selectedObject = scene.getObjectByName(obj);
+      console.log(selectedObject)
+      selectedObject.visible = false
+    }
+    //移除模型 
     function removeEntity(object) {
-      var selectedObject = scene.getObjectByName(object);
+      let selectedObject = scene.getObjectByName(object);
       scene.remove(selectedObject);
     }
 
@@ -458,22 +478,23 @@
       createIcon('video2')
       createIcon('video3')
       createIcon('video4')
+      $('.videoIcon').hide()
     }
 
-    function world2Screen(x, y, z) {
-      let worldVector = new THREE.Vector3(x, y, z);
-      let vector = worldVector.project(camera);
+    // function world2Screen(x, y, z) {
+    //   let worldVector = new THREE.Vector3(x, y, z);
+    //   let vector = worldVector.project(camera);
 
-      let halfWidth = window.innerWidth / 2;
-      let halfHeight = window.innerHeight / 2;
+    //   let halfWidth = window.innerWidth / 2;
+    //   let halfHeight = window.innerHeight / 2;
 
-      let result = {
-        x: Math.round(vector.x * halfWidth + halfWidth),
-        y: Math.round(-vector.y * halfHeight + halfHeight)
-      };
+    //   let result = {
+    //     x: Math.round(vector.x * halfWidth + halfWidth),
+    //     y: Math.round(-vector.y * halfHeight + halfHeight)
+    //   };
 
-      return result;
-    }
+    //   return result;
+    // }
     // 更新div的位置
     // function renderDiv(object, intersect) {
     //   let {
@@ -484,7 +505,7 @@
     //     }
     //   } = intersect;
     //   let position = world2Screen(x, y, z);
-    //   console.log(createIcon(object.name))
+
     //   // let testIcon = createIcon(object.name)
     // createIcon(object.name).css({
     //   'left': position.x + (-20) + 'px',
@@ -505,7 +526,6 @@
       let bodyDom = document.body
       bodyDom.insertBefore(iconDiv, bodyDom.lastChild);
       let iconDivid = $('#' + video_id)
-      console.log(iconDivid)
       return iconDivid
     }
 
@@ -520,7 +540,6 @@
 
       let testDiv = $(".testDiv");
       let groupNames = ['video1', 'video2', 'video3', 'video4'];
-
 
       for (let i = 0; i < groupNames.length; i++) {
         let groupName = groupNames[i];
@@ -571,7 +590,6 @@
 
         model_all_num['model_all_floor' + floor_num].push(gltf.scene.position) //添加模型所在楼层位置
 
-        console.log(model_all_num['model_all_floor' + floor_num])
         // model.position.set(0, 60, 0);
         // let sc = 3;
         model = gltf.scene.children[0];
@@ -663,7 +681,15 @@
     }
     //人员监控按钮
     $('#people_moni').on('click', function () {
-      $('.videoIcon').show()
+      if($('.videoIcon').is(":hidden")) {
+        $('.videoIcon').show()
+      }else {
+        $('.videoIcon').hide()
+      }
+    })
+    //跳转楼层按钮
+    $('#f1').on('click', function() {
+      
     })
   </script>
 
