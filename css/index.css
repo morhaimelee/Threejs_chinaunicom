@@ -131,10 +131,11 @@ ul,ol,li{
   position: absolute;
   top: 140px;
   left: 40px;
+  display: none;
 }
-#import_ex {
+#back_all {
   position: absolute;
-  top: 190px;
+  top: 336px;
   left: 40px;
 }
 #in_ex_floor {
@@ -142,7 +143,7 @@ ul,ol,li{
   top: 240px;
   left: 40px;
 }
-#fold_floor {
+#gate {
   position: absolute;
   top: 290px;
   left: 40px;

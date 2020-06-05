@@ -99,10 +99,10 @@
   </nav>
   <div class="rightBox"></div>
   <div class="rightTop"></div>
-  <div class="btn_left" id="people_moni">人员监控</div>
-  <div class="btn_left" id="import_ex">闸机</div>
-  <div class="btn_left" id="in_ex_floor" value="play()">进入楼层</div>
-  <div class="btn_left" id="fold_floor">折叠楼层</div>
+  <div class="btn_left" id="people_moni">安防监控</div>
+  <div class="btn_left" id="in_ex_floor" value="play()">进入大楼</div>
+  <div class="btn_left" id="gate">闸机</div>
+  <div class="btn_left" id="back_all">返回主场景</div>
 
   <div id="bottomFloor">
     <ul>
@@ -137,6 +137,7 @@
     let model_video1, model_video2, model_video3, model_video4, model_video5;
 
     let video_path = './assets/sexiangtou.gltf'
+    let gate_path = './assets/zhaji.gltf'
 
     let model_all = [] //所有模型
     let model_all_floor1 = [] //每层所有模型
@@ -310,9 +311,8 @@
         obj.scene.name = "9floor"
       })
 
-
+      $('#back_all').hide()
     }
-
 
     // 点击隐藏
     // var moonDiv = document.createElement('div');
@@ -336,7 +336,7 @@
 
     let tween1, tween2, tween3, tween4, tween5, tween6, tween7, tween8, tween9, tween10;
 
-    $('#fold_floor').on('click', function () {
+    function fold_all() {
       if (model_floor1.position.y != -120) {
         return
       } else {
@@ -351,10 +351,14 @@
         tween9.reversed(!tween9.reversed())
         // tween10.reversed(!tween10.reversed())
       }
+    }
 
+    $('#fold_floor').on('click', function () {
+      fold_all()
     })
-    //点击移动
+    //进入大楼
     $('#in_ex_floor').on('click', function () {
+      $('#back_all').show()
       // removeEntity('all')
       hiddenObject('all')
       if (model_floor1.position.y != 0) {
@@ -415,6 +419,7 @@
           y: 120,
           ease: Power3.easeOut
         });
+
         // tween10 = TweenMax.to(model_all_floorB1, 2, {
         //   y: -1000,
         //   ease: Power3.easeOut
@@ -446,6 +451,12 @@
       console.log(selectedObject)
       selectedObject.visible = false
     }
+    //显示模型
+    function showObject(obj) {
+      let selectedObject = scene.getObjectByName(obj);
+      console.log(selectedObject)
+      selectedObject.visible = true
+    }
     //移除模型 
     function removeEntity(object) {
       let selectedObject = scene.getObjectByName(object);
@@ -472,13 +483,19 @@
       loadModel(video_path, 'video2', 3, -23.93, 0, -53.375)
       loadModel(video_path, 'video3', 3, 4.84, 0, 70.834)
       loadModel(video_path, 'video4', 3, 0, 0, 0)
+      loadModel(gate_path, 'gate1', 1, 1.687, 0, 18.373)
+      loadModel(gate_path, 'gate1', 1, -0.904, 0, -22.398)
+          //x: 1.687. y: 0 z: 18.373
+    //x: -0.904 y: 0.000 z: -22.398
       initStats();
       animate();
       createIcon('video1')
       createIcon('video2')
       createIcon('video3')
       createIcon('video4')
-      $('.videoIcon').hide()
+
+      $('.videoIcon').hide()  //隐藏所有3D图标
+
     }
 
     // function world2Screen(x, y, z) {
@@ -679,17 +696,42 @@
         }
       }
     }
-    //人员监控按钮
+    //返回主场景
+    $('#back_all').on('click', function () {
+      back_to_home()
+    })
+
+    function back_to_home() {
+      fold_all()
+      let selectedObject = scene.getObjectByName('all');
+      setTimeout(function () {
+        selectedObject.visible = true
+      }, 1000)
+      $('.videoIcon').hide()
+      if (selectedObject.visible = true) {
+        $('#back_all').hide()
+      }
+    }
+    //顶部tab
+    $('#people_pass').on('click', function () {
+      $('#people_moni').hide()
+      $('.videoIcon').hide()
+
+
+    })
+
+    //安防监控按钮
     $('#people_moni').on('click', function () {
-      if($('.videoIcon').is(":hidden")) {
+
+      if ($('.videoIcon').is(":hidden")) {
         $('.videoIcon').show()
-      }else {
+      } else {
         $('.videoIcon').hide()
       }
     })
     //跳转楼层按钮
-    $('#f1').on('click', function() {
-      
+    $('#f1').on('click', function () {
+
     })
   </script>
 
