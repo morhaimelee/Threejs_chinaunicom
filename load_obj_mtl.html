@@ -72,6 +72,9 @@
   <script src="./js/OrbitControls.js"></script>
   <!-- 引入gltf -->
   <script src="./js/GLTFLoader.js"></script>
+  <!-- obj -->
+  <script src="./js/OBJLoader.js"></script>
+  <script src="./js/MTLLoader.js"></script>
   <!-- fps查看 -->
   <script src="./js/stats.min.js"></script>
   <!--加载控制器-->
@@ -90,14 +93,15 @@
   <div class="topleft"></div>
   <nav class="nav">
     <ul>
-      <li class="fl selected" id="people_pass">人员通行</li>
-      <li class="fl">综合安防</li>
-      <li class="fl">能源管理</li>
-      <li class="fl">环境管理</li>
-      <li class="fl">办公运营</li>
+      <li class="nav_list fl selected" id="people_pass">人员通行</li>
+      <li class="nav_list fl" id="security">综合安防</li>
+      <li class="nav_list fl">能源管理</li>
+      <li class="nav_list fl">环境管理</li>
+      <li class="nav_list fl">办公运营</li>
     </ul>
   </nav>
   <div class="rightBox"></div>
+  <div class="rightBox2"></div>
   <div class="rightTop"></div>
   <div class="btn_left" id="people_moni">安防监控</div>
   <div class="btn_left" id="in_ex_floor" value="play()">进入大楼</div>
@@ -123,7 +127,7 @@
     let objAll = null;
     let container, stats, controls;
 
-    let camera, scene, renderer, light, point, directionalLight, ambient;
+    let camera, scene, renderer, light, point, point3, directionalLight, ambient;
 
     let model;
 
@@ -206,8 +210,8 @@
       // var point2 = new THREE.PointLight(0x72b1ff);
       // point2.position.set(-554.418, 337.135, -20.433); //点光源左侧
       // scene.add(point2); //点光源添加到场景中
-      // var point3 = new THREE.PointLight(0x72b1ff);
-      // point3.position.set(863.018, 478.976, -21.585); //点光源右侧
+      // point3 = new THREE.PointLight(0x72b1ff);
+      // point3.position.set(463.018, 278.976, -21.585); //点光源右侧
       // scene.add(point3); //点光源添加到场景中
       // var point4 = new THREE.PointLight(0x72b1ff);
       // point4.position.set(136.340, 336.995, -438.744); //点光源后侧
@@ -241,6 +245,24 @@
       scene.add(skyBox); //在场景中加入天空盒
 
       //非交互模型加载
+
+          /**
+     * OBJ和材质文件mtl加载
+     */
+    // var OBJLoader = new THREE.OBJLoader();//obj加载器
+    // var MTLLoader = new THREE.MTLLoader();//材质文件加载器
+    // MTLLoader.load('./assets/shuzi/3lou(1).mtl', function(materials) {
+    //   // 返回一个包含材质的对象MaterialCreator
+    //   console.log(materials);
+    //   //obj的模型会和MaterialCreator包含的材质对应起来
+    //   OBJLoader.setMaterials(materials);
+    //   OBJLoader.load('./assets/shuzi/3lou(1).obj', function(obj) {
+    //     console.log(obj);
+    //     // obj.scale.set(10, 10, 10); //放大obj组对象
+    //     scene.add(obj);//返回的组对象插入场景中
+    //   })
+    // })
+
       GLTFLoader_AllBuild = new THREE.GLTFLoader();
       GLTFLoader_AllBuild.load('./assets/index.gltf', function (obj) { //道路及大楼
         objAll = obj
@@ -361,6 +383,7 @@
       $('#back_all').show()
       // removeEntity('all')
       hiddenObject('all')
+      $('#bottomFloor').show()
       if (model_floor1.position.y != 0) {
         return
       } else {
@@ -699,6 +722,7 @@
     //返回主场景
     $('#back_all').on('click', function () {
       back_to_home()
+      $('#bottomFloor').hide()
     })
 
     function back_to_home() {
@@ -713,12 +737,27 @@
       }
     }
     //顶部tab
+    //人员通行
     $('#people_pass').on('click', function () {
+      $('.nav_list').removeClass('selected')
+      $('#people_pass').addClass('selected')
       $('#people_moni').hide()
       $('.videoIcon').hide()
-
+      $('.rightBox').show()
+      $('.rightBox2').hide()
+      $('#gate').show()//闸机
+    })
+    //综合安防
+    $('#security').on('click',function() {
+      $('.nav_list').removeClass('selected')
+      $('#security').addClass('selected')
+      $('.rightBox').hide()
+      $('.rightBox2').show()
+      $('#gate').hide() //闸机按钮
+      $('#people_moni').show() //安防监控按钮
 
     })
+
 
     //安防监控按钮
     $('#people_moni').on('click', function () {

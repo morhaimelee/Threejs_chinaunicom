@@ -109,6 +109,15 @@ ul,ol,li{
   right: 20px;
   background: url('../assets/imgs/首页-右边.png') center center no-repeat;
 }
+.rightBox2 {
+  width: 482px;
+  height: 843px;
+  position: absolute;
+  top: 120px;
+  right: 20px;
+  background: url('../assets/imgs/安防外.png') center center no-repeat;
+  display: none;
+}
 .rightTop {
   width: 410px;
   height: 56px;
@@ -129,7 +138,7 @@ ul,ol,li{
 }
 #people_moni {
   position: absolute;
-  top: 140px;
+  top: 290px;
   left: 40px;
   display: none;
 }
@@ -162,6 +171,7 @@ ul,ol,li{
     color: #fff;
     line-height: 32px;
     text-align: center;
+    display: none;
 }
 #bottomFloor ul {
     width: 360px;
