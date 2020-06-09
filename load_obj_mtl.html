@@ -62,6 +62,31 @@
       position: absolute;
       background: url('./assets/imgs/摄像头.png') center center no-repeat;
       /* display: none; */
+      cursor: pointer;
+    }
+
+    .gateIcon {
+      width: 37px;
+      height: 47px;
+      position: absolute;
+      background: url('./assets/imgs/zhaji.png') center center no-repeat;
+      cursor: pointer;
+    }
+
+    .smokeIcon {
+      width: 37px;
+      height: 47px;
+      position: absolute;
+      background: url('./assets/imgs/烟感.png') center center no-repeat;
+      cursor: pointer;
+    }
+
+    .waterIcon {
+      width: 37px;
+      height: 47px;
+      position: absolute;
+      background: url('./assets/imgs/水箱.png') center center no-repeat;
+      cursor: pointer;
     }
   </style>
   <link rel="stylesheet" href="./css/index.css">
@@ -106,6 +131,9 @@
   <div class="btn_left" id="people_moni">安防监控</div>
   <div class="btn_left" id="in_ex_floor" value="play()">进入大楼</div>
   <div class="btn_left" id="gate">闸机</div>
+  <div class="btn_left" id="smoke">烟感</div>
+  <div class="btn_left" id="fire_waterP">消防水压</div>
+  <div class="btn_left" id="line_temp">线缆温度</div>
   <div class="btn_left" id="back_all">返回主场景</div>
 
   <div id="bottomFloor">
@@ -141,7 +169,9 @@
     let model_video1, model_video2, model_video3, model_video4, model_video5;
 
     let video_path = './assets/sexiangtou.gltf'
-    let gate_path = './assets/zhaji.gltf'
+    let gate_path = './assets/zhaji_real.gltf'
+    let smoke_path = './assets/yangan.gltf'
+    let water_path = './assets/water_box.gltf'
 
     let model_all = [] //所有模型
     let model_all_floor1 = [] //每层所有模型
@@ -246,22 +276,22 @@
 
       //非交互模型加载
 
-          /**
-     * OBJ和材质文件mtl加载
-     */
-    // var OBJLoader = new THREE.OBJLoader();//obj加载器
-    // var MTLLoader = new THREE.MTLLoader();//材质文件加载器
-    // MTLLoader.load('./assets/shuzi/3lou(1).mtl', function(materials) {
-    //   // 返回一个包含材质的对象MaterialCreator
-    //   console.log(materials);
-    //   //obj的模型会和MaterialCreator包含的材质对应起来
-    //   OBJLoader.setMaterials(materials);
-    //   OBJLoader.load('./assets/shuzi/3lou(1).obj', function(obj) {
-    //     console.log(obj);
-    //     // obj.scale.set(10, 10, 10); //放大obj组对象
-    //     scene.add(obj);//返回的组对象插入场景中
-    //   })
-    // })
+      /**
+ * OBJ和材质文件mtl加载
+ */
+      // var OBJLoader = new THREE.OBJLoader();//obj加载器
+      // var MTLLoader = new THREE.MTLLoader();//材质文件加载器
+      // MTLLoader.load('./assets/shuzi/3lou(1).mtl', function(materials) {
+      //   // 返回一个包含材质的对象MaterialCreator
+      //   console.log(materials);
+      //   //obj的模型会和MaterialCreator包含的材质对应起来
+      //   OBJLoader.setMaterials(materials);
+      //   OBJLoader.load('./assets/shuzi/3lou(1).obj', function(obj) {
+      //     console.log(obj);
+      //     // obj.scale.set(10, 10, 10); //放大obj组对象
+      //     scene.add(obj);//返回的组对象插入场景中
+      //   })
+      // })
 
       GLTFLoader_AllBuild = new THREE.GLTFLoader();
       GLTFLoader_AllBuild.load('./assets/index.gltf', function (obj) { //道路及大楼
@@ -356,7 +386,7 @@
     model_all_num['model_all_floor' + 9] = []
 
 
-    let tween1, tween2, tween3, tween4, tween5, tween6, tween7, tween8, tween9, tween10;
+    let tween1, tween2, tween3, tween4, tween5, tween6, tween7, tween8, tween9, tween10, tween_camera;
 
     function fold_all() {
       if (model_floor1.position.y != -120) {
@@ -381,6 +411,12 @@
     //进入大楼
     $('#in_ex_floor').on('click', function () {
       $('#back_all').show()
+      // $('#back_all').css('top', '486px')
+      if ($('#security').hasClass('seleceted')) {
+        $('#back_all').css('top', '486px')
+      } else if ($('#people_pass').hasClass('seleceted')) {
+        $('#back_all').css('top', '336px')
+      }
       // removeEntity('all')
       hiddenObject('all')
       $('#bottomFloor').show()
@@ -507,18 +543,40 @@
       loadModel(video_path, 'video3', 3, 4.84, 0, 70.834)
       loadModel(video_path, 'video4', 3, 0, 0, 0)
       loadModel(gate_path, 'gate1', 1, 1.687, 0, 18.373)
-      loadModel(gate_path, 'gate1', 1, -0.904, 0, -22.398)
-          //x: 1.687. y: 0 z: 18.373
-    //x: -0.904 y: 0.000 z: -22.398
+      loadModel(gate_path, 'gate2', 1, -0.904, 0, -22.398)
+      loadModel(smoke_path, 'smoke1', 3, 6.047, 6.186, 0.15)
+      loadModel(smoke_path, 'smoke2', 3, 6.047, 6.186, 60.5)
+      loadModel(smoke_path, 'smoke3', 3, 14.973, 6.186, 124.95)
+      //x: 1.687. y: 0 z: 18.373
+      //x: -0.904 y: 0.000 z: -22.398
       initStats();
       animate();
-      createIcon('video1')
-      createIcon('video2')
-      createIcon('video3')
-      createIcon('video4')
+      createIcon('video1', 'videoIcon')
+      createIcon('video2', 'videoIcon')
+      createIcon('video3', 'videoIcon')
+      createIcon('video4', 'videoIcon')
+      createIcon('gate1', 'gateIcon')
+      createIcon('gate2', 'gateIcon')
+      createIcon('smoke1', 'smokeIcon')
+      createIcon('smoke2', 'smokeIcon')
+      createIcon('smoke3', 'smokeIcon')
+      createLayer('video1_ly', 'videoLayer')
+      createLayer('video2_ly', 'videoLayer')
+      createLayer('video3_ly', 'videoLayer')
+      createLayer('video4_ly', 'videoLayer')
+      createLayer('gate1_ly', 'gateLayer')
+      createLayer('gate2_ly', 'gateLayer')
+      createLayer('smoke1_ly', 'smokeLayer')
+      createLayer('smoke2_ly', 'smokeLayer')
+      createLayer('smoke3_ly', 'smokeLayer')
 
       $('.videoIcon').hide()  //隐藏所有3D图标
+      $('.gateIcon').hide()
+      $('.smokeIcon').hide()
 
+      layer_show('videoIcon')
+      layer_show('gateIcon')
+      layer_show('smokeIcon')
     }
 
     // function world2Screen(x, y, z) {
@@ -558,18 +616,26 @@
     // }
 
     //添加ICON的dom
-    function createIcon(video_id) {
+    function createIcon(mesh_id, class_name) {
 
       let iconDiv = document.createElement('div');
-      iconDiv.className = 'videoIcon';
-      iconDiv.id = video_id
+      iconDiv.className = class_name;
+      iconDiv.id = mesh_id
       let bodyDom = document.body
       bodyDom.insertBefore(iconDiv, bodyDom.lastChild);
-      let iconDivid = $('#' + video_id)
+      let iconDivid = $('#' + mesh_id)
       return iconDivid
     }
-
-
+    //添加弹窗dom
+    function createLayer(mesh_id, class_name) {
+      let iconDiv = document.createElement('div');
+      iconDiv.className = class_name;
+      iconDiv.id = mesh_id
+      let bodyDom = document.body
+      bodyDom.insertBefore(iconDiv, bodyDom.lastChild);
+      let layerDivid = $('#' + mesh_id)
+      return layerDivid
+    }
 
     function renderDiv() {
       let halfWidth = window.innerWidth / 2;
@@ -579,7 +645,7 @@
       let yOffset = -60;
 
       let testDiv = $(".testDiv");
-      let groupNames = ['video1', 'video2', 'video3', 'video4'];
+      let groupNames = ['video1', 'video2', 'video3', 'video4', 'gate1', 'gate2', 'smoke1', 'smoke2', 'smoke3'];
 
       for (let i = 0; i < groupNames.length; i++) {
         let groupName = groupNames[i];
@@ -599,9 +665,15 @@
           //   left: vector.x * halfWidth + halfWidth + xOffset,
           //   top: -vector.y * halfHeight + halfHeight + yOffset
           // });
+          //图标位置
           $("#" + groupName).css({
             left: vector.x * halfWidth + halfWidth + xOffset,
             top: -vector.y * halfHeight + halfHeight + yOffset
+          });
+          //弹框位置
+          $("#" + groupName + '_ly').css({
+            left: vector.x * halfWidth + halfWidth + (2),
+            top: -vector.y * halfHeight + halfHeight + (-206)
           });
 
           let g = testDiv.data('group');
@@ -732,30 +804,41 @@
         selectedObject.visible = true
       }, 1000)
       $('.videoIcon').hide()
+      $('.gateIcon').hide()
       if (selectedObject.visible = true) {
         $('#back_all').hide()
       }
     }
     //顶部tab
+
     //人员通行
     $('#people_pass').on('click', function () {
       $('.nav_list').removeClass('selected')
       $('#people_pass').addClass('selected')
-      $('#people_moni').hide()
+      $('#people_moni').hide() //隐藏安防按钮
+      $('#smoke').hide() //隐藏烟感按钮
+      $('#fire_waterP').hide() //隐藏消防水压
+      $('#line_temp').hide() //隐藏线缆温度
       $('.videoIcon').hide()
       $('.rightBox').show()
       $('.rightBox2').hide()
       $('#gate').show()//闸机
+      $('#back_all').css('top', '336px')
     })
     //综合安防
-    $('#security').on('click',function() {
+    $('#security').on('click', function () {
       $('.nav_list').removeClass('selected')
       $('#security').addClass('selected')
+      $('.gateIcon').hide()
       $('.rightBox').hide()
       $('.rightBox2').show()
       $('#gate').hide() //闸机按钮
       $('#people_moni').show() //安防监控按钮
+      $('#smoke').show() //显示烟感按钮
+      $('#fire_waterP').show() //显示消防水压
+      $('#line_temp').show() //显示线缆温度
 
+      $('#back_all').css('top', '486px')
     })
 
 
@@ -768,9 +851,48 @@
         $('.videoIcon').hide()
       }
     })
+    //闸机按钮
+    $('#gate').on('click', function () {
+
+      if ($('.gateIcon').is(":hidden")) {
+        $('.gateIcon').show()
+      } else {
+        $('.gateIcon').hide()
+      }
+    })
+    //烟感按钮
+    $('#smoke').on('click', function () {
+
+      if ($('.smokeIcon').is(":hidden")) {
+        $('.smokeIcon').show()
+      } else {
+        $('.smokeIcon').hide()
+      }
+    })
+
+    //弹窗
+    function layer_show(clk_icon_classname) {
+      $('.' + clk_icon_classname).on('click', function () {
+        let this_id = $(this).attr('id')
+        if ($('#' + this_id + '_ly').is(":hidden")) {
+          $('#' + this_id + '_ly').show()
+        } else {
+          $('#' + this_id + '_ly').hide()
+        }
+      })
+
+    }
+
+
     //跳转楼层按钮
     $('#f1').on('click', function () {
-
+      tween_camera = TweenMax.to(camera.position, 2, {
+          x: 100,
+          y: 5,
+          z: -10,
+          ease: Cubic.easeIn //Linear.easeNone
+          //Power3.easeOut
+        });
     })
   </script>
 

@@ -136,12 +136,6 @@ ul,ol,li{
   color: #fff;
   cursor: pointer;
 }
-#people_moni {
-  position: absolute;
-  top: 290px;
-  left: 40px;
-  display: none;
-}
 #back_all {
   position: absolute;
   top: 336px;
@@ -157,6 +151,35 @@ ul,ol,li{
   top: 290px;
   left: 40px;
 }
+/* 安防 */
+#people_moni {
+    position: absolute;
+    top: 290px;
+    left: 40px;
+    display: none;
+  }
+/* 烟感 */
+#smoke {
+    position: absolute;
+    top: 336px;
+    left: 40px;
+    display: none;
+}
+/* 消防水压 */
+#fire_waterP {
+    position: absolute;
+    top: 386px;
+    left: 40px;
+    display: none;
+}
+/* 线缆温度 */
+#line_temp {
+    position: absolute;
+    top: 436px;
+    left: 40px;
+    display: none;
+}
+
 .selected {
     color: #4DFFFF;
 }
@@ -186,3 +209,32 @@ ul,ol,li{
 /* #bottomFloor ul li:nth-child(1) {
     margin-left: 20px;
 } */
+/* 视频弹窗 */
+.videoLayer {
+    width: 218px;
+    height: 164px;
+    background: url('../assets/imgs/弹框.png') center center no-repeat;
+    position: absolute;
+    display: none;
+}
+.gateLayer {
+    width: 210px;
+    height: 110px;
+    background: url('../assets/imgs/zhaji-tk2.png') center center no-repeat;
+    position: absolute;
+    display: none;
+}
+.smokeLayer {
+    width: 172px;
+    height: 80px;
+    background: url('../assets/imgs/yangan-tk.png') center center no-repeat;
+    position: absolute;
+    display: none;
+}
+.waterLayer {
+    width: 180px;
+    height: 102px;
+    background: url('../assets/imgs/shuixiang-tk.png') center center no-repeat;
+    position: absolute;
+    display: none;
+}
