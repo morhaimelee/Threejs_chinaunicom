@@ -88,6 +88,16 @@
       background: url('./assets/imgs/水箱.png') center center no-repeat;
       cursor: pointer;
     }
+
+    #camera_position {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      left: 100px;
+      bottom: 200px;
+      color: #FFF;
+      background: aqua;
+    }
   </style>
   <link rel="stylesheet" href="./css/index.css">
   <script src="https://cdn.staticfile.org/jquery/3.5.0/jquery.min.js"></script>
@@ -98,8 +108,8 @@
   <!-- 引入gltf -->
   <script src="./js/GLTFLoader.js"></script>
   <!-- obj -->
-  <script src="./js/OBJLoader.js"></script>
-  <script src="./js/MTLLoader.js"></script>
+  <!-- <script src="./js/OBJLoader.js"></script>
+  <script src="./js/MTLLoader.js"></script> -->
   <!-- fps查看 -->
   <script src="./js/stats.min.js"></script>
   <!--加载控制器-->
@@ -149,6 +159,7 @@
       <li class="fl" id="f9">F9</li>
     </ul>
   </div>
+  <div id="camera_position">相机位置</div>
 
   <script>
     let mixer = null;
@@ -213,8 +224,10 @@
       // s = 300; //三维场景显示范围控制系数，系数越大，显示的范围越大
       s = 250;
       //创建相机对象
-      camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 2000);
-      camera.position.set(300, 100, -150); //设置相机位置
+      // camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 2000);
+      camera = new THREE.PerspectiveCamera(45, width / height, 1, 2000);
+
+      camera.position.set(540, 335, -250); //设置相机位置
       // camera.position.set(1000, 1000, 2000); //设置相机位置
       // camera.position.z = 2000
 
@@ -230,6 +243,9 @@
       scene = new THREE.Scene(); //创建场景
       scene.name = 'WEB_Scene'
       // camera.lookAt(scene.position); //设置相机方向(指向的场景对象)
+      // 模拟坐标轴
+      var axesHelper = new THREE.AxesHelper(100);
+      scene.add(axesHelper);
       /** 
        * 光源设置
        */
@@ -300,8 +316,15 @@
         scene.add(obj.scene)
       })
 
+      // GLTFLoader_AllBuild = new THREE.GLTFLoader();
+      // GLTFLoader_AllBuild.load('./assets/数字.gltf', function (obj) { //道路及大楼
+      //   objAll = obj
+      //   obj.scene.name = "all"
+      //   scene.add(obj.scene)
+      // })
+
       GLTFLoader_First = new THREE.GLTFLoader();
-      GLTFLoader_First.load('./assets/1floor_new.gltf', function (obj) { //第一层楼
+      GLTFLoader_First.load('./assets/1floor.gltf', function (obj) { //第一层楼
         model_floor1 = obj.scene
         scene.add(obj.scene)
         obj.scene.name = "1floor"
@@ -317,50 +340,50 @@
       GLTFLoader_Video3 = new THREE.GLTFLoader();
       GLTFLoader_Video3.load('./assets/3floor.gltf', function (obj) {
         model_floor3 = obj.scene
-        scene.add(obj.scene)
         obj.scene.name = "3floor"
+        scene.add(obj.scene)
       })
 
       GLTFLoader_Video4 = new THREE.GLTFLoader();
       GLTFLoader_Video4.load('./assets/4floor.gltf', function (obj) {
         model_floor4 = obj.scene
-        scene.add(obj.scene)
         obj.scene.name = "4floor"
+        scene.add(obj.scene)
       })
 
       GLTFLoader_Video5 = new THREE.GLTFLoader();
       GLTFLoader_Video5.load('./assets/5floor.gltf', function (obj) {
         model_floor5 = obj.scene
-        scene.add(obj.scene)
         obj.scene.name = "5floor"
+        scene.add(obj.scene)
       })
 
       GLTFLoader_Video6 = new THREE.GLTFLoader();
       GLTFLoader_Video6.load('./assets/6floor.gltf', function (obj) {
         model_floor6 = obj.scene
-        scene.add(obj.scene)
         obj.scene.name = "6floor"
+        scene.add(obj.scene)
       })
 
       GLTFLoader_Video7 = new THREE.GLTFLoader();
       GLTFLoader_Video7.load('./assets/7floor.gltf', function (obj) {
         model_floor7 = obj.scene
-        scene.add(obj.scene)
         obj.scene.name = "7floor"
+        scene.add(obj.scene)
       })
 
       GLTFLoader_Video8 = new THREE.GLTFLoader();
       GLTFLoader_Video8.load('./assets/8floor.gltf', function (obj) {
         model_floor8 = obj.scene
-        scene.add(obj.scene)
         obj.scene.name = "8floor"
+        scene.add(obj.scene)
       })
 
       GLTFLoader_Video9 = new THREE.GLTFLoader();
       GLTFLoader_Video9.load('./assets/9floor.gltf', function (obj) {
         model_floor9 = obj.scene
-        scene.add(obj.scene)
         obj.scene.name = "9floor"
+        scene.add(obj.scene)
       })
 
       $('#back_all').hide()
@@ -386,7 +409,7 @@
     model_all_num['model_all_floor' + 9] = []
 
 
-    let tween1, tween2, tween3, tween4, tween5, tween6, tween7, tween8, tween9, tween10, tween_camera;
+    let tween1, tween2, tween3, tween4, tween5, tween6, tween7, tween8, tween9, tween10, tween_camera, tween_smoke;
 
     function fold_all() {
       if (model_floor1.position.y != -120) {
@@ -411,6 +434,7 @@
     //进入大楼
     $('#in_ex_floor').on('click', function () {
       $('#back_all').show()
+      console.log(model_all_num['model_all_floor' + 3])
       // $('#back_all').css('top', '486px')
       if ($('#security').hasClass('seleceted')) {
         $('#back_all').css('top', '486px')
@@ -484,6 +508,7 @@
         //   ease: Power3.easeOut
         // });
         // modelTraverse()
+        // tween_smoke = TweenMax.to()
 
         // moveFloor()
         tween1.play()
@@ -542,11 +567,11 @@
       loadModel(video_path, 'video2', 3, -23.93, 0, -53.375)
       loadModel(video_path, 'video3', 3, 4.84, 0, 70.834)
       loadModel(video_path, 'video4', 3, 0, 0, 0)
+      loadModel(smoke_path, 'smoke1', 3, 6.047, 5, 0.15)
+      loadModel(smoke_path, 'smoke2', 3, 6.047, 5, 60.5)
+      loadModel(smoke_path, 'smoke3', 3, 14.973, 5, 124.95)
       loadModel(gate_path, 'gate1', 1, 1.687, 0, 18.373)
       loadModel(gate_path, 'gate2', 1, -0.904, 0, -22.398)
-      loadModel(smoke_path, 'smoke1', 3, 6.047, 6.186, 0.15)
-      loadModel(smoke_path, 'smoke2', 3, 6.047, 6.186, 60.5)
-      loadModel(smoke_path, 'smoke3', 3, 14.973, 6.186, 124.95)
       //x: 1.687. y: 0 z: 18.373
       //x: -0.904 y: 0.000 z: -22.398
       initStats();
@@ -820,6 +845,9 @@
       $('#fire_waterP').hide() //隐藏消防水压
       $('#line_temp').hide() //隐藏线缆温度
       $('.videoIcon').hide()
+      $('.smokeIcon').hide()
+      $('.videoLayer').hide()
+      $('.smokeLayer').hide()
       $('.rightBox').show()
       $('.rightBox2').hide()
       $('#gate').show()//闸机
@@ -830,6 +858,7 @@
       $('.nav_list').removeClass('selected')
       $('#security').addClass('selected')
       $('.gateIcon').hide()
+      $('.gateLayer').hide()
       $('.rightBox').hide()
       $('.rightBox2').show()
       $('#gate').hide() //闸机按钮
@@ -883,16 +912,23 @@
 
     }
 
+    $('#camera_position').on('click', function () {
+      console.log(camera)
+    })
 
     //跳转楼层按钮
     $('#f1').on('click', function () {
+      for(let i = 2;i<=9; i ++) {
+        hiddenObject(i + 'floor')
+      }
+
       tween_camera = TweenMax.to(camera.position, 2, {
-          x: 100,
-          y: 5,
-          z: -10,
-          ease: Cubic.easeIn //Linear.easeNone
-          //Power3.easeOut
-        });
+        x: 10,
+        y: 150,
+        z: 0,
+        ease: Expo.easeInOut //Linear.easeNone  Cubic.easeIn
+        //Power3.easeOut
+      });
     })
   </script>
 
