@@ -251,11 +251,10 @@
       scene.name = 'WEB_Scene'
       // camera.lookAt(scene.position); //设置相机方向(指向的场景对象)
 
-      // //增加背景图
-      // var loader = new THREE.TextureLoader();
-      // var backgroundTexture = loader.load( './assets/background/background.png' );
-
-      // scene.background = backgroundTexture;
+      //增加背景图
+      var loader = new THREE.TextureLoader();
+      var backgroundTexture = loader.load('./assets/background/background.png');
+      scene.background = backgroundTexture;
 
       // 模拟坐标轴
       var axesHelper = new THREE.AxesHelper(100);
@@ -324,96 +323,103 @@
       //   })
       // })
 
-      GLTFLoader_AllBuild = new THREE.GLTFLoader();
-      GLTFLoader_AllBuild.load('./assets/index.gltf', function (obj) { //道路及大楼
-        objAll = obj
-        obj.scene.name = "all"
-        scene.add(obj.scene)
-      })
-
       // GLTFLoader_AllBuild = new THREE.GLTFLoader();
-      // GLTFLoader_AllBuild.load('./assets/new_gltf/main_build.gltf', function (obj) { //道路及大楼
-      //   // objAll = obj
+      // GLTFLoader_AllBuild.load('./assets/index.gltf', function (obj) { //道路及大楼
+      //   objAll = obj
       //   obj.scene.name = "all"
       //   scene.add(obj.scene)
       // })
 
-      // GLTFLoader_AllBuild = new THREE.GLTFLoader();
-      // GLTFLoader_AllBuild.load('./assets/new_gltf/ground.gltf', function (obj) { //道路及大楼
-      //   console.log(obj)
-      //   obj.scene.name = "ground"
+      GLTFLoader_AllBuild = new THREE.GLTFLoader();
+      GLTFLoader_AllBuild.load('./assets/new_gltf/main_build.gltf', function (obj) { //道路及大楼
+        // objAll = obj
+        obj.scene.name = "all"
+        scene.add(obj.scene)
+      })
+
+      GLTFLoader_AllBuild = new THREE.GLTFLoader();
+      GLTFLoader_AllBuild.load('./assets/new_gltf/ground.gltf', function (obj) { //道路及大楼
+        console.log(obj)
+        obj.scene.name = "ground"
+        scene.add(obj.scene)
+      })
+
+      GLTFLoader_AllBuild = new THREE.GLTFLoader();
+      GLTFLoader_AllBuild.load('./assets/new_gltf/road.gltf', function (obj) { //道路及大楼
+        // objAll = obj
+        obj.scene.name = "road"
+        scene.add(obj.scene)
+      })
+
+      GLTFLoader_otherBuild = new THREE.GLTFLoader();
+      GLTFLoader_otherBuild.load('./assets/new_gltf/other.gltf', function (obj) { //道路及大楼
+        // objAll = obj
+        obj.scene.name = "other"
+        scene.add(obj.scene)
+      })
+
+      // GLTFLoader_First = new THREE.GLTFLoader();
+      // GLTFLoader_First.load('./assets/1floor.gltf', function (obj) { //第一层楼
+      //   model_floor1 = obj.scene
+      //   scene.add(obj.scene)
+      //   obj.scene.name = "1floor"
+      // })
+
+      // GLTFLoader_Video2 = new THREE.GLTFLoader();
+      // GLTFLoader_Video2.load('./assets/2floor.gltf', function (obj) {
+      //   model_floor2 = obj.scene
+      //   scene.add(obj.scene)
+      //   obj.scene.name = "2floor"
+      // })
+
+      // GLTFLoader_Video3 = new THREE.GLTFLoader();
+      // GLTFLoader_Video3.load('./assets/3floor.gltf', function (obj) {
+      //   model_floor3 = obj.scene
+      //   obj.scene.name = "3floor"
       //   scene.add(obj.scene)
       // })
 
-      // GLTFLoader_AllBuild = new THREE.GLTFLoader();
-      // GLTFLoader_AllBuild.load('./assets/new_gltf/road.gltf', function (obj) { //道路及大楼
-      //   // objAll = obj
-      //   obj.scene.name = "road"
+      // GLTFLoader_Video4 = new THREE.GLTFLoader();
+      // GLTFLoader_Video4.load('./assets/4floor.gltf', function (obj) {
+      //   model_floor4 = obj.scene
+      //   obj.scene.name = "4floor"
       //   scene.add(obj.scene)
       // })
 
-      GLTFLoader_First = new THREE.GLTFLoader();
-      GLTFLoader_First.load('./assets/1floor.gltf', function (obj) { //第一层楼
-        model_floor1 = obj.scene
-        scene.add(obj.scene)
-        obj.scene.name = "1floor"
-      })
+      // GLTFLoader_Video5 = new THREE.GLTFLoader();
+      // GLTFLoader_Video5.load('./assets/5floor.gltf', function (obj) {
+      //   model_floor5 = obj.scene
+      //   obj.scene.name = "5floor"
+      //   scene.add(obj.scene)
+      // })
 
-      GLTFLoader_Video2 = new THREE.GLTFLoader();
-      GLTFLoader_Video2.load('./assets/2floor.gltf', function (obj) {
-        model_floor2 = obj.scene
-        scene.add(obj.scene)
-        obj.scene.name = "2floor"
-      })
+      // GLTFLoader_Video6 = new THREE.GLTFLoader();
+      // GLTFLoader_Video6.load('./assets/6floor.gltf', function (obj) {
+      //   model_floor6 = obj.scene
+      //   obj.scene.name = "6floor"
+      //   scene.add(obj.scene)
+      // })
 
-      GLTFLoader_Video3 = new THREE.GLTFLoader();
-      GLTFLoader_Video3.load('./assets/3floor.gltf', function (obj) {
-        model_floor3 = obj.scene
-        obj.scene.name = "3floor"
-        scene.add(obj.scene)
-      })
+      // GLTFLoader_Video7 = new THREE.GLTFLoader();
+      // GLTFLoader_Video7.load('./assets/7floor.gltf', function (obj) {
+      //   model_floor7 = obj.scene
+      //   obj.scene.name = "7floor"
+      //   scene.add(obj.scene)
+      // })
 
-      GLTFLoader_Video4 = new THREE.GLTFLoader();
-      GLTFLoader_Video4.load('./assets/4floor.gltf', function (obj) {
-        model_floor4 = obj.scene
-        obj.scene.name = "4floor"
-        scene.add(obj.scene)
-      })
+      // GLTFLoader_Video8 = new THREE.GLTFLoader();
+      // GLTFLoader_Video8.load('./assets/8floor.gltf', function (obj) {
+      //   model_floor8 = obj.scene
+      //   obj.scene.name = "8floor"
+      //   scene.add(obj.scene)
+      // })
 
-      GLTFLoader_Video5 = new THREE.GLTFLoader();
-      GLTFLoader_Video5.load('./assets/5floor.gltf', function (obj) {
-        model_floor5 = obj.scene
-        obj.scene.name = "5floor"
-        scene.add(obj.scene)
-      })
-
-      GLTFLoader_Video6 = new THREE.GLTFLoader();
-      GLTFLoader_Video6.load('./assets/6floor.gltf', function (obj) {
-        model_floor6 = obj.scene
-        obj.scene.name = "6floor"
-        scene.add(obj.scene)
-      })
-
-      GLTFLoader_Video7 = new THREE.GLTFLoader();
-      GLTFLoader_Video7.load('./assets/7floor.gltf', function (obj) {
-        model_floor7 = obj.scene
-        obj.scene.name = "7floor"
-        scene.add(obj.scene)
-      })
-
-      GLTFLoader_Video8 = new THREE.GLTFLoader();
-      GLTFLoader_Video8.load('./assets/8floor.gltf', function (obj) {
-        model_floor8 = obj.scene
-        obj.scene.name = "8floor"
-        scene.add(obj.scene)
-      })
-
-      GLTFLoader_Video9 = new THREE.GLTFLoader();
-      GLTFLoader_Video9.load('./assets/9floor.gltf', function (obj) {
-        model_floor9 = obj.scene
-        obj.scene.name = "9floor"
-        scene.add(obj.scene)
-      })
+      // GLTFLoader_Video9 = new THREE.GLTFLoader();
+      // GLTFLoader_Video9.load('./assets/9floor.gltf', function (obj) {
+      //   model_floor9 = obj.scene
+      //   obj.scene.name = "9floor"
+      //   scene.add(obj.scene)
+      // })
 
       $('#back_all').hide()
 
