@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>省分大楼</title>
   <style>
     body {
@@ -11,6 +11,7 @@
       /* 隐藏body窗口区域滚动条 */
       /* background-image: linear-gradient(rgb(46,81,255), #000); */
     }
+
     /* #cc {
       background-image: linear-gradient(rgb(46,81,255), #000);
     } */
@@ -32,8 +33,8 @@
     .moveDiv {
       width: 150px;
       height: 100px;
-      color: #FFF;
-      background: rgb(87, 179, 248, .6);
+      color: #fff;
+      background: rgb(87, 179, 248, 0.6);
       text-align: center;
       position: absolute;
       top: 300px;
@@ -48,7 +49,6 @@
       width: 100px;
       height: 20px;
       color: #fff;
-
     }
 
     .testDiv {
@@ -98,11 +98,11 @@
       position: absolute;
       left: 100px;
       bottom: 200px;
-      color: #FFF;
+      color: #fff;
       background: aqua;
     }
   </style>
-  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/index.css" />
   <script src="https://cdn.staticfile.org/jquery/3.5.0/jquery.min.js"></script>
   <!--引入three.js三维引擎-->
   <script src="./js/three.js"></script>
@@ -165,22 +165,33 @@
   <div id="camera_position">相机位置</div>
 
   <script>
-    let mixer = null;
-    let objAll = null;
-    let container, stats, controls;
+    let mixer = null
+    let objAll = null
+    let container, stats, controls
 
-    let camera, scene, renderer, light, point, point3, directionalLight, ambient;
+    let camera,
+      scene,
+      renderer,
+      light,
+      point,
+      point3,
+      directionalLight,
+      ambient
 
-    let model;
+    let model
 
-    let Vplace1 = [];
-    let Vplace2 = [];
-    let width, height, k, s;
+    let Vplace1 = []
+    let Vplace2 = []
+    let width, height, k, s
 
-    let GLTFLoader_AllBuild, GLTFLoader_First, GLTFLoader_Video2, GLTFLoader_Video3, GLTFLoader_Video4;
+    let GLTFLoader_AllBuild,
+      GLTFLoader_First,
+      GLTFLoader_Video2,
+      GLTFLoader_Video3,
+      GLTFLoader_Video4
 
-    let model_floor1, model_floor2, model_floor3, model_floor4, model_floor5;
-    let model_video1, model_video2, model_video3, model_video4, model_video5;
+    let model_floor1, model_floor2, model_floor3, model_floor4, model_floor5
+    let model_video1, model_video2, model_video3, model_video4, model_video5
 
     let video_path = './assets/sexiangtou.gltf'
     let gate_path = './assets/zhaji_real.gltf'
@@ -201,71 +212,75 @@
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
     // controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-
     function initStats() {
-      stats = new Stats();
-      document.body.appendChild(stats.dom);
+      stats = new Stats()
+      document.body.appendChild(stats.dom)
     }
 
     function init() {
       renderer = new THREE.WebGLRenderer({
         antialias: true,
-        canvas: document.querySelector("#cc")
-      });
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.shadowMap.enabled = true; //渲染器接收阴影渲染
+        canvas: document.querySelector('#cc'),
+      })
+      renderer.setPixelRatio(window.devicePixelRatio)
+      renderer.setSize(window.innerWidth, window.innerHeight)
+      renderer.shadowMap.enabled = true //渲染器接收阴影渲染
 
-      // renderer.setClearColor('rgb(46,81,255)', .5);//背景颜色像素及渲染
+      renderer.setClearColor('rgb(0,47,94)', 1) //背景颜色像素及渲染
+      // renderer.setClearColor('rgb(0,16,32)', 1)//进入楼层后更改
+
       // renderer.setClearColor('linear-gradient(rgb(46,81,255), #000)', 1.0);
       // renderer.setClearColor('rgba(135,206,250,0.5)',1.0);
 
-      window.addEventListener('resize', onWindowResize, false); //窗口大小变化后，针对当前窗口大小比例渲染
+      window.addEventListener('resize', onWindowResize, false) //窗口大小变化后，针对当前窗口大小比例渲染
 
       /**
        * 相机设置
        */
-      width = window.innerWidth; //窗口宽度
-      height = window.innerHeight; //窗口高度
-      k = width / height; //窗口宽
+      width = window.innerWidth //窗口宽度
+      height = window.innerHeight //窗口高度
+      k = width / height //窗口宽
       // s = 300; //三维场景显示范围控制系数，系数越大，显示的范围越大
-      s = 250;
+      s = 250
       //创建相机对象
       // camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 2000);
-      camera = new THREE.PerspectiveCamera(45, width / height, 1, 2000);
-
-      camera.position.set(540, 335, -250); //设置相机位置
+      camera = new THREE.PerspectiveCamera(45, width / height, 10, 2000)
+      camera.position.set(13.6, 10, 31.3) //设置相机位置
+      // camera.position.set(10, 30, 100) //设置相机位置
       // camera.position.set(1000, 1000, 2000); //设置相机位置
       // camera.position.z = 2000
 
       // //监听鼠标事件，触发渲染函数，更新canvas画布渲染效果
-      controls = new THREE.OrbitControls(camera, document.querySelector("#cc")); //添加控制器 //设置控制器。方便操控3d世界。
+      controls = new THREE.OrbitControls(
+        camera,
+        document.querySelector('#cc'),
+      ) //添加控制器 //设置控制器。方便操控3d世界。
       // controls.target.set(0, 0, 0); //设置控制器控制中心点
       // controls.update(); //控制器更新
       //设置相机距离原点的最远距离`````````
-      controls.minDistance = 1;
+      controls.minDistance = 1
       //设置相机距离原点的最远距离
-      controls.maxDistance = 2000;
+      controls.maxDistance = 2000
 
-      scene = new THREE.Scene(); //创建场景
+      scene = new THREE.Scene() //创建场景
       scene.name = 'WEB_Scene'
       // camera.lookAt(scene.position); //设置相机方向(指向的场景对象)
 
       //增加背景图
-      var loader = new THREE.TextureLoader();
-      var backgroundTexture = loader.load('./assets/background/background.png');
-      scene.background = backgroundTexture;
+      //   var loader = new THREE.TextureLoader();
+      //   var backgroundTexture = loader.load( './assets/background/background.png');
+      //   scene.background = backgroundTexture;
 
       // 模拟坐标轴
-      var axesHelper = new THREE.AxesHelper(100);
-      scene.add(axesHelper);
-      /** 
+      var axesHelper = new THREE.AxesHelper(100)
+      scene.add(axesHelper)
+      /**
        * 光源设置
        */
       //点光源
-      // point = new THREE.PointLight(0x72b1ff);
-      // point.position.set(1270.480, 172.285, 103.841); //点光源中间门上
-      // scene.add(point); //点光源添加到场景中
+      point = new THREE.PointLight(0xffffff)
+      point.position.set(0, 8.63, 55.19) //点光源中间门上
+      scene.add(point) //点光源添加到场景中
       // var point2 = new THREE.PointLight(0x72b1ff);
       // point2.position.set(-554.418, 337.135, -20.433); //点光源左侧
       // scene.add(point2); //点光源添加到场景中
@@ -280,12 +295,13 @@
       // scene.add(point5); //点光源添加到场景中
 
       //平行光
-      // directionalLight = new THREE.DirectionalLight(0xffffff, 0.4);
-      // scene.add(directionalLight);
+      directionalLight = new THREE.DirectionalLight(0xffffff, 1)
+      directionalLight.position.set(5, 1.601, 57.199)
+      scene.add(directionalLight)
       // 环境光
       // ambient = new THREE.AmbientLight(0x72b1ff);
-      ambient = new THREE.AmbientLight(0xCFE8FF);
-      scene.add(ambient);
+      ambient = new THREE.AmbientLight(0x888888)
+      scene.add(ambient)
 
       //天空盒
       // var path = "./assets/background/"; //设置路径
@@ -307,8 +323,8 @@
       //非交互模型加载
 
       /**
- * OBJ和材质文件mtl加载
- */
+       * OBJ和材质文件mtl加载
+       */
       // var OBJLoader = new THREE.OBJLoader();//obj加载器
       // var MTLLoader = new THREE.MTLLoader();//材质文件加载器
       // MTLLoader.load('./assets/obj/number.mtl', function(materials) {
@@ -330,32 +346,76 @@
       //   scene.add(obj.scene)
       // })
 
-      GLTFLoader_AllBuild = new THREE.GLTFLoader();
-      GLTFLoader_AllBuild.load('./assets/new_gltf/main_build.gltf', function (obj) { //道路及大楼
+      GLTFLoader_AllBuild = new THREE.GLTFLoader()
+      GLTFLoader_AllBuild.load('./assets/new_gltf/main_build.gltf', function (obj) {
+        //道路及大楼
         // objAll = obj
-        obj.scene.name = "all"
+        obj.scene.name = 'all'
         scene.add(obj.scene)
       })
 
-      GLTFLoader_AllBuild = new THREE.GLTFLoader();
-      GLTFLoader_AllBuild.load('./assets/new_gltf/ground.gltf', function (obj) { //道路及大楼
+      GLTFLoader_AllBuild = new THREE.GLTFLoader()
+      GLTFLoader_AllBuild.load('./assets/new_gltf/ground.gltf', function (obj) {
+        //道路及大楼
         console.log(obj)
-        obj.scene.name = "ground"
+        obj.scene.name = 'ground'
         scene.add(obj.scene)
+        // let ground_obj = scene.getObjectByName('ground')
+        obj.scene.children[0].traverse(function (obj) {
+          if (obj.isMesh) {
+            obj.material.color.set(0x000000)
+            obj.material.emissive.set(0x001435)
+          }
+        })
       })
 
-      GLTFLoader_AllBuild = new THREE.GLTFLoader();
-      GLTFLoader_AllBuild.load('./assets/new_gltf/road.gltf', function (obj) { //道路及大楼
+      GLTFLoader_AllBuild = new THREE.GLTFLoader()
+      GLTFLoader_AllBuild.load('./assets/new_gltf/road.gltf', function (obj) {
+        //道路及大楼
         // objAll = obj
-        obj.scene.name = "road"
+        obj.scene.name = 'road'
         scene.add(obj.scene)
+        obj.scene.traverse(function (obj) {
+          if (obj.isMesh) {
+            obj.material.color.set(0x17FFFF)
+            obj.material.emissive.set(0x28E4FF)
+          }
+        })
       })
 
-      GLTFLoader_otherBuild = new THREE.GLTFLoader();
-      GLTFLoader_otherBuild.load('./assets/new_gltf/other.gltf', function (obj) { //道路及大楼
+      GLTFLoader_otherBuild = new THREE.GLTFLoader()
+      GLTFLoader_otherBuild.load('./assets/new_gltf/other.gltf', function (obj) {
+        //道路及大楼
         // objAll = obj
-        obj.scene.name = "other"
+        obj.scene.name = 'other'
         scene.add(obj.scene)
+        obj.scene.traverse(function (obj) {
+          if (obj.isMesh) {
+            obj.material.color.set(0x00091C)
+            obj.material.emissive.set(0x000000)
+          }
+        })
+      })
+
+      GLTFLoader_three = new THREE.GLTFLoader();
+      GLTFLoader_three.load('./assets/new_gltf/3floor.gltf', function (obj) { //第一层楼
+        // model_floor3 = obj.scene
+        scene.add(obj.scene)
+        obj.scene.name = "3floor"
+      })
+
+      GLTFLoader_three = new THREE.GLTFLoader();
+      GLTFLoader_three.load('./assets/new_gltf/办公室.gltf', function (obj) { //第一层楼
+        // model_floor3 = obj.scene
+        scene.add(obj.scene)
+        obj.scene.name = "office"
+      })
+
+      GLTFLoader_three = new THREE.GLTFLoader();
+      GLTFLoader_three.load('./assets/new_gltf/桌子.gltf', function (obj) { //第一层楼
+        // model_floor3 = obj.scene
+        scene.add(obj.scene)
+        obj.scene.name = "table"
       })
 
       // GLTFLoader_First = new THREE.GLTFLoader();
@@ -422,8 +482,6 @@
       // })
 
       $('#back_all').hide()
-
-
     }
 
     // 点击隐藏
@@ -432,7 +490,6 @@
     // moonDiv.textContent = '点击折叠';
     // let bodyDom = document.body;
     // bodyDom.insertBefore(moonDiv, bodyDom.lastChild);
-
 
     let model_all_num = {}
     model_all_num['model_all_floor' + 1] = []
@@ -445,8 +502,18 @@
     model_all_num['model_all_floor' + 8] = []
     model_all_num['model_all_floor' + 9] = []
 
-
-    let tween1, tween2, tween3, tween4, tween5, tween6, tween7, tween8, tween9, tween10, tween_camera, tween_smoke;
+    let tween1,
+      tween2,
+      tween3,
+      tween4,
+      tween5,
+      tween6,
+      tween7,
+      tween8,
+      tween9,
+      tween10,
+      tween_camera,
+      tween_smoke
 
     function fold_all() {
       if (model_floor1.position.y != -120) {
@@ -505,40 +572,40 @@
 
         tween1 = TweenMax.to(model_all_num['model_all_floor' + 1], 2, {
           y: -120,
-          ease: Power3.easeOut //Linear.easeNone
-        });
+          ease: Power3.easeOut, //Linear.easeNone
+        })
         tween2 = TweenMax.to(model_all_num['model_all_floor' + 2], 2, {
           y: -90,
-          ease: Power3.easeOut
-        });
+          ease: Power3.easeOut,
+        })
         tween3 = TweenMax.to(model_all_num['model_all_floor' + 3], 2, {
           y: -60,
-          ease: Power3.easeOut
-        });
+          ease: Power3.easeOut,
+        })
         tween4 = TweenMax.to(model_all_num['model_all_floor' + 4], 2, {
           y: -30,
-          ease: Power3.easeOut
-        });
+          ease: Power3.easeOut,
+        })
         tween5 = TweenMax.to(model_all_num['model_all_floor' + 5], 2, {
           y: 0,
-          ease: Power3.easeOut
-        });
+          ease: Power3.easeOut,
+        })
         tween6 = TweenMax.to(model_all_num['model_all_floor' + 6], 2, {
           y: 30,
-          ease: Power3.easeOut
-        });
+          ease: Power3.easeOut,
+        })
         tween7 = TweenMax.to(model_all_num['model_all_floor' + 7], 2, {
           y: 60,
-          ease: Power3.easeOut
-        });
+          ease: Power3.easeOut,
+        })
         tween8 = TweenMax.to(model_all_num['model_all_floor' + 8], 2, {
           y: 90,
-          ease: Power3.easeOut
-        });
+          ease: Power3.easeOut,
+        })
         tween9 = TweenMax.to(model_all_num['model_all_floor' + 9], 2, {
           y: 120,
-          ease: Power3.easeOut
-        });
+          ease: Power3.easeOut,
+        })
 
         // tween10 = TweenMax.to(model_all_floorB1, 2, {
         //   y: -1000,
@@ -568,20 +635,20 @@
 
     //隐藏模型
     function hiddenObject(obj) {
-      let selectedObject = scene.getObjectByName(obj);
+      let selectedObject = scene.getObjectByName(obj)
       console.log(selectedObject)
       selectedObject.visible = false
     }
     //显示模型
     function showObject(obj) {
-      let selectedObject = scene.getObjectByName(obj);
+      let selectedObject = scene.getObjectByName(obj)
       console.log(selectedObject)
       selectedObject.visible = true
     }
-    //移除模型 
+    //移除模型
     function removeEntity(object) {
-      let selectedObject = scene.getObjectByName(object);
-      scene.remove(selectedObject);
+      let selectedObject = scene.getObjectByName(object)
+      scene.remove(selectedObject)
     }
 
     //遍历所有模型
@@ -592,47 +659,47 @@
     }
 
     function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight; //相机视锥体的长宽比
-      camera.updateProjectionMatrix(); //更新相机投影矩阵
+      camera.aspect = window.innerWidth / window.innerHeight //相机视锥体的长宽比
+      camera.updateProjectionMatrix() //更新相机投影矩阵
 
-      renderer.setSize(window.innerWidth, window.innerHeight); //渲染器大小
+      renderer.setSize(window.innerWidth, window.innerHeight) //渲染器大小
     }
 
     function draw() {
-      init();
-      loadModel(video_path, 'video1', 3, -25.2, 0, 0)
-      loadModel(video_path, 'video2', 3, -23.93, 0, -53.375)
-      loadModel(video_path, 'video3', 3, 4.84, 0, 70.834)
-      loadModel(video_path, 'video4', 3, 0, 0, 0)
-      loadModel(smoke_path, 'smoke1', 3, 6.047, 5, 0.15)
-      loadModel(smoke_path, 'smoke2', 3, 6.047, 5, 60.5)
-      loadModel(smoke_path, 'smoke3', 3, 14.973, 5, 124.95)
-      loadModel(gate_path, 'gate1', 1, 1.687, 0, 18.373)
-      loadModel(gate_path, 'gate2', 1, -0.904, 0, -22.398)
+      init()
+      // loadModel(video_path, 'video1', 3, -25.2, 0, 0)
+      // loadModel(video_path, 'video2', 3, -23.93, 0, -53.375)
+      // loadModel(video_path, 'video3', 3, 4.84, 0, 70.834)
+      // loadModel(video_path, 'video4', 3, 0, 0, 0)
+      // loadModel(smoke_path, 'smoke1', 3, 6.047, 5, 0.15)
+      // loadModel(smoke_path, 'smoke2', 3, 6.047, 5, 60.5)
+      // loadModel(smoke_path, 'smoke3', 3, 14.973, 5, 124.95)
+      // loadModel(gate_path, 'gate1', 1, 1.687, 0, 18.373)
+      // loadModel(gate_path, 'gate2', 1, -0.904, 0, -22.398)
       //x: 1.687. y: 0 z: 18.373
       //x: -0.904 y: 0.000 z: -22.398
-      initStats();
-      animate();
-      createIcon('video1', 'videoIcon')
-      createIcon('video2', 'videoIcon')
-      createIcon('video3', 'videoIcon')
-      createIcon('video4', 'videoIcon')
-      createIcon('gate1', 'gateIcon')
-      createIcon('gate2', 'gateIcon')
-      createIcon('smoke1', 'smokeIcon')
-      createIcon('smoke2', 'smokeIcon')
-      createIcon('smoke3', 'smokeIcon')
-      createLayer('video1_ly', 'videoLayer')
-      createLayer('video2_ly', 'videoLayer')
-      createLayer('video3_ly', 'videoLayer')
-      createLayer('video4_ly', 'videoLayer')
-      createLayer('gate1_ly', 'gateLayer')
-      createLayer('gate2_ly', 'gateLayer')
-      createLayer('smoke1_ly', 'smokeLayer')
-      createLayer('smoke2_ly', 'smokeLayer')
-      createLayer('smoke3_ly', 'smokeLayer')
+      initStats()
+      animate()
+      // createIcon('video1', 'videoIcon')
+      // createIcon('video2', 'videoIcon')
+      // createIcon('video3', 'videoIcon')
+      // createIcon('video4', 'videoIcon')
+      // createIcon('gate1', 'gateIcon')
+      // createIcon('gate2', 'gateIcon')
+      // createIcon('smoke1', 'smokeIcon')
+      // createIcon('smoke2', 'smokeIcon')
+      // createIcon('smoke3', 'smokeIcon')
+      // createLayer('video1_ly', 'videoLayer')
+      // createLayer('video2_ly', 'videoLayer')
+      // createLayer('video3_ly', 'videoLayer')
+      // createLayer('video4_ly', 'videoLayer')
+      // createLayer('gate1_ly', 'gateLayer')
+      // createLayer('gate2_ly', 'gateLayer')
+      // createLayer('smoke1_ly', 'smokeLayer')
+      // createLayer('smoke2_ly', 'smokeLayer')
+      // createLayer('smoke3_ly', 'smokeLayer')
 
-      $('.videoIcon').hide()  //隐藏所有3D图标
+      $('.videoIcon').hide() //隐藏所有3D图标
       $('.gateIcon').hide()
       $('.smokeIcon').hide()
 
@@ -679,123 +746,136 @@
 
     //添加ICON的dom
     function createIcon(mesh_id, class_name) {
-
-      let iconDiv = document.createElement('div');
-      iconDiv.className = class_name;
+      let iconDiv = document.createElement('div')
+      iconDiv.className = class_name
       iconDiv.id = mesh_id
       let bodyDom = document.body
-      bodyDom.insertBefore(iconDiv, bodyDom.lastChild);
+      bodyDom.insertBefore(iconDiv, bodyDom.lastChild)
       let iconDivid = $('#' + mesh_id)
       return iconDivid
     }
     //添加弹窗dom
     function createLayer(mesh_id, class_name) {
-      let iconDiv = document.createElement('div');
-      iconDiv.className = class_name;
+      let iconDiv = document.createElement('div')
+      iconDiv.className = class_name
       iconDiv.id = mesh_id
       let bodyDom = document.body
-      bodyDom.insertBefore(iconDiv, bodyDom.lastChild);
+      bodyDom.insertBefore(iconDiv, bodyDom.lastChild)
       let layerDivid = $('#' + mesh_id)
       return layerDivid
     }
 
     function renderDiv() {
-      let halfWidth = window.innerWidth / 2;
-      let halfHeight = window.innerHeight / 2;
+      let halfWidth = window.innerWidth / 2
+      let halfHeight = window.innerHeight / 2
 
-      let xOffset = -18;
-      let yOffset = -60;
+      let xOffset = -18
+      let yOffset = -60
 
-      let testDiv = $(".testDiv");
-      let groupNames = ['video1', 'video2', 'video3', 'video4', 'gate1', 'gate2', 'smoke1', 'smoke2', 'smoke3'];
+      let testDiv = $('.testDiv')
+      let groupNames = [
+        'video1',
+        'video2',
+        'video3',
+        'video4',
+        'gate1',
+        'gate2',
+        'smoke1',
+        'smoke2',
+        'smoke3',
+      ]
 
       for (let i = 0; i < groupNames.length; i++) {
-        let groupName = groupNames[i];
-        let group = scene.getObjectByName(groupName);
+        let groupName = groupNames[i]
+        let group = scene.getObjectByName(groupName)
         if (group) {
-          let mesh;
+          let mesh
           group.traverse(function (child) {
             if (child.isMesh) {
-              mesh = child;
+              mesh = child
             }
-          });
+          })
 
-          let vector = new THREE.Vector3();
-          mesh.getWorldPosition(vector);
-          vector.project(camera);
+          let vector = new THREE.Vector3()
+          mesh.getWorldPosition(vector)
+          vector.project(camera)
           // $("#" + groupName).css({
           //   left: vector.x * halfWidth + halfWidth + xOffset,
           //   top: -vector.y * halfHeight + halfHeight + yOffset
           // });
           //图标位置
-          $("#" + groupName).css({
+          $('#' + groupName).css({
             left: vector.x * halfWidth + halfWidth + xOffset,
-            top: -vector.y * halfHeight + halfHeight + yOffset
-          });
+            top: -vector.y * halfHeight + halfHeight + yOffset,
+          })
           //弹框位置
-          $("#" + groupName + '_ly').css({
-            left: vector.x * halfWidth + halfWidth + (2),
-            top: -vector.y * halfHeight + halfHeight + (-206)
-          });
+          $('#' + groupName + '_ly').css({
+            left: vector.x * halfWidth + halfWidth + 2,
+            top: -vector.y * halfHeight + halfHeight + -206,
+          })
 
-          let g = testDiv.data('group');
+          let g = testDiv.data('group')
           if (g === groupName) {
-            $(".testDiv").text(groupName).css({
-              left: vector.x * halfWidth + halfWidth + 10,
-              top: -vector.y * halfHeight + halfHeight + 10
-            });
+            $('.testDiv')
+              .text(groupName)
+              .css({
+                left: vector.x * halfWidth + halfWidth + 10,
+                top: -vector.y * halfHeight + halfHeight + 10,
+              })
           }
         }
       }
     }
 
     function animate() {
-      stats.update();
-      controls.update();
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
+      stats.update()
+      controls.update()
+      renderer.render(scene, camera)
+      requestAnimationFrame(animate)
       renderDiv()
     }
 
     function loadModel(path, gltf_name, floor_num, pst_x, pst_y, pst_z) {
       new THREE.GLTFLoader().load(path, function (gltf) {
         gltf.scene.name = gltf_name //set模型名字
-        gltf.scene.position.set(pst_x, pst_y, pst_z); //set模型位置
+        gltf.scene.position.set(pst_x, pst_y, pst_z) //set模型位置
 
         model_all_num['model_all_floor' + floor_num].push(gltf.scene.position) //添加模型所在楼层位置
 
         // model.position.set(0, 60, 0);
         // let sc = 3;
-        model = gltf.scene.children[0];
+        model = gltf.scene.children[0]
         model.traverse(function (child) {
           //对模型体内的每个几何体进行遍历
           if (child.isMesh) {
-            child.castShadow = true; //允许模型本身对自己产生阴影
-            child.receiveShadow = true; //接受阴影渲染
+            child.castShadow = true //允许模型本身对自己产生阴影
+            child.receiveShadow = true //接受阴影渲染
             // child.scale.set(sc, sc, sc); //模型重置比例放大。
 
-            Vplace1.push(child);
+            Vplace1.push(child)
           }
-        });
+        })
 
-        scene.add(gltf.scene);
-      });
+        scene.add(gltf.scene)
+      })
     }
 
-    document.addEventListener('click', function () {
-      ray(Vplace1)
-    }, false);
+    document.addEventListener(
+      'click',
+      function () {
+        ray(Vplace1)
+      },
+      false,
+    )
 
     function getGroup(groupName, mesh) {
-      let {
-        parent
-      } = mesh;
+      let { parent } = mesh
       while (parent) {
         if (parent.isGroup && parent.name === groupName) {
-          return parent;
+          return parent
         }
 
-        parent = parent.parent;
+        parent = parent.parent
       }
     }
 
@@ -816,39 +896,39 @@
       //创建射线投射器对象
       // var raycaster = new THREE.Raycaster(camera.position, ray);
       //方法2
-      let x = event.clientX;
-      let y = event.clientY;
-      let mouse = new THREE.Vector2();
+      let x = event.clientX
+      let y = event.clientY
+      let mouse = new THREE.Vector2()
 
-      mouse.x = (x / window.innerWidth) * 2 - 1;
-      mouse.y = -(y / window.innerHeight) * 2 + 1;
+      mouse.x = (x / window.innerWidth) * 2 - 1
+      mouse.y = -(y / window.innerHeight) * 2 + 1
 
-      var raycaster = new THREE.Raycaster();
+      var raycaster = new THREE.Raycaster()
       raycaster.setFromCamera(mouse, camera)
 
       //返回射线选中的对象
-      var intersects = raycaster.intersectObjects(Bplace); //Bplace为需要被点击的目标体池集合
+      var intersects = raycaster.intersectObjects(Bplace) //Bplace为需要被点击的目标体池集合
 
       if (intersects.length > 0) {
-        console.log('拾取到了');
+        console.log('拾取到了')
 
-        let obj = intersects[0].object;
+        let obj = intersects[0].object
 
-        let groupNames = ['video1', 'video2', 'video3', 'video4'];
+        let groupNames = ['video1', 'video2', 'video3', 'video4']
         for (let i = 0; i < groupNames.length; i++) {
-          let groupName = groupNames[i];
-          let group = scene.getObjectByName(groupName);
+          let groupName = groupNames[i]
+          let group = scene.getObjectByName(groupName)
 
           if (getGroup(groupName, obj)) {
-            let child = scene.getObjectByName(groupName);
+            let child = scene.getObjectByName(groupName)
             child.traverse(function (obj) {
               if (obj.isMesh) {
-                obj.material.color.set(0xff0000);
+                obj.material.color.set(0xff0000)
               }
-            });
+            })
 
-            $("#" + groupName).show();
-            $(".testDiv").data('group', groupName);
+            $('#' + groupName).show()
+            $('.testDiv').data('group', groupName)
           }
         }
       }
@@ -861,13 +941,13 @@
 
     function back_to_home() {
       fold_all()
-      let selectedObject = scene.getObjectByName('all');
+      let selectedObject = scene.getObjectByName('all')
       setTimeout(function () {
         selectedObject.visible = true
       }, 1000)
       $('.videoIcon').hide()
       $('.gateIcon').hide()
-      if (selectedObject.visible = true) {
+      if ((selectedObject.visible = true)) {
         $('#back_all').hide()
       }
     }
@@ -887,7 +967,7 @@
       $('.smokeLayer').hide()
       $('.rightBox').show()
       $('.rightBox2').hide()
-      $('#gate').show()//闸机
+      $('#gate').show() //闸机
       $('#back_all').css('top', '336px')
     })
     //综合安防
@@ -907,11 +987,9 @@
       $('#back_all').css('top', '486px')
     })
 
-
     //安防监控按钮
     $('#people_moni').on('click', function () {
-
-      if ($('.videoIcon').is(":hidden")) {
+      if ($('.videoIcon').is(':hidden')) {
         $('.videoIcon').show()
       } else {
         $('.videoIcon').hide()
@@ -919,8 +997,7 @@
     })
     //闸机按钮
     $('#gate').on('click', function () {
-
-      if ($('.gateIcon').is(":hidden")) {
+      if ($('.gateIcon').is(':hidden')) {
         $('.gateIcon').show()
       } else {
         $('.gateIcon').hide()
@@ -928,8 +1005,7 @@
     })
     //烟感按钮
     $('#smoke').on('click', function () {
-
-      if ($('.smokeIcon').is(":hidden")) {
+      if ($('.smokeIcon').is(':hidden')) {
         $('.smokeIcon').show()
       } else {
         $('.smokeIcon').hide()
@@ -940,13 +1016,12 @@
     function layer_show(clk_icon_classname) {
       $('.' + clk_icon_classname).on('click', function () {
         let this_id = $(this).attr('id')
-        if ($('#' + this_id + '_ly').is(":hidden")) {
+        if ($('#' + this_id + '_ly').is(':hidden')) {
           $('#' + this_id + '_ly').show()
         } else {
           $('#' + this_id + '_ly').hide()
         }
       })
-
     }
 
     $('#camera_position').on('click', function () {
@@ -963,21 +1038,13 @@
         x: 10,
         y: 150,
         z: 0,
-        ease: Expo.easeInOut //Linear.easeNone  Cubic.easeIn
+        ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
-      });
+      })
     })
 
-    $('#f9').on('click', function () {
-      let ground_obj = scene.getObjectByName('ground')
-      ground_obj.traverse(function (obj) {
-        if (obj.isMesh) {
-          obj.material.color.set(0x2543d6);
-        }
-      });
-    })
+    $('#f9').on('click', function () { })
   </script>
-
 </body>
 
 </html>
