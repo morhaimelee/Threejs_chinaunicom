@@ -111,8 +111,8 @@
   <!-- 引入gltf -->
   <script src="./js/GLTFLoader.js"></script>
   <!-- obj -->
-  <script src="./js/OBJLoader.js"></script>
-  <script src="./js/MTLLoader.js"></script>
+  <!-- <script src="./js/OBJLoader.js"></script>
+  <script src="./js/MTLLoader.js"></script> -->
   <!-- fps查看 -->
   <script src="./js/stats.min.js"></script>
   <!--加载控制器-->
@@ -185,6 +185,7 @@
     let width, height, k, s
 
     let GLTFLoader_AllBuild,
+      GLTFLoader_otherBuild,
       GLTFLoader_First,
       GLTFLoader_Video2,
       GLTFLoader_Video3,
@@ -383,19 +384,19 @@
         })
       })
 
-      GLTFLoader_otherBuild = new THREE.GLTFLoader()
-      GLTFLoader_otherBuild.load('./assets/new_gltf/other.gltf', function (obj) {
-        //道路及大楼
-        // objAll = obj
-        obj.scene.name = 'other'
-        scene.add(obj.scene)
-        obj.scene.traverse(function (obj) {
-          if (obj.isMesh) {
-            obj.material.color.set(0x00091C)
-            obj.material.emissive.set(0x000000)
-          }
-        })
-      })
+      // GLTFLoader_otherBuild = new THREE.GLTFLoader()
+      // GLTFLoader_otherBuild.load('./assets/new_gltf/otherDraco.gltf', function (obj) {
+      //道路及大楼
+      // objAll = obj
+      // obj.scene.name = 'other'
+      // scene.add(obj.scene)
+      // obj.scene.traverse(function (obj) {
+      //   if (obj.isMesh) {
+      //     obj.material.color.set(0x00091C)
+      //     obj.material.emissive.set(0x000000)
+      //   }
+      // })
+      // })
 
       GLTFLoader_three = new THREE.GLTFLoader();
       GLTFLoader_three.load('./assets/new_gltf/3floor.gltf', function (obj) { //第一层楼
