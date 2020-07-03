@@ -274,13 +274,14 @@
 
       // 模拟坐标轴
       var axesHelper = new THREE.AxesHelper(100)
-      scene.add(axesHelper)
+      // scene.add(axesHelper)
       /**
        * 光源设置
        */
       //点光源
       point = new THREE.PointLight(0xffffff)
       point.position.set(0, 8.63, 55.19) //点光源中间门上
+      
       scene.add(point) //点光源添加到场景中
       // var point2 = new THREE.PointLight(0x72b1ff);
       // point2.position.set(-554.418, 337.135, -20.433); //点光源左侧
@@ -384,22 +385,22 @@
         })
       })
 
-      // GLTFLoader_otherBuild = new THREE.GLTFLoader()
-      // GLTFLoader_otherBuild.load('./assets/new_gltf/otherDraco.gltf', function (obj) {
+      GLTFLoader_otherBuild = new THREE.GLTFLoader()
+      GLTFLoader_otherBuild.load('./assets/new_gltf/other.gltf', function (obj) {
       //道路及大楼
       // objAll = obj
-      // obj.scene.name = 'other'
-      // scene.add(obj.scene)
-      // obj.scene.traverse(function (obj) {
-      //   if (obj.isMesh) {
-      //     obj.material.color.set(0x00091C)
-      //     obj.material.emissive.set(0x000000)
-      //   }
-      // })
-      // })
+      obj.scene.name = 'other'
+      scene.add(obj.scene)
+      obj.scene.traverse(function (obj) {
+        if (obj.isMesh) {
+          obj.material.color.set(0x00091C)
+          obj.material.emissive.set(0x000000)
+        }
+      })
+      })
 
       GLTFLoader_three = new THREE.GLTFLoader();
-      GLTFLoader_three.load('./assets/new_gltf/3floor.gltf', function (obj) { //第一层楼
+      GLTFLoader_three.load('./assets/new_gltf/33.gltf', function (obj) { //第一层楼
         // model_floor3 = obj.scene
         scene.add(obj.scene)
         obj.scene.name = "3floor"
