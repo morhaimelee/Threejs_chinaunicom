@@ -1,0 +1,165 @@
+HTML, body, div, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, p, blockquote,
+pre, form, fieldset, table, th, td {
+    border:none;
+    font-family:"微软雅黑","黑体","宋体";
+    font-size:14px;
+    margin:0px;
+    padding:0px;
+    }
+html,body{
+    height: 100%;
+    width: 100%;
+    }
+address, caption, cite, code, dfn, em, strong, th, var {
+    font-style: normal;
+    font-weight: normal;
+}
+a{
+    text-decoration:none;
+}
+a:link{
+    color:#fff;
+}
+a:visited{
+    color:#fff;
+}
+a:hover{
+    color:#fff;
+}
+a:active{
+    color:#fff;
+}
+input::-ms-clear{
+    display:none;
+    }
+input::-ms-reveal{
+    display:none;
+}
+input{
+    -webkit-appearance: none;
+    margin: 0;
+    outline: none;
+    padding: 0;
+}
+input::-webkit-input-placeholder{
+    color: #ccc;
+}
+input::-ms-input-placeholder{
+    color: #ccc;
+}
+input::-moz-placeholder{
+    color: #ccc;
+}
+input[type=submit],input[type=button]{
+    cursor: pointer;
+}
+button[disabled], input[disabled] {
+    cursor: default;
+}
+img{
+    border:none;
+}
+ul,ol,li{
+    list-style-type:none;
+}
+/*公共方法*/
+.clear{
+    clear: both;
+}
+.clearleft{
+    clear: left;
+}
+.clearright{
+    clear: right;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.cursor{
+    cursor: pointer;
+}
+/* 初始化结束 */
+.topleft {
+  width: 350px;
+  height: 52px;
+  background: url('../assets/imgs/top@2x.png') center center no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.nav {
+  position: absolute;
+  top: 40px;
+  left: 450px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+}
+.nav ul li {
+  margin-right: 50px;
+}
+
+.btn_left {
+  width: 112px;
+  height: 32px;
+  background: url('../assets/imgs/按钮.png') center center no-repeat;
+  font-size: 16px;
+  text-align: center;
+  line-height: 32px;
+  color: #fff;
+  cursor: pointer;
+}
+#people_moni {
+  position: absolute;
+  top: 290px;
+  left: 40px;
+  display: none;
+}
+#back_all {
+  position: absolute;
+  top: 336px;
+  left: 40px;
+}
+#in_ex_floor {
+  position: absolute;
+  top: 240px;
+  left: 40px;
+}
+#gate {
+  position: absolute;
+  top: 290px;
+  left: 40px;
+}
+.selected {
+    color: #4DFFFF;
+}
+#bottomFloor {
+    width: 380px;
+    height: 32px;
+    background: url('../assets/imgs/中间.png') center center no-repeat;
+    position: absolute;
+    bottom: 84px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    line-height: 32px;
+    text-align: center;
+    /* display: none; */
+}
+#bottomFloor ul {
+    width: 360px;
+    display: flex;
+    padding: 0 10px 0 10px;
+}
+#bottomFloor ul li {
+    width: 40px;
+    flex: auto;
+    cursor: pointer;
+}
+/* #bottomFloor ul li:nth-child(1) {
+    margin-left: 20px;
+} */
