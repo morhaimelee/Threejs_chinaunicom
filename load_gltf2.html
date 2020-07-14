@@ -152,6 +152,24 @@
       <li id="park_list"></li>
     </ul>
   </div>
+  <!-- 监控设备运行录像 -->
+  <div class="warnVideo-title">
+    <i></i>
+    <span>监控设备运行</span>
+    <div>Staff status</div>
+  </div>
+
+  <!-- 随机影像 -->
+  <div id="random-video">video</div>
+  <div id="equip-num"><div>设备编号</div><div>8T242</div></div>
+  <div id="equip-allnum">
+    <i></i>
+    <span class="point-yellow"></span>
+    <span>设备总数量</span>
+    <span id="equip_num">512</span>
+    个</div>
+
+
   <div class="btn_left" id="people_moni">安防监控</div> -->
   <div class="btn_left" id="in_ex_floor">进入大楼</div>
   <!--  value="play()" -->
@@ -724,7 +742,8 @@
       // loadModel(gate_path, 'gate2', 1, -0.904, 0, -22.398)
       //x: 1.687. y: 0 z: 18.373
       //x: -0.904 y: 0.000 z: -22.398
-      initStats()
+
+      // initStats() //加载性能监视
       animate()
       // createIcon('video1', 'videoIcon')
       // createIcon('video2', 'videoIcon')
@@ -874,7 +893,7 @@
     }
 
     function animate() {
-      stats.update()
+      // stats.update()
       controls.update()
       renderer.render(scene, camera)
       requestAnimationFrame(animate)

@@ -82,6 +82,13 @@ ul,ol,li{
     cursor: pointer;
 }
 /* 初始化结束 */
+@font-face{
+    font-family: fangzheng;
+    src: url("../assets/imgs/方正粗倩简体.ttf");
+    src: url('../assets/imgs/方正粗倩简体.woff') format('woff'),
+    url('../assets/imgs/方正粗倩简体.woff2') format('woff2');
+}
+
 .topleft {
   width: 350px;
   height: 52px;
@@ -94,7 +101,7 @@ ul,ol,li{
 .nav {
   position: absolute;
   top: 40px;
-  left: 507px;
+  left: 480px;
   font-size: 16px;
   color: #fff;
   cursor: pointer;
@@ -177,6 +184,8 @@ ul,ol,li{
 }
 .equipment-list ul li{
     height: 50px;
+    margin: 20px 0;
+    cursor: pointer;
 }
 #video_list {
     background: url('../assets/imgs/摄像头-icon.png') center center no-repeat;
@@ -209,4 +218,87 @@ ul,ol,li{
 #park_list {
     background: url('../assets/imgs/停车场-icon.png') center center no-repeat;
     background-size: 24px 24px;
+}
+.warnVideo-title {
+    width: 150px;
+    position: absolute;
+    top: 150px;
+    left: 85px;
+    color: #fff;
+}
+.warnVideo-title i {
+    display: inline-block;
+    width: 15px;
+    height: 17px;
+    background: url('../assets/imgs/标题.png') center center no-repeat;
+    background-size: 15px 17px;
+}
+.warnVideo-title span {
+    font-size: 18px;
+}
+.warnVideo-title div {
+    font-size: 10px;
+    margin: 5px 0 0 24px;
+    font-family: 'Microsoft YaHei';
+}
+#random-video {
+    width: 185px;
+    height: 104px;
+    position: absolute;
+    top: 221px;
+    left: 111px;
+    color: #FFF;
+}
+#equip-num {
+    width: 185px;
+    height: 104px;
+    background: rgba(239, 239, 239, .1);
+    position: absolute;
+    top: 221px;
+    left: 348px;
+    text-align: center;
+}
+#equip-num div:nth-child(1) {
+    color: #DCF4FE;
+    font-size: 16px;
+    margin-top: 28px;
+}
+#equip-num div:nth-child(2) {
+    color: #FFD200;
+    margin-top: 12px;
+    font-family: fangzheng;
+}
+
+#equip-allnum {
+    position: absolute;
+    top: 335px;
+    left: 111px;
+    font-size: 16px;
+    color: #fff;
+}
+#equip-allnum i {
+    width: 28px;
+    height: 24px;
+    display: inline-block;
+    background: url('../assets/imgs/摄像头-icon.png') center center no-repeat;
+    background-size: 28px 24px;
+
+}
+#equip-allnum .point-yellow {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: #FFAD00;
+    border-radius: 50%;
+    margin-left: 11px;
+}
+#equip-allnum span:nth-child(3) {
+    margin-left: 10px;
+    color: #DBF3FD;
+}
+#equip_num {
+    color: #FFD200;
+    font-size: 24px;
+    margin-left: 130px;
+    font-family: fangzheng;
 }
