@@ -233,6 +233,7 @@
     </div>
 
   </section>
+  <!-- 设备状态异常滚动 -->
   <div class="equip-status-box">
     <ol>
       <li>设备</li>
@@ -240,8 +241,23 @@
       <li>告警时间</li>
       <li>状态</li>
     </ol>
+    <div id="mid-line"></div>
+    <ul>
+      <li><span>烟感</span><span>烟雾告警</span><span>12-14 14:12</span><span>未处理</span></li>
+      <li><span>电线温度</span><span>温度过高</span><span>12-14 14:12</span><span>已处理</span></li>
+      <li><span>消防栓</span><span>水压过高</span><span>12-14 14:12</span><span>已处理</span></li>
+    </ul>
   </div>
-
+  <!-- 近三个月告警趋势 -->
+  <section class="recent-trends">
+    <div class="warnVideo-title">
+      <i></i>
+      <span>近3个月告警趋势</span>
+      <div>Recent trends</div>
+    </div>
+    
+  </section>
+  <div id="echarts_first_rightBottom"></div>
 
 
   <div class="btn_left" id="people_moni">安防监控</div> -->
@@ -273,7 +289,7 @@
   <script src="./js/weather.js"></script>
   <script>
     echarts.init(document.getElementById('echarts_first_leftBottom')).setOption(option1_first); //主页左下角echarts
-
+    echarts.init(document.getElementById('echarts_first_rightBottom')).setOption(option2_first); //主页右下角echarts
     let mixer = null
     let objAll = null
     let container, stats, controls

@@ -53,7 +53,7 @@ option1_first = {
                 color: '#ffffff',
                 fontSize: '12'
             },
-            formatter: function(value) {
+            formatter: function (value) {
                 if (value >= 10000) {
                     return (value / 10000).toLocaleString();
                 } else {
@@ -64,36 +64,159 @@ option1_first = {
         data: [14, 14, 14, 14, 14, 14, 14]
     }],
     series: [{
-            name: '金额',
-            type: 'bar',
-            zlevel: 1,
-            itemStyle: {
-                normal: {
-                    barBorderRadius: 30,
-                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
-                        offset: 0,
-                        color: 'rgb(57,89,255,1)'
-                    }, {
-                        offset: 1,
-                        color: 'rgb(46,200,207,1)'
-                    }]),
+        name: '金额',
+        type: 'bar',
+        zlevel: 1,
+        itemStyle: {
+            normal: {
+                barBorderRadius: 30,
+                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                    offset: 0,
+                    color: 'rgb(57,89,255,1)'
+                }, {
+                    offset: 1,
+                    color: 'rgb(46,200,207,1)'
+                }]),
+            },
+        },
+        barWidth: 20,
+        data: [50000000, 22000000, 10000000, 5000000, 1]
+    },
+    {
+        name: '背景',
+        type: 'bar',
+        barWidth: 18,
+        barGap: '-100%',
+        data: [50000000, 50000000, 50000000, 50000000, 1],
+        itemStyle: {
+            normal: {
+                color: 'rgba(24,31,68,1)',
+                barBorderRadius: 30,
+            }
+        },
+    },
+    ]
+};
+
+option2_first = {
+    // title: {
+    //     text: '一周内人员出入总数变化图',
+    //     textStyle: {
+    //         fontSize: 25,
+    //         fontWeight: 'normal',
+    //         color: '#fff',
+    //     },
+    //     x: 'center'
+    // },
+    // backgroundColor: "#05224d",
+    tooltip: {},
+    grid: {
+        top: '8%',
+        left: '1%',
+        right: '1%',
+        bottom: '8%',
+        containLabel: true,
+    },
+    legend: {
+        itemGap: 50,
+        data: ['人员出入总数'],
+        textStyle: {
+            color: '#f9f9f9',
+            borderColor: '#fff'
+        },
+    },
+    xAxis: [{
+        type: 'category',
+        boundaryGap: true,
+        axisLine: { //坐标轴轴线相关设置。数学上的x轴
+            show: true,
+            lineStyle: {
+                color: '#f9f9f9'
+            },
+        },
+        axisLabel: { //坐标轴刻度标签的相关设置
+            textStyle: {
+                color: '#d1e6eb',
+                margin: 15,
+            },
+        },
+        axisTick: {
+            show: false,
+        },
+        data: ['2020-2-17', '2020-2-17', '2020-2-17', '2020-2-17', '2020-2-17', '2020-2-17', '2020-2-17',],
+    }],
+    yAxis: [{
+        type: 'value',
+        min: 0,
+        // max: 140,
+        splitNumber: 7,
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#0a3256'
+            }
+        },
+        axisLine: {
+            show: false,
+        },
+        axisLabel: {
+            margin: 20,
+            textStyle: {
+                color: '#d1e6eb',
+
+            },
+        },
+        axisTick: {
+            show: false,
+        },
+    }],
+    series: [{
+        name: '注册总量',
+        type: 'line',
+        smooth: true, //是否平滑曲线显示
+        // 			symbol:'circle',  // 默认是空心圆（中间是白色的），改成实心圆
+        showAllSymbol: true,
+        symbol: 'emptyCircle',
+        symbolSize: 6,
+        lineStyle: {
+            normal: {
+                color: "#28ffb3", // 线条颜色
+            },
+            borderColor: '#f0f'
+        },
+        label: {
+            show: true,
+            position: 'top',
+            textStyle: {
+                color: '#fff',
+            }
+        },
+        itemStyle: {
+            normal: {
+                color: "#28ffb3",
+
+            }
+        },
+        tooltip: {
+            show: false
+        },
+        areaStyle: { //区域填充样式
+            normal: {
+                //线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(0,154,120,1)'
                 },
-            },
-            barWidth: 20,
-            data: [50000000, 22000000, 10000000, 5000000, 1]
-        },
-        {
-            name: '背景',
-            type: 'bar',
-            barWidth: 18,
-            barGap: '-100%',
-            data: [50000000, 50000000, 50000000, 50000000, 1],
-            itemStyle: {
-                normal: {
-                    color: 'rgba(24,31,68,1)',
-                    barBorderRadius: 30,
+                {
+                    offset: 1,
+                    color: 'rgba(0,0,0, 0)'
                 }
-            },
+                ], false),
+                shadowColor: 'rgba(53,142,215, 0.9)', //阴影颜色
+                shadowBlur: 20 //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
+            }
         },
+        data: [100, 120, 110, 60, 70, 130, 150]
+    }
     ]
 };
