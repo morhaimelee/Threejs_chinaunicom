@@ -220,3 +220,95 @@ option2_first = {
     }
     ]
 };
+
+// 第二页图表
+option1_second = {
+    // backgroundColor: "#ffffff",
+    color: ["#37A2DA"],
+    radar: {
+        shape: 'circle',
+        name: {
+            textStyle: {
+                color: '#FFFFFF',
+            }
+        },
+        splitLine: {
+            lineStyle: {
+                color: [
+                    'rgba(86,130,245,0.2)', 'rgba(54,77，202,0.2)',
+                    'rgba(86,130,245,0.2)', 'rgba(54,77，202,0.2)',
+                    'rgba(86,130,245,0.2)', 'rgba(54,77，202,0.2)',
+                ].reverse()
+            }
+        },
+        splitArea: {
+            areaStyle: {
+                color: [
+                    "rgba(0, 104, 183, 0.3)",
+                    "rgba(0, 104, 183, 0.5)",
+                    "rgba(0, 255, 255, 0.4)"
+                ],
+                shadowColor: 'rgba(0, 0, 0, 0.3)'
+            }
+        },
+        axisLine: {
+            lineStyle: {
+                color: 'rgba(86,130,245,0.2)'
+            }
+        },
+        indicator: [{
+            name: '1F',
+            max: 150
+        },
+        {
+            name: '2F',
+            max: 150
+        },
+        {
+            name: '3F',
+            max: 150
+        },
+        {
+            name: '4F',
+            max: 150
+        },
+        {
+            name: '5F',
+            max: 150
+        },
+        {
+            name: '6F',
+            max: 150
+        },
+        {
+            name: '7F',
+            max: 150
+        },
+        {
+            name: '8F',
+            max: 150
+        },
+        {
+            name: '9F',
+            max: 150
+        },
+        ]
+    },
+    series: [{
+        type: 'radar',
+        data: [{
+            value: [120, 106, 113, 107, 126, 137, 90, 99, 50],
+            name: '人数',
+            itemStyle: {
+                normal: {
+                    color: 'rgba(0, 255, 255, 0.4)'
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: 'rgba(0, 255, 255, 0.4)'
+                }
+            }
+        }]
+    }]
+}

@@ -566,3 +566,39 @@ ul,ol,li{
     right: 26px;
     /* background: #00b4ff; */
 }
+.total_number_of_floor {
+    position: absolute;
+    top: 150px;
+    left: 85px;
+}
+.total_number_of_floor .warnVideo-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#echarts_second_leftTop {
+    width: 220px;
+    height: 220px;
+    position: absolute;
+    top: 210px;
+    left: 150px;
+}
+.people-status {
+    position: absolute;
+    top: 151px;
+    right: 474px;
+}
+.people-status .warnVideo-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.company-all-person-num {
+    font-size: 14px;
+    color: #fff;
+    width: 418px;
+    height: 88px;
+    position: absolute;
+    top: 197px;
+    right: 25px;
+}

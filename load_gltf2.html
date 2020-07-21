@@ -121,6 +121,7 @@
   <script src="./js/CSS2DRenderer.js"></script>
   <!--加载缓动插件-->
   <script src="./js/TweenMax.min.js"></script>
+
 </head>
 
 <body onload="draw();">
@@ -131,8 +132,8 @@
   <div class="topleft"></div>
   <nav class="nav">
     <ul>
-      <li class="nav_list fl selected" id="people_pass">设备警告</li>
-      <li class="nav_list fl" id="security">人员管理</li>
+      <li class="nav_list fl selected" id="equipment_warning">设备警告</li>
+      <li class="nav_list fl" id="personnel_management">人员管理</li>
       <li class="nav_list fl">公共资源</li>
       <li class="nav_list fl">环境管理</li>
       <!-- <li class="nav_list fl">办公运营</li> -->
@@ -152,113 +153,143 @@
       <li id="park_list"></li>
     </ul>
   </div>
-  <!-- 监控设备运行录像 -->
-  <div class="warnVideo-title">
-    <i></i>
-    <span>监控设备运行</span>
-    <div>Monitoring equipment</div>
-  </div>
-
-  <!-- 随机影像 -->
-  <div id="random-video">video</div>
-  <div id="equip-num">
-    <div>设备编号</div>
-    <div>8T242</div>
-  </div>
-  <div id="equip-allnum">
-    <i></i>
-    <span class="point-yellow"></span>
-    <span>设备总数量</span>
-    <span id="equip_num">512</span>个
-  </div>
-
-  <!-- 设备数量细则 -->
-  <div class="equip-list">
-    <ol>
-      <li><span class="point-yellow"></span> 运行数量</li>
-      <li><span class="point-blue"></span> 离线数量</li>
-      <li><span class="point-red"></span> 告警数量</li>
-    </ol>
-    <ul>
-      <li><i></i> 478</li>
-      <li><i></i> 24</li>
-      <li><i></i> 10</li>
-    </ul>
-  </div>
-
-  <section class="equip-online">
+  <section id="first_page">
+    <!-- 监控设备运行录像 -->
     <div class="warnVideo-title">
       <i></i>
-      <span>设备在线情况</span>
-      <div>Equipment online</div>
+      <span>监控设备运行</span>
+      <div>Monitoring equipment</div>
     </div>
-    <div id="echarts_first_leftBottom"></div>
-  </section>
-  <!-- 右上时间&天气 -->
-  <section class="time-date">
-    <div id="time"></div>
-    <div id="date"></div>
-    <div id="vertical_bar"></div>
-    <div id="weather"></div>
-    <div id="temperature"></div>
-  </section>
-  <!-- 越界告警 -->
-  <section class="cross-border-alarm">
-    <div class="warnVideo-title">
-      <i></i>
-      <span>越界告警</span>
-      <div>Cross-border alarm</div>
-    </div>
-  </section>
-  <div class="visitors-box"></div>
 
-  <!-- 安防告警 -->
-  <section class="Security-alarm">
-    <div class="warnVideo-title">
-      <i></i>
-      <span>安防告警</span>
-      <div>Security alarm</div>
+    <!-- 随机影像 -->
+    <div id="random-video">video</div>
+    <div id="equip-num">
+      <div>设备编号</div>
+      <div>8T242</div>
     </div>
-    <div class="alarm-all-num-box">
+    <div id="equip-allnum">
+      <i></i>
+      <span class="point-yellow"></span>
+      <span>设备总数量</span>
+      <span id="equip_num">512</span>个
+    </div>
+
+    <!-- 设备数量细则 -->
+    <div class="equip-list">
       <ol>
-        <li>告 警 总 数</li>
-        <li>未 处 理</li>
-        <li>已 处 理</li>
+        <li><span class="point-yellow"></span> 运行数量</li>
+        <li><span class="point-blue"></span> 离线数量</li>
+        <li><span class="point-red"></span> 告警数量</li>
       </ol>
       <ul>
-        <li>215</li>
-        <li>15</li>
-        <li>200</li>
+        <li><i></i> 478</li>
+        <li><i></i> 24</li>
+        <li><i></i> 10</li>
       </ul>
     </div>
 
+    <section class="equip-online">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>设备在线情况</span>
+        <div>Equipment online</div>
+      </div>
+      <div id="echarts_first_leftBottom"></div>
+    </section>
+    <!-- 右上时间&天气 -->
+    <section class="time-date">
+      <div id="time"></div>
+      <div id="date"></div>
+      <div id="vertical_bar"></div>
+      <div id="weather"></div>
+      <div id="temperature"></div>
+    </section>
+    <!-- 越界告警 -->
+    <section class="cross-border-alarm">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>越界告警</span>
+        <div>Cross-border alarm</div>
+      </div>
+    </section>
+    <div class="visitors-box"></div>
+
+    <!-- 安防告警 -->
+    <section class="Security-alarm">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>安防告警</span>
+        <div>Security alarm</div>
+      </div>
+      <div class="alarm-all-num-box">
+        <ol>
+          <li>告 警 总 数</li>
+          <li>未 处 理</li>
+          <li>已 处 理</li>
+        </ol>
+        <ul>
+          <li>215</li>
+          <li>15</li>
+          <li>200</li>
+        </ul>
+      </div>
+
+    </section>
+    <!-- 设备状态异常滚动 -->
+    <div class="equip-status-box">
+      <ol>
+        <li>设备</li>
+        <li>告警消防</li>
+        <li>告警时间</li>
+        <li>状态</li>
+      </ol>
+      <div id="mid-line"></div>
+      <ul>
+        <li><span>烟感</span><span>烟雾告警</span><span>12-14 14:12</span><span>未处理</span></li>
+        <li><span>电线温度</span><span>温度过高</span><span>12-14 14:12</span><span>已处理</span></li>
+        <li><span>消防栓</span><span>水压过高</span><span>12-14 14:12</span><span>已处理</span></li>
+      </ul>
+    </div>
+    <!-- 近三个月告警趋势 -->
+    <section class="recent-trends">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>近3个月告警趋势</span>
+        <div>Recent trends</div>
+      </div>
+
+    </section>
+    <div id="echarts_first_rightBottom"></div>
   </section>
-  <!-- 设备状态异常滚动 -->
-  <div class="equip-status-box">
-    <ol>
-      <li>设备</li>
-      <li>告警消防</li>
-      <li>告警时间</li>
-      <li>状态</li>
-    </ol>
-    <div id="mid-line"></div>
-    <ul>
-      <li><span>烟感</span><span>烟雾告警</span><span>12-14 14:12</span><span>未处理</span></li>
-      <li><span>电线温度</span><span>温度过高</span><span>12-14 14:12</span><span>已处理</span></li>
-      <li><span>消防栓</span><span>水压过高</span><span>12-14 14:12</span><span>已处理</span></li>
-    </ul>
-  </div>
-  <!-- 近三个月告警趋势 -->
-  <section class="recent-trends">
+  <!-- 人员管理页签 -->
+  <section class="total_number_of_floor">
     <div class="warnVideo-title">
       <i></i>
-      <span>近3个月告警趋势</span>
-      <div>Recent trends</div>
+      <span>楼层总人数</span>
+      <div>Security alarm</div>
     </div>
-    
   </section>
-  <div id="echarts_first_rightBottom"></div>
+  <div id="echarts_second_leftTop"></div>
 
+  <!-- 人员状况 -->
+  <section class="people-status">
+    <div class="warnVideo-title">
+      <i></i>
+      <span>人员状况</span>
+      <div>People status</div>
+    </div>
+  </section>
+  <div class="company-all-person-num">
+    <div class="company-person">
+      <span>公司员工 <div id="company_person">124</div>人</span>
+    </div>
+    <div class="visitor-person">
+      <span>公司员工 <div id="visitor_person">43</div>人</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- 访客进入实时数据 -->
 
   <div class="btn_left" id="people_moni">安防监控</div> -->
   <div class="btn_left" id="in_ex_floor">进入大楼</div>
@@ -287,9 +318,11 @@
   <script src="./js/echarts-main.js"></script>
   <script src="./js/GetTime.js"></script>
   <script src="./js/weather.js"></script>
+  <script src="./js/button.js"></script><!-- 按钮js -->
   <script>
     echarts.init(document.getElementById('echarts_first_leftBottom')).setOption(option1_first); //主页左下角echarts
     echarts.init(document.getElementById('echarts_first_rightBottom')).setOption(option2_first); //主页右下角echarts
+    echarts.init(document.getElementById('echarts_second_leftTop')).setOption(option1_second); //二页左上角echarts
     let mixer = null
     let objAll = null
     let container, stats, controls
@@ -668,12 +701,7 @@
     //进入大楼
     $('#in_ex_floor').on('click', function () {
       $('#back_all').show()
-      // $('#back_all').css('top', '486px')
-      if ($('#security').hasClass('seleceted')) {
-        $('#back_all').css('top', '486px')
-      } else if ($('#people_pass').hasClass('seleceted')) {
-        $('#back_all').css('top', '336px')
-      }
+
       // removeEntity('all')
       hiddenObject('all')
       hiddenObject('other')
@@ -1115,39 +1143,6 @@
     }
     //顶部tab
 
-    //人员通行
-    $('#people_pass').on('click', function () {
-      $('.nav_list').removeClass('selected')
-      $('#people_pass').addClass('selected')
-      $('#people_moni').hide() //隐藏安防按钮
-      $('#smoke').hide() //隐藏烟感按钮
-      $('#fire_waterP').hide() //隐藏消防水压
-      $('#line_temp').hide() //隐藏线缆温度
-      $('.videoIcon').hide()
-      $('.smokeIcon').hide()
-      $('.videoLayer').hide()
-      $('.smokeLayer').hide()
-      $('.rightBox').show()
-      $('.rightBox2').hide()
-      $('#gate').show() //闸机
-      $('#back_all').css('top', '336px')
-    })
-    //综合安防
-    $('#security').on('click', function () {
-      $('.nav_list').removeClass('selected')
-      $('#security').addClass('selected')
-      $('.gateIcon').hide()
-      $('.gateLayer').hide()
-      $('.rightBox').hide()
-      $('.rightBox2').show()
-      $('#gate').hide() //闸机按钮
-      $('#people_moni').show() //安防监控按钮
-      $('#smoke').show() //显示烟感按钮
-      $('#fire_waterP').show() //显示消防水压
-      $('#line_temp').show() //显示线缆温度
-
-      $('#back_all').css('top', '486px')
-    })
 
     //安防监控按钮
     $('#people_moni').on('click', function () {
