@@ -312,3 +312,106 @@ option1_second = {
         }]
     }]
 }
+
+option2_second = {
+    // backgroundColor: '#00265f',
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    legend: {
+        data: ['进', '出'],
+        align: 'right',
+        right: 10,
+        textStyle: {
+            color: "#fff"
+        },
+        itemWidth: 10,
+        itemHeight: 10,
+        itemGap: 35
+    },
+    // grid: {
+    //     left: '3%',
+    //     right: '4%',
+    //     bottom: '3%',
+    //     containLabel: true
+    // },
+    xAxis: [{
+        type: 'category',
+        data: ['08:00',
+            '09:00',
+            '10:00',
+            '11:00',
+            '12:00',
+            '13:00',
+            '14:00',
+            '15:00',
+            '16:00'
+        ],
+        axisLine: {
+            show: true,
+            lineStyle: {
+                color: "#063374",
+                width: 1,
+                type: "solid"
+            }
+        },
+        axisTick: {
+            show: false,
+        },
+        axisLabel: {
+            show: true,
+            textStyle: {
+                color: "#00c7ff",
+            }
+        },
+    }],
+    yAxis: [{
+        type: 'value',
+        axisLabel: {
+            formatter: '{value}'
+        },
+        axisTick: {
+            show: false,
+        },
+        axisLine: {
+            show: false,
+            lineStyle: {
+                color: "#00c7ff",
+                width: 1,
+                type: "solid"
+            },
+        },
+        splitLine: {
+            lineStyle: {
+                color: "#063374",
+            }
+        }
+    }],
+    series: [{
+        name: '进',
+        type: 'bar',
+        data: [20, 50, 80, 58, 83, 68, 57, 80, 42, 66],
+        barWidth: 5, //柱子宽度
+        // barGap: 1, //柱子之间间距
+        itemStyle: {
+            normal: {
+                color: '#008AFF',
+                opacity: 1,
+            }
+        }
+    }, {
+        name: '出',
+        type: 'bar',
+        data: [50, 70, 60, 61, 75, 87, 60, 62, 86, 46],
+        barWidth: 5,
+        // barGap: 1,
+        itemStyle: {
+            normal: {
+                color: '#FF9000'
+            }
+        }
+    }]
+};

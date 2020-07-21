@@ -134,8 +134,8 @@
     <ul>
       <li class="nav_list fl selected" id="equipment_warning">设备警告</li>
       <li class="nav_list fl" id="personnel_management">人员管理</li>
-      <li class="nav_list fl">公共资源</li>
-      <li class="nav_list fl">环境管理</li>
+      <li class="nav_list fl" id="public_resource">公共资源</li>
+      <li class="nav_list fl" id="environmental_management">环境管理</li>
       <!-- <li class="nav_list fl">办公运营</li> -->
     </ul>
   </nav>
@@ -153,7 +153,7 @@
       <li id="park_list"></li>
     </ul>
   </div>
-  <section id="first_page">
+  <section id="first_page" class="all_of_page">
     <!-- 监控设备运行录像 -->
     <div class="warnVideo-title">
       <i></i>
@@ -262,37 +262,86 @@
     <div id="echarts_first_rightBottom"></div>
   </section>
   <!-- 人员管理页签 -->
-  <section class="total_number_of_floor">
-    <div class="warnVideo-title">
-      <i></i>
-      <span>楼层总人数</span>
-      <div>Security alarm</div>
+  <section id="second_page" class="all_of_page">
+    <!-- 楼层总人数 -->
+    <section class="total_number_of_floor">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>楼层总人数</span>
+        <div>Security alarm</div>
+      </div>
+    </section>
+    <div id="echarts_second_leftTop"></div>
+
+    <!-- 今日人流量各时段统计 -->
+    <section class="todays_statistics">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>今日人流量各时段统计</span>
+        <div>Today's traffic statistics for each period</div>
+      </div>
+    </section>
+    <div id="echarts_second_leftBottom"></div>
+
+    <!-- 人员状况 -->
+    <section class="people-status">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>人员状况</span>
+        <div>People status</div>
+      </div>
+    </section>
+    <div class="company-all-person-num">
+      <div class="company-person">
+        <span>公司员工 <div id="company_person">
+            <ul class="person-single-num">
+              <li>0</li>
+              <li>3</li>
+              <li>4</li>
+              <li>5</li>
+            </ul>
+          </div>人</span>
+      </div>
+      <div class="visitor-person">
+        <span>访客人员 <div id="visitor_person">
+            <ul class="person-single-num">
+              <li>0</li>
+              <li>0</li>
+              <li>4</li>
+              <li>2</li>
+            </ul>
+          </div>人</span>
+      </div>
     </div>
+    </div>
+    <!-- 访客进入实时数据 -->
+    <section class="visitor-real-data">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>访客进入实时数据</span>
+        <div>Visitors enter real-time data</div>
+      </div>
+    </section>
+    <div class="visitor-realTime-data">
+      <div class="realTime-box"></div>
+      <div class="realTime-box"></div>
+      <div class="realTime-box"></div>
+    </div> 
   </section>
-  <div id="echarts_second_leftTop"></div>
 
-  <!-- 人员状况 -->
-  <section class="people-status">
-    <div class="warnVideo-title">
-      <i></i>
-      <span>人员状况</span>
-      <div>People status</div>
-    </div>
+
+
+  <!-- 公共资源页签 -->
+  <section id="thrid_page" class="all_of_page">
+
   </section>
-  <div class="company-all-person-num">
-    <div class="company-person">
-      <span>公司员工 <div id="company_person">124</div>人</span>
-    </div>
-    <div class="visitor-person">
-      <span>公司员工 <div id="visitor_person">43</div>人</span>
-    </div>
-  </div>
-  </div>
 
-  <!-- 访客进入实时数据 -->
+  <section id="fourth_page" class="all_of_page">
 
-  <div class="btn_left" id="people_moni">安防监控</div> -->
-  <div class="btn_left" id="in_ex_floor">进入大楼</div>
+  </section>
+  <!-- <div class="btn_left" id="people_moni">安防监控</div> --> -->
+  <!-- <div class="btn_left" id="in_ex_floor">进入大楼</div> -->
+
   <!--  value="play()" -->
   <!-- <div class="btn_left" id="gate">闸机</div>
   <div class="btn_left" id="smoke">烟感</div>
@@ -323,6 +372,7 @@
     echarts.init(document.getElementById('echarts_first_leftBottom')).setOption(option1_first); //主页左下角echarts
     echarts.init(document.getElementById('echarts_first_rightBottom')).setOption(option2_first); //主页右下角echarts
     echarts.init(document.getElementById('echarts_second_leftTop')).setOption(option1_second); //二页左上角echarts
+    echarts.init(document.getElementById('echarts_second_leftBottom')).setOption(option2_second); //二页左上角echarts
     let mixer = null
     let objAll = null
     let container, stats, controls
