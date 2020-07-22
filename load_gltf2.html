@@ -153,6 +153,14 @@
       <li id="park_list"></li>
     </ul>
   </div>
+  <!-- 右上时间&天气 -->
+  <section class="time-date">
+    <div id="time"></div>
+    <div id="date"></div>
+    <div id="vertical_bar"></div>
+    <div id="weather"></div>
+    <div id="temperature"></div>
+  </section>
   <section id="first_page" class="all_of_page">
     <!-- 监控设备运行录像 -->
     <div class="warnVideo-title">
@@ -196,14 +204,7 @@
       </div>
       <div id="echarts_first_leftBottom"></div>
     </section>
-    <!-- 右上时间&天气 -->
-    <section class="time-date">
-      <div id="time"></div>
-      <div id="date"></div>
-      <div id="vertical_bar"></div>
-      <div id="weather"></div>
-      <div id="temperature"></div>
-    </section>
+
     <!-- 越界告警 -->
     <section class="cross-border-alarm">
       <div class="warnVideo-title">
@@ -323,10 +324,69 @@
       </div>
     </section>
     <div class="visitor-realTime-data">
-      <div class="realTime-box"></div>
-      <div class="realTime-box"></div>
-      <div class="realTime-box"></div>
-    </div> 
+      <div class="realTime-box">
+        <ul>
+          <li><img src="./assets/imgs/QQtouxiang.png" alt=""></li>
+          <li>姓名： 某某某</li>
+          <li>通过门禁： B栋一楼</li>
+          <li>进入时间： 2020-7-22</li>
+        </ul>
+      </div>
+      <div class="realTime-box">
+        <ul>
+          <li><img src="./assets/imgs/QQtouxiang.png" alt=""></li>
+          <li>姓名： 某某某</li>
+          <li>通过门禁： B栋一楼</li>
+          <li>进入时间： 2020-7-22</li>
+        </ul>
+      </div>
+      <div class="realTime-box">
+        <ul>
+          <li><img src="./assets/imgs/QQtouxiang.png" alt=""></li>
+          <li>姓名： 某某某</li>
+          <li>通过门禁： B栋一楼</li>
+          <li>进入时间： 2020-7-22</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 访客实时数据 -->
+    <section class="visitor-real-time-data">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>访客实时数据</span>
+        <div>Visitor real-time data</div>
+      </div>
+    </section>
+    <div class="visitor-sys">
+      <ol>
+        <li>今日访客</li>
+        <li>当前访客</li>
+        <li>未到访客</li>
+      </ol>
+      <ul>
+        <li>200</li>
+        <li>50</li>
+        <li>10</li>
+      </ul>
+    </div>
+    <!-- 访客list -->
+    <div class="visitor-list">
+      <ol>
+        <li class="fl">访客姓名</li>
+        <li class="fl">受访人</li>
+        <li class="fl">预约时间</li>
+        <li class="fl">状态</li>
+      </ol>
+      <div class="line-gray"></div>
+      <ul>
+        <li><span>某某某</span><span>某某某</span><span>07-22 16:14</span><span>已进入</span></li>
+        <li><span>某某某</span><span>某某某</span><span>07-22 16:14</span><span>已进入</span></li>
+        <li><span>某某某</span><span>某某某</span><span>07-22 16:14</span><span>已进入</span></li>
+        <li><span>某某某</span><span>某某某</span><span>07-22 16:14</span><span>已进入</span></li>
+      </ul>
+    </div>
+
   </section>
 
 
@@ -339,7 +399,7 @@
   <section id="fourth_page" class="all_of_page">
 
   </section>
-  <!-- <div class="btn_left" id="people_moni">安防监控</div> --> -->
+  <!-- <div class="btn_left" id="people_moni">安防监控</div> -->
   <!-- <div class="btn_left" id="in_ex_floor">进入大楼</div> -->
 
   <!--  value="play()" -->
