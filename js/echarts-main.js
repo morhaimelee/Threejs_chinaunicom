@@ -415,3 +415,285 @@ option2_second = {
         }
     }]
 };
+
+
+var value;
+option1_third = {
+    grid: {
+        left: '5%',
+        right: '5%',
+        bottom: '5%',
+        top: '10%',
+        containLabel: true
+    },
+    // tooltip: {
+    //     trigger: 'axis',
+    //     axisPointer: {
+    //         type: 'none'
+    //     },
+    //     formatter: function(params) {
+    //         return params[0].name + '<br/>' +
+    //             "<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:rgba(36,207,233,0.9)'></span>" +
+    //             params[0].seriesName + ' : ' + Number((params[0].value.toFixed(4) / 10000).toFixed(2)).toLocaleString() + ' 万元<br/>'
+    //     }
+    // },
+    // backgroundColor: 'rgb(20,28,52)',
+    xAxis: {
+        show: false,
+        type: 'value'
+    },
+    yAxis: [{
+        type: 'category',
+        inverse: true,
+        axisLabel: {
+            show: true,
+            textStyle: {
+                color: '#fff'
+            },
+        },
+        splitLine: {
+            show: false
+        },
+        axisTick: {
+            show: false
+        },
+        axisLine: {
+            show: false
+        },
+        data: ['停车位']
+    }, {
+        type: 'category',
+        inverse: true,
+        axisTick: 'none',
+        axisLine: 'none',
+        show: true,
+        axisLabel: {
+            textStyle: {
+                color: '#ffffff',
+                fontSize: '12'
+            },
+            formatter: function (value) {
+                return value + ' / 50';
+            },
+        },
+        data: [35]
+    }],
+    series: [{
+        // name: '金额',
+        type: 'bar',
+        zlevel: 1,
+        itemStyle: {
+            normal: {
+                barBorderRadius: 30,
+                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                    offset: 0,
+                    color: 'rgb(57,89,255,1)'
+                }, {
+                    offset: 1,
+                    color: 'rgb(46,200,207,1)'
+                }]),
+            },
+        },
+        barWidth: 18,
+        data: [35]
+    },
+    {
+        name: '背景',
+        type: 'bar',
+        barWidth: 18,
+        barGap: '-100%',
+        data: [50],
+        itemStyle: {
+            normal: {
+                color: 'rgba(24,31,68,1)',
+                barBorderRadius: 30,
+            }
+        },
+    },
+    ]
+};
+
+var dataStyle = {
+    normal: {
+        label: {
+            show: false
+        },
+        labelLine: {
+            show: false
+        },
+        shadowBlur: 0,
+        shadowColor: '#203665'
+    }
+};
+option2_third = {
+    // backgroundColor: "#20263f",
+    series: [{
+        name: '第一个圆环',
+        type: 'pie',
+        clockWise: false,
+        radius: [50, 55],
+        itemStyle: dataStyle,
+        hoverAnimation: false,
+        center: ['15%', '50%'],
+        data: [{
+            value: 328,
+            label: {
+                normal: {
+                    rich: {
+                        a: {
+                            color: '#00ADFF',
+                            align: 'center',
+                            fontSize: 20,
+                            fontWeight: "bold"
+                        },
+                        b: {
+                            color: '#fff',
+                            align: 'center',
+                            fontSize: 16
+                        }
+                    },
+                    formatter: function(params){
+                        return "{a|"+params.value+"}";
+                    },
+                    position: 'center',
+                    show: true,
+                    textStyle: {
+                        fontSize: '14',
+                        fontWeight: 'normal',
+                        color: '#fff'
+                    }
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#2c6cc4',
+                    shadowColor: '#2c6cc4',
+                    shadowBlur: 0
+                }
+            }
+        }, {
+            value: 75,
+            name: 'invisible',
+            itemStyle: {
+                normal: {
+                    color: '#24375c'
+                },
+                emphasis: {
+                    color: '#24375c'
+                }
+            }
+        }]
+    }, {
+        name: '第二个圆环',
+        type: 'pie',
+        clockWise: false,
+        radius: [50, 55],
+        itemStyle: dataStyle,
+        hoverAnimation: false,
+        center: ['50%', '50%'],
+        data: [{
+            value: 25,
+            label: {
+                normal: {
+                    rich: {
+                        a: {
+                            color: '#00FFFF',
+                            align: 'center',
+                            fontSize: 20,
+                            fontWeight: "bold"
+                        },
+                        b: {
+                            color: '#fff',
+                            align: 'center',
+                            fontSize: 16
+                        }
+                    },
+                    formatter: function(params){
+                        return "{a|"+params.value+"}";
+                    },
+                    position: 'center',
+                    show: true,
+                    textStyle: {
+                        fontSize: '14',
+                        fontWeight: 'normal',
+                        color: '#fff'
+                    }
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#00FFFF',
+                    shadowColor: '#00FFFF',
+                    shadowBlur: 0
+                }
+            }
+        }, {
+            value: 50,
+            name: 'invisible',
+            itemStyle: {
+                normal: {
+                    color: '#24375c'
+                },
+                emphasis: {
+                    color: '#24375c'
+                }
+            }
+        }]
+    }, {
+        name: '第三个圆环',
+        type: 'pie',
+        clockWise: false,
+        radius: [50, 55],
+        itemStyle: dataStyle,
+        hoverAnimation: false,
+        center: ['85%', '50%'],
+        data: [{
+            value: 10,
+            label: {
+                normal: {
+                    rich: {
+                        a: {
+                            color: '#FF6767',
+                            align: 'center',
+                            fontSize: 20,
+                            fontWeight: "bold"
+                        },
+                        b: {
+                            color: '#fff',
+                            align: 'center',
+                            fontSize: 16
+                        }
+                    },
+                    formatter: function(params){
+                        return "{a|"+params.value+"}";//"{b|缺报统计}\n\n"+"{a|"+params.value+"个}"+"\n\n{b|增长2%}";
+                    },
+                    position: 'center',
+                    show: true,
+                    textStyle: {
+                        fontSize: '14',
+                        fontWeight: 'normal',
+                        color: '#fff'
+                    }
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#FF6767',
+                    shadowColor: '#FF6767',
+                    shadowBlur: 0
+                }
+            }
+        }, {
+            value: 25,
+            name: 'invisible',
+            itemStyle: {
+                normal: {
+                    color: '#24375c'
+                },
+                emphasis: {
+                    color: '#24375c'
+                }
+            }
+        }]
+    }]
+}

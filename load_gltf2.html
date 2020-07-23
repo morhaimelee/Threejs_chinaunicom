@@ -393,8 +393,44 @@
 
   <!-- 公共资源页签 -->
   <section id="thrid_page" class="all_of_page">
+    <!-- 车位占比 -->
+    <section class="percentage-parking-spaces">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>车位占比</span>
+        <div>Percentage of parking spaces</div>
+      </div>
+    </section>
+    <div id="echarts_third_leftTop"></div>
+
+    <!-- 车辆类型 -->
+    <section class="vehicle-Type">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>车辆类型</span>
+        <div>Vehicle Type</div>
+      </div>
+    </section>
+    <div id="echarts_third_leftMid"></div>
+    <div class="car-chart">
+      <ul>
+        <li class="fl">长期车</li>
+        <li class="fl">预约车</li>
+        <li class="fl">临时车</li>
+      </ul>
+    </div>
+    <!-- 车辆进出记录 -->
+    <section class="Vehicle-records">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>车辆进出记录</span>
+        <div>Vehicle entry and exit records</div>
+      </div>
+    </section>
 
   </section>
+
+
 
   <section id="fourth_page" class="all_of_page">
 
@@ -433,6 +469,8 @@
     echarts.init(document.getElementById('echarts_first_rightBottom')).setOption(option2_first); //主页右下角echarts
     echarts.init(document.getElementById('echarts_second_leftTop')).setOption(option1_second); //二页左上角echarts
     echarts.init(document.getElementById('echarts_second_leftBottom')).setOption(option2_second); //二页左上角echarts
+    echarts.init(document.getElementById('echarts_third_leftTop')).setOption(option1_third); //三页左上角echarts
+    echarts.init(document.getElementById('echarts_third_leftMid')).setOption(option2_third); //三页中echarts
     let mixer = null
     let objAll = null
     let container, stats, controls
