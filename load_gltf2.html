@@ -427,6 +427,126 @@
         <div>Vehicle entry and exit records</div>
       </div>
     </section>
+    <div class="records-list">
+      <ul>
+        <li>
+          <i class="enter_go"></i> <!-- go_icon -->
+          <div class="line-list"></div>
+          <span>贵A 48293</span>
+          <div class="time-box">07-24 10:13</div>
+        </li>
+        <li>
+          <i class="enter_go"></i>
+          <div class="line-list"></div>
+          <span>贵A 48293</span>
+          <div class="time-box">07-24 10:13</div>
+        </li>
+        <li>
+          <i class="enter_go"></i>
+          <div class="line-list"></div>
+          <span>贵A 48293</span>
+          <div class="time-box">07-24 10:13</div>
+        </li>
+        <li>
+          <i class="enter_go go_icon"></i>
+          <div class="line-list"></div>
+          <span>贵A 48293</span>
+          <div class="time-box">07-24 10:13</div>
+        </li>
+        <li>
+          <i class="enter_go"></i>
+          <div class="line-list"></div>
+          <span>贵A 48293</span>
+          <div class="time-box">07-24 10:13</div>
+        </li>
+        <li>
+          <i class="enter_go"></i>
+          <div class="line-list"></div>
+          <span>贵A 48293</span>
+          <div class="time-box">07-24 10:13</div>
+        </li>
+        <li>
+          <i class="enter_go"></i>
+          <div class="line-list"></div>
+          <span>贵A 48293</span>
+          <div class="time-box">07-24 10:13</div>
+        </li>
+        <li>
+          <i class="enter_go"></i>
+          <div class="line-list"></div>
+          <span>贵A 48293</span>
+          <div class="time-box">07-24 10:13</div>
+        </li>
+        <li>
+          <i class="enter_go"></i>
+          <div class="line-list"></div>
+          <span>贵A 48293</span>
+          <div class="time-box">07-24 10:13</div>
+        </li>
+        <li>
+          <i class="enter_go"></i>
+          <div class="line-list"></div>
+          <span>贵A 48293</span>
+          <div class="time-box">07-24 10:13</div>
+        </li>
+      </ul>
+    </div>
+    <!-- 停车场占用率 -->
+    <section class="parking_rate">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>停车场占用率</span>
+        <div>Parking lot occupancy rate</div>
+      </div>
+    </section>
+    <div id="echarts_third_rightTop"></div>
+    <!-- 会议室使用情况 -->
+    <section class="conference_room">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>会议室使用情况</span>
+        <div>Conference room usage</div>
+      </div>
+    </section>
+    <div class="conference-room-box">
+      <ol>
+        <li><i></i>可预约</li>
+        <li><i></i>不可预约</li>
+        <li><i></i>待开放</li>
+      </ol>
+      <ul>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+      </ul>
+      <ul>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+      </ul>
+      <ul>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+      </ul>
+      <ul>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+        <li class="fl"><div>B602</div></li>
+      </ul>
+    </div>
 
   </section>
 
@@ -471,6 +591,7 @@
     echarts.init(document.getElementById('echarts_second_leftBottom')).setOption(option2_second); //二页左上角echarts
     echarts.init(document.getElementById('echarts_third_leftTop')).setOption(option1_third); //三页左上角echarts
     echarts.init(document.getElementById('echarts_third_leftMid')).setOption(option2_third); //三页中echarts
+    echarts.init(document.getElementById('echarts_third_rightTop')).setOption(option3_third); //三页右上echarts
     let mixer = null
     let objAll = null
     let container, stats, controls
