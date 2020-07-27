@@ -139,6 +139,13 @@ li {
     cursor: pointer;
 }
 
+.clearfix:after {
+    content: ' ';
+    display: block;
+    height : 0;
+    clear  : both;
+}
+
 /* 初始化结束 */
 @font-face {
     font-family: fangzheng;
@@ -1260,12 +1267,12 @@ li {
 }
 
 .conference-room-box ul li {
-    color       : #fff;
-    width       : 67px;
-    height      : 42px;
-    font-size   : 18px;
-    border      : 1px solid rgba(210, 241, 255, 1);
-    margin-right: 10px;
+    color        : #fff;
+    width        : 67px;
+    height       : 42px;
+    font-size    : 18px;
+    border       : 1px solid rgba(210, 241, 255, 1);
+    margin-right : 10px;
     margin-bottom: 10px;
 }
 
@@ -1276,4 +1283,160 @@ li {
     margin     : 2px;
     line-height: 36px;
     text-align : center;
+}
+
+.environmental-monitoring {
+    position: absolute;
+    top     : 147px;
+    left    : 85px;
+}
+
+.environmental-monitoring .warnVideo-title {
+    width   : 230px;
+    position: absolute;
+    top     : 0;
+    left    : 0;
+}
+
+.environmental-box {
+    width   : 438px;
+    height  : 80px;
+    position: absolute;
+    top     : 215px;
+    left    : 110px;
+}
+
+.environmental-box ul {
+    width  : 435px;
+    display: flex;
+    color  : #fff;
+}
+
+.environmental-box ul li {
+    flex: 1;
+}
+
+.environmental-box ul li span {
+    color: #4DFFFF;
+}
+
+.environmental-box ul:nth-child(2) {
+    position: absolute;
+    top     : 40px;
+}
+
+/* 设备信息 */
+.device-information {
+    position: absolute;
+    top     : 308px;
+    left    : 85px;
+}
+
+.device-information .warnVideo-title {
+    position: absolute;
+    left    : 0;
+    top     : 0;
+}
+
+.device-box {
+    position: absolute;
+    top     : 360px;
+    left    : 100px;
+}
+
+.option {
+    width : 116px;
+    height: 38px;
+    margin-bottom: 10px;
+}
+
+.option::after {
+    content       : "";
+    width         : 20px;
+    height        : 20px;
+    background    : url(../assets/imgs/下拉.png) no-repeat center;
+    position      : absolute;
+    left         : 84px;
+    top           : 9px;
+    pointer-events: none;
+}
+
+.device-box select {
+    margin            : 0;
+    padding           : 0;
+    background        : none;
+    color             : #fff;
+    font-size         : 16px;
+    width             : 100%;
+    height            : 100%;
+    border            : none;
+    outline           : none;
+    line-height       : 36px;
+    appearance        : none;
+    -webkit-appearance: none;
+    -moz-appearance   : none;
+    padding-left      : 10px;
+    border            : 1px solid rgba(51, 150, 251, 1);
+    border-radius     : 4px;
+}
+
+.option-class {
+    border    : none;
+    background: #4DC2FF;
+    color     : #fff;
+}
+
+.device-list-box {
+    width: 435px;
+    color: #fff;
+}
+
+.device-list-box ul li {
+    width : 435px;
+    height: 107px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(51, 150, 251, 1);
+}
+.divice-31 {
+    height: 31px;
+    border-bottom: 1px solid rgba(51, 150, 251, 1);
+}
+.blue-82 {
+    width: 70px;
+    display: inline-block;
+    color: #82AAFF;
+    text-align: center;
+    line-height: 31px;
+}
+.white-33 {
+    display: inline-block;
+    width: 101px;
+    height: 100%;
+    line-height: 31px;
+    text-align: center;
+    border: 1px solid rgba(51,150,251,1);
+    border-top: none;
+    border-bottom: none;
+}
+.device-div {
+    height     : 43px;
+    font-size  : 16px;
+    color      : #fff;
+    line-height: 43px;
+    border-bottom: 1px solid rgba(51,150,251,1);
+}
+.device-div .device-name {
+    display: inline-block;
+    margin-left: 9px;
+}
+.device-div .fr {
+    color       : #FF6767;
+    margin-right: 36px;
+}
+.last_white {
+    display: inline-block;
+    height: 100%;
+    padding-left: 10px;
+    line-height: 31px;
+    border-left: 1px solid rgba(51,150,251,1);
 }
