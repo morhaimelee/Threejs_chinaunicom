@@ -552,8 +552,8 @@ option2_third = {
                             fontSize: 16
                         }
                     },
-                    formatter: function(params){
-                        return "{a|"+params.value+"}";
+                    formatter: function (params) {
+                        return "{a|" + params.value + "}";
                     },
                     position: 'center',
                     show: true,
@@ -608,8 +608,8 @@ option2_third = {
                             fontSize: 16
                         }
                     },
-                    formatter: function(params){
-                        return "{a|"+params.value+"}";
+                    formatter: function (params) {
+                        return "{a|" + params.value + "}";
                     },
                     position: 'center',
                     show: true,
@@ -664,8 +664,8 @@ option2_third = {
                             fontSize: 16
                         }
                     },
-                    formatter: function(params){
-                        return "{a|"+params.value+"}";//"{b|缺报统计}\n\n"+"{a|"+params.value+"个}"+"\n\n{b|增长2%}";
+                    formatter: function (params) {
+                        return "{a|" + params.value + "}";//"{b|缺报统计}\n\n"+"{a|"+params.value+"个}"+"\n\n{b|增长2%}";
                     },
                     position: 'center',
                     show: true,
@@ -714,7 +714,7 @@ option3_third = {
                 fontSize: 16
             },
         },
-        axisTick:{
+        axisTick: {
             show: false
         },
         splitLine: {
@@ -741,7 +741,7 @@ option3_third = {
                 fontSize: 16
             },
         },
-        axisTick:{
+        axisTick: {
             show: false
         },
         splitLine: {
@@ -757,8 +757,8 @@ option3_third = {
         smooth: true,
         symbol: 'circle',
         symbolSize: 7,
-        markPoint:{
-          symbol:"circle"  
+        markPoint: {
+            symbol: "circle"
         },
         // markLine:{
         //     symbol:"none",
@@ -823,4 +823,372 @@ option3_third = {
             }
         }
     }]
+};
+
+
+const colorList = ["#9E87FF", '#73DDFF', '#fe9a8b', '#F56948', '#9E87FF']
+option1_fourth = {
+    // backgroundColor: '#fff',
+    // title: {
+    //     text: '全国6月销售统计',
+    //     textStyle: {
+    //         fontSize:12,
+    //         fontWeight: 400
+    //     },
+    //     left:'center',
+    //     top: '5%'
+    // },
+    legend: {
+        icon: 'circle',
+        top: '5%',
+        right: '5%',
+        itemWidth: 6,
+        itemGap: 20,
+        textStyle: {
+            color: '#556677'
+        }
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            label: {
+                show: true,
+                backgroundColor: '#fff',
+                color: '#556677',
+                borderColor: 'rgba(0,0,0,0)',
+                shadowColor: 'rgba(0,0,0,0)',
+                shadowOffsetY: 0
+            },
+            lineStyle: {
+                width: 0
+            }
+        },
+        backgroundColor: '#fff',
+        textStyle: {
+            color: '#5c6c7c'
+        },
+        padding: [10, 10],
+        extraCssText: 'box-shadow: 1px 0 2px 0 rgba(163,163,163,0.5)'
+    },
+    grid: {
+        top: '15%'
+    },
+    xAxis: [{
+        type: 'category',
+        data: ['北京', '上海', '广州', '深圳', '香港', '澳门', '台湾'],
+        axisLine: {
+            lineStyle: {
+                color: '#DCE2E8'
+            }
+        },
+        axisTick: {
+            show: false
+        },
+        axisLabel: {
+            interval: 0,
+            textStyle: {
+                color: '#556677'
+            },
+            margin: 15
+        },
+        axisPointer: {
+            label: {
+                padding: [11, 5, 7],
+                backgroundColor: {
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [{
+                        offset: 0,
+                        color: '#fff' // 0% 处的颜色
+                    }, {
+                        offset: 0.9,
+                        color: '#fff' // 0% 处的颜色
+                    }, {
+                        offset: 0.9,
+                        color: '#33c0cd' // 0% 处的颜色
+                    }, {
+                        offset: 1,
+                        color: '#33c0cd' // 100% 处的颜色
+                    }],
+                    global: false // 缺省为 false
+                }
+            }
+        },
+        boundaryGap: false
+    }],
+    yAxis: [{
+        type: 'value',
+        axisTick: {
+            show: false
+        },
+        axisLine: {
+            show: true,
+            lineStyle: {
+                color: '#DCE2E8'
+            }
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#556677'
+            }
+        },
+        splitLine: {
+            show: false
+        }
+    }, {
+        type: 'value',
+        position: 'right',
+        axisTick: {
+            show: false
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#556677'
+            },
+            formatter: '{value}'
+        },
+        axisLine: {
+            show: true,
+            lineStyle: {
+                color: '#DCE2E8'
+            }
+        },
+        splitLine: {
+            show: false
+        }
+    }],
+    series: [{
+        name: 'Adidas',
+        type: 'line',
+        data: [10, 10, 30, 12, 15, 3, 7],
+        symbolSize: 1,
+        symbol: 'circle',
+        smooth: true,
+        yAxisIndex: 0,
+        showSymbol: false,
+        lineStyle: {
+            width: 2,
+            color: '#00FCFF',
+            shadowColor: 'rgba(158,135,255, 0.3)',
+            shadowBlur: 10,
+            shadowOffsetY: 20
+        },
+        itemStyle: {
+            normal: {
+                color: colorList[0],
+                borderColor: colorList[0]
+            }
+        }
+    }, {
+        name: 'Nike',
+        type: 'line',
+        data: [5, 12, 11, 14, 25, 16, 10],
+        symbolSize: 1,
+        symbol: 'circle',
+        smooth: true,
+        yAxisIndex: 0,
+        showSymbol: false,
+        lineStyle: {
+            width: 2,
+            color: '#FFD200',
+            shadowColor: 'rgba(115,221,255, 0.3)',
+            shadowBlur: 10,
+            shadowOffsetY: 20
+        },
+        itemStyle: {
+            normal: {
+                color: colorList[1],
+                borderColor: colorList[1]
+            }
+        }
+    },
+
+    ]
+};
+
+
+var xAxisData = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],  //时间轴和柱状x轴数据
+dx = ["6", "9", "30", "15", "20", "40", "15", "20", "33", "35", "12", "24"];   //仪表盘数据
+dx2 = ["77", "85", "60", "50", "20", "40", "60", "72", "50", "33", "55", "66"];   //仪表盘数据
+
+var os = [];
+for (var i = 0; i < dx.length; i++) {
+    var series = [];
+    series.push({
+        data: [{
+            value: dx[i],
+            name: '照明'
+        }]
+    });
+
+    series.push({
+        data: [{
+            value: dx2[i],
+            name: '空调'
+        }]
+    });
+
+    os.push({
+        series: series
+    });
+}
+
+var option2_fourth = {
+    baseOption: {
+        timeline: {
+            axisType: 'category',
+            autoPlay: true,
+            bottom: 10,
+            left: 30,
+            data: xAxisData,
+            lineStyle: {
+                color: '#FFFFFF',
+                width: 2,
+            },
+            label: {
+                color: "#019aba"
+            },
+            checkpointStyle: {
+                symbol: 'diamond',
+                color: '#00FFFF',
+                borderColor: '#00FFFF'
+            }
+        },
+        // backgroundColor:'#384756',
+        color: ['#019aba'],
+        // title: {
+        //     text: '说明',
+        //     textStyle: {
+        //         fontSize: 8,
+        //         // fontWeight: 'bold',
+
+        //     },
+        // },
+
+        tooltip: {
+            show: true,
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow',
+            },
+        },
+
+        series: [
+            {
+                type: 'gauge',
+                center: ['20%', '40%'],
+                radius: '60%',
+                label: {
+                    normal: {
+                        position: 'center'
+                    }
+                },
+                axisLine: {            // 坐标轴线
+                    show: true,        // 默认显示，属性show控制显示与否
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: [[0.5, '#00EFC9'], [1, '#00BCF2']],
+                        width: 10
+                    }
+                },
+                axisTick: {            // 坐标轴小标记
+                    show: true,        // 属性show控制显示与否，默认不显示
+                    splitNumber: 10,    // 每份split细分多少段
+                    length: 3,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: '#fff',
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                splitLine: {           // 分隔线
+                    show: true,        // 默认显示，属性show控制显示与否
+                    length: 15,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        color: '#fff',
+                        width: 3,
+                        type: 'solid'
+                    }
+                },
+                pointer: {
+                    width: 5
+                },
+                title: {
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontSize: 10,
+                        color: '#fff',
+                        shadowColor: '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                detail: {
+                    formatter: '{value}%',
+                    textStyle: {
+                        fontSize: 10,
+                        fontWeight: "",
+                        color: '#00BCF2',
+                    }
+                },
+
+            },
+            {
+                type: 'gauge',
+                center: ['75%', '40%'],
+                radius: '60%',
+                label: {
+                    normal: {
+                        position: 'center'
+                    }
+                },
+                axisLine: {            // 坐标轴线
+                    show: true,        // 默认显示，属性show控制显示与否
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: [[0.5, '#00EFC9'], [1, '#00BCF2']],
+                        width: 10
+                    }
+                },
+                axisTick: {            // 坐标轴小标记
+                    show: true,        // 属性show控制显示与否，默认不显示
+                    splitNumber: 10,    // 每份split细分多少段
+                    length: 3,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: '#fff',
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                splitLine: {           // 分隔线
+                    show: true,        // 默认显示，属性show控制显示与否
+                    length: 15,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        color: '#fff',
+                        width: 3,
+                        type: 'solid'
+                    }
+                },
+                pointer: {
+                    width: 5
+                },
+                title: {
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontSize: 10,
+                        color: '#fff',
+                        shadowColor: '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                detail: {
+                    formatter: '{value}%',
+                    textStyle: {
+                        fontSize: 10,
+                        fontWeight: "",
+                        color: '#00BCF2',
+                    }
+                },
+
+            }]
+    },
+    options: os
 };

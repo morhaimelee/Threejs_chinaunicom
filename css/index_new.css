@@ -1440,3 +1440,117 @@ li {
     line-height: 31px;
     border-left: 1px solid rgba(51,150,251,1);
 }
+.energy-consumption {
+    position: absolute;
+    top: 149px;
+    right: 474px;
+}
+.energy-consumption .warnVideo-title {
+    width: 250px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.energy-logo div:nth-child(1) {
+    position: absolute;
+    top: 204px;
+    right: 332px;
+}
+.energy-logo div:nth-child(2) {
+    position: absolute;
+    top: 204px;
+    right: 112px;
+}
+.energy-logo div {
+    width: 77px;
+    height: 77px;
+    border-radius: 50%;
+    border:2px solid rgba(210,241,255,1);
+    text-align: center;
+}
+.energy-logo div i {
+    display: inline-block;
+    width: 28px;
+    height: 39px;
+    margin-top: 16px;
+}
+.energy-logo div .dian {
+    background: url('../assets/imgs/电.png') center center no-repeat;
+}
+.energy-logo div .shui {
+    background: url('../assets/imgs/水滴.png') center center no-repeat;
+}
+.energy-num {
+    position: absolute;
+    top: 300px;
+    right: 280px;
+    font-size: 16px;
+    color: #DCF4FE;
+}
+.energy-num2 {
+    position: absolute;
+    top: 300px;
+    right: 68px;
+}
+.energy-num span {
+    font-size: 29px;
+    font-family: fangzheng;
+    margin-right: 12px;
+}
+#dian_num {
+    color: #FFD200;
+}
+#shui_num {
+    color: #00FCFF;
+}
+.total-dian-text {
+    position: absolute;
+    top: 333px;
+    right: 319px;
+    color: #fff;
+    font-size: 16px;
+}
+.total-shui-text {
+    position: absolute;
+    top: 333px;
+    right: 93px;
+    color: #fff;
+    font-size: 16px;
+}
+.day-energy {
+    position: absolute;
+    top: 388px;
+    right: 474px;
+}
+.day-energy .warnVideo-title {
+    width: 250px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#echarts_fourth_rightTop {
+    width: 430px;
+    height: 180px;
+    position: absolute;
+    top: 432px;
+    right: 13px;
+}
+.equipment-power {
+    position: absolute;
+    top: 622px;
+    right: 474px;
+}
+.equipment-power .warnVideo-title {
+    width: 250px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#echarts_fourth_rightBottom {
+    width: 420px;
+    height: 280px;
+    position: absolute;
+    top: 693px;
+    right: 20px;
+
+}

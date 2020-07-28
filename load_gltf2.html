@@ -669,6 +669,40 @@
         </ul>
       </div>
     </section>
+    <!-- 耗能总量 -->
+    <section class="energy-consumption">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>耗能总量</span>
+        <div>Total energy consumption</div>
+      </div>
+    </section>
+    <div class="energy-logo">
+       <div><i class="dian"></i></div>
+       <div><i class="shui"></i></div>
+    </div>
+    <div class="energy-num"><span id="dian_num">12546.9</span>kw</div>
+    <div class="energy-num energy-num2"><span id="shui_num">12546.9</span>t</div>
+    <div class="total-dian-text">累计耗电总量</div>
+    <div class="total-shui-text">累计耗水总量</div>
+    <!-- 当日能耗趋势 -->
+    <section class="day-energy">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>当日能耗趋势</span>
+        <div>Energy consumption trend of the day</div>
+      </div>
+    </section>
+    <div id="echarts_fourth_rightTop"></div>
+    <!-- 设备耗电占比 -->
+    <section class="equipment-power">
+      <div class="warnVideo-title">
+        <i></i>
+        <span>设备耗电占比</span>
+        <div>Percentage of equipment power consumption</div>
+      </div>
+    </section>
+    <div id="echarts_fourth_rightBottom"></div>
 
   </section>
   <!-- <div class="btn_left" id="people_moni">安防监控</div> -->
@@ -708,6 +742,8 @@
     echarts.init(document.getElementById('echarts_third_leftTop')).setOption(option1_third); //三页左上角echarts
     echarts.init(document.getElementById('echarts_third_leftMid')).setOption(option2_third); //三页中echarts
     echarts.init(document.getElementById('echarts_third_rightTop')).setOption(option3_third); //三页右上echarts
+    echarts.init(document.getElementById('echarts_fourth_rightTop')).setOption(option1_fourth); //四页右上echarts
+    echarts.init(document.getElementById('echarts_fourth_rightBottom')).setOption(option2_fourth); //四页右下echarts
 
     let objAll = null
     let container, stats, controls
@@ -1030,6 +1066,7 @@
       //   scene.add(obj.scene)
       //   model_floor9.visible = false
       // })
+      
       // GLTFLoader_AllBuild = new THREE.GLTFLoader()
       // GLTFLoader_AllBuild.load('./assets/new_gltf/道路.gltf', function (obj) {
       //   //道路
