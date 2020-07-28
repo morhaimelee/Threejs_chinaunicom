@@ -121,6 +121,12 @@
   <script src="./js/CSS2DRenderer.js"></script>
   <!--加载缓动插件-->
   <script src="./js/TweenMax.min.js"></script>
+  <!-- m3u8 -->
+
+  <link href="https://vjs.zencdn.net/7.4.1/video-js.css" rel="stylesheet">
+  <script src='https://vjs.zencdn.net/7.4.1/video.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.15.0/videojs-contrib-hls.min.js"
+    type="text/javascript"></script>
 
 </head>
 
@@ -170,10 +176,14 @@
     </div>
 
     <!-- 随机影像 -->
-    <div id="random-video">video</div>
+    <div id="random-video">
+      <!-- video -->
+      <video id="welcomeVideo" class="video-js vjs-default-skin" controls preload="auto" muted data-setup='{}' style='width: 100%;height: auto'>
+      </video>
+    </div>
     <div id="equip-num">
       <div>设备编号</div>
-      <div>8T242</div>
+      <div id="equip_code">8T242</div>
     </div>
     <div id="equip-allnum">
       <i></i>
@@ -678,8 +688,8 @@
       </div>
     </section>
     <div class="energy-logo">
-       <div><i class="dian"></i></div>
-       <div><i class="shui"></i></div>
+      <div><i class="dian"></i></div>
+      <div><i class="shui"></i></div>
     </div>
     <div class="energy-num"><span id="dian_num">12546.9</span>kw</div>
     <div class="energy-num energy-num2"><span id="shui_num">12546.9</span>t</div>
@@ -734,6 +744,7 @@
   <script src="./js/GetTime.js"></script>
   <script src="./js/weather.js"></script>
   <script src="./js/button.js"></script><!-- 按钮js -->
+  <script src="./js/ajax.js"></script>
   <script>
     echarts.init(document.getElementById('echarts_first_leftBottom')).setOption(option1_first); //主页左下角echarts
     echarts.init(document.getElementById('echarts_first_rightBottom')).setOption(option2_first); //主页右下角echarts
@@ -744,6 +755,9 @@
     echarts.init(document.getElementById('echarts_third_rightTop')).setOption(option3_third); //三页右上echarts
     echarts.init(document.getElementById('echarts_fourth_rightTop')).setOption(option1_fourth); //四页右上echarts
     echarts.init(document.getElementById('echarts_fourth_rightBottom')).setOption(option2_fourth); //四页右下echarts
+
+
+
 
     let objAll = null
     let container, stats, controls
@@ -1066,7 +1080,7 @@
       //   scene.add(obj.scene)
       //   model_floor9.visible = false
       // })
-      
+
       // GLTFLoader_AllBuild = new THREE.GLTFLoader()
       // GLTFLoader_AllBuild.load('./assets/new_gltf/道路.gltf', function (obj) {
       //   //道路
