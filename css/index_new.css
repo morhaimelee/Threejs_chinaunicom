@@ -680,10 +680,10 @@ li {
     left    : 190px;
 }
 
-.equip-status-box ul li span:nth-child(4) {
+.color-deal {
     position: absolute;
     left    : 295px;
-    color   : #ff6767;
+    color   : #01FF1F;
 }
 
 /* 近三个月趋势 */
