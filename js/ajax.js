@@ -1,4 +1,4 @@
-// //首屏监控切换
+//首屏监控切换
 // $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/monitorEquipmentOperation", function (resp) {
 //     let videoSrc = resp.data[0].url
 //     $('#equip_code').html(resp.data[0].code)
@@ -74,11 +74,16 @@ $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/eventOutofBoundsAl
     $('#securityAlarm_totle').html(resp.data.securityAlarm.totalNum)
     $('#securityAlarm_unHandlerNum').html(resp.data.securityAlarm.unHandlerNum)
     $('#securityAlarm_handlerNum').html(resp.data.securityAlarm.handlerNum)
+    //cross_box
+    let auto_warn = resp.data
+    console.log(auto_warn)
+    var html = template("cross_temp", auto_warn);
+    document.getElementById('cross_box').innerHTML = html
 })
 
 //人员状况、访客进入管理
 $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/personnelStatus", function (resp) {
-    console.log(resp)
+    // console.log(resp)
     // console.log(resp.data)
     // var data_real = resp.data
 
@@ -88,6 +93,6 @@ $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/personnelStatus", 
 })
 //车辆进出记录
 $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/carInAndOutRecords", function (resp) {
-    console.log(resp)
+    // console.log(resp)
 
 })

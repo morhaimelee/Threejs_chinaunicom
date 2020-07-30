@@ -210,7 +210,7 @@ li {
 
 #in_ex_floor {
     position : absolute;
-    bottom   : 100px;
+    bottom   : 120px;
     left     : 50%;
     transform: translateX(-50%);
 }
@@ -236,7 +236,7 @@ li {
     color      : #fff;
     line-height: 32px;
     text-align : center;
-    /* display : none; */
+    display : none;
 }
 
 #bottomFloor ul {
@@ -570,14 +570,26 @@ li {
 
 .visitors-box {
     width     : 455px;
-    height    : 160px;
+    height    : 180px;
     /* display: flex; */
     /* border : 1px solid #4dc2ff; */
     position  : absolute;
     top       : 195px;
     right     : 26px;
 }
+.visitors-box .visitor-realTime-data {
+    position: static;
+    margin-top: 15px;
+}
+.visitors-box .visitor-realTime-data .realTime-box ul li {
+    margin: 5px 0 4px 27px;
+}
 
+.visitors-box .visitor-realTime-data .realTime-box ul li:nth-child(1) {
+    width: 86px;
+    height: 60px;
+    margin: 15px 0 0 25px;
+}
 .Security-alarm {
     position: absolute;
     top     : 393px;
@@ -1553,4 +1565,12 @@ li {
     top: 693px;
     right: 20px;
 
+}
+
+/* 会议室预约颜色 */
+.yuyue {
+    background-color: #00b4ff;
+}
+.un-yuyue {
+    background: #ff6767;
 }

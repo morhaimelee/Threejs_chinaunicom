@@ -226,7 +226,27 @@
         <div>Cross-border alarm</div>
       </div>
     </section>
-    <div class="visitors-box"></div>
+    <div class="visitors-box" id="cross_box">
+
+    </div>
+
+    <script id="cross_temp" type="text/html">
+      <div class="visitor-realTime-data">
+        {{each outofAlarm}}
+        <div class="realTime-box">
+          <ul>
+            
+            <li><img src="{{$value.alarmPic}}" alt=""></li>
+            <li>告警原因：{{$value.reason}}</li>
+            <li>处理情况：{{$value.handlerStatus}}</li>
+            <li>告警地点：B栋一楼</li>
+            <li>{{$value.alarmTime}}</li>
+          </ul>
+        </div>
+        {{/each}}
+      </div>
+    
+    </script>
 
     <!-- 安防告警 -->
     <section class="Security-alarm">
@@ -537,82 +557,82 @@
       </ol>
       <ul>
         <li class="fl">
-          <div>B602</div>
+          <div>A601</div>
+        </li>
+        <li class="fl">
+          <div>B601</div>
+        </li>
+        <li class="fl">
+          <div>A602</div>
         </li>
         <li class="fl">
           <div>B602</div>
         </li>
         <li class="fl">
-          <div>B602</div>
+          <div>A603</div>
         </li>
         <li class="fl">
-          <div>B602</div>
-        </li>
-        <li class="fl">
-          <div>B602</div>
-        </li>
-        <li class="fl">
-          <div>B602</div>
-        </li>
-      </ul>
-      <ul>
-        <li class="fl">
-          <div>B602</div>
-        </li>
-        <li class="fl">
-          <div>B602</div>
-        </li>
-        <li class="fl">
-          <div>B602</div>
-        </li>
-        <li class="fl">
-          <div>B602</div>
-        </li>
-        <li class="fl">
-          <div>B602</div>
-        </li>
-        <li class="fl">
-          <div>B602</div>
+          <div></div>
         </li>
       </ul>
       <ul>
         <li class="fl">
-          <div>B602</div>
+          <div>A604</div>
         </li>
         <li class="fl">
-          <div>B602</div>
+          <div class="yuyue">B604</div>
         </li>
         <li class="fl">
-          <div>B602</div>
+          <div>A605</div>
         </li>
         <li class="fl">
-          <div>B602</div>
+          <div>B605</div>
         </li>
         <li class="fl">
-          <div>B602</div>
+          <div>A606</div>
         </li>
         <li class="fl">
-          <div>B602</div>
+          <div></div>
         </li>
       </ul>
       <ul>
         <li class="fl">
-          <div>B602</div>
+          <div>A607</div>
         </li>
         <li class="fl">
-          <div>B602</div>
+          <div>B607</div>
         </li>
         <li class="fl">
-          <div>B602</div>
+          <div>A809</div>
         </li>
         <li class="fl">
-          <div>B602</div>
+          <div>A903</div>
         </li>
         <li class="fl">
-          <div>B602</div>
+          <div class="un-yuyue">B405</div>
         </li>
         <li class="fl">
-          <div>B602</div>
+          <div></div>
+        </li>
+      </ul>
+      <ul>
+        <li class="fl">
+          <div>B603</div>
+        </li>
+        <li class="fl">
+          <div>B606</div>
+        </li>
+        <li class="fl">
+          <div></div>
+        </li>
+        <li class="fl">
+          <div></div>
+        </li>
+        <li class="fl">
+          <div></div>
+        </li>
+        <li class="fl">
+          <div></div>
         </li>
       </ul>
     </div>
@@ -736,7 +756,7 @@
   <div class="btn_left" id="line_temp">线缆温度</div>
   <div class="btn_left" id="back_all">返回主场景</div> -->
 
-  <!-- <div id="bottomFloor">
+  <div id="bottomFloor">
     <ul>
       <li class="fl" id="f1">F1</li>
       <li class="fl" id="f2">F2</li>
@@ -749,7 +769,8 @@
       <li class="fl" id="f9">F9</li>
     </ul>
   </div>
-  <div id="camera_position">相机位置</div> -->
+
+  <div id="camera_position">相机位置</div>
   <script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.8.0/echarts.js"></script>
   <script src="./js/echarts-main.js"></script>
   <script src="./js/GetTime.js"></script>
@@ -828,6 +849,7 @@
       renderer.shadowMap.enabled = true //渲染器接收阴影渲染
 
       renderer.setClearColor('rgb(0,47,94)', 1) //背景颜色像素及渲染
+      // renderer.setClearColor('rgb(76,76,88)', 1) //背景颜色像素及渲染
       // renderer.setClearColor('rgb(0,16,32)', 1)//进入楼层后更改
 
       // renderer.setClearColor('linear-gradient(rgb(46,81,255), #000)', 1.0);
@@ -874,7 +896,7 @@
 
       // 模拟坐标轴
       var axesHelper = new THREE.AxesHelper(100)
-      scene.add(axesHelper)
+      // scene.add(axesHelper)
       /**
        * 光源设置
        */
@@ -966,51 +988,51 @@
         scene.add(obj.scene)
       })
 
-      GLTFLoader_AllBuild = new THREE.GLTFLoader()
-      GLTFLoader_AllBuild.load('./assets/new_gltf/ground.gltf', function (obj) {
-        //道路及大楼
-        obj.scene.name = 'ground'
-        scene.add(obj.scene)
-        // let ground_obj = scene.getObjectByName('ground')
-        obj.scene.children[0].traverse(function (obj) {
-          if (obj.isMesh) {
-            obj.material.color.set(0x000000)
-            obj.material.emissive.set(0x001435)
-          }
-        })
-      })
+      // GLTFLoader_AllBuild = new THREE.GLTFLoader()
+      // GLTFLoader_AllBuild.load('./assets/new_gltf/ground.gltf', function (obj) {
+      //   //道路及大楼
+      //   obj.scene.name = 'ground'
+      //   scene.add(obj.scene)
+      //   // let ground_obj = scene.getObjectByName('ground')
+      //   obj.scene.children[0].traverse(function (obj) {
+      //     if (obj.isMesh) {
+      //       obj.material.color.set(0x000000)
+      //       obj.material.emissive.set(0x001435)
+      //     }
+      //   })
+      // })
 
-      GLTFLoader_AllBuild = new THREE.GLTFLoader()
-      GLTFLoader_AllBuild.load('./assets/new_gltf/road.gltf', function (obj) {
-        //道路及大楼
-        // objAll = obj
-        obj.scene.name = 'road'
-        scene.add(obj.scene)
-        obj.scene.traverse(function (obj) {
-          if (obj.isMesh) {
-            obj.material.color.set(0x17FFFF)
-            obj.material.emissive.set(0x28E4FF)
-          }
-        })
-      })
+      // GLTFLoader_AllBuild = new THREE.GLTFLoader()
+      // GLTFLoader_AllBuild.load('./assets/new_gltf/road.gltf', function (obj) {
+      //   //道路及大楼
+      //   // objAll = obj
+      //   obj.scene.name = 'road'
+      //   scene.add(obj.scene)
+      //   obj.scene.traverse(function (obj) {
+      //     if (obj.isMesh) {
+      //       obj.material.color.set(0x17FFFF)
+      //       obj.material.emissive.set(0x28E4FF)
+      //     }
+      //   })
+      // })
 
-      GLTFLoader_otherBuild = new THREE.GLTFLoader()
-      GLTFLoader_otherBuild.load('./assets/new_gltf/other.gltf', function (obj) {
-        //道路及大楼
-        // objAll = obj
-        // console.log(obj)
-        obj.scene.name = 'other'
-        scene.add(obj.scene)
+      // GLTFLoader_otherBuild = new THREE.GLTFLoader()
+      // GLTFLoader_otherBuild.load('./assets/new_gltf/other.gltf', function (obj) {
+      //   //道路及大楼
+      //   // objAll = obj
+      //   // console.log(obj)
+      //   obj.scene.name = 'other'
+      //   scene.add(obj.scene)
 
-        obj.scene.traverse(function (obj) {
-          if (obj.isMesh) {
-            obj.material.metalness = 0.2
-            obj.material.roughness = 0.36
-            obj.material.color.set(0x00091C)
-            obj.material.emissive.set(0x000000)
-          }
-        })
-      })
+      //   obj.scene.traverse(function (obj) {
+      //     if (obj.isMesh) {
+      //       obj.material.metalness = 0.2
+      //       obj.material.roughness = 0.36
+      //       obj.material.color.set(0x00091C)
+      //       obj.material.emissive.set(0x000000)
+      //     }
+      //   })
+      // })
 
       GLTFLoader_Floor1 = new THREE.GLTFLoader();
       GLTFLoader_Floor1.load('./assets/new_gltf/内部建模/1楼/1楼.gltf', function (obj) { //第一层楼
@@ -1114,6 +1136,7 @@
     // bodyDom.insertBefore(moonDiv, bodyDom.lastChild);
 
     let model_all_num = {}
+    let model_all_model = {}
     model_all_num['model_all_floor' + 1] = []
     model_all_num['model_all_floor' + 2] = []
     model_all_num['model_all_floor' + 3] = []
@@ -1123,6 +1146,15 @@
     model_all_num['model_all_floor' + 7] = []
     model_all_num['model_all_floor' + 8] = []
     model_all_num['model_all_floor' + 9] = []
+    model_all_model['model_all_floor' + 1] = []
+    model_all_model['model_all_floor' + 2] = []
+    model_all_model['model_all_floor' + 3] = []
+    model_all_model['model_all_floor' + 4] = []
+    model_all_model['model_all_floor' + 5] = []
+    model_all_model['model_all_floor' + 6] = []
+    model_all_model['model_all_floor' + 7] = []
+    model_all_model['model_all_floor' + 8] = []
+    model_all_model['model_all_floor' + 9] = []
 
     let tween1,
       tween2,
@@ -1135,7 +1167,8 @@
       tween9,
       tween10,
       tween_camera,
-      tween_smoke
+      tween_smoke,
+      tween_target
 
     function fold_all() {
       if (model_floor1.position.y != -120) {
@@ -1163,15 +1196,16 @@
 
       // removeEntity('all')
       hiddenObject('all')
-      hiddenObject('other')
-      hiddenObject('ground')
-      hiddenObject('road')
+      // hiddenObject('other')
+      // hiddenObject('ground')
+      // hiddenObject('road')
 
       removeEntity('directionalLight')
       directionalLight = new THREE.DirectionalLight(0xffffff, 1)
       directionalLight.position.set(5, 1.601, 57.199)
       scene.add(directionalLight)
 
+      scene.add(directionalLight2)
       // removeEntity('directionalLight2')
 
       removeEntity('ambient')
@@ -1189,7 +1223,19 @@
       showObject('8floor')
       showObject('9floor')
 
-      // $('#bottomFloor').show()
+      tween_camera = TweenMax.to(camera.position, 2, {
+        x: 4.39,
+        y: 5.08,
+        z: 14.63,
+        ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
+        //Power3.easeOut
+      })
+      tween_target = TweenMax.to(controls.target, 2, {
+        x: -0.4,
+        y: -6.49,
+        z: -9.06
+      })
+      $('#bottomFloor').show()
       // if (model_floor1.position.y != 0) {
       //   return
       // } else {
@@ -1271,6 +1317,7 @@
     var test = 'model_video'
     let model_position
 
+
     //隐藏模型
     function hiddenObject(obj) {
       let selectedObject = scene.getObjectByName(obj)
@@ -1305,14 +1352,29 @@
 
     function draw() {
       init()
-      // loadModel('./assets/new_gltf/内部建模/4楼/会议厅.gltf', 'room1', 4)
-      // loadModel('./assets/new_gltf/内部建模/4楼/会议桌.gltf', 'room2', 4)
-      // loadModel('./assets/new_gltf/内部建模/4楼/办公室1.gltf', 'room3', 4)
-      // loadModel('./assets/new_gltf/内部建模/4楼/办公室2.gltf', 'room4', 4)
-      // loadModel('./assets/new_gltf/内部建模/4楼/办公室3.gltf', 'room5', 4)
-      // loadModel('./assets/new_gltf/内部建模/4楼/办公室4.gltf', 'room6', 4)
-      // loadModel('./assets/new_gltf/内部建模/4楼/办公室5.gltf', 'room7', 4)
-      // loadModel('./assets/new_gltf/内部建模/4楼/办公室6.gltf', 'room8', 4)
+      loadModel('./assets/new_gltf/内部建模/1楼/a栋闸机.gltf', 'zhaji1', 1, 'hide')
+      loadModel('./assets/new_gltf/内部建模/1楼/b栋闸机.gltf', 'zhaji2', 1, 'hide', 1.388, 0, 0.001)
+      // loadModel('./assets/new_gltf/内部建模/1楼/办公室1.gltf', 'meeting_room_f1_1', 'hide')
+      // loadModel('./assets/new_gltf/内部建模/1楼/办公室2.gltf', 'meeting_room_f1_2', 'hide')
+
+      loadModel('./assets/new_gltf/内部建模/4楼/会议厅.gltf', 'room1', 4, 'hide')
+      loadModel('./assets/new_gltf/内部建模/4楼/办公室1.gltf', 'room3', 4, 'hide')
+      loadModel('./assets/new_gltf/内部建模/4楼/办公室2.gltf', 'room4', 4, 'hide')
+      loadModel('./assets/new_gltf/内部建模/4楼/办公室3.gltf', 'room5', 4, 'hide')
+      loadModel('./assets/new_gltf/内部建模/4楼/办公室4.gltf', 'room6', 4, 'hide')
+      loadModel('./assets/new_gltf/内部建模/4楼/办公室5.gltf', 'room7', 4, 'hide')
+      loadModel('./assets/new_gltf/内部建模/4楼/办公室6.gltf', 'room8', 4, 'hide')
+      // loadModel('./assets/new_gltf/摄像头.gltf', 'video_f4_1', 4, -1.78, 2.02, 0)
+      // loadModel('./assets/new_gltf/摄像头.gltf', 'video_f4_2', 4, 1.58, 2.02, 0)
+      loadModel('./assets/new_gltf/摄像头.gltf', 'video_f9_1', 9, 'hide', 1.32, 5.18, 1.9)
+      loadModel('./assets/new_gltf/摄像头.gltf', 'video_f9_2', 9, 'hide', 1.32, 5.18, 0.55)
+      loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f9_1', 9, 'hide', 0, 5.18, -0.1)
+      loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f9_2', 9, 'hide', 0, 5.18, -2.14)
+      // loadModel('./assets/new_gltf/摄像头.gltf', 'video_f1_1', 1, 1, -1.94, 0)
+      // loadModel('./assets/new_gltf/摄像头.gltf', 'video_f1_2', 1, -1.94, 0.66, 1)
+      // loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f1_1', 1, 1, 0.66, 0)
+      // loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f1_2', 1, -1.32, 0.66, 0)
+
       // loadModel(video_path, 'video1', 3, -25.2, 0, 0)
       // loadModel(video_path, 'video2', 3, -23.93, 0, -53.375)
       // loadModel(video_path, 'video3', 3, 4.84, 0, 70.834)
@@ -1421,8 +1483,8 @@
 
       let testDiv = $('.testDiv')
       let groupNames = [
-        'video1',
-        'video2',
+        'video_f4_1',
+        'video_f4_2',
         'video3',
         'video4',
         'gate1',
@@ -1482,14 +1544,18 @@
       renderDiv()
     }
 
-    function loadModel(path, gltf_name, floor_num, pst_x, pst_y, pst_z) {
+    function loadModel(path, gltf_name, floor_num, visible, pst_x, pst_y, pst_z) {
       new THREE.GLTFLoader().load(path, function (gltf) {
         gltf.scene.name = gltf_name //set模型名字
         if (pst_x, pst_y, pst_z) {
           gltf.scene.position.set(pst_x, pst_y, pst_z) //set模型位置
         }
 
+        if (visible == 'hide') {
+          gltf.scene.visible = false
+        }
         model_all_num['model_all_floor' + floor_num].push(gltf.scene.position) //添加模型所在楼层位置
+        model_all_model['model_all_floor' + floor_num].push(gltf.scene)
 
         // model.position.set(0, 60, 0);
         // let sc = 3;
@@ -1641,25 +1707,11 @@
     }
 
     $('#camera_position').on('click', function () {
-      console.log(camera)
+      console.log(camera.position)
+      console.log(controls.target)
     })
 
-    //跳转楼层按钮
-    $('#f1').on('click', function () {
-      for (let i = 2; i <= 9; i++) {
-        hiddenObject(i + 'floor')
-      }
 
-      tween_camera = TweenMax.to(camera.position, 2, {
-        x: 10,
-        y: 150,
-        z: 0,
-        ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
-        //Power3.easeOut
-      })
-    })
-
-    $('#f9').on('click', function () { })
   </script>
 </body>
 
