@@ -578,17 +578,28 @@ li {
     right     : 26px;
 }
 .visitors-box .visitor-realTime-data {
+    width: 470px;
+    height: 170px;
     position: static;
     margin-top: 15px;
+    display: block;
+    overflow: hidden;
+}
+.visitors-box .visitor-realTime-data .realTime-box {
+    width: 150px;
+    height: 167px;
+    display: inline-block;
+    margin-right: 5px;
 }
 .visitors-box .visitor-realTime-data .realTime-box ul li {
-    margin: 5px 0 4px 27px;
+    margin: 5px 0 4px 33px;
 }
 
 .visitors-box .visitor-realTime-data .realTime-box ul li:nth-child(1) {
     width: 86px;
     height: 60px;
-    margin: 15px 0 0 25px;
+    margin: 20px 0 0 35px;
+    border-radius: 2px;
 }
 .Security-alarm {
     position: absolute;
@@ -1021,7 +1032,7 @@ li {
 
 #echarts_third_leftTop {
     width   : 400px;
-    height  : 50px;
+    height  : 100px;
     position: absolute;
     top     : 200px;
     left    : 100px;
@@ -1029,7 +1040,7 @@ li {
 
 .vehicle-Type {
     position: absolute;
-    top     : 262px;
+    top     : 280px;
     left    : 85px;
 }
 
@@ -1041,7 +1052,7 @@ li {
 
 #echarts_third_leftMid {
     width   : 400px;
-    height  : 160px;
+    height  : 140px;
     position: absolute;
     top     : 320px;
     left    : 100px;

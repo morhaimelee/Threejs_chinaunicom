@@ -468,69 +468,24 @@
         <div>Vehicle entry and exit records</div>
       </div>
     </section>
-    <div class="records-list">
-      <ul>
-        <li>
-          <i class="enter_go"></i> <!-- go_icon -->
-          <div class="line-list"></div>
-          <span>贵A 48293</span>
-          <div class="time-box">07-24 10:13</div>
-        </li>
-        <li>
-          <i class="enter_go"></i>
-          <div class="line-list"></div>
-          <span>贵A 48293</span>
-          <div class="time-box">07-24 10:13</div>
-        </li>
-        <li>
-          <i class="enter_go"></i>
-          <div class="line-list"></div>
-          <span>贵A 48293</span>
-          <div class="time-box">07-24 10:13</div>
-        </li>
-        <li>
-          <i class="enter_go go_icon"></i>
-          <div class="line-list"></div>
-          <span>贵A 48293</span>
-          <div class="time-box">07-24 10:13</div>
-        </li>
-        <li>
-          <i class="enter_go"></i>
-          <div class="line-list"></div>
-          <span>贵A 48293</span>
-          <div class="time-box">07-24 10:13</div>
-        </li>
-        <li>
-          <i class="enter_go"></i>
-          <div class="line-list"></div>
-          <span>贵A 48293</span>
-          <div class="time-box">07-24 10:13</div>
-        </li>
-        <li>
-          <i class="enter_go"></i>
-          <div class="line-list"></div>
-          <span>贵A 48293</span>
-          <div class="time-box">07-24 10:13</div>
-        </li>
-        <li>
-          <i class="enter_go"></i>
-          <div class="line-list"></div>
-          <span>贵A 48293</span>
-          <div class="time-box">07-24 10:13</div>
-        </li>
-        <li>
-          <i class="enter_go"></i>
-          <div class="line-list"></div>
-          <span>贵A 48293</span>
-          <div class="time-box">07-24 10:13</div>
-        </li>
-        <li>
-          <i class="enter_go"></i>
-          <div class="line-list"></div>
-          <span>贵A 48293</span>
-          <div class="time-box">07-24 10:13</div>
-        </li>
-      </ul>
+    <div class="records-list" id="records_list">
+      <script id="records_temp" type="text/html">
+        <ul>
+          {{each record}}
+          <li>
+            {{if $value.type == "in"}}
+            <i class="enter_go"></i>
+            {{else if $value.type == "out"}}
+            <i class="enter_go go_icon"></i>
+            {{/if}}
+            <div class="line-list"></div>
+            <span>{{$value.carCode}}</span>
+            <div class="time-box">{{$value.recordTime}}</div>
+          </li>
+          {{/each}}
+        </ul>
+      </script>
+
     </div>
     <!-- 停车场占用率 -->
     <section class="parking_rate">
@@ -770,24 +725,23 @@
     </ul>
   </div>
 
-  <div id="camera_position">相机位置</div>
+  <!-- <div id="camera_position">相机位置</div> -->
   <script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.8.0/echarts.js"></script>
-  <script src="./js/echarts-main.js"></script>
   <script src="./js/GetTime.js"></script>
   <script src="./js/weather.js"></script>
   <script src="./js/button.js"></script><!-- 按钮js -->
   <script src="./js/ajax.js"></script>
+  <!-- <script src="./js/echarts-main.js"></script> -->
   <script>
     echarts.init(document.getElementById('echarts_first_leftBottom')).setOption(option1_first); //主页左下角echarts
     echarts.init(document.getElementById('echarts_first_rightBottom')).setOption(option2_first); //主页右下角echarts
     echarts.init(document.getElementById('echarts_second_leftTop')).setOption(option1_second); //二页左上角echarts
     echarts.init(document.getElementById('echarts_second_leftBottom')).setOption(option2_second); //二页左上角echarts
-    echarts.init(document.getElementById('echarts_third_leftTop')).setOption(option1_third); //三页左上角echarts
+
     echarts.init(document.getElementById('echarts_third_leftMid')).setOption(option2_third); //三页中echarts
     echarts.init(document.getElementById('echarts_third_rightTop')).setOption(option3_third); //三页右上echarts
     echarts.init(document.getElementById('echarts_fourth_rightTop')).setOption(option1_fourth); //四页右上echarts
     echarts.init(document.getElementById('echarts_fourth_rightBottom')).setOption(option2_fourth); //四页右下echarts
-
 
     let objAll = null
     let container, stats, controls
@@ -901,10 +855,10 @@
        * 光源设置
        */
       //点光源
-      // point = new THREE.PointLight(0xffffff)
-      // point.position.set(0, 8.63, 55.19) //点光源中间门上
+      point = new THREE.PointLight(0xffffff, 0.4)
+      point.position.set(1.763, 5.099, -0.190) //点光源中间
 
-      // scene.add(point) //点光源添加到场景中
+      scene.add(point) //点光源添加到场景中
       // var point2 = new THREE.PointLight(0x72b1ff);
       // point2.position.set(-554.418, 337.135, -20.433); //点光源左侧
       // scene.add(point2); //点光源添加到场景中
@@ -988,51 +942,51 @@
         scene.add(obj.scene)
       })
 
-      // GLTFLoader_AllBuild = new THREE.GLTFLoader()
-      // GLTFLoader_AllBuild.load('./assets/new_gltf/ground.gltf', function (obj) {
-      //   //道路及大楼
-      //   obj.scene.name = 'ground'
-      //   scene.add(obj.scene)
-      //   // let ground_obj = scene.getObjectByName('ground')
-      //   obj.scene.children[0].traverse(function (obj) {
-      //     if (obj.isMesh) {
-      //       obj.material.color.set(0x000000)
-      //       obj.material.emissive.set(0x001435)
-      //     }
-      //   })
-      // })
+      GLTFLoader_AllBuild = new THREE.GLTFLoader()
+      GLTFLoader_AllBuild.load('./assets/new_gltf/ground.gltf', function (obj) {
+        //道路及大楼
+        obj.scene.name = 'ground'
+        scene.add(obj.scene)
+        // let ground_obj = scene.getObjectByName('ground')
+        obj.scene.children[0].traverse(function (obj) {
+          if (obj.isMesh) {
+            obj.material.color.set(0x000000)
+            obj.material.emissive.set(0x001435)
+          }
+        })
+      })
 
-      // GLTFLoader_AllBuild = new THREE.GLTFLoader()
-      // GLTFLoader_AllBuild.load('./assets/new_gltf/road.gltf', function (obj) {
-      //   //道路及大楼
-      //   // objAll = obj
-      //   obj.scene.name = 'road'
-      //   scene.add(obj.scene)
-      //   obj.scene.traverse(function (obj) {
-      //     if (obj.isMesh) {
-      //       obj.material.color.set(0x17FFFF)
-      //       obj.material.emissive.set(0x28E4FF)
-      //     }
-      //   })
-      // })
+      GLTFLoader_AllBuild = new THREE.GLTFLoader()
+      GLTFLoader_AllBuild.load('./assets/new_gltf/road.gltf', function (obj) {
+        //道路及大楼
+        // objAll = obj
+        obj.scene.name = 'road'
+        scene.add(obj.scene)
+        obj.scene.traverse(function (obj) {
+          if (obj.isMesh) {
+            obj.material.color.set(0x17FFFF)
+            obj.material.emissive.set(0x28E4FF)
+          }
+        })
+      })
 
-      // GLTFLoader_otherBuild = new THREE.GLTFLoader()
-      // GLTFLoader_otherBuild.load('./assets/new_gltf/other.gltf', function (obj) {
-      //   //道路及大楼
-      //   // objAll = obj
-      //   // console.log(obj)
-      //   obj.scene.name = 'other'
-      //   scene.add(obj.scene)
+      GLTFLoader_otherBuild = new THREE.GLTFLoader()
+      GLTFLoader_otherBuild.load('./assets/new_gltf/other.gltf', function (obj) {
+        //道路及大楼
+        // objAll = obj
+        // console.log(obj)
+        obj.scene.name = 'other'
+        scene.add(obj.scene)
 
-      //   obj.scene.traverse(function (obj) {
-      //     if (obj.isMesh) {
-      //       obj.material.metalness = 0.2
-      //       obj.material.roughness = 0.36
-      //       obj.material.color.set(0x00091C)
-      //       obj.material.emissive.set(0x000000)
-      //     }
-      //   })
-      // })
+        obj.scene.traverse(function (obj) {
+          if (obj.isMesh) {
+            obj.material.metalness = 0.2
+            obj.material.roughness = 0.36
+            obj.material.color.set(0x00091C)
+            obj.material.emissive.set(0x000000)
+          }
+        })
+      })
 
       GLTFLoader_Floor1 = new THREE.GLTFLoader();
       GLTFLoader_Floor1.load('./assets/new_gltf/内部建模/1楼/1楼.gltf', function (obj) { //第一层楼
@@ -1196,9 +1150,9 @@
 
       // removeEntity('all')
       hiddenObject('all')
-      // hiddenObject('other')
-      // hiddenObject('ground')
-      // hiddenObject('road')
+      hiddenObject('other')
+      hiddenObject('ground')
+      hiddenObject('road')
 
       removeEntity('directionalLight')
       directionalLight = new THREE.DirectionalLight(0xffffff, 1)
@@ -1389,7 +1343,8 @@
 
       // initStats() //加载性能监视
       animate()
-      // createIcon('video1', 'videoIcon')
+      createIcon('video_f9_1', 'videoIcon')
+      createIcon('video_f9_2', 'videoIcon')
       // createIcon('video2', 'videoIcon')
       // createIcon('video3', 'videoIcon')
       // createIcon('video4', 'videoIcon')
@@ -1461,6 +1416,7 @@
       let bodyDom = document.body
       bodyDom.insertBefore(iconDiv, bodyDom.lastChild)
       let iconDivid = $('#' + mesh_id)
+      console.log(iconDivid)
       return iconDivid
     }
     //添加弹窗dom
@@ -1483,15 +1439,15 @@
 
       let testDiv = $('.testDiv')
       let groupNames = [
-        'video_f4_1',
-        'video_f4_2',
-        'video3',
-        'video4',
-        'gate1',
-        'gate2',
-        'smoke1',
-        'smoke2',
-        'smoke3',
+        'video_f9_1',
+        'video_f9_2'
+        // 'video3',
+        // 'video4',
+        // 'gate1',
+        // 'gate2',
+        // 'smoke1',
+        // 'smoke2',
+        // 'smoke3',
       ]
 
       for (let i = 0; i < groupNames.length; i++) {
@@ -1670,7 +1626,7 @@
 
 
     //安防监控按钮
-    $('#people_moni').on('click', function () {
+    $('#video_list').on('click', function () {
       if ($('.videoIcon').is(':hidden')) {
         $('.videoIcon').show()
       } else {
