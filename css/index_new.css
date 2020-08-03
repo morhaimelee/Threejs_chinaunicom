@@ -684,6 +684,9 @@ li {
 }
 
 .equip-status-box ul {
+    width: 400px;
+    height: 85px;
+    overflow: hidden;
     font-size : 12px;
     color     : #FCF4FE;
     margin-top: 14px;
@@ -691,6 +694,7 @@ li {
 
 .equip-status-box ul li {
     margin-bottom: 12px;
+    position: relative;
 }
 
 .equip-status-box ul li span:nth-child(2) {
@@ -707,6 +711,9 @@ li {
     position: absolute;
     left    : 295px;
     color   : #01FF1F;
+}
+.color-deal-red {
+    color: #FF6767;
 }
 
 /* 近三个月趋势 */

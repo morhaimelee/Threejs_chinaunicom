@@ -1,225 +1,5 @@
-// 主页左下echarts
-option1_first = {
-    grid: {
-        left: '5%',
-        right: '5%',
-        bottom: '5%',
-        top: '10%',
-        containLabel: true
-    },
-    // tooltip: {
-    //     trigger: 'axis',
-    //     axisPointer: {
-    //         type: 'none'
-    //     },
-    //     formatter: function(params) {
-    //         return params[0].name + '<br/>' +
-    //             "<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:rgba(36,207,233,0.9)'></span>" +
-    //             params[0].seriesName + ' : ' + Number((params[0].value.toFixed(4) / 10000).toFixed(2)).toLocaleString() + ' 万元<br/>'
-    //     }
-    // },
-    // backgroundColor: 'rgb(20,28,52)',
-    xAxis: {
-        show: false,
-        type: 'value'
-    },
-    yAxis: [{
-        type: 'category',
-        inverse: true,
-        axisLabel: {
-            show: true,
-            textStyle: {
-                color: '#fff'
-            },
-        },
-        splitLine: {
-            show: false
-        },
-        axisTick: {
-            show: false
-        },
-        axisLine: {
-            show: false
-        },
-        data: ['垃圾桶', '停车位', '烟感', '温感', '水箱', '闸机', '井盖']
-    }, {
-        type: 'category',
-        inverse: true,
-        axisTick: 'none',
-        axisLine: 'none',
-        show: true,
-        axisLabel: {
-            textStyle: {
-                color: '#ffffff',
-                fontSize: '12'
-            },
-            formatter: function (value) {
-                if (value >= 10000) {
-                    return (value / 10000).toLocaleString();
-                } else {
-                    return value;
-                }
-            },
-        },
-        data: [14, 14, 14, 14, 14, 14, 14]
-    }],
-    series: [{
-        name: '金额',
-        type: 'bar',
-        zlevel: 1,
-        itemStyle: {
-            normal: {
-                barBorderRadius: 30,
-                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
-                    offset: 0,
-                    color: 'rgb(57,89,255,1)'
-                }, {
-                    offset: 1,
-                    color: 'rgb(46,200,207,1)'
-                }]),
-            },
-        },
-        barWidth: 20,
-        data: [100, 100, 100, 100, 100, 100, 100]
-    },
-    {
-        name: '背景',
-        type: 'bar',
-        barWidth: 18,
-        barGap: '-100%',
-        data: [100, 100, 100, 50, 50, 40, 40],
-        itemStyle: {
-            normal: {
-                color: 'rgba(24,31,68,1)',
-                barBorderRadius: 30,
-            }
-        },
-    },
-    ]
-};
 
-option2_first = {
-    // title: {
-    //     text: '一周内人员出入总数变化图',
-    //     textStyle: {
-    //         fontSize: 25,
-    //         fontWeight: 'normal',
-    //         color: '#fff',
-    //     },
-    //     x: 'center'
-    // },
-    // backgroundColor: "#05224d",
-    tooltip: {},
-    grid: {
-        top: '8%',
-        left: '1%',
-        right: '1%',
-        bottom: '8%',
-        containLabel: true,
-    },
-    legend: {
-        itemGap: 50,
-        data: ['人员出入总数'],
-        textStyle: {
-            color: '#f9f9f9',
-            borderColor: '#fff'
-        },
-    },
-    xAxis: [{
-        type: 'category',
-        boundaryGap: true,
-        axisLine: { //坐标轴轴线相关设置。数学上的x轴
-            show: true,
-            lineStyle: {
-                color: '#f9f9f9'
-            },
-        },
-        axisLabel: { //坐标轴刻度标签的相关设置
-            textStyle: {
-                color: '#d1e6eb',
-                margin: 15,
-            },
-        },
-        axisTick: {
-            show: false,
-        },
-        data: ['2020-2-17', '2020-2-17', '2020-2-17', '2020-2-17', '2020-2-17', '2020-2-17', '2020-2-17',],
-    }],
-    yAxis: [{
-        type: 'value',
-        min: 0,
-        // max: 140,
-        splitNumber: 7,
-        splitLine: {
-            show: true,
-            lineStyle: {
-                color: '#0a3256'
-            }
-        },
-        axisLine: {
-            show: false,
-        },
-        axisLabel: {
-            margin: 20,
-            textStyle: {
-                color: '#d1e6eb',
 
-            },
-        },
-        axisTick: {
-            show: false,
-        },
-    }],
-    series: [{
-        name: '注册总量',
-        type: 'line',
-        smooth: true, //是否平滑曲线显示
-        // 			symbol:'circle',  // 默认是空心圆（中间是白色的），改成实心圆
-        showAllSymbol: true,
-        symbol: 'emptyCircle',
-        symbolSize: 6,
-        lineStyle: {
-            normal: {
-                color: "#28ffb3", // 线条颜色
-            },
-            borderColor: '#f0f'
-        },
-        label: {
-            show: true,
-            position: 'top',
-            textStyle: {
-                color: '#fff',
-            }
-        },
-        itemStyle: {
-            normal: {
-                color: "#28ffb3",
-
-            }
-        },
-        tooltip: {
-            show: false
-        },
-        areaStyle: { //区域填充样式
-            normal: {
-                //线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                    offset: 0,
-                    color: 'rgba(0,154,120,1)'
-                },
-                {
-                    offset: 1,
-                    color: 'rgba(0,0,0, 0)'
-                }
-                ], false),
-                shadowColor: 'rgba(53,142,215, 0.9)', //阴影颜色
-                shadowBlur: 20 //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
-            }
-        },
-        data: [100, 120, 110, 60, 70, 130, 150]
-    }
-    ]
-};
 
 // 第二页图表
 option1_second = {
@@ -1163,11 +943,116 @@ $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/monitorEquipmentOp
 })
 // 设备在线情况
 $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/equipmentOperationStatus", function (resp) {
-    // console.log(resp)
+    console.log(resp)
     $('#equip_num').html(resp.data.monitorStatus.totalNum)
     $('#onlineNum').html(resp.data.monitorStatus.onlineNum)
     $('#offlineNum').html(resp.data.monitorStatus.offlineNum)
     $('#repairNum').html(resp.data.monitorStatus.repairNum)
+
+    let equip_num = resp.data.deviceStatus.name
+    let equip_online = resp.data.deviceStatus.online
+    let equip_total = resp.data.deviceStatus.total
+
+    // 主页左下echarts
+    let option1_first = {
+        grid: {
+            left: '5%',
+            right: '5%',
+            bottom: '5%',
+            top: '10%',
+            containLabel: true
+        },
+        // tooltip: {
+        //     trigger: 'axis',
+        //     axisPointer: {
+        //         type: 'none'
+        //     },
+        //     formatter: function(params) {
+        //         return params[0].name + '<br/>' +
+        //             "<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:rgba(36,207,233,0.9)'></span>" +
+        //             params[0].seriesName + ' : ' + Number((params[0].value.toFixed(4) / 10000).toFixed(2)).toLocaleString() + ' 万元<br/>'
+        //     }
+        // },
+        // backgroundColor: 'rgb(20,28,52)',
+        xAxis: {
+            show: false,
+            type: 'value'
+        },
+        yAxis: [{
+            type: 'category',
+            inverse: true,
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#fff'
+                },
+            },
+            splitLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLine: {
+                show: false
+            },
+            data: equip_num
+        }, {
+            type: 'category',
+            inverse: true,
+            axisTick: 'none',
+            axisLine: 'none',
+            show: true,
+            axisLabel: {
+                textStyle: {
+                    color: '#ffffff',
+                    fontSize: '12'
+                },
+                formatter: function (value, index) {
+                    for (let j = 0; j <= equip_total.length; j++) {
+                        if (index == j) {
+                            return value + ' / ' + equip_total[j]
+                        }
+                    }
+                },
+            },
+            data: equip_online
+        }],
+        series: [{
+            name: '设备',
+            type: 'bar',
+            zlevel: 1,
+            itemStyle: {
+                normal: {
+                    barBorderRadius: 30,
+                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                        offset: 0,
+                        color: 'rgb(57,89,255,1)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(46,200,207,1)'
+                    }]),
+                },
+            },
+            barWidth: 20,
+            data: equip_online
+        },
+        // {
+        //     name: '背景',
+        //     type: 'bar',
+        //     barWidth: 18,
+        //     barGap: '-100%',
+        //     data: equip_total,
+        //     itemStyle: {
+        //         normal: {
+        //             color: 'rgba(24,31,68,1)',
+        //             barBorderRadius: 30,
+        //         }
+        //     },
+        // },
+        ]
+    };
+    echarts.init(document.getElementById('echarts_first_leftBottom')).setOption(option1_first); //主页左下角echarts
 })
 // 越界告警、安防
 $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/eventOutofBoundsAlarm", function (resp) {
@@ -1176,10 +1061,147 @@ $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/eventOutofBoundsAl
     $('#securityAlarm_unHandlerNum').html(resp.data.securityAlarm.unHandlerNum)
     $('#securityAlarm_handlerNum').html(resp.data.securityAlarm.handlerNum)
     //cross_box
+    //越界告警
     let auto_warn = resp.data
     // console.log(auto_warn)
-    var html = template("cross_temp", auto_warn);
+    let html = template("cross_temp", auto_warn);
     document.getElementById('cross_box').innerHTML = html
+    // 安防告警
+    let security_alarm = resp.data.securityAlarmDetail
+    document.getElementById('warn_list').innerHTML = template("warn_list_temp", { security: security_alarm });
+
+    //近三个月告警趋势
+    let recent_month = resp.data.threeMonthsAlarm
+    let recent_month_arr = []
+    let recent_alarmNum_arr = []
+    recent_month.forEach((item) => {
+        recent_month_arr.push(item.month)
+        recent_alarmNum_arr.push(item.alarmNum)
+    })
+
+    let option2_first = {
+        // title: {
+        //     text: '一周内人员出入总数变化图',
+        //     textStyle: {
+        //         fontSize: 25,
+        //         fontWeight: 'normal',
+        //         color: '#fff',
+        //     },
+        //     x: 'center'
+        // },
+        // backgroundColor: "#05224d",
+        tooltip: {},
+        grid: {
+            top: '8%',
+            left: '1%',
+            right: '1%',
+            bottom: '8%',
+            containLabel: true,
+        },
+        legend: {
+            itemGap: 50,
+            data: ['人员出入总数'],
+            textStyle: {
+                color: '#f9f9f9',
+                borderColor: '#fff'
+            },
+        },
+        xAxis: [{
+            type: 'category',
+            boundaryGap: true,
+            axisLine: { //坐标轴轴线相关设置。数学上的x轴
+                show: true,
+                lineStyle: {
+                    color: '#f9f9f9'
+                },
+            },
+            axisLabel: { //坐标轴刻度标签的相关设置
+                textStyle: {
+                    color: '#d1e6eb',
+                    margin: 15,
+                },
+            },
+            axisTick: {
+                show: false,
+            },
+            data: recent_month_arr
+        }],
+        yAxis: [{
+            type: 'value',
+            min: 0,
+            // max: 140,
+            splitNumber: 7,
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    color: '#0a3256'
+                }
+            },
+            axisLine: {
+                show: false,
+            },
+            axisLabel: {
+                margin: 20,
+                textStyle: {
+                    color: '#d1e6eb',
+
+                },
+            },
+            axisTick: {
+                show: false,
+            },
+        }],
+        series: [{
+            // name: '注册总量',
+            type: 'line',
+            smooth: true, //是否平滑曲线显示
+            // 			symbol:'circle',  // 默认是空心圆（中间是白色的），改成实心圆
+            showAllSymbol: true,
+            symbol: 'emptyCircle',
+            symbolSize: 6,
+            lineStyle: {
+                normal: {
+                    color: "#28ffb3", // 线条颜色
+                },
+                borderColor: '#f0f'
+            },
+            label: {
+                show: true,
+                position: 'top',
+                textStyle: {
+                    color: '#fff',
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: "#28ffb3",
+
+                }
+            },
+            tooltip: {
+                show: false
+            },
+            areaStyle: { //区域填充样式
+                normal: {
+                    //线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(0,154,120,1)'
+                    },
+                    {
+                        offset: 1,
+                        color: 'rgba(0,0,0, 0)'
+                    }
+                    ], false),
+                    shadowColor: 'rgba(53,142,215, 0.9)', //阴影颜色
+                    shadowBlur: 20 //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
+                }
+            },
+            data: recent_alarmNum_arr
+        }
+        ]
+    };
+    echarts.init(document.getElementById('echarts_first_rightBottom')).setOption(option2_first); //主页右下角echarts
 })
 
 //人员状况、访客进入管理
@@ -1194,10 +1216,9 @@ $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/personnelStatus", 
 })
 //车位占比
 $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/parkingLotProportion", function (resp) {
-    console.log(resp)
+    // console.log(resp)
     let option1_third_value = resp.data.carSpaceProportion.totalNum
     let option1_third_value_used = resp.data.carSpaceProportion.usedNum
-
 
 
     var option1_third = {
@@ -1247,7 +1268,7 @@ $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/parkingLotProporti
                 normal: {
                     show: true,
                     position: 'insideBottomRight',
-                    formatter: '{c}'+ "/" + option1_third_value,
+                    formatter: '{c}' + "/" + option1_third_value,
                     distance: 0,
                     offset: [30, -20],
                     color: '#fff',
@@ -1290,11 +1311,10 @@ $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/parkingLotProporti
 })
 //车辆进出记录
 $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/carInAndOutRecords", function (resp) {
-    console.log(resp)
     // console.log(resp.data)
-    let records_data = resp.data.slice(0,10)
+    let records_data = resp.data.slice(0, 10)
 
-    var html = template("records_temp", {record:records_data})
+    var html = template("records_temp", { record: records_data })
     document.getElementById('records_list').innerHTML = html
 
 })

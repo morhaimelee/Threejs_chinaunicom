@@ -279,11 +279,18 @@
       </ol>
       <div id="mid-line"></div>
       <div id="warn_list">
-        <ul>
-          <li><span>烟感</span><span>烟雾告警</span><span>12-14 14:12</span><span class="color-deal">已处理</span></li>
-          <li><span>电线温度</span><span>温度过高</span><span>12-14 14:12</span><span class="color-deal">已处理</span></li>
-          <li><span>消防栓</span><span>水压过高</span><span>12-14 14:12</span><span class="color-deal">已处理</span></li>
-        </ul>
+        <script id="warn_list_temp" type="text/html">
+          <ul>
+            {{each security}}
+            <li>
+              <span>{{$value.devName}}</span>
+              <span>{{$value.repairDesc}}</span>
+              <span>{{$value.alarmTime}}</span>
+              {{if $value.handlerStatus == "已处理"}}<span class="color-deal">{{$value.handlerStatus}}</span>{{else if $value.handlerStatus == "未处理"}}<span class="color-deal color-deal-red">{{$value.handlerStatus}}</span>{{/if}}
+            </li>
+            {{/each}}
+          </ul>
+        </script>
       </div>
     </div>
     <!-- 近三个月告警趋势 -->
@@ -733,8 +740,8 @@
   <script src="./js/ajax.js"></script>
   <!-- <script src="./js/echarts-main.js"></script> -->
   <script>
-    echarts.init(document.getElementById('echarts_first_leftBottom')).setOption(option1_first); //主页左下角echarts
-    echarts.init(document.getElementById('echarts_first_rightBottom')).setOption(option2_first); //主页右下角echarts
+
+
     echarts.init(document.getElementById('echarts_second_leftTop')).setOption(option1_second); //二页左上角echarts
     echarts.init(document.getElementById('echarts_second_leftBottom')).setOption(option2_second); //二页左上角echarts
 
@@ -1416,7 +1423,6 @@
       let bodyDom = document.body
       bodyDom.insertBefore(iconDiv, bodyDom.lastChild)
       let iconDivid = $('#' + mesh_id)
-      console.log(iconDivid)
       return iconDivid
     }
     //添加弹窗dom
