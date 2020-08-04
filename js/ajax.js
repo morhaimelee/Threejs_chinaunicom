@@ -882,11 +882,11 @@ var option2_fourth = {
 //首屏监控切换
 $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/monitorEquipmentOperation", function (resp) {
     let videoSrc = resp.data[0].url
-    $('#equip_code').html(resp.data[0].code)
-    let arr_code = []
+    $('#equip_name').html(resp.data[0].name)
+    let arr_name = []
     let arr_url = []
     $.each(resp.data, function (i, value) {
-        arr_code.push(value.code)
+        arr_name.push(value.name)
         arr_url.push(value.url)
     })
     sourceDom = `<source id="source" src='' type="application/x-mpegURL" />`
@@ -935,7 +935,7 @@ $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/monitorEquipmentOp
         }
 
         videoSrc = arr_url[index]
-        $('#equip_code').html(arr_code[index])
+        $('#equip_name').html(arr_name[index])
         changeVideo(videoSrc);
         index++
     }, 30000);
@@ -1316,5 +1316,11 @@ $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/carInAndOutRecords
 
     var html = template("records_temp", { record: records_data })
     document.getElementById('records_list').innerHTML = html
+
+})
+
+//人员管理，楼层总人数
+$.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/personnelStatus", function (resp) {
+    console.log(resp)
 
 })

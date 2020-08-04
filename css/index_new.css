@@ -699,17 +699,17 @@ li {
 
 .equip-status-box ul li span:nth-child(2) {
     position: absolute;
-    left    : 100px;
+    left    : 120px;
 }
 
 .equip-status-box ul li span:nth-child(3) {
     position: absolute;
-    left    : 190px;
+    left    : 200px;
 }
 
 .color-deal {
     position: absolute;
-    left    : 295px;
+    left    : 300px;
     color   : #01FF1F;
 }
 .color-deal-red {
@@ -1129,6 +1129,22 @@ li {
     background: url('../assets/imgs/出.png') center center no-repeat;
 }
 
+.legend {
+    width: 100px;
+    height: 16px;
+    position: absolute;
+    top: 22px;
+    left: 290px;
+    color: #E9E9EA;
+}
+.legend span {
+    font-size: 14px;
+}
+.legend .enter_go {
+    position  : static;
+    margin: 0 8px;
+}
+
 .records-list ul li .line-list {
     width     : 2px;
     height    : 35px;
@@ -1157,7 +1173,7 @@ li {
 }
 
 .records-list ul li .time-box {
-    width        : 138px;
+    width        : 140px;
     height       : 16px;
     border       : 1px solid rgba(0, 192, 255, 1);
     border-radius: 4px;
@@ -1255,18 +1271,18 @@ li {
 }
 
 .conference-room-box {
-    width   : 475px;
+    width   : 440px;
     height  : 300px;
     position: absolute;
-    top     : 535px;
-    right   : 0px;
+    top: 535px;
+    right: 30px;
 }
 
 .conference-room-box ol {
     width      : 350px;
     display    : flex;
     text-align : center;
-    margin-left: 45px;
+    margin-left: 15px;
 }
 
 .conference-room-box ol li {
