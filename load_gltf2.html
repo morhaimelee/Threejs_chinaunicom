@@ -29,6 +29,21 @@
       top: 500px;
       line-height: 50px;
     } */
+    #progress {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 0;
+      font-size: 40px;
+      line-height: 1080px;
+      font-weight: bold;
+      color: #fff;
+      text-align: center;
+      background-color: rgb(87, 179, 248);
+      z-index: 1000;
+    }
 
     .moveDiv {
       width: 150px;
@@ -136,6 +151,7 @@
   <!-- <div id="bianjie">便捷通行</div> -->
   <div class="testDiv"></div>
   <canvas id="cc"></canvas>
+  <div id="progress"></div>
   <div class="topleft"></div>
   <nav class="nav">
     <ul>
@@ -858,7 +874,7 @@
       point = new THREE.PointLight(0xffffff, 0.4)
       point.position.set(1.763, 5.099, -0.190) //点光源中间
 
-      scene.add(point) //点光源添加到场景中
+      // scene.add(point) //点光源添加到场景中
       // var point2 = new THREE.PointLight(0x72b1ff);
       // point2.position.set(-554.418, 337.135, -20.433); //点光源左侧
       // scene.add(point2); //点光源添加到场景中
@@ -970,11 +986,25 @@
         })
       })
 
+      //加载过程，可以显示进度值
+      // var onProgress = function (xhr) {
+      //   if (xhr.lengthComputable) {
+      //     var percentComplete = xhr.loaded / xhr.total * 100;
+      //     console.log(Math.round(percentComplete, 2) + '% downloaded');
+      //     document.getElementById('progress').innerText = Math.round(percentComplete, 2) + '%下载';
+      //   }
+      // };
+      // //错误回调，因为网页调试有报错，这里可以不做处理
+      // var onError = function (xhr) {
+      // };
+      //回调写好了，现在可以用加载的方法加载模型了。
+      // GLTFLoader_otherBuild.load('./assets/new_gltf/other.gltf', onLoad, onProgress, onError);
+
       GLTFLoader_otherBuild = new THREE.GLTFLoader()
       GLTFLoader_otherBuild.load('./assets/new_gltf/other.gltf', function (obj) {
         //道路及大楼
         // objAll = obj
-        // console.log(obj)
+        // console.log(obj) 
         obj.scene.name = 'other'
         scene.add(obj.scene)
 
@@ -986,12 +1016,52 @@
             obj.material.emissive.set(0x000000)
           }
         })
+      },
+      function(xhr) {
+        if (xhr.lengthComputable) {
+          var percentComplete = xhr.loaded / xhr.total * 100;
+          console.log(Math.round(percentComplete, 2) + '% downloaded');
+          document.getElementById('progress').innerText = "系统加载中" + Math.round(percentComplete, 2) + '%';
+          if(percentComplete == 100) {
+            $('#progress').hide()
+          }
+        }
       })
 
+      // GLTFLoader_Floor1 = new THREE.GLTFLoader();
+      // GLTFLoader_Floor1.load('./assets/new_gltf/内部建模/1楼/1楼.gltf', function (obj) { //第一层楼
+      //   model_floor1 = obj.scene
+      //   scene.add(obj.scene)
+      //   obj.scene.name = "1floor"
+      //   model_floor1.visible = false
+      // })
+
+      var texture = new THREE.TextureLoader().load("./assets/imgs/texture_map.jpg");
+      texture.wrapS = THREE.RepeatWrapping;//RepeatWrapping
+      texture.wrapT = THREE.RepeatWrapping;
+      texture.repeat.set(4, 4);
+      // var loader = new THREE.ImageLoader(manager);
+      // loader.load('http://renyuan.bos.xyz/FloorsCheckerboard_S_Diffuse.jpg', function (image) {
+      //   texture.image = image;
+      //   texture.needsUpdate = true;
+      // });
+      // var texture = new THREE.TextureLoader().load('http://renyuan.bos.xyz/FloorsCheckerboard_S_Diffuse.jpg', function () {
+      //   renderer.render(scene, camera)
+      // })
+      // // 加载一个资源
+      var material = new THREE.MeshBasicMaterial({
+        map: texture,
+      });
+
       GLTFLoader_Floor1 = new THREE.GLTFLoader();
-      GLTFLoader_Floor1.load('./assets/new_gltf/内部建模/1楼/1楼.gltf', function (obj) { //第一层楼
+      GLTFLoader_Floor1.load('./assets/new_gltf/1楼地面.gltf', function (obj) { //第一层楼
         model_floor1 = obj.scene
         scene.add(obj.scene)
+        obj.scene.traverse(function (child) {
+          if (child instanceof THREE.Mesh) {
+            child.material.map = texture
+          }
+        })
         obj.scene.name = "1floor"
         model_floor1.visible = false
       })

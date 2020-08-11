@@ -579,7 +579,7 @@ li {
 }
 .visitors-box .visitor-realTime-data {
     width: 470px;
-    height: 170px;
+    height: 200px;
     position: static;
     margin-top: 15px;
     display: block;
@@ -587,9 +587,10 @@ li {
 }
 .visitors-box .visitor-realTime-data .realTime-box {
     width: 150px;
-    height: 167px;
+    height: 200px;
     display: inline-block;
     margin-right: 5px;
+    background: url('../assets/imgs/index_kuang.png') center center no-repeat;
 }
 .visitors-box .visitor-realTime-data .realTime-box ul li {
     margin: 5px 0 4px 33px;
@@ -597,13 +598,18 @@ li {
 
 .visitors-box .visitor-realTime-data .realTime-box ul li:nth-child(1) {
     width: 86px;
-    height: 60px;
-    margin: 20px 0 0 35px;
+    height: 106px;
+    margin: 20px 0 0 23px;
     border-radius: 2px;
 }
+.visitors-box .visitor-realTime-data .realTime-box ul li:nth-child(1) img {
+    width: 106px;
+    height: 106px;
+}
+
 .Security-alarm {
     position: absolute;
-    top     : 393px;
+    top     : 420px;
     right   : 474px;
 }
 
@@ -661,7 +667,7 @@ li {
     width    : 400px;
     font-size: 14px;
     position : absolute;
-    top      : 550px;
+    top      : 565px;
     right    : 41px;
 }
 
@@ -719,7 +725,7 @@ li {
 /* 近三个月趋势 */
 .recent-trends {
     position: absolute;
-    top     : 690px;
+    top     : 700px;
     right   : 474px;
 }
 
@@ -732,9 +738,9 @@ li {
 
 #echarts_first_rightBottom {
     width        : 450px;
-    height       : 240px;
+    height       : 245px;
     position     : absolute;
-    top          : 738px;
+    top          : 745px;
     right        : 26px;
     /* background: #00b4ff; */
 }
