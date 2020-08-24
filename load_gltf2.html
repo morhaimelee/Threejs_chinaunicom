@@ -95,7 +95,7 @@
       width: 37px;
       height: 47px;
       position: absolute;
-      background: url('./assets/imgs/烟感.png') center center no-repeat;
+      background: url('./assets/imgs/yangan.png') center center no-repeat;
       cursor: pointer;
     }
 
@@ -125,6 +125,9 @@
   <script src="./js/OrbitControls.js"></script>
   <!-- 引入gltf -->
   <script src="./js/GLTFLoader.js"></script>
+  <!-- dracoLoader -->
+  <script src="./js/DRACOLoader.js"></script>
+  <script src="./js/Draco/draco_decoder.js"></script>
   <!-- obj -->
   <!-- <script src="./js/OBJLoader.js"></script>
   <script src="./js/MTLLoader.js"></script> -->
@@ -809,6 +812,11 @@
       document.body.appendChild(stats.dom)
     }
 
+
+    // var dracoLoader = new DRACOLoader();
+    // dracoLoader.setDecoderPath('js/Draco/');
+    // dracoLoader.setDecoderConfig({ type: 'js' });
+
     function init() {
       renderer = new THREE.WebGLRenderer({
         antialias: true,
@@ -871,7 +879,7 @@
        * 光源设置
        */
       //点光源
-      point = new THREE.PointLight(0xffffff, 0.4)
+      point = new THREE.PointLight(0xffffff, 0.1)
       point.position.set(1.763, 5.099, -0.190) //点光源中间
 
       // scene.add(point) //点光源添加到场景中
@@ -904,13 +912,15 @@
       ambient.name = 'ambient'
       scene.add(ambient)
 
+      var texture_bg = new THREE.TextureLoader().load('./assets/background/nx.jpg');
+      scene.background = texture_bg
       //天空盒
       // var path = "./assets/background/"; //设置路径
       // var directions = ["px", "nx", "py", "ny", "pz", "nz"]; //获取对象
-      // var format = ".png"; //格式
-      // //创建盒子，并设置盒子的大小为( 5000, 5000, 5000 )
-      // var skyGeometry = new THREE.BoxGeometry(1000, 1000, 1000);
-      // //设置盒子材质
+      // var format = ".jpg"; //格式
+      // // //创建盒子，并设置盒子的大小为( 5000, 5000, 5000 )
+      // var skyGeometry = new THREE.BoxGeometry(500, 500, 500);
+      // // //设置盒子材质
       // var materialArray = [];
       // for (var i = 0; i < 6; i++)
       //   materialArray.push(new THREE.MeshBasicMaterial({
@@ -941,7 +951,7 @@
       // })
 
       //DracoLoader
-      // var loader = new DRACOLoader();
+      // var draco_loader = new DRACOLoader();
       // loader.setDecoderPath('./assets/new_gltf/otherDraco.gltf')
 
       // loader.preload()
@@ -949,6 +959,40 @@
       // loader.load(
 
       // )
+
+
+      var gltfLoader = new THREE.GLTFLoader();
+      var dracoLoader = new THREE.DRACOLoader();
+      // 设置解压路径，这个文件直接放在项目的public目录下面即可
+      dracoLoader.setDecoderPath('./js/Draco/')
+      dracoLoader.setDecoderConfig({ type: 'js' })
+      dracoLoader.preload()
+      gltfLoader.setDRACOLoader(dracoLoader)
+      gltfLoader.load('./assets/new_gltf/内部建模/yizitest.gltf', function (gltf) {
+        console.log(gltf)
+        scene.add(gltf.scene)
+      })
+
+      // dracotest_Loader = new THREE.GLTFLoader()
+      // dracotest_Loader.load('./assets/new_gltf/yizitestDraco.gltf', function (obj) {
+      //   //道路及大楼
+      //   // objAll = obj
+      //   console.log(obj)
+      //   obj.scene.name = 'test'
+      //   scene.add(obj.scene)
+      // })
+
+      // dracoLoader.load('./assets/new_gltf/内部建模/yizitestDraco.gltf', function (geometry) {
+      //   console.log(geometry)
+      // })
+
+      // var dracoLoader = new THREE.GLTFLoader()
+      // dracoLoader.setDRACOLoader(new THREE.DRACOLoader());
+
+      // dracoLoader.load('./assets/new_gltf/内部建模/yizitestDraco.gltf', function(gltf) {
+      //   console.log('load_draco')
+      //   scene.add(gltf.scene)
+      // })
 
       GLTFLoader_AllBuild = new THREE.GLTFLoader()
       GLTFLoader_AllBuild.load('./assets/new_gltf/main_build.gltf', function (obj) {
@@ -1017,16 +1061,16 @@
           }
         })
       },
-      function(xhr) {
-        if (xhr.lengthComputable) {
-          var percentComplete = xhr.loaded / xhr.total * 100;
-          console.log(Math.round(percentComplete, 2) + '% downloaded');
-          document.getElementById('progress').innerText = "系统加载中" + Math.round(percentComplete, 2) + '%';
-          if(percentComplete == 100) {
-            $('#progress').hide()
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            console.log(Math.round(percentComplete, 2) + '% downloaded');
+            document.getElementById('progress').innerText = "系统加载中" + Math.round(percentComplete, 2) + '%';
+            if (percentComplete == 100) {
+              $('#progress').hide()
+            }
           }
-        }
-      })
+        })
 
       // GLTFLoader_Floor1 = new THREE.GLTFLoader();
       // GLTFLoader_Floor1.load('./assets/new_gltf/内部建模/1楼/1楼.gltf', function (obj) { //第一层楼
@@ -1036,10 +1080,10 @@
       //   model_floor1.visible = false
       // })
 
-      var texture = new THREE.TextureLoader().load("./assets/imgs/texture_map.jpg");
-      texture.wrapS = THREE.RepeatWrapping;//RepeatWrapping
-      texture.wrapT = THREE.RepeatWrapping;
-      texture.repeat.set(4, 4);
+      // var texture = new THREE.TextureLoader().load("./assets/imgs/texture_map.jpg");
+      // texture.wrapS = THREE.RepeatWrapping;//RepeatWrapping
+      // texture.wrapT = THREE.RepeatWrapping;
+      // texture.repeat.set(4, 2);
       // var loader = new THREE.ImageLoader(manager);
       // loader.load('http://renyuan.bos.xyz/FloorsCheckerboard_S_Diffuse.jpg', function (image) {
       //   texture.image = image;
@@ -1049,21 +1093,56 @@
       //   renderer.render(scene, camera)
       // })
       // // 加载一个资源
-      var material = new THREE.MeshBasicMaterial({
-        map: texture,
-      });
+      // var material = new THREE.MeshStandardMaterial({
+      //   emissive: 0x5A5A5A,
+      //   map: texture
+      //   // repeat.set(1, 1)
+      // });
+
+      // GLTFLoader_Floor1 = new THREE.GLTFLoader();
+      // GLTFLoader_Floor1.load('./assets/new_gltf/内部建模/1楼/1楼地面.gltf', function (obj) { //第一层楼
+      //   model_floor1 = obj.scene
+      //   scene.add(obj.scene)
+      //   obj.scene.traverse(function (child) {
+      //     if (child instanceof THREE.Mesh) {
+      //       // child.material.map = texture
+      //       child.material = material
+      //       // child.material.emissive = {r: 70, g: 70, b: 70}
+      //     }
+      //   })
+      //   obj.scene.name = "1floor"
+      //   model_floor1.visible = false
+      // })
+
+      // var texture2 = new THREE.TextureLoader().load("./assets/imgs/qian1.jpg");
+      // var material2 = new THREE.MeshStandardMaterial({
+      //   // emissive: 0x464646,
+      //   map: texture2
+      //   // repeat.set(1, 1)
+      // });
+
+      // GLTFLoader_Floor1_wall = new THREE.GLTFLoader();
+      // GLTFLoader_Floor1_wall.load('./assets/new_gltf/内部建模/1楼/1楼墙.gltf', function (obj) {
+      //   model_floor1_wall = obj.scene
+      //   scene.add(obj.scene)
+      //   console.log(obj.scene.children[1].children[0])
+      //   obj.scene.children[1].children[0].traverse(function (child) {
+      //     // if (child instanceof THREE.Mesh) {
+      //       console.log(child)
+      //     child.material = material2
+
+      //     // }
+      //   })
+      //   obj.scene.name = "1floor_wall"
+      //   model_floor1_wall.visible = false
+      // })
 
       GLTFLoader_Floor1 = new THREE.GLTFLoader();
-      GLTFLoader_Floor1.load('./assets/new_gltf/1楼地面.gltf', function (obj) { //第一层楼
-        model_floor1 = obj.scene
+      GLTFLoader_Floor1.load('./assets/new_gltf/内部建模/1楼/1楼all.gltf', function (obj) {
+        model_floor2 = obj.scene
         scene.add(obj.scene)
-        obj.scene.traverse(function (child) {
-          if (child instanceof THREE.Mesh) {
-            child.material.map = texture
-          }
-        })
         obj.scene.name = "1floor"
-        model_floor1.visible = false
+        model_floor2.visible = false
       })
 
       GLTFLoader_Floor2 = new THREE.GLTFLoader();
@@ -1099,7 +1178,7 @@
       })
 
       GLTFLoader_Floor6 = new THREE.GLTFLoader();
-      GLTFLoader_Floor6.load('./assets/new_gltf/内部建模/6楼/6楼.gltf', function (obj) {
+      GLTFLoader_Floor6.load('./assets/new_gltf/内部建模/6楼/6楼all.gltf', function (obj) {
         model_floor6 = obj.scene
         obj.scene.name = "6floor"
         scene.add(obj.scene)
@@ -1233,9 +1312,11 @@
       // removeEntity('directionalLight2')
 
       removeEntity('ambient')
-      ambient = new THREE.AmbientLight(0x888888, 1)
+      ambient = new THREE.AmbientLight(0xD7EAFF, 0.5)
       ambient.name = 'ambient'
       scene.add(ambient)
+
+      scene.add(point)
 
       showObject('1floor')
       showObject('2floor')
@@ -1376,8 +1457,10 @@
 
     function draw() {
       init()
-      loadModel('./assets/new_gltf/内部建模/1楼/a栋闸机.gltf', 'zhaji1', 1, 'hide')
-      loadModel('./assets/new_gltf/内部建模/1楼/b栋闸机.gltf', 'zhaji2', 1, 'hide', 1.388, 0, 0.001)
+      loadModel('./assets/new_gltf/内部建模/1楼/a栋闸机.gltf', 'gate1', 1, 'hide', 0.2, 0, 0.001)
+      loadModel('./assets/new_gltf/内部建模/1楼/b栋闸机.gltf', 'gate2', 1, 'hide')
+      loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f1_1', 1, 'hide', 0.1, 0.001, -0.15)
+      loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f1_2', 1, 'hide', 3.4, 0.001, -0.14)
       // loadModel('./assets/new_gltf/内部建模/1楼/办公室1.gltf', 'meeting_room_f1_1', 'hide')
       // loadModel('./assets/new_gltf/内部建模/1楼/办公室2.gltf', 'meeting_room_f1_2', 'hide')
 
@@ -1396,8 +1479,6 @@
       loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f9_2', 9, 'hide', 0, 5.18, -2.14)
       // loadModel('./assets/new_gltf/摄像头.gltf', 'video_f1_1', 1, 1, -1.94, 0)
       // loadModel('./assets/new_gltf/摄像头.gltf', 'video_f1_2', 1, -1.94, 0.66, 1)
-      // loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f1_1', 1, 1, 0.66, 0)
-      // loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f1_2', 1, -1.32, 0.66, 0)
 
       // loadModel(video_path, 'video1', 3, -25.2, 0, 0)
       // loadModel(video_path, 'video2', 3, -23.93, 0, -53.375)
@@ -1413,16 +1494,17 @@
 
       // initStats() //加载性能监视
       animate()
-      createIcon('video_f9_1', 'videoIcon')
-      createIcon('video_f9_2', 'videoIcon')
+      createIcon('video_f9_1', 'videoIcon', 'f9')
+      createIcon('video_f9_2', 'videoIcon', 'f9')
       // createIcon('video2', 'videoIcon')
       // createIcon('video3', 'videoIcon')
       // createIcon('video4', 'videoIcon')
-      // createIcon('gate1', 'gateIcon')
-      // createIcon('gate2', 'gateIcon')
-      // createIcon('smoke1', 'smokeIcon')
-      // createIcon('smoke2', 'smokeIcon')
-      // createIcon('smoke3', 'smokeIcon')
+      createIcon('gate1', 'gateIcon', 'f1')
+      createIcon('gate2', 'gateIcon', 'f1')
+      createIcon('smoke_f1_1', 'smokeIcon', 'f1')
+      createIcon('smoke_f1_2', 'smokeIcon', 'f1')
+      createIcon('smoke_f9_1', 'smokeIcon', 'f9')
+      createIcon('smoke_f9_2', 'smokeIcon', 'f9')
       // createLayer('video1_ly', 'videoLayer')
       // createLayer('video2_ly', 'videoLayer')
       // createLayer('video3_ly', 'videoLayer')
@@ -1479,9 +1561,11 @@
     // }
 
     //添加ICON的dom
-    function createIcon(mesh_id, class_name) {
+    function createIcon(mesh_id, class_name, icon_floor) {
       let iconDiv = document.createElement('div')
-      iconDiv.className = class_name
+      iconDiv.className = 'Icon'
+      iconDiv.classList.add(class_name)
+      iconDiv.classList.add(icon_floor)
       iconDiv.id = mesh_id
       let bodyDom = document.body
       bodyDom.insertBefore(iconDiv, bodyDom.lastChild)
@@ -1509,14 +1593,15 @@
       let testDiv = $('.testDiv')
       let groupNames = [
         'video_f9_1',
-        'video_f9_2'
+        'video_f9_2',
         // 'video3',
         // 'video4',
-        // 'gate1',
-        // 'gate2',
-        // 'smoke1',
-        // 'smoke2',
-        // 'smoke3',
+        'gate1',
+        'gate2',
+        'smoke_f1_1',
+        'smoke_f1_2',
+        'smoke_f9_1',
+        'smoke_f9_2'
       ]
 
       for (let i = 0; i < groupNames.length; i++) {
@@ -1703,7 +1788,7 @@
       }
     })
     //闸机按钮
-    $('#gate').on('click', function () {
+    $('#gate_list').on('click', function () {
       if ($('.gateIcon').is(':hidden')) {
         $('.gateIcon').show()
       } else {
@@ -1711,7 +1796,7 @@
       }
     })
     //烟感按钮
-    $('#smoke').on('click', function () {
+    $('#temp_list').on('click', function () {
       if ($('.smokeIcon').is(':hidden')) {
         $('.smokeIcon').show()
       } else {

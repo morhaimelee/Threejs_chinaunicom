@@ -68,6 +68,16 @@ function hidden_all_model(except) {
     model_all_model['model_all_floor' + except].forEach(function (e) {
         e.visible = true
     })
+    //隐藏所有ICON DOM
+    
+    if (!$('.f' + except).is(':hidden')) {
+        $('.Icon').hide()
+        $('.f' + except).show() //保留单层Icon
+        //以左侧Icon状态来获取
+    }else {
+        $('.Icon').hide()
+    }
+    
 }
 //跳转楼层按钮
 $('#f1').on('click', function () {
