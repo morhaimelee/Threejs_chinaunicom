@@ -78,7 +78,7 @@
       width: 37px;
       height: 47px;
       position: absolute;
-      background: url('./assets/imgs/摄像头.png') center center no-repeat;
+      background: url('./assets/imgs/shexiangtou.png') center center no-repeat;
       /* display: none; */
       cursor: pointer;
     }
@@ -968,7 +968,7 @@
       dracoLoader.setDecoderConfig({ type: 'js' })
       dracoLoader.preload()
       gltfLoader.setDRACOLoader(dracoLoader)
-      gltfLoader.load('./assets/new_gltf/内部建模/yizitest.gltf', function (gltf) {
+      gltfLoader.load('./assets/new_gltf/yizitestDraco.gltf', function (gltf) {
         console.log(gltf)
         scene.add(gltf.scene)
       })
