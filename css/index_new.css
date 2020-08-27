@@ -277,40 +277,64 @@ li {
     background     : url('../assets/imgs/摄像头-icon.png') center center no-repeat;
     background-size: 28px 24px;
 }
+#video_list:hover {
+    background: url('../assets/imgs/shexiangtou-icon-in.png') center center no-repeat;
+}
 
 #waterTank_list {
     background     : url('../assets/imgs/水池-icon.png') center center no-repeat;
     background-size: 26px 26px;
+}
+#waterTank_list:hover {
+    background     : url('../assets/imgs/shuixiang-icon-in.png') center center no-repeat;
 }
 
 #fire_list {
     background     : url('../assets/imgs/烟感-icon.png') center center no-repeat;
     background-size: 22px 25px;
 }
+#fire_list:hover {
+    background     : url('../assets/imgs/wengan-icon-in.png') center center no-repeat;
+}
 
 #temp_list {
     background     : url('../assets/imgs/温感-icon.png') center center no-repeat;
     background-size: 28px 21px;
+}
+#temp_list:hover {
+    background     : url('../assets/imgs/yangan-icon-in.png') center center no-repeat;
 }
 
 #gate_list {
     background     : url('../assets/imgs/闸机-icon.png') center center no-repeat;
     background-size: 19px 24px;
 }
+#gate_list:hover {
+    background: url('../assets/imgs/zhaji-icon-in.png') center center no-repeat;
+}
 
 #trashCan_list {
     background     : url('../assets/imgs/垃圾桶-icon.png') center center no-repeat;
     background-size: 23px 24px;
+}
+#trashCan_list:hover {
+    background: url('../assets/imgs/lajitong-icon-in.png') center center no-repeat;
 }
 
 #hole_cover_list {
     background     : url('../assets/imgs/井盖-icon.png') center center no-repeat;
     background-size: 24px 24px;
 }
+#hole_cover_list:hover {
+    background: url('../assets/imgs/jinggai-icon-in.png') center center no-repeat;
+}
 
 #park_list {
     background     : url('../assets/imgs/停车场-icon.png') center center no-repeat;
     background-size: 24px 24px;
+}
+#hole_cover_list:hover {
+    background: url('../assets/imgs/tingche-icon-in.png') center center no-repeat;
 }
 
 .warnVideo-title {

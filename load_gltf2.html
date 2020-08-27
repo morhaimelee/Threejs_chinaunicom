@@ -812,11 +812,6 @@
       document.body.appendChild(stats.dom)
     }
 
-
-    // var dracoLoader = new DRACOLoader();
-    // dracoLoader.setDecoderPath('js/Draco/');
-    // dracoLoader.setDecoderConfig({ type: 'js' });
-
     function init() {
       renderer = new THREE.WebGLRenderer({
         antialias: true,
@@ -912,24 +907,24 @@
       ambient.name = 'ambient'
       scene.add(ambient)
 
-      var texture_bg = new THREE.TextureLoader().load('./assets/background/nx.jpg');
-      scene.background = texture_bg
+      // var texture_bg = new THREE.TextureLoader().load('./assets/background/nx.jpg');
+      // scene.background = texture_bg
       //天空盒
-      // var path = "./assets/background/"; //设置路径
-      // var directions = ["px", "nx", "py", "ny", "pz", "nz"]; //获取对象
-      // var format = ".jpg"; //格式
-      // // //创建盒子，并设置盒子的大小为( 5000, 5000, 5000 )
-      // var skyGeometry = new THREE.BoxGeometry(500, 500, 500);
-      // // //设置盒子材质
-      // var materialArray = [];
-      // for (var i = 0; i < 6; i++)
-      //   materialArray.push(new THREE.MeshBasicMaterial({
-      //     map: THREE.ImageUtils.loadTexture(path + directions[i] + format), //将图片纹理贴上
-      //     side: THREE.BackSide /*镜像翻转，如果设置镜像翻转，那么只会看到黑漆漆的一片，因为你身处在盒子的内部，所以一定要设置镜像翻转。*/
-      //   }));
-      // var skyMaterial = new THREE.MeshFaceMaterial(materialArray);
-      // var skyBox = new THREE.Mesh(skyGeometry, skyMaterial); //创建一个完整的天空盒，填入几何模型和材质的参数
-      // scene.add(skyBox); //在场景中加入天空盒
+      var path = "./assets/background/"; //设置路径
+      var directions = ["posx", "negx", "posy", "negy", "posz", "negz"]; //获取对象
+      var format = ".jpg"; //格式
+      // //创建盒子，并设置盒子的大小为( 5000, 5000, 5000 )
+      var skyGeometry = new THREE.BoxGeometry(500, 500, 500);
+      // //设置盒子材质
+      var materialArray = [];
+      for (var i = 0; i < 6; i++)
+        materialArray.push(new THREE.MeshBasicMaterial({
+          map: THREE.ImageUtils.loadTexture(path + directions[i] + format), //将图片纹理贴上
+          side: THREE.BackSide /*镜像翻转，如果设置镜像翻转，那么只会看到黑漆漆的一片，因为你身处在盒子的内部，所以一定要设置镜像翻转。*/
+        }));
+      var skyMaterial = new THREE.MeshFaceMaterial(materialArray);
+      var skyBox = new THREE.Mesh(skyGeometry, skyMaterial); //创建一个完整的天空盒，填入几何模型和材质的参数
+      scene.add(skyBox); //在场景中加入天空盒
 
       //非交互模型加载
 
@@ -950,20 +945,9 @@
       //   })
       // })
 
-      //DracoLoader
-      // var draco_loader = new DRACOLoader();
-      // loader.setDecoderPath('./assets/new_gltf/otherDraco.gltf')
-
-      // loader.preload()
-
-      // loader.load(
-
-      // )
-
-
       var gltfLoader = new THREE.GLTFLoader();
       var dracoLoader = new THREE.DRACOLoader();
-      // 设置解压路径，这个文件直接放在项目的public目录下面即可
+      // draco文件路径
       dracoLoader.setDecoderPath('./js/Draco/')
       dracoLoader.setDecoderConfig({ type: 'js' })
       dracoLoader.preload()
@@ -1137,13 +1121,58 @@
       //   model_floor1_wall.visible = false
       // })
 
+
       GLTFLoader_Floor1 = new THREE.GLTFLoader();
-      GLTFLoader_Floor1.load('./assets/new_gltf/内部建模/1楼/1楼all.gltf', function (obj) {
-        model_floor2 = obj.scene
+      // var dracoLoader = new THREE.DRACOLoader();
+      // // draco文件路径
+      // dracoLoader.setDecoderPath('./js/Draco/')
+      // dracoLoader.setDecoderConfig({ type: 'js' })
+      // dracoLoader.preload()
+      GLTFLoader_Floor1.setDRACOLoader(dracoLoader)
+      GLTFLoader_Floor1.load('./assets/inside_gltf/1楼/1floorDraco.gltf', function (obj) {
+        console.log(obj)
+        model_floor1 = obj.scene
         scene.add(obj.scene)
         obj.scene.name = "1floor"
-        model_floor2.visible = false
+        obj.scene.traverse(function (child) {
+          // console.log(child)
+          if (child.name == "地面") { // && child instanceof THREE.Mesh
+            child.children.map(function (n) {
+              n.material.emissive.set(0xaaaaaa)
+            });
+          }
+          else if (child.name == "空白1") { // && child instanceof THREE.Mesh
+            child.children.map(function (n) {
+              if (n instanceof THREE.Mesh) {
+                n.material.emissive.set(0x333333)
+              }
+            });
+          }
+        })
+        model_floor1.visible = false
       })
+
+      // GLTFLoader_Floor1.load('./assets/inside_gltf/1楼/房间.gltf', function (obj) {
+      //   model_floor1 = obj.scene
+      //   scene.add(obj.scene)
+      //   obj.scene.name = "1floor"
+      //   obj.scene.traverse(function (child) {
+      //     // console.log(child)
+      //     if (child.name == "地面") { // && child instanceof THREE.Mesh
+      //       child.children.map(function (n) {
+      //         n.material.emissive.set(0xaaaaaa)
+      //       });
+      //     }
+      //     else if (child.name == "空白1") { // && child instanceof THREE.Mesh
+      //       child.children.map(function (n) {
+      //         if (n instanceof THREE.Mesh) {
+      //           n.material.emissive.set(0x333333)
+      //         }
+      //       });
+      //     }
+      //   })
+      //   model_floor1.visible = false
+      // })
 
       GLTFLoader_Floor2 = new THREE.GLTFLoader();
       GLTFLoader_Floor2.load('./assets/new_gltf/内部建模/2楼/2楼.gltf', function (obj) {
@@ -1210,23 +1239,7 @@
       })
 
       // })
-      // GLTFLoader_AllBuild = new THREE.GLTFLoader()
-      // GLTFLoader_AllBuild.load('./assets/new_gltf/坐标.gltf', function (obj) {
-      //   //坐标
-      //   // objAll = obj
-      //   console.log(obj)
-      //   obj.scene.name = 'new_axes'
-      //   scene.add(obj.scene)
-      //   //动画
-      //   mixer = new THREE.AnimationMixer(obj)
-      //   console.log(mixer)
 
-      //   const animationClip = obj.animations[0];
-      //   console.log(animationClip)
-      //   action = mixer.clipAction(animationClip)
-      //   console.log(action)
-      //   action.play()
-      // })
 
       $('#back_all').hide()
     }
@@ -1780,6 +1793,7 @@
 
 
     //安防监控按钮
+
     $('#video_list').on('click', function () {
       if ($('.videoIcon').is(':hidden')) {
         $('.videoIcon').show()
