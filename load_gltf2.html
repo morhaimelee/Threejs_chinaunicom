@@ -1469,28 +1469,19 @@
 
     function draw() {
       init()
+      //1楼模型
       loadModel('./assets/new_gltf/内部建模/1楼/a栋闸机.gltf', 'gate1', 1, 'hide', 0.2, 0, 0.001)
       loadModel('./assets/new_gltf/内部建模/1楼/b栋闸机.gltf', 'gate2', 1, 'hide')
       loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f1_1', 1, 'hide', 0.1, 0.001, -0.15)
       loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f1_2', 1, 'hide', 3.4, 0.001, -0.14)
-      // loadModel('./assets/new_gltf/内部建模/1楼/办公室1.gltf', 'meeting_room_f1_1', 'hide')
-      // loadModel('./assets/new_gltf/内部建模/1楼/办公室2.gltf', 'meeting_room_f1_2', 'hide')
+      loadModel('./assets/new_gltf/摄像头.gltf', 'video_f1_1', 1, 'hide', 0.75, 0, 1)
+      loadModel('./assets/new_gltf/摄像头.gltf', 'video_f1_2', 1, 'hide', -1.5, 0, 1)
 
-      loadModel('./assets/new_gltf/内部建模/4楼/会议厅.gltf', 'room1', 4, 'hide')
-      loadModel('./assets/new_gltf/内部建模/4楼/办公室1.gltf', 'room3', 4, 'hide')
-      loadModel('./assets/new_gltf/内部建模/4楼/办公室2.gltf', 'room4', 4, 'hide')
-      loadModel('./assets/new_gltf/内部建模/4楼/办公室3.gltf', 'room5', 4, 'hide')
-      loadModel('./assets/new_gltf/内部建模/4楼/办公室4.gltf', 'room6', 4, 'hide')
-      loadModel('./assets/new_gltf/内部建模/4楼/办公室5.gltf', 'room7', 4, 'hide')
-      loadModel('./assets/new_gltf/内部建模/4楼/办公室6.gltf', 'room8', 4, 'hide')
-      // loadModel('./assets/new_gltf/摄像头.gltf', 'video_f4_1', 4, -1.78, 2.02, 0)
-      // loadModel('./assets/new_gltf/摄像头.gltf', 'video_f4_2', 4, 1.58, 2.02, 0)
+
       loadModel('./assets/new_gltf/摄像头.gltf', 'video_f9_1', 9, 'hide', 1.32, 5.18, 1.9)
       loadModel('./assets/new_gltf/摄像头.gltf', 'video_f9_2', 9, 'hide', 1.32, 5.18, 0.55)
       loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f9_1', 9, 'hide', 0, 5.18, -0.1)
       loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f9_2', 9, 'hide', 0, 5.18, -2.14)
-      // loadModel('./assets/new_gltf/摄像头.gltf', 'video_f1_1', 1, 1, -1.94, 0)
-      // loadModel('./assets/new_gltf/摄像头.gltf', 'video_f1_2', 1, -1.94, 0.66, 1)
 
       // loadModel(video_path, 'video1', 3, -25.2, 0, 0)
       // loadModel(video_path, 'video2', 3, -23.93, 0, -53.375)
@@ -1666,7 +1657,7 @@
       renderDiv()
     }
 
-    function loadModel(path, gltf_name, floor_num, visible, pst_x, pst_y, pst_z) {
+    function loadModel(path, gltf_name, floor_num, visible, pst_x, pst_y, pst_z, rotateX) {
       new THREE.GLTFLoader().load(path, function (gltf) {
         gltf.scene.name = gltf_name //set模型名字
         if (pst_x, pst_y, pst_z) {
@@ -1676,6 +1667,13 @@
         if (visible == 'hide') {
           gltf.scene.visible = false
         }
+
+        if (rotateX == 180) {
+          gltf.scene.rotateX(Math.PI / 2)
+        }else if (rotateX == 90) {
+          gltf.scene.rotateX(Math.PI / 4)
+        }
+        
         model_all_num['model_all_floor' + floor_num].push(gltf.scene.position) //添加模型所在楼层位置
         model_all_model['model_all_floor' + floor_num].push(gltf.scene)
 

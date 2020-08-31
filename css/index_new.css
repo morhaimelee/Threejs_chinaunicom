@@ -333,7 +333,7 @@ li {
     background     : url('../assets/imgs/停车场-icon.png') center center no-repeat;
     background-size: 24px 24px;
 }
-#hole_cover_list:hover {
+#park_list:hover {
     background: url('../assets/imgs/tingche-icon-in.png') center center no-repeat;
 }
 
