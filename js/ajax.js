@@ -880,7 +880,7 @@ var option2_fourth = {
 
 
 //首屏监控切换
-$.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/monitorEquipmentOperation", function (resp) {
+$.get("http://58.16.56.202:9000/smart-bldg/big/screen/monitorEquipmentOperation", function (resp) {
     let videoSrc = resp.data[0].url
     $('#equip_name').html(resp.data[0].name)
     let arr_name = []
@@ -942,7 +942,7 @@ $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/monitorEquipmentOp
 
 })
 // 设备在线情况
-$.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/equipmentOperationStatus", function (resp) {
+$.get("http://58.16.56.202:9000/smart-bldg/big/screen/equipmentOperationStatus", function (resp) {
         $('#equip_num').html(resp.data.monitorStatus.totalNum)
         $('#onlineNum').html(resp.data.monitorStatus.onlineNum)
         $('#offlineNum').html(resp.data.monitorStatus.offlineNum)
@@ -1055,7 +1055,7 @@ $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/equipmentOperation
 
 })
 // 越界告警、安防
-$.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/eventOutofBoundsAlarm", function (resp) {
+$.get("http://58.16.56.202:9000/smart-bldg/big/screen/eventOutofBoundsAlarm", function (resp) {
     // console.log(resp)
     $('#securityAlarm_totle').html(resp.data.securityAlarm.totalNum)
     $('#securityAlarm_unHandlerNum').html(resp.data.securityAlarm.unHandlerNum)
@@ -1206,7 +1206,7 @@ $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/eventOutofBoundsAl
 })
 
 //人员状况、访客进入管理
-$.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/personnelStatus", function (resp) {
+$.get("http://58.16.56.202:9000/smart-bldg/big/screen/personnelStatus", function (resp) {
     // console.log(resp)
     // console.log(resp.data)
     // var data_real = resp.data
@@ -1216,7 +1216,7 @@ $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/personnelStatus", 
 
 })
 //车位占比
-$.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/parkingLotProportion", function (resp) {
+$.get("http://58.16.56.202:9000/smart-bldg/big/screen/parkingLotProportion", function (resp) {
     // console.log(resp)
     let option1_third_value = resp.data.carSpaceProportion.totalNum
     let option1_third_value_used = resp.data.carSpaceProportion.usedNum
@@ -1311,8 +1311,8 @@ $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/parkingLotProporti
 
 })
 //车辆进出记录
-$.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/carInAndOutRecords", function (resp) {
-    console.log(resp.data)
+$.get("http://58.16.56.202:9000/smart-bldg/big/screen/carInAndOutRecords", function (resp) {
+    // console.log(resp.data)
     let records_data = resp.data.slice(0, 10)
 
     var html = template("records_temp", { record: records_data })
@@ -1321,7 +1321,7 @@ $.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/carInAndOutRecords
 })
 
 //楼层总人数
-$.get("http://zhly.zhiyanginfo.top:9000/smart-bldg/big/screen/personFloor", function (resp) {
-    console.log(resp)
+$.get("http://58.16.56.202:9000/smart-bldg/big/screen/personFloor", function (resp) {
+    // console.log(resp)
 
 })

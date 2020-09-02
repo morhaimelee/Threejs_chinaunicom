@@ -203,9 +203,10 @@ li {
 }
 
 #back_all {
-    position: absolute;
-    bottom  : 100px;
-    left    : 1080px;
+    position : absolute;
+    bottom   : 135px;
+    left     : 50%;
+    transform: translateX(-50%);
 }
 
 #in_ex_floor {
@@ -236,7 +237,7 @@ li {
     color      : #fff;
     line-height: 32px;
     text-align : center;
-    display : none;
+    display    : none;
 }
 
 #bottomFloor ul {
@@ -277,6 +278,7 @@ li {
     background     : url('../assets/imgs/摄像头-icon.png') center center no-repeat;
     background-size: 28px 24px;
 }
+
 #video_list:hover {
     background: url('../assets/imgs/shexiangtou-icon-in.png') center center no-repeat;
 }
@@ -285,30 +287,34 @@ li {
     background     : url('../assets/imgs/水池-icon.png') center center no-repeat;
     background-size: 26px 26px;
 }
+
 #waterTank_list:hover {
-    background     : url('../assets/imgs/shuixiang-icon-in.png') center center no-repeat;
+    background: url('../assets/imgs/shuixiang-icon-in.png') center center no-repeat;
 }
 
 #fire_list {
     background     : url('../assets/imgs/烟感-icon.png') center center no-repeat;
     background-size: 22px 25px;
 }
+
 #fire_list:hover {
-    background     : url('../assets/imgs/wengan-icon-in.png') center center no-repeat;
+    background: url('../assets/imgs/wengan-icon-in.png') center center no-repeat;
 }
 
 #temp_list {
     background     : url('../assets/imgs/温感-icon.png') center center no-repeat;
     background-size: 28px 21px;
 }
+
 #temp_list:hover {
-    background     : url('../assets/imgs/yangan-icon-in.png') center center no-repeat;
+    background: url('../assets/imgs/yangan-icon-in.png') center center no-repeat;
 }
 
 #gate_list {
     background     : url('../assets/imgs/闸机-icon.png') center center no-repeat;
     background-size: 19px 24px;
 }
+
 #gate_list:hover {
     background: url('../assets/imgs/zhaji-icon-in.png') center center no-repeat;
 }
@@ -317,6 +323,7 @@ li {
     background     : url('../assets/imgs/垃圾桶-icon.png') center center no-repeat;
     background-size: 23px 24px;
 }
+
 #trashCan_list:hover {
     background: url('../assets/imgs/lajitong-icon-in.png') center center no-repeat;
 }
@@ -325,6 +332,7 @@ li {
     background     : url('../assets/imgs/井盖-icon.png') center center no-repeat;
     background-size: 24px 24px;
 }
+
 #hole_cover_list:hover {
     background: url('../assets/imgs/jinggai-icon-in.png') center center no-repeat;
 }
@@ -333,6 +341,7 @@ li {
     background     : url('../assets/imgs/停车场-icon.png') center center no-repeat;
     background-size: 24px 24px;
 }
+
 #park_list:hover {
     background: url('../assets/imgs/tingche-icon-in.png') center center no-repeat;
 }
@@ -601,33 +610,37 @@ li {
     top       : 195px;
     right     : 26px;
 }
+
 .visitors-box .visitor-realTime-data {
-    width: 470px;
-    height: 200px;
-    position: static;
+    width     : 470px;
+    height    : 200px;
+    position  : static;
     margin-top: 15px;
-    display: block;
-    overflow: hidden;
+    display   : block;
+    overflow  : hidden;
 }
+
 .visitors-box .visitor-realTime-data .realTime-box {
-    width: 150px;
-    height: 200px;
-    display: inline-block;
+    width       : 150px;
+    height      : 200px;
+    display     : inline-block;
     margin-right: 5px;
-    background: url('../assets/imgs/index_kuang.png') center center no-repeat;
+    background  : url('../assets/imgs/index_kuang.png') center center no-repeat;
 }
+
 .visitors-box .visitor-realTime-data .realTime-box ul li {
     margin: 5px 0 4px 33px;
 }
 
 .visitors-box .visitor-realTime-data .realTime-box ul li:nth-child(1) {
-    width: 86px;
-    height: 106px;
-    margin: 20px 0 0 23px;
+    width        : 86px;
+    height       : 106px;
+    margin       : 20px 0 0 23px;
     border-radius: 2px;
 }
+
 .visitors-box .visitor-realTime-data .realTime-box ul li:nth-child(1) img {
-    width: 106px;
+    width : 106px;
     height: 106px;
 }
 
@@ -714,9 +727,9 @@ li {
 }
 
 .equip-status-box ul {
-    width: 400px;
-    height: 85px;
-    overflow: hidden;
+    width     : 400px;
+    height    : 85px;
+    overflow  : hidden;
     font-size : 12px;
     color     : #FCF4FE;
     margin-top: 14px;
@@ -724,7 +737,7 @@ li {
 
 .equip-status-box ul li {
     margin-bottom: 12px;
-    position: relative;
+    position     : relative;
 }
 
 .equip-status-box ul li span:nth-child(2) {
@@ -742,6 +755,7 @@ li {
     left    : 300px;
     color   : #01FF1F;
 }
+
 .color-deal-red {
     color: #FF6767;
 }
@@ -1160,19 +1174,21 @@ li {
 }
 
 .legend {
-    width: 100px;
-    height: 16px;
+    width   : 100px;
+    height  : 16px;
     position: absolute;
-    top: 22px;
-    left: 290px;
-    color: #E9E9EA;
+    top     : 22px;
+    left    : 290px;
+    color   : #E9E9EA;
 }
+
 .legend span {
     font-size: 14px;
 }
+
 .legend .enter_go {
-    position  : static;
-    margin: 0 8px;
+    position: static;
+    margin  : 0 8px;
 }
 
 .records-list ul li .line-list {
@@ -1304,8 +1320,8 @@ li {
     width   : 440px;
     height  : 300px;
     position: absolute;
-    top: 535px;
-    right: 30px;
+    top     : 535px;
+    right   : 30px;
 }
 
 .conference-room-box ol {
@@ -1421,8 +1437,8 @@ li {
 }
 
 .option {
-    width : 116px;
-    height: 38px;
+    width        : 116px;
+    height       : 38px;
     margin-bottom: 10px;
 }
 
@@ -1432,7 +1448,7 @@ li {
     height        : 20px;
     background    : url(../assets/imgs/下拉.png) no-repeat center;
     position      : absolute;
-    left         : 84px;
+    left          : 84px;
     top           : 9px;
     pointer-events: none;
 }
@@ -1468,166 +1484,194 @@ li {
 }
 
 .device-list-box ul li {
-    width : 435px;
-    height: 107px;
+    width        : 435px;
+    height       : 107px;
     margin-bottom: 10px;
-    border: 1px solid rgba(51, 150, 251, 1);
+    border       : 1px solid rgba(51, 150, 251, 1);
 }
+
 .divice-31 {
-    height: 31px;
+    height       : 31px;
     border-bottom: 1px solid rgba(51, 150, 251, 1);
 }
+
 .blue-82 {
-    width: 70px;
-    display: inline-block;
-    color: #82AAFF;
-    text-align: center;
+    width      : 70px;
+    display    : inline-block;
+    color      : #82AAFF;
+    text-align : center;
     line-height: 31px;
 }
+
 .white-33 {
-    display: inline-block;
-    width: 101px;
-    height: 100%;
-    line-height: 31px;
-    text-align: center;
-    border: 1px solid rgba(51,150,251,1);
-    border-top: none;
+    display      : inline-block;
+    width        : 101px;
+    height       : 100%;
+    line-height  : 31px;
+    text-align   : center;
+    border       : 1px solid rgba(51, 150, 251, 1);
+    border-top   : none;
     border-bottom: none;
 }
+
 .device-div {
-    height     : 43px;
-    font-size  : 16px;
-    color      : #fff;
-    line-height: 43px;
-    border-bottom: 1px solid rgba(51,150,251,1);
+    height       : 43px;
+    font-size    : 16px;
+    color        : #fff;
+    line-height  : 43px;
+    border-bottom: 1px solid rgba(51, 150, 251, 1);
 }
+
 .device-div .device-name {
-    display: inline-block;
+    display    : inline-block;
     margin-left: 9px;
 }
+
 .device-div .fr {
     color       : #FF6767;
     margin-right: 36px;
 }
+
 .last_white {
-    display: inline-block;
-    height: 100%;
+    display     : inline-block;
+    height      : 100%;
     padding-left: 10px;
-    line-height: 31px;
-    border-left: 1px solid rgba(51,150,251,1);
+    line-height : 31px;
+    border-left : 1px solid rgba(51, 150, 251, 1);
 }
+
 .energy-consumption {
     position: absolute;
-    top: 149px;
-    right: 474px;
+    top     : 149px;
+    right   : 474px;
 }
+
 .energy-consumption .warnVideo-title {
-    width: 250px;
+    width   : 250px;
     position: absolute;
-    top: 0;
-    left: 0;
+    top     : 0;
+    left    : 0;
 }
+
 .energy-logo div:nth-child(1) {
     position: absolute;
-    top: 204px;
-    right: 332px;
+    top     : 204px;
+    right   : 332px;
 }
+
 .energy-logo div:nth-child(2) {
     position: absolute;
-    top: 204px;
-    right: 112px;
+    top     : 204px;
+    right   : 112px;
 }
+
 .energy-logo div {
-    width: 77px;
-    height: 77px;
+    width        : 77px;
+    height       : 77px;
     border-radius: 50%;
-    border:2px solid rgba(210,241,255,1);
-    text-align: center;
+    border       : 2px solid rgba(210, 241, 255, 1);
+    text-align   : center;
 }
+
 .energy-logo div i {
-    display: inline-block;
-    width: 28px;
-    height: 39px;
+    display   : inline-block;
+    width     : 28px;
+    height    : 39px;
     margin-top: 16px;
 }
+
 .energy-logo div .dian {
     background: url('../assets/imgs/电.png') center center no-repeat;
 }
+
 .energy-logo div .shui {
     background: url('../assets/imgs/水滴.png') center center no-repeat;
 }
+
 .energy-num {
-    position: absolute;
-    top: 300px;
-    right: 280px;
+    position : absolute;
+    top      : 300px;
+    right    : 280px;
     font-size: 16px;
-    color: #DCF4FE;
+    color    : #DCF4FE;
 }
+
 .energy-num2 {
     position: absolute;
-    top: 300px;
-    right: 68px;
+    top     : 300px;
+    right   : 68px;
 }
+
 .energy-num span {
-    font-size: 29px;
-    font-family: fangzheng;
+    font-size   : 29px;
+    font-family : fangzheng;
     margin-right: 12px;
 }
+
 #dian_num {
     color: #FFD200;
 }
+
 #shui_num {
     color: #00FCFF;
 }
+
 .total-dian-text {
-    position: absolute;
-    top: 333px;
-    right: 319px;
-    color: #fff;
+    position : absolute;
+    top      : 333px;
+    right    : 319px;
+    color    : #fff;
     font-size: 16px;
 }
+
 .total-shui-text {
-    position: absolute;
-    top: 333px;
-    right: 93px;
-    color: #fff;
+    position : absolute;
+    top      : 333px;
+    right    : 93px;
+    color    : #fff;
     font-size: 16px;
 }
+
 .day-energy {
     position: absolute;
-    top: 388px;
-    right: 474px;
+    top     : 388px;
+    right   : 474px;
 }
+
 .day-energy .warnVideo-title {
-    width: 250px;
+    width   : 250px;
     position: absolute;
-    top: 0;
-    left: 0;
+    top     : 0;
+    left    : 0;
 }
+
 #echarts_fourth_rightTop {
-    width: 430px;
-    height: 180px;
+    width   : 430px;
+    height  : 180px;
     position: absolute;
-    top: 432px;
-    right: 13px;
+    top     : 432px;
+    right   : 13px;
 }
+
 .equipment-power {
     position: absolute;
-    top: 622px;
-    right: 474px;
+    top     : 622px;
+    right   : 474px;
 }
+
 .equipment-power .warnVideo-title {
-    width: 250px;
+    width   : 250px;
     position: absolute;
-    top: 0;
-    left: 0;
+    top     : 0;
+    left    : 0;
 }
+
 #echarts_fourth_rightBottom {
-    width: 420px;
-    height: 280px;
+    width   : 420px;
+    height  : 280px;
     position: absolute;
-    top: 693px;
-    right: 20px;
+    top     : 693px;
+    right   : 20px;
 
 }
 
@@ -1635,6 +1679,7 @@ li {
 .yuyue {
     background-color: #00b4ff;
 }
+
 .un-yuyue {
     background: #ff6767;
 }

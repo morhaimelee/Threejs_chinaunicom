@@ -65,19 +65,29 @@ function hidden_all_model(except) {
         })
     }
 
+    hiddenObject('1other')
+    for (let i = 4; i <= 9; i++) {
+        if (i + 'other') {
+            hiddenObject(i + 'other')
+        }
+        if (i == 1 || i >= 4) {
+            showObject(except + 'other')
+        }
+    }
+
     model_all_model['model_all_floor' + except].forEach(function (e) {
         e.visible = true
     })
     //隐藏所有ICON DOM
-    
+
     if (!$('.f' + except).is(':hidden')) {
         $('.Icon').hide()
         $('.f' + except).show() //保留单层Icon
         //以左侧Icon状态来获取
-    }else {
+    } else {
         $('.Icon').hide()
     }
-    
+
 }
 //跳转楼层按钮
 $('#f1').on('click', function () {
@@ -132,9 +142,6 @@ $('#f3').on('click', function () {
 $('#f4').on('click', function () {
     hidden_all_floor('4floor')
     hidden_all_model(4)
-    model_all_model['model_all_floor' + 4].forEach(function (e) {
-        e.visible = true
-    })
     tween_camera = TweenMax.to(camera.position, 2, {
         x: 2.15,
         y: 5.81,
