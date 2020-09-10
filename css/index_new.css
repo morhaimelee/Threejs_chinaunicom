@@ -927,9 +927,10 @@ li {
 }
 
 .realTime-box ul li {
-    color    : #DCF4FE;
-    font-size: 8px;
-    margin   : 5px 0 7px 27px;
+    color                   : #DCF4FE;
+    margin                  : 5px 0 7px 27px;
+    -webkit-text-size-adjust: none;
+    font-size               : 8px;
 }
 
 .realTime-box ul li:nth-child(1) {

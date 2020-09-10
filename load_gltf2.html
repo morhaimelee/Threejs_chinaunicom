@@ -1061,8 +1061,8 @@
       // GLTFLoader_otherBuild.load('./assets/new_gltf/other.gltf', onLoad, onProgress, onError);
 
       GLTFLoader_otherBuild = new THREE.GLTFLoader()
-      // GLTFLoader_otherBuild.setDRACOLoader(dracoLoader)
-      GLTFLoader_otherBuild.load('./assets/new_gltf/other.gltf', function (obj) {
+      GLTFLoader_otherBuild.setDRACOLoader(dracoLoader)
+      GLTFLoader_otherBuild.load('./assets/inside_gltf/otherDraco.gltf', function (obj) {
         //道路及大楼
         // objAll = obj
         // console.log(obj) 
@@ -1082,7 +1082,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             console.log(Math.round(percentComplete, 2) + '% downloaded');
-            document.getElementById('progress').innerText = "系统加载中" + Math.round(percentComplete, 2) + '%' + "  推荐使用6核16G以上配置电脑运行此系统";
+            document.getElementById('progress').innerText = "系统加载中" + Math.round(percentComplete, 2) + '%' + "  最低要求4核8G以上配置运行此系统";
             if (percentComplete == 100) {
               setTimeout(() => {
                 $('#progress').hide()
@@ -1090,14 +1090,6 @@
             }
           }
         })
-
-      // GLTFLoader_Floor1 = new THREE.GLTFLoader();
-      // GLTFLoader_Floor1.load('./assets/new_gltf/内部建模/1楼/1楼.gltf', function (obj) { //第一层楼
-      //   model_floor1 = obj.scene
-      //   scene.add(obj.scene)
-      //   obj.scene.name = "1floor"
-      //   model_floor1.visible = false
-      // })
 
       // var texture = new THREE.TextureLoader().load("./assets/imgs/texture_map.jpg");
       // texture.wrapS = THREE.RepeatWrapping;//RepeatWrapping
@@ -1140,32 +1132,10 @@
       //   // repeat.set(1, 1)
       // });
 
-      // GLTFLoader_Floor1_wall = new THREE.GLTFLoader();
-      // GLTFLoader_Floor1_wall.load('./assets/new_gltf/内部建模/1楼/1楼墙.gltf', function (obj) {
-      //   model_floor1_wall = obj.scene
-      //   scene.add(obj.scene)
-      //   console.log(obj.scene.children[1].children[0])
-      //   obj.scene.children[1].children[0].traverse(function (child) {
-      //     // if (child instanceof THREE.Mesh) {
-      //       console.log(child)
-      //     child.material = material2
-
-      //     // }
-      //   })
-      //   obj.scene.name = "1floor_wall"
-      //   model_floor1_wall.visible = false
-      // })
-
 
       GLTFLoader_Floor1 = new THREE.GLTFLoader();
-      // var dracoLoader = new THREE.DRACOLoader();
-      // // draco文件路径
-      // dracoLoader.setDecoderPath('./js/Draco/')
-      // dracoLoader.setDecoderConfig({ type: 'js' })
-      // dracoLoader.preload()
       GLTFLoader_Floor1.setDRACOLoader(dracoLoader)
-      GLTFLoader_Floor1.load('./assets/inside_gltf/1楼/1floorDraco.gltf', function (obj) {
-        console.log(obj)
+      GLTFLoader_Floor1.load('./assets/inside_gltf/1floor/房间Draco.gltf', function (obj) {
         model_floor1 = obj.scene
         scene.add(obj.scene)
         obj.scene.name = "1floor"
@@ -1188,7 +1158,7 @@
       })
       GLTFLoader_Floor1_other = new THREE.GLTFLoader();
       GLTFLoader_Floor1_other.setDRACOLoader(dracoLoader)
-      GLTFLoader_Floor1_other.load('./assets/inside_gltf/1楼/所有设施Draco.gltf', function (obj) {
+      GLTFLoader_Floor1_other.load('./assets/inside_gltf/1floor/所有设施Draco.gltf', function (obj) {
         model_other1 = obj.scene
         obj.scene.name = '1other'
         scene.add(obj.scene)
@@ -1217,24 +1187,71 @@
       // })
 
       GLTFLoader_Floor2 = new THREE.GLTFLoader();
-      GLTFLoader_Floor2.load('./assets/new_gltf/内部建模/2楼/2楼.gltf', function (obj) {
+      GLTFLoader_Floor2.setDRACOLoader(dracoLoader)
+      GLTFLoader_Floor2.load('./assets/inside_gltf/2floor/房间Draco.gltf', function (obj) {
         model_floor2 = obj.scene
         scene.add(obj.scene)
         obj.scene.name = "2floor"
+        obj.scene.traverse(function (child) {
+          if (child.name == "地面") { // && child instanceof THREE.Mesh
+            child.children.map(function (n) {
+              n.material.emissive.set(0xaaaaaa)
+            });
+          }
+          else if (child.name == "空白1") { // && child instanceof THREE.Mesh
+            child.children.map(function (n) {
+              if (n instanceof THREE.Mesh) {
+                n.material.emissive.set(0x333333)
+              }
+            });
+          }
+        })
         model_floor2.visible = false
+      })
+      GLTFLoader_Floor2_other = new THREE.GLTFLoader();
+      GLTFLoader_Floor2_other.setDRACOLoader(dracoLoader)
+      GLTFLoader_Floor2_other.load('./assets/inside_gltf/2floor/所有设施Draco.gltf', function (obj) {
+        model_other2 = obj.scene
+        obj.scene.name = '2other'
+        scene.add(obj.scene)
+        model_other2.visible = false
       })
 
       GLTFLoader_Floor3 = new THREE.GLTFLoader();
-      GLTFLoader_Floor3.load('./assets/new_gltf/内部建模/3楼/3.gltf', function (obj) {
+      GLTFLoader_Floor3.setDRACOLoader(dracoLoader)
+      GLTFLoader_Floor3.load('./assets/inside_gltf/3floor/房间Draco.gltf', function (obj) {
         model_floor3 = obj.scene
-        obj.scene.name = "3floor"
         scene.add(obj.scene)
+        obj.scene.name = "3floor"
+        obj.scene.traverse(function (child) {
+          // console.log(child)
+          if (child.name == "地面") { // && child instanceof THREE.Mesh
+            child.children.map(function (n) {
+              n.material.emissive.set(0xaaaaaa)
+            });
+          }
+          else if (child.name == "空白1") { // && child instanceof THREE.Mesh
+            child.children.map(function (n) {
+              if (n instanceof THREE.Mesh) {
+                n.material.emissive.set(0x333333)
+              }
+            });
+          }
+        })
         model_floor3.visible = false
+      })
+      GLTFLoader_Floor3_other = new THREE.GLTFLoader();
+      GLTFLoader_Floor3_other.setDRACOLoader(dracoLoader)
+      GLTFLoader_Floor3_other.load('./assets/inside_gltf/3floor/所有设施Draco.gltf', function (obj) {
+        model_other3 = obj.scene
+        obj.scene.name = '3other'
+        scene.add(obj.scene)
+        model_other3.visible = false
       })
 
       GLTFLoader_Floor4 = new THREE.GLTFLoader();
       GLTFLoader_Floor4.setDRACOLoader(dracoLoader)
-      GLTFLoader_Floor4.load('./assets/inside_gltf/4楼/房间Draco.gltf', function (obj) {
+      GLTFLoader_Floor4.load('./assets/inside_gltf/4floor/房间Draco.gltf', function (obj) {
         model_floor4 = obj.scene
         scene.add(obj.scene)
         obj.scene.name = "4floor"
@@ -1255,24 +1272,22 @@
         })
         model_floor4.visible = false
       })
-
       GLTFLoader_Floor4_other = new THREE.GLTFLoader();
       GLTFLoader_Floor4_other.setDRACOLoader(dracoLoader)
-      GLTFLoader_Floor4_other.load('./assets/inside_gltf/4楼/所有设施Draco.gltf', function (obj) {
+      GLTFLoader_Floor4_other.load('./assets/inside_gltf/4floor/所有设施Draco.gltf', function (obj) {
         model_other4 = obj.scene
         obj.scene.name = '4other'
         scene.add(obj.scene)
-        model_other4.visible = false
+        model_other3.visible = false
       })
 
       GLTFLoader_Floor5 = new THREE.GLTFLoader();
       GLTFLoader_Floor5.setDRACOLoader(dracoLoader)
-      GLTFLoader_Floor5.load('./assets/inside_gltf/5楼/房间Draco.gltf', function (obj) {
+      GLTFLoader_Floor5.load('./assets/inside_gltf/5floor/房间Draco.gltf', function (obj) {
         model_floor5 = obj.scene
         scene.add(obj.scene)
         obj.scene.name = "5floor"
         obj.scene.traverse(function (child) {
-          // console.log(child)
           if (child.name == "地面") { // && child instanceof THREE.Mesh
             child.children.map(function (n) {
               n.material.emissive.set(0xaaaaaa)
@@ -1290,7 +1305,7 @@
       })
       GLTFLoader_Floor5_other = new THREE.GLTFLoader();
       GLTFLoader_Floor5_other.setDRACOLoader(dracoLoader)
-      GLTFLoader_Floor5_other.load('./assets/inside_gltf/5楼/所有设施Draco.gltf', function (obj) {
+      GLTFLoader_Floor5_other.load('./assets/inside_gltf/5floor/所有设施Draco.gltf', function (obj) {
         model_other5 = obj.scene
         obj.scene.name = '5other'
         scene.add(obj.scene)
@@ -1299,7 +1314,7 @@
 
       GLTFLoader_Floor6 = new THREE.GLTFLoader();
       GLTFLoader_Floor6.setDRACOLoader(dracoLoader)
-      GLTFLoader_Floor6.load('./assets/inside_gltf/6楼/房间Draco.gltf', function (obj) {
+      GLTFLoader_Floor6.load('./assets/inside_gltf/6floor/房间Draco.gltf', function (obj) {
         model_floor6 = obj.scene
         scene.add(obj.scene)
         obj.scene.name = "6floor"
@@ -1324,7 +1339,7 @@
       })
       GLTFLoader_Floor6_other = new THREE.GLTFLoader();
       GLTFLoader_Floor6_other.setDRACOLoader(dracoLoader)
-      GLTFLoader_Floor6_other.load('./assets/inside_gltf/6楼/所有设施Draco.gltf', function (obj) {
+      GLTFLoader_Floor6_other.load('./assets/inside_gltf/6floor/所有设施Draco.gltf', function (obj) {
         model_other6 = obj.scene
         obj.scene.name = '6other'
         scene.add(obj.scene)
@@ -1333,12 +1348,12 @@
 
       GLTFLoader_Floor7 = new THREE.GLTFLoader();
       GLTFLoader_Floor7.setDRACOLoader(dracoLoader)
-      GLTFLoader_Floor7.load('./assets/inside_gltf/7楼/房间Draco.gltf', function (obj) {
+      GLTFLoader_Floor7.load('./assets/inside_gltf/7floor/房间Draco.gltf', function (obj) {
         model_floor7 = obj.scene
         scene.add(obj.scene)
+        console.log(obj)
         obj.scene.name = "7floor"
         obj.scene.traverse(function (child) {
-          // console.log(child)
           if (child.name == "地面") { // && child instanceof THREE.Mesh
             child.children.map(function (n) {
               if (n instanceof THREE.Mesh) {
@@ -1358,7 +1373,7 @@
       })
       GLTFLoader_Floor7_other = new THREE.GLTFLoader();
       GLTFLoader_Floor7_other.setDRACOLoader(dracoLoader)
-      GLTFLoader_Floor7_other.load('./assets/inside_gltf/7楼/所有设施Draco.gltf', function (obj) {
+      GLTFLoader_Floor7_other.load('./assets/inside_gltf/7floor/所有设施Draco.gltf', function (obj) {
         model_other7 = obj.scene
         obj.scene.name = '7other'
         scene.add(obj.scene)
@@ -1367,9 +1382,10 @@
 
       GLTFLoader_Floor8 = new THREE.GLTFLoader();
       GLTFLoader_Floor8.setDRACOLoader(dracoLoader)
-      GLTFLoader_Floor8.load('./assets/inside_gltf/8楼/房间Draco.gltf', function (obj) {
+      GLTFLoader_Floor8.load('./assets/inside_gltf/8floor/房间Draco.gltf', function (obj) {
         model_floor8 = obj.scene
         scene.add(obj.scene)
+        console.log(obj)
         obj.scene.name = "8floor"
         obj.scene.traverse(function (child) {
           // console.log(child)
@@ -1392,7 +1408,7 @@
       })
       GLTFLoader_Floor8_other = new THREE.GLTFLoader();
       GLTFLoader_Floor8_other.setDRACOLoader(dracoLoader)
-      GLTFLoader_Floor8_other.load('./assets/inside_gltf/8楼/所有设施Draco.gltf', function (obj) {
+      GLTFLoader_Floor8_other.load('./assets/inside_gltf/8floor/所有设施Draco.gltf', function (obj) {
         model_other8 = obj.scene
         obj.scene.name = '8other'
         scene.add(obj.scene)
@@ -1401,7 +1417,7 @@
 
       GLTFLoader_Floor9 = new THREE.GLTFLoader();
       GLTFLoader_Floor9.setDRACOLoader(dracoLoader)
-      GLTFLoader_Floor9.load('./assets/inside_gltf/9楼/房间Draco.gltf', function (obj) {
+      GLTFLoader_Floor9.load('./assets/inside_gltf/9floor/房间Draco.gltf', function (obj) {
         model_floor9 = obj.scene
         scene.add(obj.scene)
         obj.scene.name = "9floor"
@@ -1426,13 +1442,12 @@
       })
       GLTFLoader_Floor9_other = new THREE.GLTFLoader();
       GLTFLoader_Floor9_other.setDRACOLoader(dracoLoader)
-      GLTFLoader_Floor9_other.load('./assets/inside_gltf/9楼/所有设施Draco.gltf', function (obj) {
+      GLTFLoader_Floor9_other.load('./assets/inside_gltf/9floor/所有设施Draco.gltf', function (obj) {
         model_other9 = obj.scene
         obj.scene.name = '9other'
         scene.add(obj.scene)
         model_other9.visible = false
       })
-
 
       $('#back_all').hide()
     }
@@ -1534,7 +1549,7 @@
       showObject('7floor')
       showObject('8floor')
       showObject('9floor')
-      
+
       showObject('1other')
       // showObject('2other')
       // showObject('3other')
