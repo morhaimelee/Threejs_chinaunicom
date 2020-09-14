@@ -51,6 +51,103 @@ $('#environmental_management').on('click', function () {
     $('.all_of_page').hide()
     $('#fourth_page').show()
 })
+//加载模型
+var dracoLoader = new THREE.DRACOLoader();
+// draco文件路径
+dracoLoader.setDecoderPath('./js/Draco/')
+dracoLoader.setDecoderConfig({ type: 'js' })
+dracoLoader.preload()
+
+function load1otherModel() {
+    GLTFLoader_Floor1_other = new THREE.GLTFLoader();
+    GLTFLoader_Floor1_other.setDRACOLoader(dracoLoader)
+    GLTFLoader_Floor1_other.load('./assets/inside_gltf/1floor/所有设施Draco.gltf', function (obj) {
+        // model_other1 = obj.scene
+        obj.scene.name = '1other'
+        scene.add(obj.scene)
+        // model_other1.visible = false
+    })
+}
+function load2otherModel() {
+    GLTFLoader_Floor2_other = new THREE.GLTFLoader();
+    GLTFLoader_Floor2_other.setDRACOLoader(dracoLoader)
+    GLTFLoader_Floor2_other.load('./assets/inside_gltf/2floor/所有设施Draco.gltf', function (obj) {
+        // model_other2 = obj.scene
+        obj.scene.name = '2other'
+        scene.add(obj.scene)
+        // model_other2.visible = false
+    })
+}
+function load3otherModel() {
+    GLTFLoader_Floor3_other = new THREE.GLTFLoader();
+    GLTFLoader_Floor3_other.setDRACOLoader(dracoLoader)
+    GLTFLoader_Floor3_other.load('./assets/inside_gltf/3floor/所有设施Draco.gltf', function (obj) {
+        // model_other3 = obj.scene
+        obj.scene.name = '3other'
+        scene.add(obj.scene)
+        // model_other3.visible = false
+    })
+}
+function load4otherModel() {
+    GLTFLoader_Floor4_other = new THREE.GLTFLoader();
+    GLTFLoader_Floor4_other.setDRACOLoader(dracoLoader)
+    GLTFLoader_Floor4_other.load('./assets/inside_gltf/4floor/所有设施Draco.gltf', function (obj) {
+        // model_other4 = obj.scene
+        obj.scene.name = '4other'
+        scene.add(obj.scene)
+        // model_other3.visible = false
+    })
+}
+function load5otherModel() {
+    GLTFLoader_Floor5_other = new THREE.GLTFLoader();
+    GLTFLoader_Floor5_other.setDRACOLoader(dracoLoader)
+    GLTFLoader_Floor5_other.load('./assets/inside_gltf/5floor/所有设施Draco.gltf', function (obj) {
+        // model_other5 = obj.scene
+        obj.scene.name = '5other'
+        scene.add(obj.scene)
+        // model_other5.visible = false
+    })
+}
+function load6otherModel() {
+    GLTFLoader_Floor6_other = new THREE.GLTFLoader();
+    GLTFLoader_Floor6_other.setDRACOLoader(dracoLoader)
+    GLTFLoader_Floor6_other.load('./assets/inside_gltf/6floor/所有设施Draco.gltf', function (obj) {
+        // model_other6 = obj.scene
+        obj.scene.name = '6other'
+        scene.add(obj.scene)
+        // model_other6.visible = false
+    })
+}
+function load7otherModel() {
+    GLTFLoader_Floor7_other = new THREE.GLTFLoader();
+    GLTFLoader_Floor7_other.setDRACOLoader(dracoLoader)
+    GLTFLoader_Floor7_other.load('./assets/inside_gltf/7floor/所有设施Draco.gltf', function (obj) {
+        // model_other7 = obj.scene
+        obj.scene.name = '7other'
+        scene.add(obj.scene)
+        // model_other7.visible = false
+    })
+}
+function load8otherModel() {
+    GLTFLoader_Floor8_other = new THREE.GLTFLoader();
+    GLTFLoader_Floor8_other.setDRACOLoader(dracoLoader)
+    GLTFLoader_Floor8_other.load('./assets/inside_gltf/8floor/所有设施Draco.gltf', function (obj) {
+        // model_other8 = obj.scene
+        obj.scene.name = '8other'
+        scene.add(obj.scene)
+        // model_other8.visible = false
+    })
+}
+function load9otherModel() {
+    GLTFLoader_Floor9_other = new THREE.GLTFLoader();
+    GLTFLoader_Floor9_other.setDRACOLoader(dracoLoader)
+    GLTFLoader_Floor9_other.load('./assets/inside_gltf/9floor/所有设施Draco.gltf', function (obj) {
+        model_other9 = obj.scene
+        obj.scene.name = '9other'
+        scene.add(obj.scene)
+        // model_other9.visible = false
+    })
+}
 
 function hidden_all_floor(except) {
     for (let i = 1; i <= 9; i++) {
@@ -65,12 +162,11 @@ function hidden_all_model(except) {
         })
     }
 
-    hiddenObject('1other')
-    for (let i = 4; i <= 9; i++) {
+    for (let i = 1; i <= 9; i++) {
         if (i + 'other') {
             hiddenObject(i + 'other')
         }
-        if (i == 1 || i >= 4) {
+        if (except + 'other') {
             showObject(except + 'other')
         }
     }
@@ -93,14 +189,15 @@ function hidden_all_model(except) {
 $('#f1').on('click', function () {
     hidden_all_floor('1floor')
     hidden_all_model(1)
-    tween_camera = TweenMax.to(camera.position, 2, {
+    load1otherModel()
+    tween_camera = TweenMax.to(camera.position, 5, {
         x: 4.95,
         y: 2.04,
         z: 4.84,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 2, {
+    tween_target = TweenMax.to(controls.target, 5, {
         x: 0.612,
         y: -6.49,
         z: -1.17
@@ -110,14 +207,15 @@ $('#f1').on('click', function () {
 $('#f2').on('click', function () {
     hidden_all_floor('2floor')
     hidden_all_model(2)
-    tween_camera = TweenMax.to(camera.position, 2, {
+    load2otherModel()
+    tween_camera = TweenMax.to(camera.position, 5, {
         x: 2.61,
         y: 5.92,
         z: 5.46,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 2, {
+    tween_target = TweenMax.to(controls.target, 5, {
         x: 1.38,
         y: -6.49,
         z: -0.63
@@ -126,30 +224,32 @@ $('#f2').on('click', function () {
 $('#f3').on('click', function () {
     hidden_all_floor('3floor')
     hidden_all_model(3)
-    tween_camera = TweenMax.to(camera.position, 2, {
-        x: 2.76,
-        y: 4.51,
-        z: 8.11,
+    load3otherModel()
+    tween_camera = TweenMax.to(camera.position, 5, {
+        x: 1.58,
+        y: 6.84,
+        z: 4.29,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 2, {
-        x: 1.35,
+    tween_target = TweenMax.to(controls.target, 5, {
+        x: 1.55,
         y: -6.49,
-        z: -2.62
+        z: 0.27
     })
 })
 $('#f4').on('click', function () {
     hidden_all_floor('4floor')
     hidden_all_model(4)
-    tween_camera = TweenMax.to(camera.position, 2, {
+    load4otherModel()
+    tween_camera = TweenMax.to(camera.position, 5, {
         x: 2.15,
         y: 5.81,
         z: 6.57,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 2, {
+    tween_target = TweenMax.to(controls.target, 5, {
         x: 1.35,
         y: -6.49,
         z: -2.62
@@ -158,14 +258,15 @@ $('#f4').on('click', function () {
 $('#f5').on('click', function () {
     hidden_all_floor('5floor')
     hidden_all_model(5)
-    tween_camera = TweenMax.to(camera.position, 2, {
+    load5otherModel()
+    tween_camera = TweenMax.to(camera.position, 5, {
         x: 2.08,
         y: 4.50,
         z: 8.11,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 2, {
+    tween_target = TweenMax.to(controls.target, 5, {
         x: 1.35,
         y: -6.49,
         z: -2.62
@@ -174,14 +275,15 @@ $('#f5').on('click', function () {
 $('#f6').on('click', function () {
     hidden_all_floor('6floor')
     hidden_all_model(6)
-    tween_camera = TweenMax.to(camera.position, 2, {
+    load6otherModel()
+    tween_camera = TweenMax.to(camera.position, 5, {
         x: 2.13,
         y: 6.44,
         z: 6.01,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 2, {
+    tween_target = TweenMax.to(controls.target, 5, {
         x: 1.36,
         y: -6.49,
         z: -2.66
@@ -190,14 +292,15 @@ $('#f6').on('click', function () {
 $('#f7').on('click', function () {
     hidden_all_floor('7floor')
     hidden_all_model(7)
-    tween_camera = TweenMax.to(camera.position, 2, {
+    load7otherModel()
+    tween_camera = TweenMax.to(camera.position, 5, {
         x: 1.75,
         y: 7.94,
         z: 5.61,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 2, {
+    tween_target = TweenMax.to(controls.target, 5, {
         x: 1.59,
         y: -6.49,
         z: -2.19
@@ -206,14 +309,15 @@ $('#f7').on('click', function () {
 $('#f8').on('click', function () {
     hidden_all_floor('8floor')
     hidden_all_model(8)
-    tween_camera = TweenMax.to(camera.position, 2, {
+    load8otherModel()
+    tween_camera = TweenMax.to(camera.position, 5, {
         x: 1.80,
         y: 9.22,
         z: 4.77,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 2, {
+    tween_target = TweenMax.to(controls.target, 5, {
         x: 1.52,
         y: -6.49,
         z: -2.388
@@ -222,14 +326,15 @@ $('#f8').on('click', function () {
 $('#f9').on('click', function () {
     hidden_all_floor('9floor')
     hidden_all_model(9)
-    tween_camera = TweenMax.to(camera.position, 2, {
+    load9otherModel()
+    tween_camera = TweenMax.to(camera.position, 5, {
         x: 1.75,
         y: 9.94,
         z: 3.20,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 2, {
+    tween_target = TweenMax.to(controls.target, 5, {
         x: 1.61,
         y: -6.49,
         z: -2.09
