@@ -169,14 +169,16 @@
   <!-- 左侧设备菜单 -->
   <div class="equipment-list">
     <ul>
-      <li id="video_list"></li>
-      <li id="waterTank_list"></li>
-      <li id="fire_list"></li>
-      <li id="temp_list"></li>
-      <li id="gate_list"></li>
-      <li id="trashCan_list"></li>
-      <li id="hole_cover_list"></li>
-      <li id="park_list"></li>
+      <li id="video_list" class="video_list"></li>
+      <li id="waterTank_list" class="waterTank_list"></li>
+      <li id="fire_list" class="fire_list"></li>
+      <li id="temp_list" class="temp_list"></li>
+      <li id="gate_list" class="gate_list"></li>
+      <li id="trashCan_list" class="trashCan_list"></li>
+      <li id="hole_cover_list" class="hole_cover_list"></li>
+      <!-- <li id="park_list"></li> -->
+      <li id="AOCN_list" class="AOCN_list"></li>
+      <li id="meter_list" class="meter_list"></li>
     </ul>
   </div>
   <!-- 右上时间&天气 -->
@@ -1320,15 +1322,6 @@
         model_floor8.visible = false
       })
 
-      GLTFLoader_Floor0 = new THREE.GLTFLoader();
-      GLTFLoader_Floor0.setDRACOLoader(dracoLoader)
-      GLTFLoader_Floor0.load('./assets/inside_gltf/设备/水箱.gltf', function (obj) {
-        model_floor0 = obj.scene
-        scene.add(obj.scene)
-        obj.scene.name = "tank"
-        model_floor0.visible = false
-      })
-
       GLTFLoader_Floor9 = new THREE.GLTFLoader();
       GLTFLoader_Floor9.setDRACOLoader(dracoLoader)
       GLTFLoader_Floor9.load('./assets/inside_gltf/9floor/房间Draco.gltf', function (obj) {
@@ -1468,7 +1461,6 @@
       showObject('7floor')
       showObject('8floor')
       showObject('9floor')
-      showObject('tank')
 
       // showObject('1other')
       // showObject('2other')
@@ -1617,8 +1609,10 @@
       //1楼模型
       loadModel('./assets/new_gltf/内部建模/1楼/a栋闸机.gltf', 'gate1', 1, 'hide', 0.2, 0, 0.001)
       loadModel('./assets/new_gltf/内部建模/1楼/b栋闸机.gltf', 'gate2', 1, 'hide')
-      loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f1_1', 1, 'hide', 0.1, 0.001, -0.15)
-      loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f1_2', 1, 'hide', 3.4, 0.001, -0.14)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f1_1', 1, 'hide', 0.1, 0.001, -0.15)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f1_2', 1, 'hide', 3.4, 0.001, -0.14)
+      // loadVideo('video_f1_1', 1, 'hide', 0.75, 0, 1)
+      // loadVideo('video_f1_2', 1, 'hide', -1.5, 0, 1)
       loadModel('./assets/new_gltf/摄像头.gltf', 'video_f1_1', 1, 'hide', 0.75, 0, 1)
       loadModel('./assets/new_gltf/摄像头.gltf', 'video_f1_2', 1, 'hide', -1.5, 0, 1)
       //二楼模型
@@ -1627,6 +1621,27 @@
       loadModel('./assets/inside_gltf/设备/水表.gltf', 'meter_f2_1', 2, 'hide', 2.478, 0.600, -1.481)
 
       //三楼模型
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_1', 3, 'hide', 3.327, 1.33, 1.671)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_2', 3, 'hide', 3.322, 1.33, 1.163)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_3', 3, 'hide', 3.326, 1.332, 0.551)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_4', 3, 'hide', 3.245, 1.333, -0.076)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_5', 3, 'hide', 2.958, 1.300, 1.976)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_6', 3, 'hide', 2.959, 1.300, 1.976)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_7', 3, 'hide', 2.957, 1.300, 0.952)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_8', 3, 'hide', 2.969, 1.300, -0.161)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_9', 3, 'hide', 2.559, 1.333, 1.864)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_10', 3, 'hide', 2.507, 1.333, 0.812)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_11', 3, 'hide', 2.632, 1.333, 0.244)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_12', 3, 'hide', 2.586, 1.333, -0.131)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_13', 3, 'hide', 0.042, 1.333, 1.668)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_14', 3, 'hide', -0.003, 1.333, 0.818)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_15', 3, 'hide', 0.041, 1.333, 0.261)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_16', 3, 'hide', 0.026, 1.333, -0.156)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_17', 3, 'hide', -0.365, 1.333, 1.939)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_18', 3, 'hide', -0.364, 1.332, 1.225)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_19', 3, 'hide', -0.363, 1.331, 0.421)
+      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_20', 3, 'hide', -0.382, 1.330, -0.300)
+
       loadModel('./assets/inside_gltf/设备/空开.gltf', 'aocn_f3_1', 3, 'hide', 2.115, 1.377, -0.66)
 
       //四楼模型
@@ -1640,28 +1655,17 @@
       //九楼模型
       loadModel('./assets/inside_gltf/设备/空开.gltf', 'aocn_f9_1', 9, 'hide', 0.104, 5.249, -1.200)
       loadModel('./assets/inside_gltf/设备/水表.gltf', 'meter_f9_1', 9, 'hide', 3.309, 5.184, 1.093)
+      loadModel('./assets/inside_gltf/设备/水箱.gltf', 'tank_f9', 9, 'hide', -3.402, -1.363, -0.974)
 
-      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f9_1', 9, 'hide', 1.32, 5.18, 1.9)
-      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f9_2', 9, 'hide', 1.32, 5.18, 0.55)
-      loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f9_1', 9, 'hide', 0, 5.18, -0.1)
-      loadModel('./assets/new_gltf/烟感.gltf', 'smoke_f9_2', 9, 'hide', 0, 5.18, -2.14)
-
-      // loadModel(video_path, 'video1', 3, -25.2, 0, 0)
-      // loadModel(video_path, 'video2', 3, -23.93, 0, -53.375)
-      // loadModel(video_path, 'video3', 3, 4.84, 0, 70.834)
-      // loadModel(video_path, 'video4', 3, 0, 0, 0)
-      // loadModel(smoke_path, 'smoke1', 3, 6.047, 5, 0.15)
-      // loadModel(smoke_path, 'smoke2', 3, 6.047, 5, 60.5)
-      // loadModel(smoke_path, 'smoke3', 3, 14.973, 5, 124.95)
-      // loadModel(gate_path, 'gate1', 1, 1.687, 0, 18.373)
-      // loadModel(gate_path, 'gate2', 1, -0.904, 0, -22.398)
-      //x: 1.687. y: 0 z: 18.373
-      //x: -0.904 y: 0.000 z: -22.398
+      // loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f9_1', 9, 'hide', 1.32, 5.18, 1.9)
+      // loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f9_2', 9, 'hide', 1.32, 5.18, 0.55)
+      // loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f9_1', 9, 'hide', 0, 5.18, -0.1)
+      // loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f9_2', 9, 'hide', 0, 5.18, -2.14)
 
       // initStats() //加载性能监视
       animate()
-      createIcon('video_f9_1', 'videoIcon', 'f9')
-      createIcon('video_f9_2', 'videoIcon', 'f9')
+      // createIcon('video_f9_1', 'videoIcon', 'f9')
+      // createIcon('video_f9_2', 'videoIcon', 'f9')
       // createIcon('video2', 'videoIcon')
       // createIcon('video3', 'videoIcon')
       // createIcon('video4', 'videoIcon')
@@ -1669,8 +1673,8 @@
       createIcon('gate2', 'gateIcon', 'f1')
       createIcon('smoke_f1_1', 'smokeIcon', 'f1')
       createIcon('smoke_f1_2', 'smokeIcon', 'f1')
-      createIcon('smoke_f9_1', 'smokeIcon', 'f9')
-      createIcon('smoke_f9_2', 'smokeIcon', 'f9')
+      // createIcon('smoke_f9_1', 'smokeIcon', 'f9')
+      // createIcon('smoke_f9_2', 'smokeIcon', 'f9')
       // createLayer('video1_ly', 'videoLayer')
       // createLayer('video2_ly', 'videoLayer')
       // createLayer('video3_ly', 'videoLayer')
@@ -1858,15 +1862,9 @@
       })
     }
 
-    function loadDraco(path, gltf_name, floor_num, visible, pst_x, pst_y, pst_z, rotateX) {
-      let dracoGLTFloader = new THREE.GLTFLoader()
-      let dracoLoader = new THREE.DRACOLoader();
-      // draco文件路径
-      dracoLoader.setDecoderPath('./js/Draco/')
-      dracoLoader.setDecoderConfig({ type: 'js' })
-      dracoLoader.preload()
-      dracoGLTFloader.setDRACOLoader(dracoLoader)
-      dracoGLTFloader.load(path, function (gltf) {
+    function loadVideo(gltf_name, floor_num, visible, pst_x, pst_y, pst_z, rotateX) {
+      GLTF_ = new THREE.GLTFLoader()
+      GLTF_.load('./assets/inside_gltf/设备/sexiangtou.gltf', function (gltf) {
         gltf.scene.name = gltf_name //set模型名字
         if (pst_x, pst_y, pst_z) {
           gltf.scene.position.set(pst_x, pst_y, pst_z) //set模型位置
@@ -1885,8 +1883,6 @@
         model_all_num['model_all_floor' + floor_num].push(gltf.scene.position) //添加模型所在楼层位置
         model_all_model['model_all_floor' + floor_num].push(gltf.scene)
 
-        // model.position.set(0, 60, 0);
-        // let sc = 3;
         model = gltf.scene.children[0]
         model.traverse(function (child) {
           //对模型体内的每个几何体进行遍历
@@ -1894,13 +1890,13 @@
             child.castShadow = true //允许模型本身对自己产生阴影
             child.receiveShadow = true //接受阴影渲染
             // child.scale.set(sc, sc, sc); //模型重置比例放大。
-
             Vplace1.push(child)
           }
         })
 
         scene.add(gltf.scene)
       })
+      GLTF_.parse('./assets/inside_gltf/设备/sexiangtou.bin')
     }
 
     document.addEventListener(
@@ -2001,17 +1997,18 @@
       hiddenObject('7floor')
       hiddenObject('8floor')
       hiddenObject('9floor')
-      hiddenObject('tank')
 
       hiddenObject('1floor')
-      // hiddenObject('2floor')
-      // hiddenObject('3floor')
+      hiddenObject('2floor')
+      hiddenObject('3floor')
       hiddenObject('4other')
       hiddenObject('5other')
       hiddenObject('6other')
       hiddenObject('7other')
       hiddenObject('8other')
       hiddenObject('9other')
+
+      hiddenObject('tank')
 
 
       $('.videoIcon').hide()

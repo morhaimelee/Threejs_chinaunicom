@@ -169,20 +169,20 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                     barWidth: 20,
                     data: equip_online
                 },
-                    // {
-                    //     name: '背景',
-                    //     type: 'bar',
-                    //     barWidth: 18,
-                    //     barGap: '-100%',
-                    //     data: equip_total,
-                    //     itemStyle: {
-                    //         normal: {
-                    //             color: 'rgba(24,31,68,1)',
-                    //             barBorderRadius: 30,
-                    //         }
-                    //     },
-                    // },
-                ]
+                {
+                    name: '背景',
+                    type: 'bar',
+                    barWidth: 18,
+                    barGap: '-100%',
+                    data: equip_total,
+                    itemStyle: {
+                        normal: {
+                            color: 'rgba(24,31,68,1)',
+                            barBorderRadius: 30,
+                        }
+                    }
+                    // data: equip_total
+                }]
             };
             echarts.init(document.getElementById('echarts_first_leftBottom')).setOption(option1_first); //主页左下角echarts
         }
@@ -471,6 +471,29 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
     //     console.log(resp)
 
     // })
+
+    //设备信息
+    $.ajax({
+        url: "http://58.16.56.202:9000/smart-bldg/big/screen/listEnvironmentDevice",
+        headers: { 'Auth-Token': token },
+        success: function (resp) {
+            console.log(resp)
+        },
+        error: function (resp) {
+            console.log(resp)
+        }
+    });
+    //168层监控设备
+    $.ajax({
+        url: "http://58.16.56.202:9000/smart-bldg/big/screen/monitor168EquipmentOperation",
+        headers: { 'Auth-Token': token },
+        success: function (resp) {
+            console.log(resp)
+        },
+        error: function (resp) {
+            console.log(resp)
+        }
+    });
 
 })
 
