@@ -2047,8 +2047,10 @@
     $('#temp_list').on('click', function () {
       if ($('.smokeIcon').is(':hidden')) {
         $('.smokeIcon').show()
+        $('#temp_list').addClass('temp_list_in')
       } else {
         $('.smokeIcon').hide()
+        $('#temp_list').removeClass('temp_list_in')
       }
     })
 
