@@ -74,37 +74,48 @@ function hidden_all_model(except) {
     for (let i = 1; i <= 9; i++) {
         hiddenObject(i + 'other')
         // if (except + 'other') {
-            showObject(except + 'other')
+        showObject(except + 'other')
         // }
     }
 
     model_all_model['model_all_floor' + except].forEach(function (e) {
         e.visible = true
     })
-    //隐藏所有ICON DOM
 
-    if (!$('.f' + except).is(':hidden')) {
+}
+let floor_tag = 'f0'
+function hidden_all_Icon() {
+    if (!$('.' + floor_tag).is(':hidden')) {
         $('.Icon').hide()
-        $('.f' + except).show() //保留单层Icon
+        $('.' + floor_tag).show() //保留单层Icon
         //以左侧Icon状态来获取
     } else {
         $('.Icon').hide()
     }
+    if ($('.' + floor_tag).is(':hidden') && $('#video_list').hasClass('video_list_in')) {
+        $('.videoIcon').each(function (i, v) {
+            console.log(v)
+            if (v.classList.contains(floor_tag)) {
+                v.style.display = 'block'
+            }
+        })
 
+    }
 }
 //跳转楼层按钮
 $('#f1').on('click', function () {
     hidden_all_floor('1floor')
     hidden_all_model(1)
-
-    tween_camera = TweenMax.to(camera.position, 5, {
+    floor_tag = 'f1'
+    hidden_all_Icon()
+    tween_camera = TweenMax.to(camera.position, 2, {
         x: 4.95,
         y: 2.04,
         z: 4.84,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 5, {
+    tween_target = TweenMax.to(controls.target, 2, {
         x: 0.612,
         y: -6.49,
         z: -1.17
@@ -114,15 +125,16 @@ $('#f1').on('click', function () {
 $('#f2').on('click', function () {
     hidden_all_floor('2floor')
     hidden_all_model(2)
-
-    tween_camera = TweenMax.to(camera.position, 5, {
+    floor_tag = 'f2'
+    hidden_all_Icon()
+    tween_camera = TweenMax.to(camera.position, 2, {
         x: 2.61,
         y: 5.92,
         z: 5.46,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 5, {
+    tween_target = TweenMax.to(controls.target, 2, {
         x: 1.38,
         y: -6.49,
         z: -0.63
@@ -131,15 +143,16 @@ $('#f2').on('click', function () {
 $('#f3').on('click', function () {
     hidden_all_floor('3floor')
     hidden_all_model(3)
-
-    tween_camera = TweenMax.to(camera.position, 5, {
+    floor_tag = 'f3'
+    hidden_all_Icon()
+    tween_camera = TweenMax.to(camera.position, 2, {
         x: 1.58,
         y: 6.84,
         z: 4.29,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 5, {
+    tween_target = TweenMax.to(controls.target, 2, {
         x: 1.55,
         y: -6.49,
         z: 0.27
@@ -148,15 +161,16 @@ $('#f3').on('click', function () {
 $('#f4').on('click', function () {
     hidden_all_floor('4floor')
     hidden_all_model(4)
-
-    tween_camera = TweenMax.to(camera.position, 5, {
+    floor_tag = 'f4'
+    hidden_all_Icon()
+    tween_camera = TweenMax.to(camera.position, 2, {
         x: 2.15,
         y: 5.81,
         z: 6.57,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 5, {
+    tween_target = TweenMax.to(controls.target, 2, {
         x: 1.35,
         y: -6.49,
         z: -2.62
@@ -165,15 +179,16 @@ $('#f4').on('click', function () {
 $('#f5').on('click', function () {
     hidden_all_floor('5floor')
     hidden_all_model(5)
-
-    tween_camera = TweenMax.to(camera.position, 5, {
+    floor_tag = 'f5'
+    hidden_all_Icon()
+    tween_camera = TweenMax.to(camera.position, 2, {
         x: 2.08,
         y: 4.50,
         z: 8.11,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 5, {
+    tween_target = TweenMax.to(controls.target, 2, {
         x: 1.35,
         y: -6.49,
         z: -2.62
@@ -182,15 +197,16 @@ $('#f5').on('click', function () {
 $('#f6').on('click', function () {
     hidden_all_floor('6floor')
     hidden_all_model(6)
-
-    tween_camera = TweenMax.to(camera.position, 5, {
+    floor_tag = 'f6'
+    hidden_all_Icon()
+    tween_camera = TweenMax.to(camera.position, 2, {
         x: 2.13,
         y: 6.44,
         z: 6.01,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 5, {
+    tween_target = TweenMax.to(controls.target, 2, {
         x: 1.36,
         y: -6.49,
         z: -2.66
@@ -199,15 +215,16 @@ $('#f6').on('click', function () {
 $('#f7').on('click', function () {
     hidden_all_floor('7floor')
     hidden_all_model(7)
-
-    tween_camera = TweenMax.to(camera.position, 5, {
+    floor_tag = 'f7'
+    hidden_all_Icon()
+    tween_camera = TweenMax.to(camera.position, 2, {
         x: 1.75,
         y: 7.94,
         z: 5.61,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 5, {
+    tween_target = TweenMax.to(controls.target, 2, {
         x: 1.59,
         y: -6.49,
         z: -2.19
@@ -216,15 +233,16 @@ $('#f7').on('click', function () {
 $('#f8').on('click', function () {
     hidden_all_floor('8floor')
     hidden_all_model(8)
-
-    tween_camera = TweenMax.to(camera.position, 5, {
+    floor_tag = 'f8'
+    hidden_all_Icon()
+    tween_camera = TweenMax.to(camera.position, 2, {
         x: 1.80,
         y: 9.22,
         z: 4.77,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 5, {
+    tween_target = TweenMax.to(controls.target, 2, {
         x: 1.52,
         y: -6.49,
         z: -2.388
@@ -233,17 +251,46 @@ $('#f8').on('click', function () {
 $('#f9').on('click', function () {
     hidden_all_floor('9floor')
     hidden_all_model(9)
-
-    tween_camera = TweenMax.to(camera.position, 5, {
+    floor_tag = 'f9'
+    hidden_all_Icon()
+    tween_camera = TweenMax.to(camera.position, 2, {
         x: 1.75,
         y: 9.94,
         z: 3.20,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
         //Power3.easeOut
     })
-    tween_target = TweenMax.to(controls.target, 5, {
+    tween_target = TweenMax.to(controls.target, 2, {
         x: 1.61,
         y: -6.49,
         z: -2.09
     })
+})
+
+//安防监控按钮
+$('#video_list').on('click', function () {
+    if (floor_tag != 'f0') {
+        if ($('#video_list').hasClass('video_list_in')) {
+            $('.videoIcon').hide()
+            $('#video_list').removeClass('video_list_in')
+        } else {
+            $('#video_list').addClass('video_list_in')
+            $('.videoIcon').each(function (i, v) {
+                console.log(v)
+                if (v.classList.contains(floor_tag)) {
+                    v.style.display = 'block'
+                }
+            })
+        }
+    }
+    if (floor_tag == 'f0') {
+        if ($('#video_list').hasClass('video_list_in')) {
+            $('.videoIcon').hide()
+            $('#video_list').removeClass('video_list_in')
+        } else {
+            $('.videoIcon').show()
+            $('#video_list').addClass('video_list_in')
+        }
+    }
+
 })

@@ -748,7 +748,7 @@
     </ul>
   </div>
 
-  <div id="camera_position">相机位置</div>
+  <!-- <div id="camera_position">相机位置</div> -->
   <script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.8.0/echarts.js"></script>
   <script src="./js/GetTime.js"></script>
   <script src="./js/weather.js"></script>
@@ -2106,8 +2106,8 @@
       hiddenObject('tank')
 
 
-      $('.videoIcon').hide()
-      $('.gateIcon').hide()
+      // $('.videoIcon').hide()
+      // $('.gateIcon').hide()
       if ((selectedObject.visible = true)) {
         $('#back_all').hide()
       }
@@ -2120,15 +2120,6 @@
       $('#in_ex_floor').show()
     }
 
-    //安防监控按钮
-    $('#video_list').on('click', function () {
-      if ($('.videoIcon').is(':hidden')) {
-        $('.videoIcon').show()
-      } else {
-        $('.videoIcon').hide()
-      }
-
-    })
 
     //闸机按钮
     $('#gate_list').on('click', function () {

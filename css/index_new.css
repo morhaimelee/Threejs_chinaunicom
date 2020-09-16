@@ -283,6 +283,12 @@ li {
     background: url('../assets/imgs/shexiangtou-icon-in.png') center center no-repeat;
 }
 
+.video_list_in {
+    background     : url('../assets/imgs/shexiangtou-icon-in.png') center center no-repeat;
+    background-size: 28px 24px;
+    border         : 1px solid #4DFFFF;
+}
+
 .waterTank_list {
     background     : url('../assets/imgs/水池-icon.png') center center no-repeat;
     background-size: 26px 26px;
