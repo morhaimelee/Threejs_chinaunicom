@@ -163,9 +163,7 @@ function hidden_all_model(except) {
     }
 
     for (let i = 1; i <= 9; i++) {
-        if (i + 'other') {
-            hiddenObject(i + 'other')
-        }
+        hiddenObject(i + 'other')
         if (except + 'other') {
             showObject(except + 'other')
         }

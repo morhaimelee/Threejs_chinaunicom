@@ -75,19 +75,21 @@
     }
 
     .videoIcon {
-      width: 37px;
-      height: 47px;
+      width: 18.5px;
+      height: 23.5px;
       position: absolute;
       background: url('./assets/imgs/shexiangtou.png') center center no-repeat;
+      background-size: 100% auto;
       /* display: none; */
       cursor: pointer;
     }
 
     .gateIcon {
-      width: 37px;
-      height: 47px;
+      width: 18.5px;
+      height: 23.5px;
       position: absolute;
       background: url('./assets/imgs/zhaji.png') center center no-repeat;
+      background-size: 100% auto;
       cursor: pointer;
     }
 
@@ -1607,14 +1609,14 @@
     function draw() {
       init()
       //1楼模型
-      loadModel('./assets/new_gltf/内部建模/1楼/a栋闸机.gltf', 'gate1', 1, 'hide', 0.2, 0, 0.001)
-      loadModel('./assets/new_gltf/内部建模/1楼/b栋闸机.gltf', 'gate2', 1, 'hide')
+      loadModel('./assets/inside_gltf/设备/a栋闸机.gltf', 'gate1', 1, 'hide', 0.2, 0, 0.001)
+      loadModel('./assets/inside_gltf/设备/b栋闸机.gltf', 'gate2', 1, 'hide')
       loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f1_1', 1, 'hide', 0.1, 0.001, -0.15)
       loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f1_2', 1, 'hide', 3.4, 0.001, -0.14)
       // loadVideo('video_f1_1', 1, 'hide', 0.75, 0, 1)
       // loadVideo('video_f1_2', 1, 'hide', -1.5, 0, 1)
-      loadModel('./assets/new_gltf/摄像头.gltf', 'video_f1_1', 1, 'hide', 0.75, 0, 1)
-      loadModel('./assets/new_gltf/摄像头.gltf', 'video_f1_2', 1, 'hide', -1.5, 0, 1)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f1_1', 1, 'hide', 0.482, -0.007, -0.894)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f1_2', 1, 'hide', 2.519, -0.008, -0.895)
       //二楼模型
       loadModel('./assets/inside_gltf/设备/水表.gltf', 'meter_f2_1', 2, 'hide', 2.478, 0.646, 0.107)
       loadModel('./assets/inside_gltf/设备/水表.gltf', 'meter_f2_1', 2, 'hide', 2.478, 0.600, -0.964)
@@ -1644,14 +1646,33 @@
 
       loadModel('./assets/inside_gltf/设备/空开.gltf', 'aocn_f3_1', 3, 'hide', 2.115, 1.377, -0.66)
 
-      //四楼模型
+      //六楼模型
       loadModel('./assets/inside_gltf/设备/水表.gltf', 'meter_f6_1', 6, 'hide', 2.040, 3.233, -0.325)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f6_1', 6, 'hide', -0.282, 3.244, -1.459)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f6_2', 6, 'hide', -0.283, 3.245, -1.098)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f6_3', 6, 'hide', -0.284, 3.243, -0.642)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f6_4', 6, 'hide', -0.285, 3.244, -0.340)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f6_5', 6, 'hide', -0.047, 3.251, -0.905)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f6_6', 6, 'hide', 0.355, 3.249, -0.905)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f6_7', 6, 'hide', 2.531, 3.260, -0.906)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f6_8', 6, 'hide', 2.883, 3.271, -0.905)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f6_9', 6, 'hide', 3.041, 3.270, -1.268)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f6_10', 6, 'hide', 3.040, 3.272, -1.515)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f6_11', 6, 'hide', 3.041, 3.266, -0.548)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f6_12', 6, 'hide', 3.037, 3.256, -0.289)
 
+      //八楼模型
       // loadDraco('./assets/inside_gltf/4楼/所有设施Draco.gltf', '4facility', 'hide')
       loadModel('./assets/inside_gltf/设备/空开.gltf', 'aocn_f8_2', 8, 'hide', 2.970, 4.520, -0.076)
       loadModel('./assets/inside_gltf/设备/空开.gltf', 'aocn_f8_3', 8, 'hide', 2.975, 4.557, -0.791)
       loadModel('./assets/inside_gltf/设备/空开.gltf', 'aocn_f8_4', 8, 'hide', -0.333, 4.596, -0.512)
 
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f8_1', 8, 'hide', 3.037, 4.555, -1.368)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f8_2', 8, 'hide', 3.056, 4.556, -1.043)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f8_3', 8, 'hide', 3.054, 4.556, -0.783)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f8_4', 8, 'hide', 3.055, 4.554, -0.480)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f8_5', 8, 'hide', 2.872, 4.556, -0.926)
+      loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f8_6', 8, 'hide', 2.596, 4.550, -0.925)
       //九楼模型
       loadModel('./assets/inside_gltf/设备/空开.gltf', 'aocn_f9_1', 9, 'hide', 0.104, 5.249, -1.200)
       loadModel('./assets/inside_gltf/设备/水表.gltf', 'meter_f9_1', 9, 'hide', 3.309, 5.184, 1.093)
@@ -1664,8 +1685,28 @@
 
       // initStats() //加载性能监视
       animate()
-      // createIcon('video_f9_1', 'videoIcon', 'f9')
-      // createIcon('video_f9_2', 'videoIcon', 'f9')
+      createIcon('video_f1_1', 'videoIcon', 'f1')
+      createIcon('video_f1_2', 'videoIcon', 'f1')
+      createIcon('video_f6_1', 'videoIcon', 'f6')
+      createIcon('video_f6_2', 'videoIcon', 'f6')
+      createIcon('video_f6_3', 'videoIcon', 'f6')
+      createIcon('video_f6_4', 'videoIcon', 'f6')
+      createIcon('video_f6_5', 'videoIcon', 'f6')
+      createIcon('video_f6_6', 'videoIcon', 'f6')
+      createIcon('video_f6_7', 'videoIcon', 'f6')
+      createIcon('video_f6_8', 'videoIcon', 'f6')
+      createIcon('video_f6_9', 'videoIcon', 'f6')
+      createIcon('video_f6_10', 'videoIcon', 'f6')
+      createIcon('video_f6_11', 'videoIcon', 'f6')
+      createIcon('video_f6_12', 'videoIcon', 'f6')
+      createIcon('video_f8_1', 'videoIcon', 'f8')
+      createIcon('video_f8_2', 'videoIcon', 'f8')
+      createIcon('video_f8_3', 'videoIcon', 'f8')
+      createIcon('video_f8_4', 'videoIcon', 'f8')
+      createIcon('video_f8_5', 'videoIcon', 'f8')
+      createIcon('video_f8_6', 'videoIcon', 'f8')
+      createIcon('video_f8_7', 'videoIcon', 'f8')
+      createIcon('video_f8_8', 'videoIcon', 'f8')
       // createIcon('video2', 'videoIcon')
       // createIcon('video3', 'videoIcon')
       // createIcon('video4', 'videoIcon')
@@ -1754,16 +1795,28 @@
     }
 
     function renderDiv() {
-      let halfWidth = window.innerWidth / 2
-      let halfHeight = window.innerHeight / 2
-
-      let xOffset = -18
-      let yOffset = -60
-
       let testDiv = $('.testDiv')
       let groupNames = [
-        'video_f9_1',
-        'video_f9_2',
+        'video_f1_1',
+        'video_f1_2',
+        'video_f6_1',
+        'video_f6_2',
+        'video_f6_3',
+        'video_f6_4',
+        'video_f6_5',
+        'video_f6_6',
+        'video_f6_7',
+        'video_f6_8',
+        'video_f6_9',
+        'video_f6_10',
+        'video_f6_11',
+        'video_f6_12',
+        'video_f8_1',
+        'video_f8_2',
+        'video_f8_3',
+        'video_f8_4',
+        'video_f8_5',
+        'video_f8_6',
         // 'video3',
         // 'video4',
         'gate1',
@@ -1773,7 +1826,11 @@
         'smoke_f9_1',
         'smoke_f9_2'
       ]
+      let halfWidth = window.innerWidth / 2
+      let halfHeight = window.innerHeight / 2
 
+      let xOffset = -8
+      let yOffset = -35
       for (let i = 0; i < groupNames.length; i++) {
         let groupName = groupNames[i]
         let group = scene.getObjectByName(groupName)
@@ -1860,43 +1917,6 @@
 
         scene.add(gltf.scene)
       })
-    }
-
-    function loadVideo(gltf_name, floor_num, visible, pst_x, pst_y, pst_z, rotateX) {
-      GLTF_ = new THREE.GLTFLoader()
-      GLTF_.load('./assets/inside_gltf/设备/sexiangtou.gltf', function (gltf) {
-        gltf.scene.name = gltf_name //set模型名字
-        if (pst_x, pst_y, pst_z) {
-          gltf.scene.position.set(pst_x, pst_y, pst_z) //set模型位置
-        }
-
-        if (visible == 'hide') {
-          gltf.scene.visible = false
-        }
-
-        if (rotateX == 180) {
-          gltf.scene.rotateX(Math.PI / 2)
-        } else if (rotateX == 90) {
-          gltf.scene.rotateX(Math.PI / 4)
-        }
-
-        model_all_num['model_all_floor' + floor_num].push(gltf.scene.position) //添加模型所在楼层位置
-        model_all_model['model_all_floor' + floor_num].push(gltf.scene)
-
-        model = gltf.scene.children[0]
-        model.traverse(function (child) {
-          //对模型体内的每个几何体进行遍历
-          if (child.isMesh) {
-            child.castShadow = true //允许模型本身对自己产生阴影
-            child.receiveShadow = true //接受阴影渲染
-            // child.scale.set(sc, sc, sc); //模型重置比例放大。
-            Vplace1.push(child)
-          }
-        })
-
-        scene.add(gltf.scene)
-      })
-      GLTF_.parse('./assets/inside_gltf/设备/sexiangtou.bin')
     }
 
     document.addEventListener(
