@@ -1081,7 +1081,18 @@
             obj.material.emissive.set(0x000000)
           }
         })
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            console.log(Math.round(percentComplete, 2) + '% downloaded');
+            document.getElementById('progress').innerText = '数据加载中...';
+            if (percentComplete == 100) {
+              // $('#progress').hide()
+              document.getElementById('progress').innerText = '';
+            }
+          }
+        })
 
       // var texture = new THREE.TextureLoader().load("./assets/imgs/texture_map.jpg");
       // texture.wrapS = THREE.RepeatWrapping;//RepeatWrapping
@@ -1428,148 +1439,110 @@
     $('#fold_floor').on('click', function () {
       fold_all()
     })
-    //进入大楼
-    $('#in_ex_floor').on('click', function () {
-      $('#back_all').show()
-
-      // removeEntity('all')
-      hiddenObject('all')
-      hiddenObject('other')
-      hiddenObject('ground')
-      hiddenObject('road')
-
-      removeEntity('directionalLight')
-      directionalLight = new THREE.DirectionalLight(0xffffff, 1)
-      directionalLight.position.set(5, 1.601, 57.199)
-      directionalLight.name = 'directionalLight'
-      scene.add(directionalLight)
-
-      // scene.add(directionalLight2)
-      // removeEntity('directionalLight2')
-
-      removeEntity('ambient')
-      ambient = new THREE.AmbientLight(0xD7EAFF, 0.5)
-      ambient.name = 'ambient'
-      scene.add(ambient)
-
-      scene.add(point)
-
-      showObject('1floor')
-      showObject('2floor')
-      showObject('3floor')
-      showObject('4floor')
-      showObject('5floor')
-      showObject('6floor')
-      showObject('7floor')
-      showObject('8floor')
-      showObject('9floor')
-
-      // showObject('1other')
-      // showObject('2other')
-      // showObject('3other')
-      // showObject('4other')
-      // showObject('5other')
-      // showObject('6other')
-      // showObject('7other')
-      // showObject('8other')
-      // showObject('9other')
-
-      tween_camera = TweenMax.to(camera.position, 2, {
-        x: 4.39,
-        y: 5.08,
-        z: 14.63,
-        ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
-        //Power3.easeOut
-      })
-      tween_target = TweenMax.to(controls.target, 2, {
-        x: -0.4,
-        y: -6.49,
-        z: -9.06
-      })
-      $('#bottomFloor').show()
-      // if (model_floor1.position.y != 0) {
-      //   return
-      // } else {
-      //   //增加每层模型
-      //   model_all_num['model_all_floor' + 1].push(model_floor1.position)
-      //   model_all_num['model_all_floor' + 2].push(model_floor2.position)
-      //   model_all_num['model_all_floor' + 3].push(model_floor3.position)
-      //   model_all_num['model_all_floor' + 4].push(model_floor4.position)
-      //   model_all_num['model_all_floor' + 5].push(model_floor5.position)
-      //   model_all_num['model_all_floor' + 6].push(model_floor6.position)
-      //   model_all_num['model_all_floor' + 7].push(model_floor7.position)
-      //   model_all_num['model_all_floor' + 8].push(model_floor8.position)
-      //   model_all_num['model_all_floor' + 9].push(model_floor9.position)
-
-      //   // model_all_floorB1.push(model_floorB1.position)
-
-      //   tween1 = TweenMax.to(model_all_num['model_all_floor' + 1], 2, {
-      //     y: -120,
-      //     ease: Power3.easeOut, //Linear.easeNone
-      //   })
-      //   tween2 = TweenMax.to(model_all_num['model_all_floor' + 2], 2, {
-      //     y: -90,
-      //     ease: Power3.easeOut,
-      //   })
-      //   tween3 = TweenMax.to(model_all_num['model_all_floor' + 3], 2, {
-      //     y: -60,
-      //     ease: Power3.easeOut,
-      //   })
-      //   tween4 = TweenMax.to(model_all_num['model_all_floor' + 4], 2, {
-      //     y: -30,
-      //     ease: Power3.easeOut,
-      //   })
-      //   tween5 = TweenMax.to(model_all_num['model_all_floor' + 5], 2, {
-      //     y: 0,
-      //     ease: Power3.easeOut,
-      //   })
-      //   tween6 = TweenMax.to(model_all_num['model_all_floor' + 6], 2, {
-      //     y: 30,
-      //     ease: Power3.easeOut,
-      //   })
-      //   tween7 = TweenMax.to(model_all_num['model_all_floor' + 7], 2, {
-      //     y: 60,
-      //     ease: Power3.easeOut,
-      //   })
-      //   tween8 = TweenMax.to(model_all_num['model_all_floor' + 8], 2, {
-      //     y: 90,
-      //     ease: Power3.easeOut,
-      //   })
-      //   tween9 = TweenMax.to(model_all_num['model_all_floor' + 9], 2, {
-      //     y: 120,
-      //     ease: Power3.easeOut,
-      //   })
-
-      // tween10 = TweenMax.to(model_all_floorB1, 2, {
-      //   y: -1000,
-      //   ease: Power3.easeOut
-      // });
-      // modelTraverse()
-      // tween_smoke = TweenMax.to()
-
-      // moveFloor()
-
-
-      // tween1.play()
-      // tween2.play()
-      // tween3.play()
-      // tween4.play()
-      // tween5.play()
-      // tween6.play()
-      // tween7.play()
-      // tween8.play()
-      // tween9.play()
-      // tween10.play()
-      // }
-
-      // let component = model_floor1.getObjectByName('1floor')
-      $('#in_ex_floor').hide()
-    })
 
     var test = 'model_video'
     let model_position
 
 
+    function load1otherModel() {
+      GLTFLoader_Floor1_other = new THREE.GLTFLoader();
+      GLTFLoader_Floor1_other.setDRACOLoader(dracoLoader)
+      GLTFLoader_Floor1_other.load('./assets/inside_gltf/1floor/所有设施Draco.gltf', function (obj) {
+        model_other1 = obj.scene
+        obj.scene.name = '1other'
+        scene.add(obj.scene)
+        model_other1.visible = false
+      })
+    }
+    function load2otherModel() {
+      GLTFLoader_Floor2_other = new THREE.GLTFLoader();
+      GLTFLoader_Floor2_other.setDRACOLoader(dracoLoader)
+      GLTFLoader_Floor2_other.load('./assets/inside_gltf/2floor/所有设施Draco.gltf', function (obj) {
+        model_other2 = obj.scene
+        obj.scene.name = '2other'
+        scene.add(obj.scene)
+        model_other2.visible = false
+      })
+    }
+    function load3otherModel() {
+      GLTFLoader_Floor3_other = new THREE.GLTFLoader();
+      GLTFLoader_Floor3_other.setDRACOLoader(dracoLoader)
+      GLTFLoader_Floor3_other.load('./assets/inside_gltf/3floor/所有设施Draco.gltf', function (obj) {
+        model_other3 = obj.scene
+        obj.scene.name = '3other'
+        scene.add(obj.scene)
+        model_other3.visible = false
+      })
+    }
+    function load4otherModel() {
+      GLTFLoader_Floor4_other = new THREE.GLTFLoader();
+      GLTFLoader_Floor4_other.setDRACOLoader(dracoLoader)
+      GLTFLoader_Floor4_other.load('./assets/inside_gltf/4floor/所有设施Draco.gltf', function (obj) {
+        model_other4 = obj.scene
+        obj.scene.name = '4other'
+        scene.add(obj.scene)
+        model_other4.visible = false
+      })
+    }
+    function load5otherModel() {
+      GLTFLoader_Floor5_other = new THREE.GLTFLoader();
+      GLTFLoader_Floor5_other.setDRACOLoader(dracoLoader)
+      GLTFLoader_Floor5_other.load('./assets/inside_gltf/5floor/所有设施Draco.gltf', function (obj) {
+        model_other5 = obj.scene
+        obj.scene.name = '5other'
+        scene.add(obj.scene)
+        model_other5.visible = false
+      })
+    }
+    function load6otherModel() {
+      GLTFLoader_Floor6_other = new THREE.GLTFLoader();
+      GLTFLoader_Floor6_other.setDRACOLoader(dracoLoader)
+      GLTFLoader_Floor6_other.load('./assets/inside_gltf/6floor/所有设施Draco.gltf', function (obj) {
+        model_other6 = obj.scene
+        obj.scene.name = '6other'
+        scene.add(obj.scene)
+        model_other6.visible = false
+      })
+    }
+    function load7otherModel() {
+      GLTFLoader_Floor7_other = new THREE.GLTFLoader();
+      GLTFLoader_Floor7_other.setDRACOLoader(dracoLoader)
+      GLTFLoader_Floor7_other.load('./assets/inside_gltf/7floor/所有设施Draco.gltf', function (obj) {
+        model_other7 = obj.scene
+        obj.scene.name = '7other'
+        scene.add(obj.scene)
+        model_other7.visible = false
+      })
+    }
+    function load8otherModel() {
+      GLTFLoader_Floor8_other = new THREE.GLTFLoader();
+      GLTFLoader_Floor8_other.setDRACOLoader(dracoLoader)
+      GLTFLoader_Floor8_other.load('./assets/inside_gltf/8floor/所有设施Draco.gltf', function (obj) {
+        model_other8 = obj.scene
+        obj.scene.name = '8other'
+        scene.add(obj.scene)
+        model_other8.visible = false
+      })
+    }
+    function load9otherModel() {
+      GLTFLoader_Floor9_other = new THREE.GLTFLoader();
+      GLTFLoader_Floor9_other.setDRACOLoader(dracoLoader)
+      GLTFLoader_Floor9_other.load('./assets/inside_gltf/9floor/所有设施Draco.gltf', function (obj) {
+        model_other9 = obj.scene
+        obj.scene.name = '9other'
+        scene.add(obj.scene)
+        model_other9.visible = false
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            console.log(Math.round(percentComplete, 2) + '% downloaded');
+            if (percentComplete == 100) {
+              $('#bottomFloor').show()
+            }
+          }
+        })
+    }
     //隐藏模型
     function hiddenObject(obj) {
       let selectedObject = scene.getObjectByName(obj)
@@ -1735,41 +1708,143 @@
       layer_show('smokeIcon')
     }
 
-    // function world2Screen(x, y, z) {
-    //   let worldVector = new THREE.Vector3(x, y, z);
-    //   let vector = worldVector.project(camera);
+    //进入大楼
+    $('#in_ex_floor').on('click', function () {
+      $('#back_all').show()
 
-    //   let halfWidth = window.innerWidth / 2;
-    //   let halfHeight = window.innerHeight / 2;
+      hiddenObject('all')
+      hiddenObject('other')
+      hiddenObject('ground')
+      hiddenObject('road')
 
-    //   let result = {
-    //     x: Math.round(vector.x * halfWidth + halfWidth),
-    //     y: Math.round(-vector.y * halfHeight + halfHeight)
-    //   };
+      removeEntity('directionalLight')
+      directionalLight = new THREE.DirectionalLight(0xffffff, 1)
+      directionalLight.position.set(5, 1.601, 57.199)
+      directionalLight.name = 'directionalLight'
+      scene.add(directionalLight)
 
-    //   return result;
-    // }
-    // 更新div的位置
-    // function renderDiv(object, intersect) {
-    //   let {
-    //     point: {
-    //       x,
-    //       y,
-    //       z
-    //     }
-    //   } = intersect;
-    //   let position = world2Screen(x, y, z);
+      // scene.add(directionalLight2)
+      // removeEntity('directionalLight2')
+      removeEntity('ambient')
+      ambient = new THREE.AmbientLight(0xD7EAFF, 0.5)
+      ambient.name = 'ambient'
+      scene.add(ambient)
+      scene.add(point)
 
-    //   // let testIcon = createIcon(object.name)
-    // createIcon(object.name).css({
-    //   'left': position.x + (-20) + 'px',
-    //   'top': position.y + (-55) + 'px'
-    // })
-    //   $(".testDiv").text(object.name).css({
-    //     'left': position.x + 'px',
-    //     'top': position.y + 25 + 'px'
-    //   });
-    // }
+      showObject('1floor')
+      showObject('2floor')
+      showObject('3floor')
+      showObject('4floor')
+      showObject('5floor')
+      showObject('6floor')
+      showObject('7floor')
+      showObject('8floor')
+      showObject('9floor')
+
+      // showObject('1other')
+      // showObject('2other')
+      // showObject('3other')
+      // showObject('4other')
+      // showObject('5other')
+      // showObject('6other')
+      // showObject('7other')
+      // showObject('8other')
+      // showObject('9other')
+
+      tween_camera = TweenMax.to(camera.position, 2, {
+        x: 4.39,
+        y: 5.08,
+        z: 14.63,
+        ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
+        //Power3.easeOut
+      })
+      tween_target = TweenMax.to(controls.target, 2, {
+        x: -0.4,
+        y: -6.49,
+        z: -9.06
+      })
+      load1otherModel()
+      load2otherModel()
+      load3otherModel()
+      load4otherModel()
+      load5otherModel()
+      load6otherModel()
+      load7otherModel()
+      load8otherModel()
+      load9otherModel()
+
+      // if (model_floor1.position.y != 0) {
+      //   return
+      // } else {
+      //   //增加每层模型
+      //   model_all_num['model_all_floor' + 1].push(model_floor1.position)
+      //   model_all_num['model_all_floor' + 2].push(model_floor2.position)
+      //   model_all_num['model_all_floor' + 3].push(model_floor3.position)
+      //   model_all_num['model_all_floor' + 4].push(model_floor4.position)
+      //   model_all_num['model_all_floor' + 5].push(model_floor5.position)
+      //   model_all_num['model_all_floor' + 6].push(model_floor6.position)
+      //   model_all_num['model_all_floor' + 7].push(model_floor7.position)
+      //   model_all_num['model_all_floor' + 8].push(model_floor8.position)
+      //   model_all_num['model_all_floor' + 9].push(model_floor9.position)
+
+      //   // model_all_floorB1.push(model_floorB1.position)
+
+      //   tween1 = TweenMax.to(model_all_num['model_all_floor' + 1], 2, {
+      //     y: -120,
+      //     ease: Power3.easeOut, //Linear.easeNone
+      //   })
+      //   tween2 = TweenMax.to(model_all_num['model_all_floor' + 2], 2, {
+      //     y: -90,
+      //     ease: Power3.easeOut,
+      //   })
+      //   tween3 = TweenMax.to(model_all_num['model_all_floor' + 3], 2, {
+      //     y: -60,
+      //     ease: Power3.easeOut,
+      //   })
+      //   tween4 = TweenMax.to(model_all_num['model_all_floor' + 4], 2, {
+      //     y: -30,
+      //     ease: Power3.easeOut,
+      //   })
+      //   tween5 = TweenMax.to(model_all_num['model_all_floor' + 5], 2, {
+      //     y: 0,
+      //     ease: Power3.easeOut,
+      //   })
+      //   tween6 = TweenMax.to(model_all_num['model_all_floor' + 6], 2, {
+      //     y: 30,
+      //     ease: Power3.easeOut,
+      //   })
+      //   tween7 = TweenMax.to(model_all_num['model_all_floor' + 7], 2, {
+      //     y: 60,
+      //     ease: Power3.easeOut,
+      //   })
+      //   tween8 = TweenMax.to(model_all_num['model_all_floor' + 8], 2, {
+      //     y: 90,
+      //     ease: Power3.easeOut,
+      //   })
+      //   tween9 = TweenMax.to(model_all_num['model_all_floor' + 9], 2, {
+      //     y: 120,
+      //     ease: Power3.easeOut,
+      //   })
+
+      // modelTraverse()
+      // tween_smoke = TweenMax.to()
+
+      // moveFloor()
+
+      // tween1.play()
+      // tween2.play()
+      // tween3.play()
+      // tween4.play()
+      // tween5.play()
+      // tween6.play()
+      // tween7.play()
+      // tween8.play()
+      // tween9.play()
+      // tween10.play()
+      // }
+
+      $('#in_ex_floor').hide()
+    })
 
     //添加ICON的dom
     function createIcon(mesh_id, class_name, icon_floor) {
