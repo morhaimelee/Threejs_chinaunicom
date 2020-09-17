@@ -80,7 +80,7 @@
       position: absolute;
       background: url('./assets/imgs/shexiangtou.png') center center no-repeat;
       background-size: 100% auto;
-      /* display: none; */
+      display: none;
       cursor: pointer;
     }
 
@@ -91,14 +91,16 @@
       background: url('./assets/imgs/zhaji.png') center center no-repeat;
       background-size: 100% auto;
       cursor: pointer;
+      display: none;
     }
 
     .smokeIcon {
-      width: 37px;
-      height: 47px;
+      width: 18.5px;
+      height: 23.5px;
       position: absolute;
       background: url('./assets/imgs/yangan.png') center center no-repeat;
       cursor: pointer;
+      display: none;
     }
 
     .waterIcon {
@@ -107,6 +109,15 @@
       position: absolute;
       background: url('./assets/imgs/水箱.png') center center no-repeat;
       cursor: pointer;
+      display: none;
+    }
+
+    .videoLayer {
+      width: 185px;
+      height: 104px;
+      position: absolute;
+      border: 1px solid #fff;
+      display: none;
     }
 
     #camera_position {
@@ -174,7 +185,7 @@
       <li id="video_list" class="video_list"></li>
       <li id="waterTank_list" class="waterTank_list"></li>
       <li id="fire_list" class="fire_list"></li>
-      <li id="temp_list" class="temp_list"></li>
+      <li id="smoke_list" class="smoke_list"></li>
       <li id="gate_list" class="gate_list"></li>
       <li id="trashCan_list" class="trashCan_list"></li>
       <li id="hole_cover_list" class="hole_cover_list"></li>
@@ -1584,8 +1595,8 @@
       //1楼模型
       loadModel('./assets/inside_gltf/设备/a栋闸机.gltf', 'gate1', 1, 'hide', 0.2, 0, 0.001)
       loadModel('./assets/inside_gltf/设备/b栋闸机.gltf', 'gate2', 1, 'hide')
-      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f1_1', 1, 'hide', 0.1, 0.001, -0.15)
-      loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f1_2', 1, 'hide', 3.4, 0.001, -0.14)
+      // loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f1_1', 1, 'hide', 0.1, 0.001, -0.15)
+      // loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f1_2', 1, 'hide', 3.4, 0.001, -0.14)
       // loadVideo('video_f1_1', 1, 'hide', 0.75, 0, 1)
       // loadVideo('video_f1_2', 1, 'hide', -1.5, 0, 1)
       loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f1_1', 1, 'hide', 0.482, -0.007, -0.894)
@@ -1685,12 +1696,33 @@
       // createIcon('video4', 'videoIcon')
       createIcon('gate1', 'gateIcon', 'f1')
       createIcon('gate2', 'gateIcon', 'f1')
-      createIcon('smoke_f1_1', 'smokeIcon', 'f1')
-      createIcon('smoke_f1_2', 'smokeIcon', 'f1')
-      // createIcon('smoke_f9_1', 'smokeIcon', 'f9')
-      // createIcon('smoke_f9_2', 'smokeIcon', 'f9')
-      // createLayer('video1_ly', 'videoLayer')
-      // createLayer('video2_ly', 'videoLayer')
+      // createIcon('smoke_f1_1', 'smokeIcon', 'f1')
+      // createIcon('smoke_f1_2', 'smokeIcon', 'f1')
+      createIcon('smoke_f3_1', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_2', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_3', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_4', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_5', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_6', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_7', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_8', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_9', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_10', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_11', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_12', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_13', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_14', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_15', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_16', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_17', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_18', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_19', 'smokeIcon', 'f3')
+      createIcon('smoke_f3_20', 'smokeIcon', 'f3')
+
+      create_video_Layer('video_f1_1_ly', 'videoLayer')
+      create_video_Layer('video_f1_2_ly', 'videoLayer')
+      // createLayer('video_f1_1_ly', 'videoLayer')
+      // createLayer('video_f1_2_ly', 'videoLayer')
       // createLayer('video3_ly', 'videoLayer')
       // createLayer('video4_ly', 'videoLayer')
       // createLayer('gate1_ly', 'gateLayer')
@@ -1698,10 +1730,6 @@
       // createLayer('smoke1_ly', 'smokeLayer')
       // createLayer('smoke2_ly', 'smokeLayer')
       // createLayer('smoke3_ly', 'smokeLayer')
-
-      $('.videoIcon').hide() //隐藏所有3D图标
-      $('.gateIcon').hide()
-      $('.smokeIcon').hide()
 
       layer_show('videoIcon')
       layer_show('gateIcon')
@@ -1869,6 +1897,21 @@
       return layerDivid
     }
 
+    function create_video_Layer(mesh_id, class_name) {
+      let iconDiv = document.createElement('div')
+      iconDiv.className = class_name
+      iconDiv.id = mesh_id
+      let videoDiv = `<video class="video-js vjs-default-skin" controls preload="auto" muted data-setup='{}'
+        style='width: 100%;height: 100%'></video>;`
+      // videoDiv.attr('id', mesh_id + '_video')
+      let bodyDom = document.body
+      bodyDom.insertBefore(iconDiv, bodyDom.lastChild)
+      let layerDivid = $('#' + mesh_id)
+      layerDivid.html(videoDiv)
+      layerDivid.children("video").attr('id', mesh_id + '_video')
+      return layerDivid
+    }
+
     function renderDiv() {
       let testDiv = $('.testDiv')
       let groupNames = [
@@ -1896,10 +1939,28 @@
         // 'video4',
         'gate1',
         'gate2',
-        'smoke_f1_1',
-        'smoke_f1_2',
-        'smoke_f9_1',
-        'smoke_f9_2'
+        // 'smoke_f1_1',
+        // 'smoke_f1_2',
+        'smoke_f3_1',
+        'smoke_f3_2',
+        'smoke_f3_3',
+        'smoke_f3_4',
+        'smoke_f3_5',
+        'smoke_f3_6',
+        'smoke_f3_7',
+        'smoke_f3_8',
+        'smoke_f3_9',
+        'smoke_f3_10',
+        'smoke_f3_11',
+        'smoke_f3_12',
+        'smoke_f3_13',
+        'smoke_f3_14',
+        'smoke_f3_15',
+        'smoke_f3_16',
+        'smoke_f3_17',
+        'smoke_f3_18',
+        'smoke_f3_19',
+        'smoke_f3_20'
       ]
       let halfWidth = window.innerWidth / 2
       let halfHeight = window.innerHeight / 2
@@ -1920,10 +1981,6 @@
           let vector = new THREE.Vector3()
           mesh.getWorldPosition(vector)
           vector.project(camera)
-          // $("#" + groupName).css({
-          //   left: vector.x * halfWidth + halfWidth + xOffset,
-          //   top: -vector.y * halfHeight + halfHeight + yOffset
-          // });
           //图标位置
           $('#' + groupName).css({
             left: vector.x * halfWidth + halfWidth + xOffset,
@@ -1932,7 +1989,7 @@
           //弹框位置
           $('#' + groupName + '_ly').css({
             left: vector.x * halfWidth + halfWidth + 2,
-            top: -vector.y * halfHeight + halfHeight + -206,
+            top: -vector.y * halfHeight + halfHeight + -142,
           })
 
           let g = testDiv.data('group')
@@ -2103,11 +2160,11 @@
       hiddenObject('8other')
       hiddenObject('9other')
 
-      hiddenObject('tank')
-
 
       // $('.videoIcon').hide()
       // $('.gateIcon').hide()
+      $('.Icon').hide()
+
       if ((selectedObject.visible = true)) {
         $('#back_all').hide()
       }
@@ -2117,6 +2174,10 @@
         z: 31.3,
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
       })
+
+      $('#video_list').removeClass('video_list_in')
+      $('#gate_list').removeClass('gate_list_in')
+
       $('#in_ex_floor').show()
     }
 
@@ -2129,28 +2190,9 @@
         $('.gateIcon').hide()
       }
     })
-    //烟感按钮
-    $('#temp_list').on('click', function () {
-      if ($('.smokeIcon').is(':hidden')) {
-        $('.smokeIcon').show()
-        $('#temp_list').addClass('temp_list_in')
-      } else {
-        $('.smokeIcon').hide()
-        $('#temp_list').removeClass('temp_list_in')
-      }
-    })
 
-    //弹窗
-    function layer_show(clk_icon_classname) {
-      $('.' + clk_icon_classname).on('click', function () {
-        let this_id = $(this).attr('id')
-        if ($('#' + this_id + '_ly').is(':hidden')) {
-          $('#' + this_id + '_ly').show()
-        } else {
-          $('#' + this_id + '_ly').hide()
-        }
-      })
-    }
+
+
 
     $('#camera_position').on('click', function () {
       console.log(camera.position)

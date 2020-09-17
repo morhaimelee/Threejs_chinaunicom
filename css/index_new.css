@@ -298,6 +298,12 @@ li {
     background: url('../assets/imgs/shuixiang-icon-in.png') center center no-repeat;
 }
 
+.waterTank_list_in {
+    background     : url('../assets/imgs/shuixiang-icon-in.png') center center no-repeat;
+    background-size: 26px 26px;
+    border         : 1px solid #4DFFFF;
+}
+
 .fire_list {
     background     : url('../assets/imgs/烟感-icon.png') center center no-repeat;
     background-size: 22px 25px;
@@ -307,18 +313,24 @@ li {
     background: url('../assets/imgs/wengan-icon-in.png') center center no-repeat;
 }
 
-.temp_list {
+.fire_list_in {
+    background     : url('../assets/imgs/wengan-icon-in.png') center center no-repeat;
+    background-size: 22px 25px;
+    border         : 1px solid #4DFFFF;
+}
+
+.smoke_list {
     background     : url('../assets/imgs/yangan-icon.png') center center no-repeat;
     background-size: 28px 21px;
 }
 
-.temp_list_in {
+.smoke_list_in {
     background     : url('../assets/imgs/yangan-icon-in.png') center center no-repeat;
     background-size: 28px 21px;
     border         : 1px solid #4DFFFF;
 }
 
-.temp_list:hover {
+.smoke_list:hover {
     background: url('../assets/imgs/yangan-icon-in.png') center center no-repeat;
 }
 
@@ -331,6 +343,12 @@ li {
     background: url('../assets/imgs/zhaji-icon-in.png') center center no-repeat;
 }
 
+.gate_list_in {
+    background     : url('../assets/imgs/zhaji-icon-in.png') center center no-repeat;
+    background-size: 19px 24px;
+    border         : 1px solid #4DFFFF;
+}
+
 .trashCan_list {
     background     : url('../assets/imgs/垃圾桶-icon.png') center center no-repeat;
     background-size: 23px 24px;
@@ -338,6 +356,12 @@ li {
 
 .trashCan_list:hover {
     background: url('../assets/imgs/lajitong-icon-in.png') center center no-repeat;
+}
+
+.trashCan_list_in {
+    background     : url('../assets/imgs/lajitong-icon-in.png') center center no-repeat;
+    background-size: 23px 24px;
+    border         : 1px solid #4DFFFF;
 }
 
 .hole_cover_list {
@@ -349,6 +373,12 @@ li {
     background: url('../assets/imgs/jinggai-icon-in.png') center center no-repeat;
 }
 
+.hole_cover_list_in {
+    background     : url('../assets/imgs/jinggai-icon-in.png') center center no-repeat;
+    background-size: 24px 24px;
+    border         : 1px solid #4DFFFF;
+}
+
 .park_list {
     background     : url('../assets/imgs/停车场-icon.png') center center no-repeat;
     background-size: 24px 24px;
@@ -356,6 +386,12 @@ li {
 
 .park_list:hover {
     background: url('../assets/imgs/tingche-icon-in.png') center center no-repeat;
+}
+
+.park_list_in {
+    background: url('../assets/imgs/tingche-icon-in.png') center center no-repeat;
+    background-size: 24px 24px;
+    border         : 1px solid #4DFFFF;
 }
 
 .AOCN_list {
@@ -367,6 +403,12 @@ li {
     background: url('../assets/imgs/kongkai-icon-in.png') center center no-repeat;
 }
 
+.AOCN_list_in {
+    background: url('../assets/imgs/kongkai-icon-in.png') center center no-repeat;
+    background-size: 19px 19px;
+    border         : 1px solid #4DFFFF;
+}
+
 .meter_list {
     background     : url('../assets/imgs/shuidian-icon.png') center center no-repeat;
     background-size: 19px 28px;
@@ -374,6 +416,12 @@ li {
 
 .meter_list:hover {
     background: url('../assets/imgs/shuidian-icon-in.png') center center no-repeat;
+}
+
+.meter_list_in {
+    background: url('../assets/imgs/shuidian-icon-in.png') center center no-repeat;
+    background-size: 19px 28px;
+    border         : 1px solid #4DFFFF;
 }
 
 .warnVideo-title {
@@ -663,12 +711,13 @@ li {
 }
 
 .visitors-box .visitor-realTime-data .realTime-box ul li:nth-child(n+2) {
-    margin: 2px 0 0px 1px;
-    font-size: 16px;
-    transform: scale(0.5);
+    margin     : 2px 0 0px 1px;
+    font-size  : 16px;
+    transform  : scale(0.5);
     line-height: 12px;
 }
-.visitors-box .visitor-realTime-data .realTime-box ul li:nth-child(5){
+
+.visitors-box .visitor-realTime-data .realTime-box ul li:nth-child(5) {
     text-align: center;
 }
 

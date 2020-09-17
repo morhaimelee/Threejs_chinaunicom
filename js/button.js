@@ -92,13 +92,20 @@ function hidden_all_Icon() {
     } else {
         $('.Icon').hide()
     }
-    if ($('.' + floor_tag).is(':hidden') && $('#video_list').hasClass('video_list_in')) {
-        $('.videoIcon').each(function (i, v) {
-            console.log(v)
-            if (v.classList.contains(floor_tag)) {
-                v.style.display = 'block'
-            }
-        })
+    if ($('.' + floor_tag).is(':hidden')) {
+        if ($('#video_list').hasClass('video_list_in')) {
+            $('.videoIcon').each(function (i, v) {
+                if (v.classList.contains(floor_tag)) {
+                    v.style.display = 'block'
+                }
+            })
+        } else if ($('#smoke_list').hasClass('smoke_list_in')) {
+            $('.smokeIcon').each(function (i, v) {
+                if (v.classList.contains(floor_tag)) {
+                    v.style.display = 'block'
+                }
+            })
+        }
 
     }
 }
@@ -266,31 +273,40 @@ $('#f9').on('click', function () {
         z: -2.09
     })
 })
-
+//左侧icon点击事件
+function icon_clk(list, list_in, icon) { //传参均为字符串
+    $('#' + list).on('click', function () {
+        if (floor_tag != 'f0') {
+            if ($('#' + list).hasClass(list_in)) {
+                $('.' + icon).hide()
+                $('#' + list).removeClass(list_in)
+            } else {
+                $('#' + list).addClass(list_in)
+                $('.' + icon).each(function (i, v) {
+                    if (v.classList.contains(floor_tag)) {
+                        v.style.display = 'block'
+                    }
+                })
+            }
+        }
+        if (floor_tag == 'f0') {
+            if ($('#' + list).hasClass(list_in)) {
+                $('.' + icon).hide()
+                $('#' + list).removeClass(list_in)
+            } else {
+                $('.' + icon).show()
+                $('#' + list).addClass(list_in)
+            }
+        }
+    })
+}
 //安防监控按钮
-$('#video_list').on('click', function () {
-    if (floor_tag != 'f0') {
-        if ($('#video_list').hasClass('video_list_in')) {
-            $('.videoIcon').hide()
-            $('#video_list').removeClass('video_list_in')
-        } else {
-            $('#video_list').addClass('video_list_in')
-            $('.videoIcon').each(function (i, v) {
-                console.log(v)
-                if (v.classList.contains(floor_tag)) {
-                    v.style.display = 'block'
-                }
-            })
-        }
-    }
-    if (floor_tag == 'f0') {
-        if ($('#video_list').hasClass('video_list_in')) {
-            $('.videoIcon').hide()
-            $('#video_list').removeClass('video_list_in')
-        } else {
-            $('.videoIcon').show()
-            $('#video_list').addClass('video_list_in')
-        }
-    }
+icon_clk('video_list', 'video_list_in', 'videoIcon')
+//烟感按钮
+icon_clk('smoke_list', 'smoke_list_in', 'smokeIcon')
 
-})
+
+//icon按钮
+// $('#video_f1_1').on('click', function() {
+//     $('#video_f1_1_ly').show()
+// })

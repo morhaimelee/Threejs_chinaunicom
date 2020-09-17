@@ -1,7 +1,20 @@
 //获取时间戳及token
 var timestamp = (new Date()).valueOf();
-
 let token
+
+//弹窗
+function layer_show(clk_icon_classname) {
+    $('.' + clk_icon_classname).on('click', function () {
+        let this_id = $(this).attr('id')
+        if ($('#' + this_id + '_ly').is(':hidden')) {
+            $('#' + this_id + '_ly').show()
+        } else {
+            $('#' + this_id + '_ly').hide()
+        }
+    })
+}
+
+
 $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId: 101878570, appKey: 'FA04063DE2339340D4E36114FA5E8EEB', timeStamp: timestamp }, function (resp) {
     console.log(resp.data.token)
     token = resp.data.token
@@ -486,6 +499,18 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
     //168层监控设备
     $.ajax({
         url: "http://58.16.56.202:9000/smart-bldg/big/screen/monitor168EquipmentOperation",
+        headers: { 'Auth-Token': token },
+        success: function (resp) {
+            console.log(resp)
+            
+        },
+        error: function (resp) {
+            console.log(resp)
+        }
+    });
+    //根据类型获取设备数据
+    $.ajax({
+        url: "http://58.16.56.202:9000/smart-bldg/big/screen/listDeviceInfoByType",
         headers: { 'Auth-Token': token },
         success: function (resp) {
             console.log(resp)
