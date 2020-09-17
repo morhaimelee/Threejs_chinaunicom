@@ -71,39 +71,32 @@ function layer_show(clk_icon_classname) {
                             // this.play();
                         });
                         myPlayer.play()
-                        // function changeVideo(videoSrc) {
-                        //     videoObj.src({ src: source_m3u8, type: "application/x-mpegURL" });
-                        // }
-                        // changeVideo(source_m3u8)
-
-                        // }
-                        // else if (this_id == video_f1_2) {
-                        //     source_m3u8 = resp.data[18].url
-                        //     var option = {};
-                        //     var myPlayer2 = videojs(this_id + '_ly_video', option, function onPlayerReady() {
-                        //         // var myPlayer = this;
-                        //         myPlayer2.src({ src: source_m3u8, type: "application/x-mpegURL" });
-                        //         videojs.log("播放器已经准备好了!");
-                        //         // this.play();
-                        //     });
-                        //     myPlayer2.play()
-                        // }
-
-                        // videoObj = videojs(this_id + '_ly_video');
-                        // console.log(videoObj)
 
                     }
                 });
 
 
-            } else if(clk_icon_classname == 'waterIcon'){
+            } else if (clk_icon_classname == 'waterIcon') {
                 //根据类型获取设备数据
                 $.ajax({
                     url: "http://58.16.56.202:9000/smart-bldg/big/screen/listDeviceInfoByType",
                     headers: { 'Auth-Token': token },
-                    data: {type: 8},
+                    data: { type: 8 },
                     success: function (resp) {
                         console.log(resp)
+                        console.log($('#' + this_id + '_ly'))
+                        $('#' + this_id + '_ly').html("状态：正常")
+                    }
+                });
+            } else if (clk_icon_classname == 'smokeIcon') {
+                //根据类型获取设备数据
+                $.ajax({
+                    url: "http://58.16.56.202:9000/smart-bldg/big/screen/listDeviceInfoByType",
+                    headers: { 'Auth-Token': token },
+                    data: { type: 9 },
+                    success: function (resp) {
+                        console.log(resp)
+                        console.log(resp.data.length)
                         console.log($('#' + this_id + '_ly'))
                         $('#' + this_id + '_ly').html("状态：正常")
                     }
