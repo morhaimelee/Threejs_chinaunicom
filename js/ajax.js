@@ -2,12 +2,113 @@
 var timestamp = (new Date()).valueOf();
 let token
 
+let videoObj
+
 //弹窗
 function layer_show(clk_icon_classname) {
     $('.' + clk_icon_classname).on('click', function () {
         let this_id = $(this).attr('id')
+        let that = this_id
         if ($('#' + this_id + '_ly').is(':hidden')) {
             $('#' + this_id + '_ly').show()
+            if (clk_icon_classname == 'videoIcon') {
+                //168层监控设备
+                $.ajax({
+                    url: "http://58.16.56.202:9000/smart-bldg/big/screen/monitor168EquipmentOperation",
+                    headers: { 'Auth-Token': token },
+                    success: function (resp) {
+                        console.log(resp)
+                        let source_m3u8
+                        console.log(that)
+                        if (that == 'video_f1_1') {
+                            source_m3u8 = resp.data.c_1000051.url
+                        } else if (that == 'video_f1_2') {
+                            source_m3u8 = resp.data.c_1000061.url
+                        } else if (that == 'video_f6_1') {
+                            source_m3u8 = resp.data.c_1000096.url
+                        } else if (that == 'video_f6_2') {
+                            source_m3u8 = resp.data.c_1000097.url
+                        } else if (that == 'video_f6_3') {
+                            source_m3u8 = resp.data.c_1000095.url
+                        } else if (that == 'video_f6_4') {
+                            source_m3u8 = resp.data.c_1000094.url
+                        } else if (that == 'video_f6_5') {
+                            source_m3u8 = resp.data.c_1000093.url
+                        } else if (that == 'video_f6_6') {
+                            source_m3u8 = resp.data.c_1000092.url
+                        } else if (that == 'video_f6_7') {
+                            source_m3u8 = resp.data.c_1000086.url
+                        } else if (that == 'video_f6_8') {
+                            source_m3u8 = resp.data.c_1000087.url
+                        } else if (that == 'video_f6_9') {
+                            source_m3u8 = resp.data.c_1000089.url
+                        } else if (that == 'video_f6_10') {
+                            source_m3u8 = resp.data.c_1000088.url
+                        } else if (that == 'video_f6_11') {
+                            source_m3u8 = resp.data.c_1000091.url
+                        } else if (that == 'video_f6_12') {
+                            source_m3u8 = resp.data.c_1000090.url
+                        } else if (that == 'video_f8_6') {
+                            source_m3u8 = resp.data.c_1000098.url
+                        } else if (that == 'video_f8_5') {
+                            source_m3u8 = resp.data.c_1000099.url
+                        } else if (that == 'video_f8_5') {
+                            source_m3u8 = resp.data.c_1000099.url
+                        } else if (that == 'video_f8_1') {
+                            source_m3u8 = resp.data.c_1000100.url
+                        } else if (that == 'video_f8_2') {
+                            source_m3u8 = resp.data.c_1000101.url
+                        } else if (that == 'video_f8_3') {
+                            source_m3u8 = resp.data.c_1000103.url
+                        } else if (that == 'video_f8_4') {
+                            source_m3u8 = resp.data.c_1000102.url
+                        }
+                        var option = {};
+                        var myPlayer = videojs(this_id + '_ly_video', option, function onPlayerReady() {
+                            // var myPlayer = this;
+                            myPlayer.src({ src: source_m3u8, type: "application/x-mpegURL" });
+                            videojs.log("播放器已经准备好了!");
+                            // this.play();
+                        });
+                        myPlayer.play()
+                        // function changeVideo(videoSrc) {
+                        //     videoObj.src({ src: source_m3u8, type: "application/x-mpegURL" });
+                        // }
+                        // changeVideo(source_m3u8)
+
+                        // }
+                        // else if (this_id == video_f1_2) {
+                        //     source_m3u8 = resp.data[18].url
+                        //     var option = {};
+                        //     var myPlayer2 = videojs(this_id + '_ly_video', option, function onPlayerReady() {
+                        //         // var myPlayer = this;
+                        //         myPlayer2.src({ src: source_m3u8, type: "application/x-mpegURL" });
+                        //         videojs.log("播放器已经准备好了!");
+                        //         // this.play();
+                        //     });
+                        //     myPlayer2.play()
+                        // }
+
+                        // videoObj = videojs(this_id + '_ly_video');
+                        // console.log(videoObj)
+
+                    }
+                });
+
+
+            } else if(clk_icon_classname == 'waterIcon'){
+                //根据类型获取设备数据
+                $.ajax({
+                    url: "http://58.16.56.202:9000/smart-bldg/big/screen/listDeviceInfoByType",
+                    headers: { 'Auth-Token': token },
+                    data: {type: 8},
+                    success: function (resp) {
+                        console.log(resp)
+                        console.log($('#' + this_id + '_ly'))
+                        $('#' + this_id + '_ly').html("状态：正常")
+                    }
+                });
+            }
         } else {
             $('#' + this_id + '_ly').hide()
         }
@@ -32,42 +133,53 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                 arr_name.push(value.name)
                 arr_url.push(value.url)
             })
-            sourceDom = `<source id="source" src='' type="application/x-mpegURL" />`
-            $('#welcomeVideo').append(sourceDom)
+            // sourceDom = `<source id="source" src='' type="application/x-mpegURL" />`
+            // $('#welcomeVideo').append(sourceDom)
 
-            // var video = document.getElementById('welcomeVideo');
-            // var hls = new Hls();
+            // var myVideo = videojs('welcomeVideo', {
+            //     bigPlayButton: true,
+            //     textTrackDisplay: false,
+            //     posterImage: false,
+            //     errorDisplay: false,
+            // })
 
-            // function play() {
-            //     hls.loadSource(arr_url[index]);
-            //     hls.attachMedia(video);
-            //     hls.on(Hls.Events.MANIFEST_PARSED, function() {
-            //         video.play();
-            //     });
-            // }
-            var myVideo = videojs('welcomeVideo', {
-                bigPlayButton: true,
-                textTrackDisplay: false,
-                posterImage: false,
-                errorDisplay: false,
-            })
-
+            // myVideo.play()
+            videoObj = videojs('welcomeVideo')
+            var option = {};
+            var myVideo = videojs('welcomeVideo', option, function onPlayerReady() {
+                // var myVideo = this;
+                myVideo.src({ src: videoSrc, type: "application/x-mpegURL" });
+                videojs.log("播放器已经准备好了!");
+                // this.play();
+            });
             myVideo.play()
-            //更改src
-            function changeVideo(vdoSrc) {
-                if (/\.m3u8$/.test(vdoSrc)) { //判断视频源是否是m3u8的格式
-                    myVideo.src({
-                        src: vdoSrc,
-                        type: 'application/x-mpegURL' //在重新添加视频源的时候需要给新的type的值
-                    })
-                } else {
-                    myVideo.src(vdoSrc)
-                }
 
-                myVideo.load();
-                myVideo.play();
+            function changeVideo(videoSrc) {
+                videoObj.src({ src: videoSrc, type: "application/x-mpegURL" });
+                myVideo.play()
             }
-            changeVideo(videoSrc)
+            // changeVideo(videoSrc)
+
+            videoObj.on("loadedmetadata", function () {
+                console.log("正在读取配置信息")
+            });
+
+
+            //更改src
+            // function changeVideo(vdoSrc) {
+            //     if (/\.m3u8$/.test(vdoSrc)) { //判断视频源是否是m3u8的格式
+            //         myVideo.src({
+            //             src: vdoSrc,
+            //             type: 'application/x-mpegURL' //在重新添加视频源的时候需要给新的type的值
+            //         })
+            //     } else {
+            //         myVideo.src(vdoSrc)
+            //     }
+
+            //     myVideo.load();
+            //     myVideo.play();
+            // }
+            // changeVideo(videoSrc)
 
             let index = 1
 
@@ -89,6 +201,7 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
         url: "http://58.16.56.202:9000/smart-bldg/big/screen/equipmentOperationStatus",
         headers: { 'Auth-Token': token },
         success: function (resp) {
+            console.log(resp.data)
             $('#equip_num').html(resp.data.monitorStatus.totalNum)
             $('#onlineNum').html(resp.data.monitorStatus.onlineNum)
             $('#offlineNum').html(resp.data.monitorStatus.offlineNum)
@@ -496,29 +609,7 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
             console.log(resp)
         }
     });
-    //168层监控设备
-    $.ajax({
-        url: "http://58.16.56.202:9000/smart-bldg/big/screen/monitor168EquipmentOperation",
-        headers: { 'Auth-Token': token },
-        success: function (resp) {
-            console.log(resp)
-            
-        },
-        error: function (resp) {
-            console.log(resp)
-        }
-    });
-    //根据类型获取设备数据
-    $.ajax({
-        url: "http://58.16.56.202:9000/smart-bldg/big/screen/listDeviceInfoByType",
-        headers: { 'Auth-Token': token },
-        success: function (resp) {
-            console.log(resp)
-        },
-        error: function (resp) {
-            console.log(resp)
-        }
-    });
+
 
 })
 

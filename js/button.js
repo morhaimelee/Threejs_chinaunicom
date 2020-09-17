@@ -99,8 +99,20 @@ function hidden_all_Icon() {
                     v.style.display = 'block'
                 }
             })
+        } else if ($('#waterTank_list').hasClass('waterTank_list_in')) {
+            $('.waterIcon').each(function (i, v) {
+                if (v.classList.contains(floor_tag)) {
+                    v.style.display = 'block'
+                }
+            })
         } else if ($('#smoke_list').hasClass('smoke_list_in')) {
             $('.smokeIcon').each(function (i, v) {
+                if (v.classList.contains(floor_tag)) {
+                    v.style.display = 'block'
+                }
+            })
+        } else if ($('#gate_list').hasClass('gate_list_in')) {
+            $('.gateIcon').each(function (i, v) {
                 if (v.classList.contains(floor_tag)) {
                     v.style.display = 'block'
                 }
@@ -108,6 +120,8 @@ function hidden_all_Icon() {
         }
 
     }
+    //隐藏layer
+    $('.Layer').hide()
 }
 //跳转楼层按钮
 $('#f1').on('click', function () {
@@ -280,6 +294,7 @@ function icon_clk(list, list_in, icon) { //传参均为字符串
             if ($('#' + list).hasClass(list_in)) {
                 $('.' + icon).hide()
                 $('#' + list).removeClass(list_in)
+                $('.Layer').hide()//layer弹窗关闭
             } else {
                 $('#' + list).addClass(list_in)
                 $('.' + icon).each(function (i, v) {
@@ -302,8 +317,12 @@ function icon_clk(list, list_in, icon) { //传参均为字符串
 }
 //安防监控按钮
 icon_clk('video_list', 'video_list_in', 'videoIcon')
+//水箱按钮
+icon_clk('waterTank_list', 'waterTank_list_in', 'waterIcon')
 //烟感按钮
 icon_clk('smoke_list', 'smoke_list_in', 'smokeIcon')
+//闸机按钮
+icon_clk('gate_list', 'gate_list_in', 'gateIcon')
 
 
 //icon按钮

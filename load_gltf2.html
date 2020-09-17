@@ -84,6 +84,17 @@
       cursor: pointer;
     }
 
+    .waterIcon {
+      width: 18.5px;
+      height: 23.5px;
+      position: absolute;
+      background: url('./assets/imgs/水箱.png') center center no-repeat;
+      background-size: 100% auto;
+      cursor: pointer;
+      display: none;
+    }
+
+
     .gateIcon {
       width: 18.5px;
       height: 23.5px;
@@ -99,20 +110,33 @@
       height: 23.5px;
       position: absolute;
       background: url('./assets/imgs/yangan.png') center center no-repeat;
-      cursor: pointer;
-      display: none;
-    }
-
-    .waterIcon {
-      width: 37px;
-      height: 47px;
-      position: absolute;
-      background: url('./assets/imgs/水箱.png') center center no-repeat;
+      background-size: 100% auto;
       cursor: pointer;
       display: none;
     }
 
     .videoLayer {
+      width: 185px;
+      height: 104px;
+      position: absolute;
+      border: 1px solid #fff;
+      display: none;
+    }
+
+    .tankLayer {
+      width: 185px;
+      height: 104px;
+      position: absolute;
+      border: 1px solid #4DFFFF;
+      background: rgba(0, 0, 0, .4);
+      text-align: center;
+      line-height: 104px;
+      font-size: 16px;
+      color: #fff;
+      display: none;
+    }
+
+    .smokeLayer {
       width: 185px;
       height: 104px;
       position: absolute;
@@ -184,7 +208,7 @@
     <ul>
       <li id="video_list" class="video_list"></li>
       <li id="waterTank_list" class="waterTank_list"></li>
-      <li id="fire_list" class="fire_list"></li>
+      <!-- <li id="fire_list" class="fire_list"></li> -->
       <li id="smoke_list" class="smoke_list"></li>
       <li id="gate_list" class="gate_list"></li>
       <li id="trashCan_list" class="trashCan_list"></li>
@@ -307,7 +331,7 @@
     <div class="equip-status-box">
       <ol>
         <li>设备</li>
-        <li style="margin-left: 25px;">告警消防</li>
+        <li style="margin-left: 25px;">告警内容</li>
         <li>告警时间</li>
         <li>状态</li>
       </ol>
@@ -802,11 +826,6 @@
       GLTFLoader_otherBuild
 
     let model_video1, model_video2, model_video3, model_video4, model_video5
-
-    let video_path = './assets/sexiangtou.gltf'
-    let gate_path = './assets/zhaji_real.gltf'
-    let smoke_path = './assets/yangan.gltf'
-    let water_path = './assets/water_box.gltf'
 
     let model_all = [] //所有模型
     let model_all_floor1 = [] //每层所有模型
@@ -1375,7 +1394,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             console.log(Math.round(percentComplete, 2) + '% downloaded');
-            document.getElementById('progress').innerText = "系统加载中" + Math.round(percentComplete, 2) + '%' + "  最低要求4核8G以上配置运行此系统";
+            document.getElementById('progress').innerText = "数据加载中" + Math.round(percentComplete, 2) + '%' + "  最低要求4核8G以上配置运行此系统";
             if (percentComplete == 100) {
               setTimeout(() => {
                 $('#progress').hide()
@@ -1384,8 +1403,14 @@
           }
         })
 
-
       $('#back_all').hide()
+      //隐藏左侧部分元素
+      $('#video_list').hide()
+      $('#waterTank_list').hide()
+      $('#smoke_list').hide()
+      $('#gate_list').hide()
+      $('#AOCN_list').hide()
+      $('#meter_list').hide()
     }
 
     // 点击隐藏
@@ -1669,6 +1694,7 @@
 
       // initStats() //加载性能监视
       animate()
+      //创建摄像头icon
       createIcon('video_f1_1', 'videoIcon', 'f1')
       createIcon('video_f1_2', 'videoIcon', 'f1')
       createIcon('video_f6_1', 'videoIcon', 'f6')
@@ -1691,9 +1717,9 @@
       createIcon('video_f8_6', 'videoIcon', 'f8')
       createIcon('video_f8_7', 'videoIcon', 'f8')
       createIcon('video_f8_8', 'videoIcon', 'f8')
-      // createIcon('video2', 'videoIcon')
-      // createIcon('video3', 'videoIcon')
-      // createIcon('video4', 'videoIcon')
+      //创建水箱icon
+      createIcon('tank_f9', 'waterIcon', 'f9')
+      //创建闸机icon
       createIcon('gate1', 'gateIcon', 'f1')
       createIcon('gate2', 'gateIcon', 'f1')
       // createIcon('smoke_f1_1', 'smokeIcon', 'f1')
@@ -1718,10 +1744,29 @@
       createIcon('smoke_f3_18', 'smokeIcon', 'f3')
       createIcon('smoke_f3_19', 'smokeIcon', 'f3')
       createIcon('smoke_f3_20', 'smokeIcon', 'f3')
-
+      //创建弹窗
       create_video_Layer('video_f1_1_ly', 'videoLayer')
       create_video_Layer('video_f1_2_ly', 'videoLayer')
-      // createLayer('video_f1_1_ly', 'videoLayer')
+      create_video_Layer('video_f6_1_ly', 'videoLayer')
+      create_video_Layer('video_f6_2_ly', 'videoLayer')
+      create_video_Layer('video_f6_3_ly', 'videoLayer')
+      create_video_Layer('video_f6_4_ly', 'videoLayer')
+      create_video_Layer('video_f6_5_ly', 'videoLayer')
+      create_video_Layer('video_f6_6_ly', 'videoLayer')
+      create_video_Layer('video_f6_7_ly', 'videoLayer')
+      create_video_Layer('video_f6_8_ly', 'videoLayer')
+      create_video_Layer('video_f6_9_ly', 'videoLayer')
+      create_video_Layer('video_f6_10_ly', 'videoLayer')
+      create_video_Layer('video_f6_11_ly', 'videoLayer')
+      create_video_Layer('video_f6_12_ly', 'videoLayer')
+      create_video_Layer('video_f9_1_ly', 'videoLayer')
+      create_video_Layer('video_f9_2_ly', 'videoLayer')
+      create_video_Layer('video_f9_3_ly', 'videoLayer')
+      create_video_Layer('video_f9_4_ly', 'videoLayer')
+      create_video_Layer('video_f9_5_ly', 'videoLayer')
+      create_video_Layer('video_f9_6_ly', 'videoLayer')
+      //创建水箱弹窗
+      createLayer('tank_f9_ly', 'tankLayer')
       // createLayer('video_f1_2_ly', 'videoLayer')
       // createLayer('video3_ly', 'videoLayer')
       // createLayer('video4_ly', 'videoLayer')
@@ -1732,13 +1777,21 @@
       // createLayer('smoke3_ly', 'smokeLayer')
 
       layer_show('videoIcon')
-      layer_show('gateIcon')
+      layer_show('waterIcon')
       layer_show('smokeIcon')
+      layer_show('gateIcon')
     }
 
     //进入大楼
     $('#in_ex_floor').on('click', function () {
       $('#back_all').show()
+      //显示左侧部分元素
+      $('#video_list').show()
+      $('#waterTank_list').show()
+      $('#smoke_list').show()
+      $('#gate_list').show()
+      $('#AOCN_list').show()
+      $('#meter_list').show()
 
       hiddenObject('all')
       hiddenObject('other')
@@ -1889,7 +1942,8 @@
     //添加弹窗dom
     function createLayer(mesh_id, class_name) {
       let iconDiv = document.createElement('div')
-      iconDiv.className = class_name
+      iconDiv.className = 'Layer'
+      iconDiv.classList.add(class_name)
       iconDiv.id = mesh_id
       let bodyDom = document.body
       bodyDom.insertBefore(iconDiv, bodyDom.lastChild)
@@ -1899,7 +1953,8 @@
 
     function create_video_Layer(mesh_id, class_name) {
       let iconDiv = document.createElement('div')
-      iconDiv.className = class_name
+      iconDiv.className = 'Layer'
+      iconDiv.classList.add(class_name)
       iconDiv.id = mesh_id
       let videoDiv = `<video class="video-js vjs-default-skin" controls preload="auto" muted data-setup='{}'
         style='width: 100%;height: 100%'></video>;`
@@ -1935,6 +1990,7 @@
         'video_f8_4',
         'video_f8_5',
         'video_f8_6',
+        'tank_f9',
         // 'video3',
         // 'video4',
         'gate1',
@@ -2164,6 +2220,7 @@
       // $('.videoIcon').hide()
       // $('.gateIcon').hide()
       $('.Icon').hide()
+      $('.Layer').hide()
 
       if ((selectedObject.visible = true)) {
         $('#back_all').hide()
@@ -2178,21 +2235,16 @@
       $('#video_list').removeClass('video_list_in')
       $('#gate_list').removeClass('gate_list_in')
 
+      //隐藏左侧部分元素
+      $('#video_list').hide()
+      $('#waterTank_list').hide()
+      $('#smoke_list').hide()
+      $('#gate_list').hide()
+      $('#AOCN_list').hide()
+      $('#meter_list').hide()
+      //显示进入大楼
       $('#in_ex_floor').show()
     }
-
-
-    //闸机按钮
-    $('#gate_list').on('click', function () {
-      if ($('.gateIcon').is(':hidden')) {
-        $('.gateIcon').show()
-      } else {
-        $('.gateIcon').hide()
-      }
-    })
-
-
-
 
     $('#camera_position').on('click', function () {
       console.log(camera.position)
