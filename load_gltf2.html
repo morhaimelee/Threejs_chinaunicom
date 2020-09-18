@@ -115,37 +115,13 @@
       display: none;
     }
 
-    .videoLayer {
-      width: 185px;
-      height: 104px;
+    .AOCNIcon {
+      width: 18.5px;
+      height: 23.5px;
       position: absolute;
-      border: 1px solid #fff;
-      display: none;
-    }
-
-    .tankLayer {
-      width: 185px;
-      height: 104px;
-      position: absolute;
-      border: 1px solid #4DFFFF;
-      background: rgba(0, 0, 0, .6);
-      text-align: center;
-      line-height: 104px;
-      font-size: 16px;
-      color: #fff;
-      display: none;
-    }
-
-    .smokeLayer {
-      width: 185px;
-      height: 104px;
-      position: absolute;
-      text-align: center;
-      background: rgba(0, 0, 0, .6);
-      color: #fff;
-      border: 1px solid #4DFFFF;
-      line-height: 104px;
-      font-size: 16px;
+      background: url('./assets/imgs/kongkai.png') center center no-repeat;
+      background-size: 100% auto;
+      cursor: pointer;
       display: none;
     }
 
@@ -298,7 +274,6 @@
         {{each outofAlarm}}
         <div class="realTime-box">
           <ul>
-            
             <li><img src="{{$value.alarmPic}}" alt=""></li>
             <li>告警原因：{{$value.reason}}</li>
             <li>处理情况：{{$value.handlerStatus}}</li>
@@ -787,6 +762,14 @@
       <li class="fl" id="f9">F9</li>
     </ul>
   </div>
+
+  <!-- <div class="layer_demo">
+    <ul class="layer_status">
+      <li>设备： <span>烟感20</span></li>
+      <li>情况： <span>在线</span></li>
+      <li>状态： <span>正常</span></li>
+    </ul>
+  </div> -->
 
   <!-- <div id="camera_position">相机位置</div> -->
   <script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.8.0/echarts.js"></script>
@@ -1484,7 +1467,6 @@
     var test = 'model_video'
     let model_position
 
-
     function load1otherModel() {
       GLTFLoader_Floor1_other = new THREE.GLTFLoader();
       GLTFLoader_Floor1_other.setDRACOLoader(dracoLoader)
@@ -1729,7 +1711,7 @@
       createIcon('gate2', 'gateIcon', 'f1')
       // createIcon('smoke_f1_1', 'smokeIcon', 'f1')
       // createIcon('smoke_f1_2', 'smokeIcon', 'f1')
-      createIcon('smoke_f3_1', 'smokeIcon', 'f3')
+      // createIcon('smoke_f3_1', 'smokeIcon', 'f3')
       createIcon('smoke_f3_2', 'smokeIcon', 'f3')
       createIcon('smoke_f3_3', 'smokeIcon', 'f3')
       createIcon('smoke_f3_4', 'smokeIcon', 'f3')
@@ -1742,13 +1724,19 @@
       createIcon('smoke_f3_11', 'smokeIcon', 'f3')
       createIcon('smoke_f3_12', 'smokeIcon', 'f3')
       createIcon('smoke_f3_13', 'smokeIcon', 'f3')
-      createIcon('smoke_f3_14', 'smokeIcon', 'f3')
-      createIcon('smoke_f3_15', 'smokeIcon', 'f3')
+      // createIcon('smoke_f3_14', 'smokeIcon', 'f3')
+      // createIcon('smoke_f3_15', 'smokeIcon', 'f3')
       createIcon('smoke_f3_16', 'smokeIcon', 'f3')
       createIcon('smoke_f3_17', 'smokeIcon', 'f3')
       createIcon('smoke_f3_18', 'smokeIcon', 'f3')
       createIcon('smoke_f3_19', 'smokeIcon', 'f3')
       createIcon('smoke_f3_20', 'smokeIcon', 'f3')
+      //空开icon
+      createIcon('aocn_f3_1', 'AOCNIcon', 'f3')
+      createIcon('aocn_f8_2', 'AOCNIcon', 'f8')
+      createIcon('aocn_f8_3', 'AOCNIcon', 'f8')
+      createIcon('aocn_f8_4', 'AOCNIcon', 'f8')
+      createIcon('aocn_f9_1', 'AOCNIcon', 'f9')
       //创建弹窗
       create_video_Layer('video_f1_1_ly', 'videoLayer')
       create_video_Layer('video_f1_2_ly', 'videoLayer')
@@ -1773,7 +1761,7 @@
       //创建水箱弹窗
       createLayer('tank_f9_ly', 'tankLayer')
       //创建烟感弹窗
-      createLayer('smoke_f3_1_ly', 'smokeLayer')
+      // createLayer('smoke_f3_1_ly', 'smokeLayer')
       createLayer('smoke_f3_2_ly', 'smokeLayer')
       createLayer('smoke_f3_3_ly', 'smokeLayer')
       createLayer('smoke_f3_4_ly', 'smokeLayer')
@@ -1786,26 +1774,29 @@
       createLayer('smoke_f3_11_ly', 'smokeLayer')
       createLayer('smoke_f3_12_ly', 'smokeLayer')
       createLayer('smoke_f3_13_ly', 'smokeLayer')
-      createLayer('smoke_f3_14_ly', 'smokeLayer')
-      createLayer('smoke_f3_15_ly', 'smokeLayer')
+      // createLayer('smoke_f3_14_ly', 'smokeLayer')
+      // createLayer('smoke_f3_15_ly', 'smokeLayer')
       createLayer('smoke_f3_16_ly', 'smokeLayer')
       createLayer('smoke_f3_17_ly', 'smokeLayer')
       createLayer('smoke_f3_18_ly', 'smokeLayer')
       createLayer('smoke_f3_19_ly', 'smokeLayer')
       createLayer('smoke_f3_20_ly', 'smokeLayer')
-      // createLayer('video_f1_2_ly', 'videoLayer')
-      // createLayer('video3_ly', 'videoLayer')
-      // createLayer('video4_ly', 'videoLayer')
-      // createLayer('gate1_ly', 'gateLayer')
-      // createLayer('gate2_ly', 'gateLayer')
-      // createLayer('smoke1_ly', 'smokeLayer')
-      // createLayer('smoke2_ly', 'smokeLayer')
-      // createLayer('smoke3_ly', 'smokeLayer')
+      //创建闸机弹窗
+      createLayer('gate1_ly', 'gateLayer')
+      createLayer('gate2_ly', 'gateLayer')
+      //创建空开弹窗
+      createLayer('aocn_f3_1', 'AOCNLayer')
+      createLayer('aocn_f8_2', 'AOCNLayer')
+      createLayer('aocn_f8_3', 'AOCNLayer')
+      createLayer('aocn_f8_4', 'AOCNLayer')
+      createLayer('aocn_f9_1', 'AOCNLayer')
 
+      //弹窗初始化
       layer_show('videoIcon')
       layer_show('waterIcon')
       layer_show('smokeIcon')
       layer_show('gateIcon')
+      layer_show('AOCNIcon')
     }
 
     //进入大楼
@@ -1818,6 +1809,9 @@
       $('#gate_list').show()
       $('#AOCN_list').show()
       $('#meter_list').show()
+      //隐藏垃圾桶井盖
+      $('#trashCan_list').hide()
+      $('#hole_cover_list').hide()
 
       hiddenObject('all')
       hiddenObject('other')
@@ -2042,7 +2036,13 @@
         'smoke_f3_17',
         'smoke_f3_18',
         'smoke_f3_19',
-        'smoke_f3_20'
+        'smoke_f3_20',
+
+        'aocn_f3_1',
+        'aocn_f8_2',
+        'aocn_f8_3',
+        'aocn_f8_4',
+        'aocn_f9_1'
       ]
       let halfWidth = window.innerWidth / 2
       let halfHeight = window.innerHeight / 2

@@ -323,6 +323,8 @@ icon_clk('waterTank_list', 'waterTank_list_in', 'waterIcon')
 icon_clk('smoke_list', 'smoke_list_in', 'smokeIcon')
 //闸机按钮
 icon_clk('gate_list', 'gate_list_in', 'gateIcon')
+//空开按钮
+icon_clk('AOCN_list', 'AOCN_list_in', 'AOCNIcon')
 
 
 //icon按钮

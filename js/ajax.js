@@ -96,11 +96,123 @@ function layer_show(clk_icon_classname) {
                     data: { type: 9 },
                     success: function (resp) {
                         console.log(resp)
-                        console.log(resp.data.length)
-                        console.log($('#' + this_id + '_ly'))
-                        $('#' + this_id + '_ly').html("状态：正常")
+                        let address, onlineStatusName, repairDesc
+                        if (that == 'smoke_f3_2') {
+                            address = resp.data.c_1305152385521356802.address
+                            onlineStatusName = resp.data.c_1305152385521356802.onlineStatusName
+                            repairDesc = resp.data.c_1305152385521356802.repairDesc
+                        } else if (that == 'smoke_f3_3') {
+                            address = resp.data.c_1305152385391333378.address
+                            onlineStatusName = resp.data.c_1305152385391333378.onlineStatusName
+                            repairDesc = resp.data.c_1305152385391333378.repairDesc
+                        } else if (that == 'smoke_f3_4') {
+                            address = resp.data.c_1305152371650793474.address
+                            onlineStatusName = resp.data.c_1305152371650793474.onlineStatusName
+                            repairDesc = resp.data.c_1305152371650793474.repairDesc
+                        } else if (that == 'smoke_f3_6') {
+                            address = resp.data.c_1305152385248727041.address
+                            onlineStatusName = resp.data.c_1305152385248727041.onlineStatusName
+                            repairDesc = resp.data.c_1305152385248727041.repairDesc
+                        } else if (that == 'smoke_f3_7') {
+                            address = resp.data.c_1305152385085149186.address
+                            onlineStatusName = resp.data.c_1305152385085149186.onlineStatusName
+                            repairDesc = resp.data.c_1305152385085149186.repairDesc
+                        } else if (that == 'smoke_f3_8') {
+                            address = resp.data.c_1305152384929959938.address
+                            onlineStatusName = resp.data.c_1305152384929959938.onlineStatusName
+                            repairDesc = resp.data.c_1305152384929959938.repairDesc
+                        } else if (that == 'smoke_f3_9') {
+                            address = resp.data.c_1305152384749604865.address
+                            onlineStatusName = resp.data.c_1305152384749604865.onlineStatusName
+                            repairDesc = resp.data.c_1305152384749604865.repairDesc
+                        } else if (that == 'smoke_f3_10') {
+                            address = resp.data.c_1305152384611192833.address
+                            onlineStatusName = resp.data.c_1305152384611192833.onlineStatusName
+                            repairDesc = resp.data.c_1305152384611192833.repairDesc
+                        } else if (that == 'smoke_f3_11') {
+                            address = resp.data.c_1305152384468586497.address
+                            onlineStatusName = resp.data.c_1305152384468586497.onlineStatusName
+                            repairDesc = resp.data.c_1305152384468586497.repairDesc
+                        } else if (that == 'smoke_f3_12') {
+                            address = resp.data.c_1305152384330174465.address
+                            onlineStatusName = resp.data.c_1305152384330174465.onlineStatusName
+                            repairDesc = resp.data.c_1305152384330174465.repairDesc
+                        } else if (that == 'smoke_f3_13') {
+                            address = resp.data.c_1305152384057544706.address
+                            onlineStatusName = resp.data.c_1305152384057544706.onlineStatusName
+                            repairDesc = resp.data.c_1305152384057544706.repairDesc
+                        } else if (that == 'smoke_f3_16') {
+                            address = resp.data.c_1305152383914938369.address
+                            onlineStatusName = resp.data.c_1305152383914938369.onlineStatusName
+                            repairDesc = resp.data.c_1305152383914938369.repairDesc
+                        } else if (that == 'smoke_f3_17') {
+                            address = resp.data.c_1305152383738777602.address
+                            onlineStatusName = resp.data.c_1305152383738777602.onlineStatusName
+                            repairDesc = resp.data.c_1305152383738777602.repairDesc
+                        } else if (that == 'smoke_f3_18') {
+                            address = resp.data.c_1305152383600365569.address
+                            onlineStatusName = resp.data.c_1305152383600365569.onlineStatusName
+                            repairDesc = resp.data.c_1305152383600365569.repairDesc
+                        } else if (that == 'smoke_f3_19') {
+                            address = resp.data.c_1305152383436787714.address
+                            onlineStatusName = resp.data.c_1305152383436787714.onlineStatusName
+                            repairDesc = resp.data.c_1305152383436787714.repairDesc
+                        } else if (that == 'smoke_f3_20') {
+                            address = resp.data.c_1305152383248044033.address
+                            onlineStatusName = resp.data.c_1305152383248044033.onlineStatusName
+                            repairDesc = resp.data.c_1305152383248044033.repairDesc
+                        }
+                        $('#' + this_id + '_ly').html(`<ul class="layer_status">
+                        <li>设备： <span>` + address + `</span></li>
+                        <li>情况： <span>` + onlineStatusName + `</span></li>
+                        <li>状态： <span>` + repairDesc + `</span></li>
+                      </ul>`)
                     }
                 });
+            } else if (clk_icon_classname == 'gateIcon') {
+                if (that == 'gate1') {
+                    $.ajax({
+                        url: "http://58.16.56.202:9000/smart-bldg/big/screen/getGateDeviceLastData",
+                        headers: { 'Auth-Token': token },
+                        data: { devId: "1000016" },
+                        success: function (resp) {
+                            console.log(resp)
+                            $('#' + this_id + '_ly').html(`<ul class="layer_status">
+                        <li>设备： <span>A栋一楼翼闸</span></li>
+                        <li>最后进入： <span>` + resp.data.personName + `</span></li>
+                        <li>部门： <span>` + resp.data.deptName + `</span></li>
+                        <li>时间： <span>` + resp.data.swingTime + `</span></li>
+                        <li><span><img src="` + resp.data.recordImage + `"></span></li>
+                      </ul>`)
+                        }
+                    })
+                } else if (that == 'gate2') {
+                    $.ajax({
+                        url: "http://58.16.56.202:9000/smart-bldg/big/screen/getGateDeviceLastData",
+                        headers: { 'Auth-Token': token },
+                        data: { devId: "1000028" },//"1000028"
+                        success: function (resp) {
+                            console.log(resp)
+                            $('#' + this_id + '_ly').html(`<ul class="layer_status">
+                        <li>设备： <span>B栋一楼翼闸</span></li>
+                        <li>最后进入： <span>` + resp.data.personName + `</span></li>
+                        <li>部门： <span>` + resp.data.deptName + `</span></li>
+                        <li>时间： <span>` + resp.data.swingTime + `</span></li>
+                        <li><span><img src="` + resp.data.recordImage + `"></span></li>
+                      </ul>`)
+                        }
+                    })
+                }
+
+            } else if (clk_icon_classname == 'AOCNIcon') {
+                $.ajax({
+                    url: "http://58.16.56.202:9000/smart-bldg/big/screen/getGateDeviceLastData",
+                    headers: { 'Auth-Token': token },
+                    data: { type: 4 },
+                    success: function (resp) {
+                        console.log(resp)
+                    }
+                })
             }
         } else {
             $('#' + this_id + '_ly').hide()

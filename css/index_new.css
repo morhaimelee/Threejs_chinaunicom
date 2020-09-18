@@ -389,7 +389,7 @@ li {
 }
 
 .park_list_in {
-    background: url('../assets/imgs/tingche-icon-in.png') center center no-repeat;
+    background     : url('../assets/imgs/tingche-icon-in.png') center center no-repeat;
     background-size: 24px 24px;
     border         : 1px solid #4DFFFF;
 }
@@ -404,7 +404,7 @@ li {
 }
 
 .AOCN_list_in {
-    background: url('../assets/imgs/kongkai-icon-in.png') center center no-repeat;
+    background     : url('../assets/imgs/kongkai-icon-in.png') center center no-repeat;
     background-size: 19px 19px;
     border         : 1px solid #4DFFFF;
 }
@@ -419,7 +419,7 @@ li {
 }
 
 .meter_list_in {
-    background: url('../assets/imgs/shuidian-icon-in.png') center center no-repeat;
+    background     : url('../assets/imgs/shuidian-icon-in.png') center center no-repeat;
     background-size: 19px 28px;
     border         : 1px solid #4DFFFF;
 }
@@ -1773,4 +1773,110 @@ li {
 
 .un-yuyue {
     background: #ff6767;
+}
+
+.layer_demo {
+    width     : 185px;
+    height    : 104px;
+    text-align: center;
+    background: rgba(0, 0, 0, .6);
+    color     : #fff;
+    border    : 1px solid #4DFFFF;
+    font-size : 16px;
+    position  : absolute;
+    top       : 400px;
+    left      : 800px;
+}
+
+
+.videoLayer {
+    width   : 185px;
+    height  : 104px;
+    position: absolute;
+    border  : 1px solid #fff;
+    display : none;
+}
+
+.tankLayer {
+    width      : 185px;
+    height     : 104px;
+    position   : absolute;
+    border     : 1px solid #4DFFFF;
+    background : rgba(0, 0, 0, .6);
+    text-align : center;
+    line-height: 104px;
+    font-size  : 16px;
+    color      : #fff;
+    display    : none;
+}
+
+.smokeLayer {
+    width        : 185px;
+    height       : 104px;
+    position     : absolute;
+    text-align   : center;
+    background   : rgba(0, 0, 0, .6);
+    color        : #fff;
+    border       : 1px solid #4DFFFF;
+    font-size    : 16px;
+    display      : none;
+    border-radius: 6px;
+}
+
+.gateLayer {
+    width        : 185px;
+    height       : 104px;
+    position     : absolute;
+    background   : rgba(0, 0, 0, .6);
+    color        : #fff;
+    border       : 1px solid #4DFFFF;
+    font-size    : 12px;
+    display      : none;
+    border-radius: 6px;
+}
+
+.AOCNLayer {
+    width        : 185px;
+    height       : 104px;
+    position     : absolute;
+    text-align   : center;
+    background   : rgba(0, 0, 0, .6);
+    color        : #fff;
+    border       : 1px solid #4DFFFF;
+    font-size    : 16px;
+    display      : none;
+    border-radius: 6px;
+}
+
+.layer_status {
+    color: #fff;
+}
+
+.layer_status li {
+    color : #4DFFFF;
+    margin: 12px;
+}
+
+.layer_status li span {
+    color: #fff;
+}
+
+.gateLayer .layer_status li {
+    font-size: 12px;
+    margin   : 6px 0 6px 5px;
+}
+
+.gateLayer .layer_status li:last-child {
+    width   : 40px;
+    height  : 40px;
+    display : inline-block;
+    position: absolute;
+    right   : 4px;
+    top     : 4px;
+    margin  : 0;
+}
+
+.gateLayer .layer_status li:last-child img {
+    width : 100%;
+    height: auto;
 }
