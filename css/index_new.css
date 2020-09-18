@@ -1051,6 +1051,10 @@ li {
     left    : 0;
 }
 
+.visitor-real-time-data .warnVideo-title div {
+    width: 180px;
+}
+
 .visitor-sys {
     width     : 390px;
     position  : absolute;
@@ -1690,7 +1694,7 @@ li {
 .energy-num2 {
     position: absolute;
     top     : 300px;
-    right   : 68px;
+    right   : 86px;
 }
 
 .energy-num span {
@@ -1835,19 +1839,6 @@ li {
     border-radius: 6px;
 }
 
-.AOCNLayer {
-    width        : 185px;
-    height       : 104px;
-    position     : absolute;
-    text-align   : center;
-    background   : rgba(0, 0, 0, .6);
-    color        : #fff;
-    border       : 1px solid #4DFFFF;
-    font-size    : 16px;
-    display      : none;
-    border-radius: 6px;
-}
-
 .layer_status {
     color: #fff;
 }
@@ -1879,4 +1870,75 @@ li {
 .gateLayer .layer_status li:last-child img {
     width : 100%;
     height: auto;
+}
+
+.AOCNLayer {
+    width        : 185px;
+    height       : 144px;
+    position     : absolute;
+    background   : rgba(0, 0, 0, .6);
+    color        : #fff;
+    border       : 1px solid #4DFFFF;
+    font-size    : 12px;
+    display      : none;
+    border-radius: 6px;
+    overflow     : hidden;
+}
+
+.AOCNLayer .layer_status li {
+    font-size: 14px;
+    margin   : 10px 0 6px 10px;
+}
+
+#aocn_f3_1_ly {
+    height: 194px;
+}
+
+.AOCNLayer .layer_status li:last-child {
+    transform: scale(0.5);
+    display  : inline-block;
+    width    : 300px;
+    font-size: 20px;
+    margin   : -50px 0 0 -63px;
+}
+
+#aocn_f8_2_ly .layer_status li:last-child {
+    width    : auto;
+    margin   : 10px 0 6px 10px;
+    transform: none;
+    font-size: 12px;
+}
+
+#aocn_f8_3_ly .layer_status li:last-child {
+    width    : auto;
+    margin   : 10px 0 6px 10px;
+    transform: none;
+    font-size: 12px;
+}
+
+#aocn_f8_4_ly .layer_status li:last-child {
+    width    : auto;
+    margin   : 10px 0 6px 10px;
+    transform: none;
+    font-size: 12px;
+}
+
+#aocn_f9_1_ly .layer_status li:last-child {
+    width    : auto;
+    margin   : 10px 0 6px 10px;
+    transform: none;
+    font-size: 12px;
+}
+
+.meterLayer {
+    width        : 185px;
+    height       : 104px;
+    position     : absolute;
+    text-align   : center;
+    background   : rgba(0, 0, 0, .6);
+    color        : #fff;
+    border       : 1px solid #4DFFFF;
+    font-size    : 16px;
+    display      : none;
+    border-radius: 6px;
 }

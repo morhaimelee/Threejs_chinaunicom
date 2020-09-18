@@ -117,6 +117,18 @@ function hidden_all_Icon() {
                     v.style.display = 'block'
                 }
             })
+        } else if ($('#AOCN_list').hasClass('AOCN_list_in')) {
+            $('.AOCNIcon').each(function (i, v) {
+                if (v.classList.contains(floor_tag)) {
+                    v.style.display = 'block'
+                }
+            })
+        } else if ($('#meter_list').hasClass('meter_list_in')) {
+            $('.meterIcon').each(function (i, v) {
+                if (v.classList.contains(floor_tag)) {
+                    v.style.display = 'block'
+                }
+            })
         }
 
     }
@@ -307,6 +319,7 @@ function icon_clk(list, list_in, icon) { //传参均为字符串
         if (floor_tag == 'f0') {
             if ($('#' + list).hasClass(list_in)) {
                 $('.' + icon).hide()
+                $('.Layer').hide()//layer弹窗关闭
                 $('#' + list).removeClass(list_in)
             } else {
                 $('.' + icon).show()
@@ -325,9 +338,5 @@ icon_clk('smoke_list', 'smoke_list_in', 'smokeIcon')
 icon_clk('gate_list', 'gate_list_in', 'gateIcon')
 //空开按钮
 icon_clk('AOCN_list', 'AOCN_list_in', 'AOCNIcon')
-
-
-//icon按钮
-// $('#video_f1_1').on('click', function() {
-//     $('#video_f1_1_ly').show()
-// })
+//水电按钮
+icon_clk('meter_list', 'meter_list_in', 'meterIcon')

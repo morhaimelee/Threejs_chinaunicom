@@ -125,6 +125,16 @@
       display: none;
     }
 
+    .meterIcon {
+      width: 18.5px;
+      height: 23.5px;
+      position: absolute;
+      background: url('./assets/imgs/shuidian.png') center center no-repeat;
+      background-size: 100% auto;
+      cursor: pointer;
+      display: none;
+    }
+
     #camera_position {
       width: 100px;
       height: 100px;
@@ -380,7 +390,7 @@
               <li>0</li>
               <li>6</li>
               <li>4</li>
-              <li>2</li>
+              <li>1</li>
             </ul>
           </div>人
         </span>
@@ -390,8 +400,8 @@
             <ul class="person-single-num">
               <li>0</li>
               <li>0</li>
-              <li>1</li>
-              <li>2</li>
+              <li>0</li>
+              <li>3</li>
             </ul>
           </div>人
         </span>
@@ -715,8 +725,8 @@
       <div><i class="dian"></i></div>
       <div><i class="shui"></i></div>
     </div>
-    <div class="energy-num"><span id="dian_num">12546.9</span>kw</div>
-    <div class="energy-num energy-num2"><span id="shui_num">12546.9</span>t</div>
+    <div class="energy-num"><span id="dian_num">325469</span>kw</div>
+    <div class="energy-num energy-num2"><span id="shui_num">2846</span>t</div>
     <div class="total-dian-text">累计耗电总量</div>
     <div class="total-shui-text">累计耗水总量</div>
     <!-- 当日能耗趋势 -->
@@ -781,11 +791,8 @@
   <script>
 
 
-    echarts.init(document.getElementById('echarts_second_leftTop')).setOption(option1_second); //二页左上角echarts
-    echarts.init(document.getElementById('echarts_second_leftBottom')).setOption(option2_second); //二页左上角echarts
 
-    echarts.init(document.getElementById('echarts_third_leftMid')).setOption(option2_third); //三页中echarts
-    echarts.init(document.getElementById('echarts_third_rightTop')).setOption(option3_third); //三页右上echarts
+
     echarts.init(document.getElementById('echarts_fourth_rightTop')).setOption(option1_fourth); //四页右上echarts
     echarts.init(document.getElementById('echarts_fourth_rightBottom')).setOption(option2_fourth); //四页右下echarts
 
@@ -1607,16 +1614,12 @@
       //1楼模型
       loadModel('./assets/inside_gltf/设备/a栋闸机.gltf', 'gate1', 1, 'hide', 0.2, 0, 0.001)
       loadModel('./assets/inside_gltf/设备/b栋闸机.gltf', 'gate2', 1, 'hide')
-      // loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f1_1', 1, 'hide', 0.1, 0.001, -0.15)
-      // loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f1_2', 1, 'hide', 3.4, 0.001, -0.14)
-      // loadVideo('video_f1_1', 1, 'hide', 0.75, 0, 1)
-      // loadVideo('video_f1_2', 1, 'hide', -1.5, 0, 1)
       loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f1_1', 1, 'hide', 0.482, -0.007, -0.894)
       loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f1_2', 1, 'hide', 2.519, -0.008, -0.895)
       //二楼模型
       loadModel('./assets/inside_gltf/设备/水表.gltf', 'meter_f2_1', 2, 'hide', 2.478, 0.646, 0.107)
-      loadModel('./assets/inside_gltf/设备/水表.gltf', 'meter_f2_1', 2, 'hide', 2.478, 0.600, -0.964)
-      loadModel('./assets/inside_gltf/设备/水表.gltf', 'meter_f2_1', 2, 'hide', 2.478, 0.600, -1.481)
+      loadModel('./assets/inside_gltf/设备/水表.gltf', 'meter_f2_2', 2, 'hide', 2.478, 0.600, -0.964)
+      loadModel('./assets/inside_gltf/设备/水表.gltf', 'meter_f2_3', 2, 'hide', 2.478, 0.600, -1.481)
 
       //三楼模型
       loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f3_1', 3, 'hide', 3.327, 1.33, 1.671)
@@ -1737,6 +1740,13 @@
       createIcon('aocn_f8_3', 'AOCNIcon', 'f8')
       createIcon('aocn_f8_4', 'AOCNIcon', 'f8')
       createIcon('aocn_f9_1', 'AOCNIcon', 'f9')
+      
+      //水电表icon
+      createIcon('meter_f2_1', 'meterIcon', 'f2')
+      createIcon('meter_f2_2', 'meterIcon', 'f2')
+      // createIcon('meter_f2_3', 'meterIcon', 'f2')
+      // createIcon('meter_f6_1', 'meterIcon', 'f6')
+      // createIcon('meter_f9_1', 'meterIcon', 'f9')
       //创建弹窗
       create_video_Layer('video_f1_1_ly', 'videoLayer')
       create_video_Layer('video_f1_2_ly', 'videoLayer')
@@ -1752,12 +1762,12 @@
       create_video_Layer('video_f6_10_ly', 'videoLayer')
       create_video_Layer('video_f6_11_ly', 'videoLayer')
       create_video_Layer('video_f6_12_ly', 'videoLayer')
-      create_video_Layer('video_f9_1_ly', 'videoLayer')
-      create_video_Layer('video_f9_2_ly', 'videoLayer')
-      create_video_Layer('video_f9_3_ly', 'videoLayer')
-      create_video_Layer('video_f9_4_ly', 'videoLayer')
-      create_video_Layer('video_f9_5_ly', 'videoLayer')
-      create_video_Layer('video_f9_6_ly', 'videoLayer')
+      create_video_Layer('video_f8_1_ly', 'videoLayer')
+      create_video_Layer('video_f8_2_ly', 'videoLayer')
+      create_video_Layer('video_f8_3_ly', 'videoLayer')
+      create_video_Layer('video_f8_4_ly', 'videoLayer')
+      create_video_Layer('video_f8_5_ly', 'videoLayer')
+      create_video_Layer('video_f8_6_ly', 'videoLayer')
       //创建水箱弹窗
       createLayer('tank_f9_ly', 'tankLayer')
       //创建烟感弹窗
@@ -1785,11 +1795,17 @@
       createLayer('gate1_ly', 'gateLayer')
       createLayer('gate2_ly', 'gateLayer')
       //创建空开弹窗
-      createLayer('aocn_f3_1', 'AOCNLayer')
-      createLayer('aocn_f8_2', 'AOCNLayer')
-      createLayer('aocn_f8_3', 'AOCNLayer')
-      createLayer('aocn_f8_4', 'AOCNLayer')
-      createLayer('aocn_f9_1', 'AOCNLayer')
+      createLayer('aocn_f3_1_ly', 'AOCNLayer')
+      createLayer('aocn_f8_2_ly', 'AOCNLayer')
+      createLayer('aocn_f8_3_ly', 'AOCNLayer')
+      createLayer('aocn_f8_4_ly', 'AOCNLayer')
+      createLayer('aocn_f9_1_ly', 'AOCNLayer')
+      //创建水电表弹窗
+      createLayer('meter_f2_1_ly', 'meterLayer')
+      createLayer('meter_f2_2_ly', 'meterLayer')
+      // createLayer('meter_f2_3_ly', 'meterLayer')
+      // createLayer('meter_f6_1_ly', 'meterLayer')
+      // createLayer('meter_f9_1_ly', 'meterLayer')
 
       //弹窗初始化
       layer_show('videoIcon')
@@ -1797,6 +1813,7 @@
       layer_show('smokeIcon')
       layer_show('gateIcon')
       layer_show('AOCNIcon')
+      layer_show('meterIcon')
     }
 
     //进入大楼
@@ -1812,6 +1829,9 @@
       //隐藏垃圾桶井盖
       $('#trashCan_list').hide()
       $('#hole_cover_list').hide()
+
+      $('#trashCan_list').removeClass('trashCan_list_in')
+      $('#hole_cover_list').removeClass('hole_cover_list_in')
 
       hiddenObject('all')
       hiddenObject('other')
@@ -2042,7 +2062,13 @@
         'aocn_f8_2',
         'aocn_f8_3',
         'aocn_f8_4',
-        'aocn_f9_1'
+        'aocn_f9_1',
+
+        'meter_f2_1',
+        'meter_f2_2',
+        'meter_f2_3',
+        'meter_f6_1',
+        'meter_f9_1'
       ]
       let halfWidth = window.innerWidth / 2
       let halfHeight = window.innerHeight / 2
@@ -2258,9 +2284,6 @@
         ease: Expo.easeInOut, //Linear.easeNone  Cubic.easeIn
       })
 
-      $('#video_list').removeClass('video_list_in')
-      $('#gate_list').removeClass('gate_list_in')
-
       //隐藏左侧部分元素
       $('#video_list').hide()
       $('#waterTank_list').hide()
@@ -2268,6 +2291,17 @@
       $('#gate_list').hide()
       $('#AOCN_list').hide()
       $('#meter_list').hide()
+      //显示垃圾桶井盖
+      $('#trashCan_list').show()
+      $('#hole_cover_list').show()
+      //取消左侧icon
+      hidden_all_Icon()
+      $('#video_list').removeClass('video_list_in')
+      $('#waterTank_list').removeClass('waterTank_list_in')
+      $('#smoke_list').removeClass('smoke_list_in')
+      $('#gate_list').removeClass('gate_list_in')
+      $('#AOCN_list').removeClass('AOCN_list_in')
+      $('#meter_list').removeClass('meter_list_in')
       //显示进入大楼
       $('#in_ex_floor').show()
     }
