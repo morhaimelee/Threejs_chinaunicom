@@ -1009,6 +1009,19 @@ li {
     display : flex;
 }
 
+#visitor_data .realTime-box ul li:nth-child(1) {
+    width        : 50px;
+    height       : 50px;
+    margin       : 12px 0 4px 68px;
+    border-radius: 2px;
+    overflow     : hidden;
+}
+
+#visitor_data .realTime-box ul li:nth-child(n+2) {
+    transform: scale(0.8);
+    margin   : 0;
+}
+
 .realTime-box {
     margin-right : 10px;
     flex         : 1;
@@ -1869,7 +1882,7 @@ li {
 
 .gateLayer .layer_status li:last-child img {
     width : 100%;
-    height: auto;
+    height: 100%;
 }
 
 .AOCNLayer {
@@ -1931,6 +1944,32 @@ li {
 }
 
 .meterLayer {
+    width        : 185px;
+    height       : 104px;
+    position     : absolute;
+    text-align   : center;
+    background   : rgba(0, 0, 0, .6);
+    color        : #fff;
+    border       : 1px solid #4DFFFF;
+    font-size    : 16px;
+    display      : none;
+    border-radius: 6px;
+}
+
+.trashCanLayer {
+    width        : 185px;
+    height       : 104px;
+    position     : absolute;
+    text-align   : center;
+    background   : rgba(0, 0, 0, .6);
+    color        : #fff;
+    border       : 1px solid #4DFFFF;
+    font-size    : 16px;
+    display      : none;
+    border-radius: 6px;
+}
+
+.hole_coverLayer {
     width        : 185px;
     height       : 104px;
     position     : absolute;

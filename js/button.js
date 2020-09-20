@@ -59,19 +59,19 @@ dracoLoader.setDecoderConfig({ type: 'js' })
 dracoLoader.preload()
 
 function hidden_all_floor(except) {
-    for (let i = 1; i <= 9; i++) {
+    for (let i = 0; i <= 9; i++) {
         hiddenObject(i + 'floor')
     }
     showObject(except)
 }
 function hidden_all_model(except) {
-    for (let i = 1; i <= 9; i++) {
+    for (let i = 0; i <= 9; i++) {
         model_all_model['model_all_floor' + i].forEach(function (e) {
             e.visible = false
         })
     }
 
-    for (let i = 1; i <= 9; i++) {
+    for (let i = 0; i <= 9; i++) {
         hiddenObject(i + 'other')
         // if (except + 'other') {
         showObject(except + 'other')
@@ -125,6 +125,18 @@ function hidden_all_Icon() {
             })
         } else if ($('#meter_list').hasClass('meter_list_in')) {
             $('.meterIcon').each(function (i, v) {
+                if (v.classList.contains(floor_tag)) {
+                    v.style.display = 'block'
+                }
+            })
+        } else if ($('#trashCan_list').hasClass('trashCan_list_in')) {
+            $('.trashCanIcon').each(function (i, v) {
+                if (v.classList.contains(floor_tag)) {
+                    v.style.display = 'block'
+                }
+            })
+        } else if ($('#hole_cover_list').hasClass('hole_cover_list_in')) {
+            $('.hole_coverIcon').each(function (i, v) {
                 if (v.classList.contains(floor_tag)) {
                     v.style.display = 'block'
                 }
@@ -328,6 +340,36 @@ function icon_clk(list, list_in, icon) { //传参均为字符串
         }
     })
 }
+
+function icon_other_clk(list, list_in, icon) { //传参均为字符串
+    $('#' + list).on('click', function () {
+        // if (floor_tag != 'f0') {
+        //     if ($('#' + list).hasClass(list_in)) {
+        //         $('.' + icon).hide()
+        //         $('.Layer').hide()//layer弹窗关闭
+        //         $('#' + list).removeClass(list_in)
+        //     } else {
+        //         $('.' + icon).show()
+        //         $('#' + list).addClass(list_in)
+        //     }
+        // }
+        console.log(floor_tag)
+        if (floor_tag == 'f0') {
+            if ($('#' + list).hasClass(list_in)) {
+                $('.' + icon).hide()
+                $('#' + list).removeClass(list_in)
+                $('.Layer').hide()//layer弹窗关闭
+            } else {
+                $('#' + list).addClass(list_in)
+                $('.' + icon).each(function (i, v) {
+                    if (v.classList.contains(floor_tag)) {
+                        v.style.display = 'block'
+                    }
+                })
+            }
+        }
+    })
+}
 //安防监控按钮
 icon_clk('video_list', 'video_list_in', 'videoIcon')
 //水箱按钮
@@ -340,3 +382,7 @@ icon_clk('gate_list', 'gate_list_in', 'gateIcon')
 icon_clk('AOCN_list', 'AOCN_list_in', 'AOCNIcon')
 //水电按钮
 icon_clk('meter_list', 'meter_list_in', 'meterIcon')
+//垃圾箱
+icon_other_clk('trashCan_list', 'trashCan_list_in', 'trashCanIcon')
+//井盖
+icon_other_clk('hole_cover_list', 'hole_cover_list_in', 'hole_coverIcon')

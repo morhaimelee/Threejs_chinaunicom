@@ -9,7 +9,6 @@ function layer_show(clk_icon_classname) {
     $('.' + clk_icon_classname).on('click', function () {
         let this_id = $(this).attr('id')
         let that = this_id
-        console.log(that)
         if ($('#' + this_id + '_ly').is(':hidden')) {
             $('#' + this_id + '_ly').show()
             if (clk_icon_classname == 'videoIcon') {
@@ -254,7 +253,7 @@ function layer_show(clk_icon_classname) {
                                 dev_arr.push(resp.data.A903[i].devName)
                             }
                             $('#' + this_id + '_ly').html(`<ul class="layer_status">
-                            <li>类型： <span>` + "空开" + `</span></li>
+                            <li>类型： <span>` + "正常" + `</span></li>
                             <li>状态： <span>` + resp.data.A903[0].repairDesc + `</span></li>
                             <li>设备： <span>` + dev_arr.join('-') + `</span></li>
                           </ul>`)
@@ -265,9 +264,96 @@ function layer_show(clk_icon_classname) {
                 $.ajax({
                     url: "http://58.16.56.202:9000/smart-bldg/big/screen/getTopscommHydropower",
                     headers: { 'Auth-Token': token },
-                    data: { type: 4 },
+                    // data: { type: 4 },
                     success: function (resp) {
                         console.log(resp)
+                        if (that == 'meter_f2_2') {
+                            $('#' + this_id + '_ly').html(`<ul class="layer_status">
+                            <li>状态： <span>` + "正常" + `</span></li>
+                            <li>读数： <span>` + resp.data[0].data + `kwh</span></li>
+                            <li>设备名称： <span>` + "电表" + `</span></li>
+                          </ul>`)
+                        } else if (that == 'meter_f2_1') {
+                            $('#' + this_id + '_ly').html(`<ul class="layer_status">
+                            <li>状态： <span>` + "正常" + `</span></li>
+                            <li>读数： <span>` + resp.data[1].data + `m³</span></li>
+                            <li>设备名称： <span>` + "水表" + `</span></li>
+                          </ul>`)
+                        }
+                    }
+                })
+            } else if (clk_icon_classname == 'trashCanIcon') {
+                $.ajax({
+                    url: "http://58.16.56.202:9000/smart-bldg/big/screen/listDeviceInfoByType",
+                    headers: { 'Auth-Token': token },
+                    data: { type: 12 },
+                    success: function (resp) {
+                        console.log(resp)
+                        if (that == 'trashCan_f0_1') {
+                            $('#' + this_id + '_ly').html(`<ul class="layer_status">
+                            <li>设备名称： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe56bc0003.address + `</span></li>
+                            <li>状态： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe56bc0003.onlineStatusName + `</span></li>
+                            <li>情况： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe56bc0003.repairDesc + `</span></li>
+                          </ul>`)
+                        } else if (that == 'trashCan_f0_2') {
+                            $('#' + this_id + '_ly').html(`<ul class="layer_status">
+                            <li>设备名称： <span>` + resp.data.c_4028e38174967eb60174967eb6910002.address + `</span></li>
+                            <li>状态： <span>` + resp.data.c_4028e38174967eb60174967eb6910002.onlineStatusName + `</span></li>
+                            <li>情况： <span>` + resp.data.c_4028e38174967eb60174967eb6910002.repairDesc + `</span></li>
+                          </ul>`)
+                        } else if (that == 'trashCan_f0_3') {
+                            $('#' + this_id + '_ly').html(`<ul class="layer_status">
+                            <li>设备名称： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe569e0001.address + `</span></li>
+                            <li>状态： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe569e0001.onlineStatusName + `</span></li>
+                            <li>情况： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe569e0001.repairDesc + `</span></li>
+                          </ul>`)
+                        } else if (that == 'trashCan_f0_4') {
+                            $('#' + this_id + '_ly').html(`<ul class="layer_status">
+                            <li>设备名称： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe56c50004.address + `</span></li>
+                            <li>状态： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe56c50004.onlineStatusName + `</span></li>
+                            <li>情况： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe56c50004.repairDesc + `</span></li>
+                          </ul>`)
+                        } else if (that == 'trashCan_f0_5') {
+                            $('#' + this_id + '_ly').html(`<ul class="layer_status">
+                            <li>设备名称： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe56820000.address + `</span></li>
+                            <li>状态： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe56820000.onlineStatusName + `</span></li>
+                            <li>情况： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe56820000.repairDesc + `</span></li>
+                          </ul>`)
+                        }
+                    }
+                })
+            } else if (clk_icon_classname == 'hole_coverIcon') {
+                $.ajax({
+                    url: "http://58.16.56.202:9000/smart-bldg/big/screen/listDeviceInfoByType",
+                    headers: { 'Auth-Token': token },
+                    data: { type: 11 },
+                    success: function (resp) {
+                        console.log(resp)
+                        if (that == 'hole_cover_f0_1') {
+                            $('#' + this_id + '_ly').html(`<ul class="layer_status">
+                            <li>设备名称： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe59e60018.address + `</span></li>
+                            <li>状态： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe59e60018.onlineStatusName + `</span></li>
+                            <li>情况： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe59e60018.repairDesc + `</span></li>
+                          </ul>`)
+                        } else if (that == 'hole_cover_f0_2') {
+                            $('#' + this_id + '_ly').html(`<ul class="layer_status">
+                            <li>设备名称： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe59df0017.address + `</span></li>
+                            <li>状态： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe59df0017.onlineStatusName + `</span></li>
+                            <li>情况： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe59df0017.repairDesc + `</span></li>
+                          </ul>`)
+                        } else if (that == 'hole_cover_f0_3') {
+                            $('#' + this_id + '_ly').html(`<ul class="layer_status">
+                            <li>设备名称： <span>` + resp.data.c_4028e38174967eb60174967ebc0e0016.address + `</span></li>
+                            <li>状态： <span>` + resp.data.c_4028e38174967eb60174967ebc0e0016.onlineStatusName + `</span></li>
+                            <li>情况： <span>` + resp.data.c_4028e38174967eb60174967ebc0e0016.repairDesc + `</span></li>
+                          </ul>`)
+                        } else if (that == 'hole_cover_f0_4') {
+                            $('#' + this_id + '_ly').html(`<ul class="layer_status">
+                            <li>设备名称： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe59cd0015.address + `</span></li>
+                            <li>状态： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe59cd0015.onlineStatusName + `</span></li>
+                            <li>情况： <span>` + resp.data.c_8a1e4b8b7499fe56017499fe59cd0015.repairDesc + `</span></li>
+                          </ul>`)
+                        }
                     }
                 })
             }
@@ -287,8 +373,8 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
         success: function (resp) {
             console.log(resp.data)
             setTimeout(() => {
-                let videoSrc = resp.data[30].url
-                $('#equip_name').html(resp.data[30].name)
+                let videoSrc = resp.data[19].url
+                $('#equip_name').html(resp.data[19].name)
                 let arr_name = []
                 let arr_url = []
                 // $.each(resp.data, function (i, value) {
@@ -647,6 +733,40 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
         headers: { 'Auth-Token': token },
         success: function (resp) {
             console.log(resp)
+            $('#visitors_enter1 li img').eq(0).attr('src', resp.data.personEnterRealTime[0].recordImage)
+            $('#visitors_enter1 li').eq(1).html('姓名：' + resp.data.personEnterRealTime[0].personName)
+            $('#visitors_enter1 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[0].deviceName)
+            $('#visitors_enter1 li').eq(3).html('进入时间：' + resp.data.personEnterRealTime[0].swingTime)
+
+            $('#visitors_enter2 li img').eq(0).attr('src', resp.data.personEnterRealTime[3].recordImage)
+            $('#visitors_enter2 li').eq(1).html('姓名：' + resp.data.personEnterRealTime[3].personName)
+            $('#visitors_enter2 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[3].deviceName)
+            $('#visitors_enter2 li').eq(3).html('进入时间：' + resp.data.personEnterRealTime[3].swingTime)
+
+            $('#visitors_enter3 li img').eq(0).attr('src', resp.data.personEnterRealTime[6].recordImage)
+            $('#visitors_enter3 li').eq(1).html('姓名：' + resp.data.personEnterRealTime[6].personName)
+            $('#visitors_enter3 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[6].deviceName)
+            $('#visitors_enter3 li').eq(3).html('进入时间：' + resp.data.personEnterRealTime[6].swingTime)
+
+            $('.visitor-list ul li').eq(0).children().eq(0).html(resp.data.personEnterDetail[0].personName)
+            $('.visitor-list ul li').eq(0).children().eq(1).html(resp.data.personEnterDetail[0].accessName)
+            $('.visitor-list ul li').eq(0).children().eq(1).html(resp.data.personEnterDetail[0].timeStart)
+            $('.visitor-list ul li').eq(0).children().eq(1).html(resp.data.personEnterDetail[0].status)
+
+            $('.visitor-list ul li').eq(1).children().eq(0).html(resp.data.personEnterDetail[1].personName)
+            $('.visitor-list ul li').eq(1).children().eq(1).html(resp.data.personEnterDetail[1].accessName)
+            $('.visitor-list ul li').eq(1).children().eq(1).html(resp.data.personEnterDetail[1].timeStart)
+            $('.visitor-list ul li').eq(1).children().eq(1).html(resp.data.personEnterDetail[1].status)
+
+            $('.visitor-list ul li').eq(2).children().eq(0).html(resp.data.personEnterDetail[4].personName)
+            $('.visitor-list ul li').eq(2).children().eq(1).html(resp.data.personEnterDetail[4].accessName)
+            $('.visitor-list ul li').eq(2).children().eq(1).html(resp.data.personEnterDetail[4].timeStart)
+            $('.visitor-list ul li').eq(2).children().eq(1).html(resp.data.personEnterDetail[4].status)
+
+            $('.visitor-list ul li').eq(3).children().eq(0).html(resp.data.personEnterDetail[6].personName)
+            $('.visitor-list ul li').eq(3).children().eq(1).html(resp.data.personEnterDetail[6].accessName)
+            $('.visitor-list ul li').eq(3).children().eq(1).html(resp.data.personEnterDetail[6].timeStart)
+            $('.visitor-list ul li').eq(3).children().eq(1).html(resp.data.personEnterDetail[6].status)
         }
     })
 
@@ -807,7 +927,7 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                             }
                         }
                     }, {
-                        value: 2000,
+                        value: 1000,
                         name: 'invisible',
                         itemStyle: {
                             normal: {
@@ -863,7 +983,7 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                             }
                         }
                     }, {
-                        value: 50,
+                        value: 100,
                         name: 'invisible',
                         itemStyle: {
                             normal: {
@@ -919,7 +1039,7 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                             }
                         }
                     }, {
-                        value: 800,
+                        value: 1000,
                         name: 'invisible',
                         itemStyle: {
                             normal: {
@@ -1344,8 +1464,6 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
             };
             echarts.init(document.getElementById('echarts_second_leftBottom')).setOption(option2_second); //二页左上角echarts
         }
-
-
 
     });
     // $.get("http://58.16.56.202:9000/smart-bldg/big/screen/personFloor", { 'Auth-Token': token }, function (resp) {

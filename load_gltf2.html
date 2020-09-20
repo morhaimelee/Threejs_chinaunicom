@@ -135,6 +135,26 @@
       display: none;
     }
 
+    .trashCanIcon {
+      width: 18.5px;
+      height: 23.5px;
+      position: absolute;
+      background: url('./assets/imgs/水箱.png') center center no-repeat;
+      background-size: 100% auto;
+      cursor: pointer;
+      display: none;
+    }
+
+    .hole_coverIcon {
+      width: 18.5px;
+      height: 23.5px;
+      position: absolute;
+      background: url('./assets/imgs/水箱-异常.png') center center no-repeat;
+      background-size: 100% auto;
+      cursor: pointer;
+      display: none;
+    }
+
     #camera_position {
       width: 100px;
       height: 100px;
@@ -419,9 +439,9 @@
         <div>Visitors enter real-time data</div>
       </div>
     </section>
-    <div class="visitor-realTime-data">
+    <div class="visitor-realTime-data" id="visitor_data">
       <div class="realTime-box">
-        <ul>
+        <ul id="visitors_enter1">
           <li><img src="./assets/imgs/QQtouxiang.png" alt=""></li>
           <li>姓名： 某某某</li>
           <li>通过门禁： B栋一楼</li>
@@ -429,7 +449,7 @@
         </ul>
       </div>
       <div class="realTime-box">
-        <ul>
+        <ul id="visitors_enter2">
           <li><img src="./assets/imgs/QQtouxiang.png" alt=""></li>
           <li>姓名： 某某某</li>
           <li>通过门禁： B栋一楼</li>
@@ -437,7 +457,7 @@
         </ul>
       </div>
       <div class="realTime-box">
-        <ul>
+        <ul id="visitors_enter3">
           <li><img src="./assets/imgs/QQtouxiang.png" alt=""></li>
           <li>姓名： 某某某</li>
           <li>通过门禁： B栋一楼</li>
@@ -832,7 +852,7 @@
     let model_all_floor7 = []
     let model_all_floor8 = []
     let model_all_floor9 = []
-    let model_all_floorB1 = []
+    let model_all_floor0 = []
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
     // controls = new THREE.OrbitControls(camera, renderer.domElement);
 
@@ -1426,6 +1446,7 @@
     model_all_num['model_all_floor' + 7] = []
     model_all_num['model_all_floor' + 8] = []
     model_all_num['model_all_floor' + 9] = []
+    model_all_num['model_all_floor' + 0] = []
     model_all_model['model_all_floor' + 1] = []
     model_all_model['model_all_floor' + 2] = []
     model_all_model['model_all_floor' + 3] = []
@@ -1435,6 +1456,7 @@
     model_all_model['model_all_floor' + 7] = []
     model_all_model['model_all_floor' + 8] = []
     model_all_model['model_all_floor' + 9] = []
+    model_all_model['model_all_floor' + 0] = []
 
     let tween1,
       tween2,
@@ -1681,7 +1703,17 @@
       // loadModel('./assets/inside_gltf/设备/摄像头.gltf', 'video_f9_2', 9, 'hide', 1.32, 5.18, 0.55)
       // loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f9_1', 9, 'hide', 0, 5.18, -0.1)
       // loadModel('./assets/inside_gltf/设备/烟感.gltf', 'smoke_f9_2', 9, 'hide', 0, 5.18, -2.14)
+      //室外模型
+      loadModel('./assets/inside_gltf/设备/垃圾箱.gltf', 'trashCan_f0_1', 0, 'show', 7.339, 0.484, -0.647)
+      loadModel('./assets/inside_gltf/设备/垃圾箱.gltf', 'trashCan_f0_2', 0, 'show', 3.413, 0.483, -0.644)
+      loadModel('./assets/inside_gltf/设备/垃圾箱.gltf', 'trashCan_f0_3', 0, 'show', -3.165, 0.044, -1.461)
+      loadModel('./assets/inside_gltf/设备/垃圾箱.gltf', 'trashCan_f0_4', 0, 'show', -0.558, 0.443, -3.826)
+      loadModel('./assets/inside_gltf/设备/垃圾箱.gltf', 'trashCan_f0_5', 0, 'show', -0.559, 0.444, -4.248)
 
+      loadModel('./assets/inside_gltf/设备/井盖.gltf', 'hole_cover_f0_1', 0, 'show', -0.549, 0.001, -0.001)
+      loadModel('./assets/inside_gltf/设备/井盖.gltf', 'hole_cover_f0_2', 0, 'show', -3.827, -0.001, -4.112)
+      loadModel('./assets/inside_gltf/设备/井盖.gltf', 'hole_cover_f0_3', 0, 'show', 12.249, 0.218, -4.414)
+      loadModel('./assets/inside_gltf/设备/井盖.gltf', 'hole_cover_f0_4', 0, 'show', 7.732, 0.110, 1.787)
       // initStats() //加载性能监视
       animate()
       //创建摄像头icon
@@ -1740,13 +1772,25 @@
       createIcon('aocn_f8_3', 'AOCNIcon', 'f8')
       createIcon('aocn_f8_4', 'AOCNIcon', 'f8')
       createIcon('aocn_f9_1', 'AOCNIcon', 'f9')
-      
+
       //水电表icon
       createIcon('meter_f2_1', 'meterIcon', 'f2')
       createIcon('meter_f2_2', 'meterIcon', 'f2')
       // createIcon('meter_f2_3', 'meterIcon', 'f2')
       // createIcon('meter_f6_1', 'meterIcon', 'f6')
       // createIcon('meter_f9_1', 'meterIcon', 'f9')
+      //创建垃圾桶Icon
+      createIcon('trashCan_f0_1', 'trashCanIcon', 'f0')
+      createIcon('trashCan_f0_2', 'trashCanIcon', 'f0')
+      createIcon('trashCan_f0_3', 'trashCanIcon', 'f0')
+      createIcon('trashCan_f0_4', 'trashCanIcon', 'f0')
+      createIcon('trashCan_f0_5', 'trashCanIcon', 'f0')
+      //创建井盖Icon
+      createIcon('hole_cover_f0_1', 'hole_coverIcon', 'f0')
+      createIcon('hole_cover_f0_2', 'hole_coverIcon', 'f0')
+      createIcon('hole_cover_f0_3', 'hole_coverIcon', 'f0')
+      createIcon('hole_cover_f0_4', 'hole_coverIcon', 'f0')
+
       //创建弹窗
       create_video_Layer('video_f1_1_ly', 'videoLayer')
       create_video_Layer('video_f1_2_ly', 'videoLayer')
@@ -1806,6 +1850,17 @@
       // createLayer('meter_f2_3_ly', 'meterLayer')
       // createLayer('meter_f6_1_ly', 'meterLayer')
       // createLayer('meter_f9_1_ly', 'meterLayer')
+      //创建垃圾桶弹窗
+      createLayer('trashCan_f0_1_ly', 'trashCanLayer')
+      createLayer('trashCan_f0_2_ly', 'trashCanLayer')
+      createLayer('trashCan_f0_3_ly', 'trashCanLayer')
+      createLayer('trashCan_f0_4_ly', 'trashCanLayer')
+      createLayer('trashCan_f0_5_ly', 'trashCanLayer')
+      //创建井盖弹窗
+      createLayer('hole_cover_f0_1_ly', 'hole_coverLayer')
+      createLayer('hole_cover_f0_2_ly', 'hole_coverLayer')
+      createLayer('hole_cover_f0_3_ly', 'hole_coverLayer')
+      createLayer('hole_cover_f0_4_ly', 'hole_coverLayer')
 
       //弹窗初始化
       layer_show('videoIcon')
@@ -1814,6 +1869,8 @@
       layer_show('gateIcon')
       layer_show('AOCNIcon')
       layer_show('meterIcon')
+      layer_show('trashCanIcon')
+      layer_show('hole_coverIcon')
     }
 
     //进入大楼
@@ -1833,10 +1890,23 @@
       $('#trashCan_list').removeClass('trashCan_list_in')
       $('#hole_cover_list').removeClass('hole_cover_list_in')
 
+      //隐藏所有
+      $('.Icon').hide()
+      $('.Layer').hide()
+
       hiddenObject('all')
       hiddenObject('other')
       hiddenObject('ground')
       hiddenObject('road')
+      hiddenObject('trashCan_f0_1')
+      hiddenObject('trashCan_f0_2')
+      hiddenObject('trashCan_f0_3')
+      hiddenObject('trashCan_f0_4')
+      hiddenObject('trashCan_f0_5')
+      hiddenObject('hole_cover_f0_1')
+      hiddenObject('hole_cover_f0_2')
+      hiddenObject('hole_cover_f0_3')
+      hiddenObject('hole_cover_f0_4')
 
       removeEntity('directionalLight')
       directionalLight = new THREE.DirectionalLight(0xffffff, 1)
@@ -2068,7 +2138,18 @@
         'meter_f2_2',
         'meter_f2_3',
         'meter_f6_1',
-        'meter_f9_1'
+        'meter_f9_1',
+
+        'trashCan_f0_1',
+        'trashCan_f0_2',
+        'trashCan_f0_3',
+        'trashCan_f0_4',
+        'trashCan_f0_5',
+
+        'hole_cover_f0_1',
+        'hole_cover_f0_2',
+        'hole_cover_f0_3',
+        'hole_cover_f0_4'
       ]
       let halfWidth = window.innerWidth / 2
       let halfHeight = window.innerHeight / 2
@@ -2235,6 +2316,8 @@
     //返回主场景
     $('#back_all').on('click', function () {
       back_to_home()
+      $('.Icon').hide()
+      $('.Layer').hide()
       $('#bottomFloor').hide()
     })
 
@@ -2247,6 +2330,17 @@
       showObject('ground')
       showObject('road')
       showObject('other')
+
+      showObject('trashCan_f0_1')
+      showObject('trashCan_f0_2')
+      showObject('trashCan_f0_3')
+      showObject('trashCan_f0_4')
+      showObject('trashCan_f0_5')
+
+      showObject('hole_cover_f0_1')
+      showObject('hole_cover_f0_2')
+      showObject('hole_cover_f0_3')
+      showObject('hole_cover_f0_4')
 
       hiddenObject('1floor')
       hiddenObject('2floor')
@@ -2271,8 +2365,6 @@
 
       // $('.videoIcon').hide()
       // $('.gateIcon').hide()
-      $('.Icon').hide()
-      $('.Layer').hide()
 
       if ((selectedObject.visible = true)) {
         $('#back_all').hide()
