@@ -1208,7 +1208,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let load_1floor
+              let load_1floor = 'flag'
               load_floor_arr.push(load_1floor)
             }
           }
@@ -1241,7 +1241,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let load_2floor
+              let load_2floor = 'flag'
               load_floor_arr.push(load_2floor)
             }
           }
@@ -1274,7 +1274,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let load_3floor
+              let load_3floor = 'flag'
               load_floor_arr.push(load_3floor)
             }
           }
@@ -1307,7 +1307,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let load_4floor
+              let load_4floor = 'flag'
               load_floor_arr.push(load_4floor)
             }
           }
@@ -1339,7 +1339,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let load_5floor
+              let load_5floor = 'flag'
               load_floor_arr.push(load_5floor)
             }
           }
@@ -1374,7 +1374,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let load_6floor
+              let load_6floor = 'flag'
               load_floor_arr.push(load_6floor)
             }
           }
@@ -1408,7 +1408,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let load_7floor
+              let load_7floor = 'flag'
               load_floor_arr.push(load_7floor)
             }
           }
@@ -1444,7 +1444,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let load_8floor
+              let load_8floor = 'flag'
               load_floor_arr.push(load_8floor)
             }
           }
@@ -1481,7 +1481,7 @@
             console.log(Math.round(percentComplete, 2) + '% downloaded');
             document.getElementById('progress').innerText = "数据加载中" + Math.round(percentComplete, 2) + '%' + "  最低要求4核8G以上配置运行此系统";
             if (percentComplete == 100) {
-              let load_9floor
+              let load_9floor = 'flag'
               load_floor_arr.push(load_9floor)
               setTimeout(() => {
                 $('#progress').hide()
@@ -1509,10 +1509,6 @@
       $('#meter_list').hide()
     }
 
-    // if (load_floor_arr.length == 9) {
-    //     console.log(load_floor_arr)
-    //     $('#in_ex_floor').show()
-    //   }
     // 点击隐藏
     // var moonDiv = document.createElement('div');
     // moonDiv.className = 'label';
@@ -1749,15 +1745,25 @@
             if (percentComplete == 100) {
               let other_9floor = 'flag'
               load_other_arr.push(other_9floor)
-              $('#in_ex_floor').show()
+              // $('#in_ex_floor').show()
             }
           }
         })
     }
-    // if (load_other_arr.length == 9) {
-    //   console.log(load_other_arr)
-    //   $('#bottomFloor').show()
+
+    // function show_bottomFloor() {
+    //   if (load_floor_arr.length == 9) {
+    //     console.log(load_floor_arr)
+    //     $('#bottomFloor').show()
+    //   }
     // }
+    function show_in_ex_Floor() {
+      if (load_other_arr.length == 9) {
+        console.log(load_other_arr)
+        // $('#bottomFloor').show()
+        $('#in_ex_floor').show()
+      }
+    }
     //隐藏模型
     function hiddenObject(obj) {
       let selectedObject = scene.getObjectByName(obj)
@@ -2034,6 +2040,8 @@
       layer_show('meterIcon')
       layer_show('trashCanIcon')
       layer_show('hole_coverIcon')
+
+      show_in_ex_Floor()
     }
 
     //进入大楼
@@ -2415,22 +2423,6 @@
     }
 
     function ray(Bplace) {
-      // var Sx = event.clientX; //鼠标单击位置横坐标
-      // var Sy = event.clientY; //鼠标单击位置纵坐标
-
-      // //屏幕坐标转标准设备坐标
-      // var x = (Sx / window.innerWidth) * 2 - 1; //标准设备横坐标
-      // var y = -(Sy / window.innerHeight) * 2 + 1; //标准设备纵坐标
-      // var standardVector = new THREE.Vector3(x, y, 0.5); //标准设备坐标
-
-      // //标准设备坐标转世界坐标
-      // var worldVector = standardVector.unproject(camera);
-
-      //射线投射方向单位向量(worldVector坐标减相机位置坐标)
-      // var ray = worldVector.sub(camera.position).normalize();
-      //创建射线投射器对象
-      // var raycaster = new THREE.Raycaster(camera.position, ray);
-      //方法2
       let x = event.clientX
       let y = event.clientY
       let mouse = new THREE.Vector2()

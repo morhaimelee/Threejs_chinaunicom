@@ -164,7 +164,7 @@ li {
 .topleft {
     width          : 350px;
     height         : 52px;
-    background     : url('../assets/imgs/top@2x.png') center center no-repeat;
+    background     : url('../assets/imgs/index_title.png') center center no-repeat;
     background-size: contain;
     position       : absolute;
     top            : 20px;
