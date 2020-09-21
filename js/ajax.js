@@ -448,124 +448,275 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
             }, 3000);
         }
     })
-    // 设备在线情况
-    $.ajax({
-        url: "http://58.16.56.202:9000/smart-bldg/big/screen/equipmentOperationStatus",
-        headers: { 'Auth-Token': token },
-        success: function (resp) {
-            setTimeout(() => {
-                $('#equip_num').html(resp.data.monitorStatus.totalNum)
-                $('#onlineNum').html(resp.data.monitorStatus.onlineNum)
-                $('#offlineNum').html(resp.data.monitorStatus.offlineNum)
-                $('#repairNum').html(resp.data.monitorStatus.repairNum)
 
-                let equip_num = resp.data.deviceStatus.name
-                let equip_online = resp.data.deviceStatus.online
-                let equip_total = resp.data.deviceStatus.total
+    function equip_load() {
+        // 设备在线情况
+        $.ajax({
+            url: "http://58.16.56.202:9000/smart-bldg/big/screen/equipmentOperationStatus",
+            headers: { 'Auth-Token': token },
+            success: function (resp) {
+                console.log(resp)
+                setTimeout(() => {
+                    $('#equip_num').html(resp.data.monitorStatus.totalNum)
+                    $('#onlineNum').html(resp.data.monitorStatus.onlineNum)
+                    $('#offlineNum').html(resp.data.monitorStatus.offlineNum)
+                    $('#repairNum').html(resp.data.monitorStatus.repairNum)
 
-                // 主页左下echarts
-                let option1_first = {
-                    grid: {
-                        left: '5%',
-                        right: '5%',
-                        bottom: '5%',
-                        top: '10%',
-                        containLabel: true
-                    },
-                    // tooltip: {
-                    //     trigger: 'axis',
-                    //     axisPointer: {
-                    //         type: 'none'
-                    //     },
-                    //     formatter: function(params) {
-                    //         return params[0].name + '<br/>' +
-                    //             "<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:rgba(36,207,233,0.9)'></span>" +
-                    //             params[0].seriesName + ' : ' + Number((params[0].value.toFixed(4) / 10000).toFixed(2)).toLocaleString() + ' 万元<br/>'
-                    //     }
-                    // },
-                    // backgroundColor: 'rgb(20,28,52)',
-                    xAxis: {
-                        show: false,
-                        type: 'value'
-                    },
-                    yAxis: [{
-                        type: 'category',
-                        inverse: true,
-                        axisLabel: {
-                            show: true,
-                            textStyle: {
-                                color: '#fff'
+                    let equip_name = resp.data.deviceStatus.name
+                    let equip_online = resp.data.deviceStatus.online
+                    let equip_total = resp.data.deviceStatus.total
+
+                    // 主页左下echarts
+                    // 绘制左侧面
+                    const CubeLeft = echarts.graphic.extendShape({
+                        shape: {
+                            x: 0,
+                            y: 0
+                        },
+                        buildPath: function (ctx, shape) {
+                            const xAxisPoint = shape.xAxisPoint
+                            const c0 = [shape.x, shape.y]
+                            const c1 = [shape.x - 13, shape.y - 13]
+                            const c2 = [xAxisPoint[0] - 13, xAxisPoint[1] - 13]
+                            const c3 = [xAxisPoint[0], xAxisPoint[1]]
+                            ctx.moveTo(c0[0], c0[1]).lineTo(c1[0], c1[1]).lineTo(c2[0], c2[1]).lineTo(c3[0], c3[1]).closePath()
+                        }
+                    })
+                    // 绘制右侧面
+                    const CubeRight = echarts.graphic.extendShape({
+                        shape: {
+                            x: 0,
+                            y: 0
+                        },
+                        buildPath: function (ctx, shape) {
+                            const xAxisPoint = shape.xAxisPoint
+                            const c1 = [shape.x, shape.y]
+                            const c2 = [xAxisPoint[0], xAxisPoint[1]]
+                            const c3 = [xAxisPoint[0] + 18, xAxisPoint[1] - 9]
+                            const c4 = [shape.x + 18, shape.y - 9]
+                            ctx.moveTo(c1[0], c1[1]).lineTo(c2[0], c2[1]).lineTo(c3[0], c3[1]).lineTo(c4[0], c4[1]).closePath()
+                        }
+                    })
+                    // 绘制顶面
+                    const CubeTop = echarts.graphic.extendShape({
+                        shape: {
+                            x: 0,
+                            y: 0
+                        },
+                        buildPath: function (ctx, shape) {
+                            const c1 = [shape.x, shape.y]
+                            const c2 = [shape.x + 18, shape.y - 9]
+                            const c3 = [shape.x + 5, shape.y - 22]
+                            const c4 = [shape.x - 13, shape.y - 13]
+                            ctx.moveTo(c1[0], c1[1]).lineTo(c2[0], c2[1]).lineTo(c3[0], c3[1]).lineTo(c4[0], c4[1]).closePath()
+                        }
+                    })
+                    // 注册三个面图形
+                    echarts.graphic.registerShape('CubeLeft', CubeLeft)
+                    echarts.graphic.registerShape('CubeRight', CubeRight)
+                    echarts.graphic.registerShape('CubeTop', CubeTop)
+
+                    const MAX = equip_total
+                    const VALUE = equip_online
+                    let option1_first = {
+                        // backgroundColor: "#012366",
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow'
                             },
+                            formatter: function (params, ticket, callback) {
+                                const item = params[1]
+                                return item.name + ' : ' + item.value;
+                            }
                         },
-                        splitLine: {
-                            show: false
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                        axisLine: {
-                            show: false
-                        },
-                        data: equip_num
-                    }, {
-                        type: 'category',
-                        inverse: true,
-                        axisTick: 'none',
-                        axisLine: 'none',
-                        show: true,
-                        axisLabel: {
-                            textStyle: {
-                                color: '#ffffff',
-                                fontSize: '12'
-                            },
-                            formatter: function (value, index) {
-                                for (let j = 0; j <= equip_total.length; j++) {
-                                    if (index == j) {
-                                        return value + ' / ' + equip_total[j]
-                                    }
+                        // grid: {
+                        //     left: 40,
+                        //     right: 40,
+                        //     bottom: 100,
+                        //     top: 100,
+                        //     containLabel: true
+                        // },
+                        xAxis: {
+                            type: 'category',
+                            data: equip_name,
+                            axisLine: {
+                                show: true,
+                                lineStyle: {
+                                    color: 'white'
                                 }
                             },
-                        },
-                        data: equip_online
-                    }],
-                    series: [{
-                        name: '设备',
-                        type: 'bar',
-                        zlevel: 1,
-                        itemStyle: {
-                            normal: {
-                                barBorderRadius: 30,
-                                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
-                                    offset: 0,
-                                    color: 'rgb(57,89,255,1)'
-                                }, {
-                                    offset: 1,
-                                    color: 'rgb(46,200,207,1)'
-                                }]),
+                            // offset: 25,
+                            axisTick: {
+                                show: true,
+                                // length: 9,
+                                alignWithLabel: true,
+                                lineStyle: {
+                                    color: '#7DFFFD'
+                                }
+                            },
+                            axisLabel: {
+                                show: true,
+                                fontSize: 10
                             },
                         },
-                        barWidth: 20,
-                        data: equip_online
-                    },
-                    {
-                        name: '背景',
-                        type: 'bar',
-                        barWidth: 18,
-                        barGap: '-100%',
-                        data: equip_total,
-                        itemStyle: {
-                            normal: {
-                                color: 'rgba(24,31,68,1)',
-                                barBorderRadius: 30,
+                        yAxis: {
+                            type: 'value',
+                            axisLine: {
+                                show: true,
+                                lineStyle: {
+                                    color: 'white'
+                                }
+                            },
+                            splitLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                            axisLabel: {
+                                show: true,
+                                fontSize: 12
                             }
-                        }
-                        // data: equip_total
-                    }]
-                };
-                echarts.init(document.getElementById('echarts_first_leftBottom')).setOption(option1_first); //主页左下角echarts
-            }, 3000);
-        }
-    })
+                            // boundaryGap: ['0', '80%']
+                        },
+                        series: [{
+                            type: 'custom',
+                            renderItem: function (params, api) {
+                                const location = api.coord([api.value(0), api.value(1)])
+                                return {
+                                    type: 'group',
+                                    children: [{
+                                        type: 'CubeLeft',
+                                        shape: {
+                                            api,
+                                            x: location[0],
+                                            y: location[1],
+                                            xAxisPoint: api.coord([api.value(0), 0])
+                                        },
+                                        style: {
+                                            fill: 'rgba(47,102,192,.27)'
+                                        }
+                                    }, {
+                                        type: 'CubeRight',
+                                        shape: {
+                                            api,
+                                            x: location[0],
+                                            y: location[1],
+                                            xAxisPoint: api.coord([api.value(0), 0])
+                                        },
+                                        style: {
+                                            fill: 'rgba(59,128,226,.27)'
+                                        }
+                                    }, {
+                                        type: 'CubeTop',
+                                        shape: {
+                                            api,
+                                            x: location[0],
+                                            y: location[1],
+                                            xAxisPoint: api.coord([api.value(0), 0])
+                                        },
+                                        style: {
+                                            fill: 'rgba(72,156,221,.27)'
+                                        }
+                                    }]
+                                }
+                            },
+                            data: MAX
+                        }, {
+                            type: 'custom',
+                            renderItem: (params, api) => {
+                                const location = api.coord([api.value(0), api.value(1)])
+                                var color = api.value(1) > 2000 ? 'red' : new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: 'rgba(67,102,243,1)'
+                                },
+                                {
+                                    offset: 1,
+                                    color: 'rgba(29,67,243,1)'
+                                }
+                                ])
+                                return {
+                                    type: 'group',
+                                    children: [{
+                                        type: 'CubeLeft',
+                                        shape: {
+                                            api,
+                                            xValue: api.value(0),
+                                            yValue: api.value(1),
+                                            x: location[0],
+                                            y: location[1],
+                                            xAxisPoint: api.coord([api.value(0), 0])
+                                        },
+                                        style: {
+                                            fill: color
+                                        }
+                                    }, {
+                                        type: 'CubeRight',
+                                        shape: {
+                                            api,
+                                            xValue: api.value(0),
+                                            yValue: api.value(1),
+                                            x: location[0],
+                                            y: location[1],
+                                            xAxisPoint: api.coord([api.value(0), 0])
+                                        },
+                                        style: {
+                                            fill: color
+                                        }
+                                    }, {
+                                        type: 'CubeTop',
+                                        shape: {
+                                            api,
+                                            xValue: api.value(0),
+                                            yValue: api.value(1),
+                                            x: location[0],
+                                            y: location[1],
+                                            xAxisPoint: api.coord([api.value(0), 0])
+                                        },
+                                        style: {
+                                            fill: color
+                                        }
+                                    }]
+                                }
+                            },
+                            data: VALUE
+                        }, {
+                            type: 'bar',
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top',
+                                    fontSize: 10,
+                                    color: '#fff',
+                                    offset: [2, -25],
+                                    // formatter: function (v) {
+                                    //     var val = v.data;
+                                    //     var value = VALUE.data
+                                    //     return value + '/' + val;
+                                    // },
+                                }
+                            },
+                            itemStyle: {
+                                color: 'transparent'
+                            },
+                            tooltip: {
+
+                            },
+                            data: MAX
+                        }]
+                    }
+                    echarts.init(document.getElementById('echarts_first_leftBottom')).setOption(option1_first); //主页左下角echarts
+                }, 3000);
+            }
+        })
+    }
+    setTimeout(() => {
+        equip_load()
+    }, 3000);
+    setInterval(() => {
+        equip_load()
+    }, 30000);
     // 越界告警、安防
     function warning() {
         $.ajax({
@@ -728,348 +879,365 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
         warning()
     }, 60000);
 
-    //人员状况、访客进入管理
-    $.ajax({
-        url: "http://58.16.56.202:9000/smart-bldg/big/screen/personnelStatus",
-        headers: { 'Auth-Token': token },
-        success: function (resp) {
-            console.log(resp)
-            //人员状况
-            $('#company_person ul li').eq(0).html(resp.data.personnelStatus.employeeNum[0])
-            $('#company_person ul li').eq(1).html(resp.data.personnelStatus.employeeNum[1])
-            $('#company_person ul li').eq(2).html(resp.data.personnelStatus.employeeNum[2])
-            $('#company_person ul li').eq(3).html(resp.data.personnelStatus.employeeNum[3])
-            $('#visitor_person ul li').eq(0).html(resp.data.personnelStatus.personNum[0])
-            $('#visitor_person ul li').eq(1).html(resp.data.personnelStatus.personNum[1])
-            $('#visitor_person ul li').eq(2).html(resp.data.personnelStatus.personNum[2])
-            $('#visitor_person ul li').eq(3).html(resp.data.personnelStatus.personNum[3])
+    function personal_status() {
+        //人员状况、访客进入管理
+        $.ajax({
+            url: "http://58.16.56.202:9000/smart-bldg/big/screen/personnelStatus",
+            headers: { 'Auth-Token': token },
+            success: function (resp) {
+                console.log(resp)
+                //人员状况
+                $('#company_person ul li').eq(0).html(resp.data.personnelStatus.employeeNum[0])
+                $('#company_person ul li').eq(1).html(resp.data.personnelStatus.employeeNum[1])
+                $('#company_person ul li').eq(2).html(resp.data.personnelStatus.employeeNum[2])
+                $('#company_person ul li').eq(3).html(resp.data.personnelStatus.employeeNum[3])
+                $('#visitor_person ul li').eq(0).html(resp.data.personnelStatus.personNum[0])
+                $('#visitor_person ul li').eq(1).html(resp.data.personnelStatus.personNum[1])
+                $('#visitor_person ul li').eq(2).html(resp.data.personnelStatus.personNum[2])
+                $('#visitor_person ul li').eq(3).html(resp.data.personnelStatus.personNum[3])
 
-            $('#visitors_enter1 li img').eq(0).attr('src', resp.data.personEnterRealTime[0].recordImage)
-            $('#visitors_enter1 li').eq(1).html('姓名：' + resp.data.personEnterRealTime[0].personName)
-            $('#visitors_enter1 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[0].deviceName)
-            $('#visitors_enter1 li').eq(3).html('进入时间：' + resp.data.personEnterRealTime[0].swingTime)
+                $('#visitors_enter1 li img').eq(0).attr('src', resp.data.personEnterRealTime[0].recordImage)
+                $('#visitors_enter1 li').eq(1).html('姓名：' + resp.data.personEnterRealTime[0].personName)
+                $('#visitors_enter1 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[0].deviceName)
+                $('#visitors_enter1 li').eq(3).html('进入时间：' + resp.data.personEnterRealTime[0].swingTime)
 
-            $('#visitors_enter2 li img').eq(0).attr('src', resp.data.personEnterRealTime[3].recordImage)
-            $('#visitors_enter2 li').eq(1).html('姓名：' + resp.data.personEnterRealTime[3].personName)
-            $('#visitors_enter2 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[3].deviceName)
-            $('#visitors_enter2 li').eq(3).html('进入时间：' + resp.data.personEnterRealTime[3].swingTime)
+                $('#visitors_enter2 li img').eq(0).attr('src', resp.data.personEnterRealTime[3].recordImage)
+                $('#visitors_enter2 li').eq(1).html('姓名：' + resp.data.personEnterRealTime[3].personName)
+                $('#visitors_enter2 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[3].deviceName)
+                $('#visitors_enter2 li').eq(3).html('进入时间：' + resp.data.personEnterRealTime[3].swingTime)
 
-            $('#visitors_enter3 li img').eq(0).attr('src', resp.data.personEnterRealTime[6].recordImage)
-            $('#visitors_enter3 li').eq(1).html('姓名：' + resp.data.personEnterRealTime[6].personName)
-            $('#visitors_enter3 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[6].deviceName)
-            $('#visitors_enter3 li').eq(3).html('进入时间：' + resp.data.personEnterRealTime[6].swingTime)
+                $('#visitors_enter3 li img').eq(0).attr('src', resp.data.personEnterRealTime[6].recordImage)
+                $('#visitors_enter3 li').eq(1).html('姓名：' + resp.data.personEnterRealTime[6].personName)
+                $('#visitors_enter3 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[6].deviceName)
+                $('#visitors_enter3 li').eq(3).html('进入时间：' + resp.data.personEnterRealTime[6].swingTime)
 
-            $('.visitor-sys ul li').eq(0).html(resp.data.personRealTime.totalNum)
-            $('.visitor-sys ul li').eq(1).html(resp.data.personRealTime.currentNum)
-            $('.visitor-sys ul li').eq(2).html(resp.data.personRealTime.notYetNum)
+                $('.visitor-sys ul li').eq(0).html(resp.data.personRealTime.totalNum)
+                $('.visitor-sys ul li').eq(1).html(resp.data.personRealTime.currentNum)
+                $('.visitor-sys ul li').eq(2).html(resp.data.personRealTime.notYetNum)
 
-            $('.visitor-list ul li').eq(0).children().eq(0).html(resp.data.personEnterDetail[0].personName)
-            $('.visitor-list ul li').eq(0).children().eq(1).html(resp.data.personEnterDetail[0].accessName)
-            $('.visitor-list ul li').eq(0).children().eq(1).html(resp.data.personEnterDetail[0].timeStart)
-            $('.visitor-list ul li').eq(0).children().eq(1).html(resp.data.personEnterDetail[0].status)
+                $('.visitor-list ul li').eq(0).children().eq(0).html(resp.data.personEnterDetail[0].personName)
+                $('.visitor-list ul li').eq(0).children().eq(1).html(resp.data.personEnterDetail[0].accessName)
+                $('.visitor-list ul li').eq(0).children().eq(2).html(resp.data.personEnterDetail[0].timeStart)
+                $('.visitor-list ul li').eq(0).children().eq(3).html(resp.data.personEnterDetail[0].status)
 
-            $('.visitor-list ul li').eq(1).children().eq(0).html(resp.data.personEnterDetail[1].personName)
-            $('.visitor-list ul li').eq(1).children().eq(1).html(resp.data.personEnterDetail[1].accessName)
-            $('.visitor-list ul li').eq(1).children().eq(1).html(resp.data.personEnterDetail[1].timeStart)
-            $('.visitor-list ul li').eq(1).children().eq(1).html(resp.data.personEnterDetail[1].status)
+                $('.visitor-list ul li').eq(1).children().eq(0).html(resp.data.personEnterDetail[1].personName)
+                $('.visitor-list ul li').eq(1).children().eq(1).html(resp.data.personEnterDetail[1].accessName)
+                $('.visitor-list ul li').eq(1).children().eq(2).html(resp.data.personEnterDetail[1].timeStart)
+                $('.visitor-list ul li').eq(1).children().eq(3).html(resp.data.personEnterDetail[1].status)
 
-            $('.visitor-list ul li').eq(2).children().eq(0).html(resp.data.personEnterDetail[4].personName)
-            $('.visitor-list ul li').eq(2).children().eq(1).html(resp.data.personEnterDetail[4].accessName)
-            $('.visitor-list ul li').eq(2).children().eq(1).html(resp.data.personEnterDetail[4].timeStart)
-            $('.visitor-list ul li').eq(2).children().eq(1).html(resp.data.personEnterDetail[4].status)
+                $('.visitor-list ul li').eq(2).children().eq(0).html(resp.data.personEnterDetail[2].personName)
+                $('.visitor-list ul li').eq(2).children().eq(1).html(resp.data.personEnterDetail[2].accessName)
+                $('.visitor-list ul li').eq(2).children().eq(2).html(resp.data.personEnterDetail[2].timeStart)
+                $('.visitor-list ul li').eq(2).children().eq(3).html(resp.data.personEnterDetail[2].status)
 
-            $('.visitor-list ul li').eq(3).children().eq(0).html(resp.data.personEnterDetail[6].personName)
-            $('.visitor-list ul li').eq(3).children().eq(1).html(resp.data.personEnterDetail[6].accessName)
-            $('.visitor-list ul li').eq(3).children().eq(1).html(resp.data.personEnterDetail[6].timeStart)
-            $('.visitor-list ul li').eq(3).children().eq(1).html(resp.data.personEnterDetail[6].status)
-        }
-    })
-
-    //车位占比
-    $.ajax({
-        url: "http://58.16.56.202:9000/smart-bldg/big/screen/parkingLotProportion",
-        headers: { 'Auth-Token': token },
-        success: function (resp) {
-            console.log(resp)
-            setTimeout(() => {
-                let option1_third_value = resp.data.carSpaceProportion.totalNum
-                let option1_third_value_used = resp.data.carSpaceProportion.usedNum
-
-                var option1_third = {
-                    // backgroundColor: '222',
-                    grid: {
-                        top: '0',
-                        left: '0',
-                        right: '4.75%',
-                        bottom: '0',
-                        containLabel: true
-                    },
-                    yAxis: [{
-                        type: 'category',
-                        data: ['停车位'],
-                        inverse: true,
-                        axisTick: {
-                            show: false
-                        },
-                        axisLabel: {
-                            margin: 16,
-                            textStyle: {
-                                fontSize: 14,
-                                color: '#fff'
-                            }
-                        },
-                        axisLine: {
-                            show: false
-                        }
-                    }],
-                    xAxis: [{
-                        type: 'value',
-                        axisLabel: {
-                            show: false
-                        },
-                        axisLine: {
-                            show: false
-                        },
-                        splitLine: {
-                            show: false
-                        }
-                    }],
-                    series: [{
-                        type: 'bar',
-                        barWidth: 14,
-                        data: [option1_third_value_used],
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'insideBottomRight',
-                                formatter: '{c}' + "/" + option1_third_value,
-                                distance: 0,
-                                offset: [30, -20],
-                                color: '#fff',
-                                fontSize: 16,
-                                padding: [5, 15, 10, 15],
-                                backgroundColor: {
-                                    image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAAA+CAYAAAD5wvNAAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA0xpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjQ3NTQ1RkVGOUM1MTFFOEJCQTdENzhFNjM5MzM3NkYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjQ3NTQ1RkRGOUM1MTFFOEJCQTdENzhFNjM5MzM3NkYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOmE5M2UxZjIxLTQyMmYtMTE3Yy05MTVlLWVhNzA0NDUwYzIzOSIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOmE5M2UxZjIxLTQyMmYtMTE3Yy05MTVlLWVhNzA0NDUwYzIzOSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PvulhDwAAAQ3SURBVHja7J1JaBRBGIX/iZEQN1CjwVxUcL+4hUnUU8SDHjQiiqJR0EOCYMAtIG4HRQXBBUQkXgQxxoOieJZ4UzO4oAe3CKJoQI2IGhUTZHz/dI12mul090xcJvU+ePSkpqsTXr1Ud81Ud8UW1SZFYuJgtsn0z+Iqd+2TFPHWGY1tFVSJ96ZgOx5lo7AdDBX9OmbMczx3mas8076BZQUhfoe3ns+xve/7/X6JcpyIZRK17u+2+I7tF5S/w+vneP0YuoXX16G33mMk5kkkCiV7RkLroNXQbE/Tk39HkdEIaDK00JTr//kd6Dx0FnqfzcELsqgzBjoCvYCOQuUMS14QM22lbfYSOgGV/cnAaG/UAD2FtkKD2QZ5yyBoE/QkfkMaoIF9HZiJerqDDkND6He/YYhp0wRCM62vAlMN3YZm0t9+ywyoNX5TluYamFroEjSMnlrR21xEaGqzDcxGqBEaQC+tQdu6MX4r1faRArPEXEUTOzkRb01lIFRgpkJN7Fms72maEJqpQYHR4VUzR0LEZKA5nug55PYGZjM0nV4Rg2Zhi19g9FO/vfSIeNiDXqYsU2B28lREfE5Nu7yBKYE20Bviw3r0MiXuwNRAxfSF+FBsMtIjMIT0xpp0YEZDs+gHCWC2XvxqYOYL57OQYDQjVRqYCnpBQlKugZlCH0hIJmtgJtAHEpKJGphS+kBCUqqBGUofSEiGFtADEgUGhjAwhIEhDAzJQ7o0MJ/pAwnJZw3MG/pAQvJBA/OMPpCQtGlgHtMHEpInGphW+kBCckcDo08mStILEoBmpCV90XuXfpAA7ibi0p7+HOYc/SAB6KPOxB2Yb/SE+KDZOOsOTAd0hr4QH87gdNThDoxyAOqkN8RDp8mGeAPTDu2jP8TDfr3YzRQY5Th0jx4Rg2bhmLvAG5huaCX0iV5Zj34pvQq9S3dvgVHaoLXQD3pmLdr2NYmK1DOZJSgwylWonr5ZSz3CcjXTG71NoDoF1bGnsa5nqUtUptpeogZGOQ0t5zWNNcPnFYk5qTaXbAOjXBFnUQOOnvov96EKhOVy0I5h5/TqhXClOI+u4lcI/Qdty91QPDFXHoapEGUSeBd0UJyFKnRs/oV+5y1foZPQJATlANQVtmI2dw28Fmf5m3Fmq4s2cT7N/096gS1ts7HiLH/zKupBclmRrcP0NCq9ob9KnGfN6NOjnSX8nCcwDmRb/VW6zQWss4SfyCNxZlXqRLmcJ/wX9tEfqX/IBaN84RC0I8dj6Opm22xKo803sulziZtyqK91t9tmms2B0XO6Ppv4WhZ1W0zdJANjFzo6qJZod07o/Odlpq4wMHYOMRdLuBv6dB9d1vejrWYxMA46olhktrnsw8BYhPYeC3x6j84IvRADYxEPMlyfZHOdw8BYhHsElB5JtdAWh0JakBH9jGW4OJ9UN9GO3/wUYAAaXtVsjsG1HQAAAABJRU5ErkJggg=='
-                                }
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
-                                    offset: 0,
-                                    color: '#57eabf' // 0% 处的颜色
-                                }, {
-                                    offset: 1,
-                                    color: '#2563f9' // 100% 处的颜色
-                                }], false),
-                                barBorderRadius: 14
-                            }
-                        }
-                    }, {
-                        type: "bar",
-                        barWidth: 14,
-                        xAxisIndex: 0,
-                        barGap: "-100%",
-                        data: [option1_third_value],
-                        itemStyle: {
-                            normal: {
-                                color: "#444a58",
-                                barBorderRadius: 14
-                            }
-                        },
-                        zlevel: -1
-                    }]
-                };
-                echarts.init(document.getElementById('echarts_third_leftTop')).setOption(option1_third); //三页左上角echarts
-            }, 3000);
-            //车辆类型
-            var dataStyle = {
-                normal: {
-                    label: {
-                        show: false
-                    },
-                    labelLine: {
-                        show: false
-                    },
-                    shadowBlur: 0,
-                    shadowColor: '#203665'
-                }
-            };
-            option2_third = {
-                // backgroundColor: "#20263f",
-                series: [{
-                    name: '第一个圆环',
-                    type: 'pie',
-                    clockWise: false,
-                    radius: [50, 55],
-                    itemStyle: dataStyle,
-                    hoverAnimation: false,
-                    center: ['15%', '50%'],
-                    data: [{
-                        value: resp.data.carInfoType.employeeNum,
-                        label: {
-                            normal: {
-                                rich: {
-                                    a: {
-                                        color: '#00ADFF',
-                                        align: 'center',
-                                        fontSize: 20,
-                                        fontWeight: "bold"
-                                    },
-                                    b: {
-                                        color: '#fff',
-                                        align: 'center',
-                                        fontSize: 16
-                                    }
-                                },
-                                formatter: function (params) {
-                                    return "{a|" + params.value + "}";
-                                },
-                                position: 'center',
-                                show: true,
-                                textStyle: {
-                                    fontSize: '14',
-                                    fontWeight: 'normal',
-                                    color: '#fff'
-                                }
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: '#2c6cc4',
-                                shadowColor: '#2c6cc4',
-                                shadowBlur: 0
-                            }
-                        }
-                    }, {
-                        value: 1000,
-                        name: 'invisible',
-                        itemStyle: {
-                            normal: {
-                                color: '#24375c'
-                            },
-                            emphasis: {
-                                color: '#24375c'
-                            }
-                        }
-                    }]
-                }, {
-                    name: '第二个圆环',
-                    type: 'pie',
-                    clockWise: false,
-                    radius: [50, 55],
-                    itemStyle: dataStyle,
-                    hoverAnimation: false,
-                    center: ['50%', '50%'],
-                    data: [{
-                        value: resp.data.carInfoType.personNum,
-                        label: {
-                            normal: {
-                                rich: {
-                                    a: {
-                                        color: '#00FFFF',
-                                        align: 'center',
-                                        fontSize: 20,
-                                        fontWeight: "bold"
-                                    },
-                                    b: {
-                                        color: '#fff',
-                                        align: 'center',
-                                        fontSize: 16
-                                    }
-                                },
-                                formatter: function (params) {
-                                    return "{a|" + params.value + "}";
-                                },
-                                position: 'center',
-                                show: true,
-                                textStyle: {
-                                    fontSize: '14',
-                                    fontWeight: 'normal',
-                                    color: '#fff'
-                                }
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: '#00FFFF',
-                                shadowColor: '#00FFFF',
-                                shadowBlur: 0
-                            }
-                        }
-                    }, {
-                        value: 100,
-                        name: 'invisible',
-                        itemStyle: {
-                            normal: {
-                                color: '#24375c'
-                            },
-                            emphasis: {
-                                color: '#24375c'
-                            }
-                        }
-                    }]
-                }, {
-                    name: '第三个圆环',
-                    type: 'pie',
-                    clockWise: false,
-                    radius: [50, 55],
-                    itemStyle: dataStyle,
-                    hoverAnimation: false,
-                    center: ['85%', '50%'],
-                    data: [{
-                        value: resp.data.carInfoType.temporaryNum,
-                        label: {
-                            normal: {
-                                rich: {
-                                    a: {
-                                        color: '#FF6767',
-                                        align: 'center',
-                                        fontSize: 20,
-                                        fontWeight: "bold"
-                                    },
-                                    b: {
-                                        color: '#fff',
-                                        align: 'center',
-                                        fontSize: 16
-                                    }
-                                },
-                                formatter: function (params) {
-                                    return "{a|" + params.value + "}";//"{b|缺报统计}\n\n"+"{a|"+params.value+"个}"+"\n\n{b|增长2%}";
-                                },
-                                position: 'center',
-                                show: true,
-                                textStyle: {
-                                    fontSize: '14',
-                                    fontWeight: 'normal',
-                                    color: '#fff'
-                                }
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: '#FF6767',
-                                shadowColor: '#FF6767',
-                                shadowBlur: 0
-                            }
-                        }
-                    }, {
-                        value: 1000,
-                        name: 'invisible',
-                        itemStyle: {
-                            normal: {
-                                color: '#24375c'
-                            },
-                            emphasis: {
-                                color: '#24375c'
-                            }
-                        }
-                    }]
-                }]
+                $('.visitor-list ul li').eq(3).children().eq(0).html(resp.data.personEnterDetail[3].personName)
+                $('.visitor-list ul li').eq(3).children().eq(1).html(resp.data.personEnterDetail[3].accessName)
+                $('.visitor-list ul li').eq(3).children().eq(2).html(resp.data.personEnterDetail[3].timeStart)
+                $('.visitor-list ul li').eq(3).children().eq(3).html(resp.data.personEnterDetail[3].status)
             }
-            echarts.init(document.getElementById('echarts_third_leftMid')).setOption(option2_third); //三页中echarts
-        }
-    })
+        })
+    }
+    setTimeout(() => {
+        personal_status()
+    }, 3000);
+    setInterval(() => {
+        personal_status()
+    }, 30000);
+
+    function car_load_data() {
+        //车位占比
+        $.ajax({
+            url: "http://58.16.56.202:9000/smart-bldg/big/screen/parkingLotProportion",
+            headers: { 'Auth-Token': token },
+            success: function (resp) {
+                console.log(resp)
+                setTimeout(() => {
+                    let option1_third_value = resp.data.carSpaceProportion.totalNum
+                    let option1_third_value_used = resp.data.carSpaceProportion.usedNum
+
+                    var option1_third = {
+                        // backgroundColor: '222',
+                        grid: {
+                            top: '0',
+                            left: '0',
+                            right: '4.75%',
+                            bottom: '0',
+                            containLabel: true
+                        },
+                        yAxis: [{
+                            type: 'category',
+                            data: ['停车位'],
+                            inverse: true,
+                            axisTick: {
+                                show: false
+                            },
+                            axisLabel: {
+                                margin: 16,
+                                textStyle: {
+                                    fontSize: 14,
+                                    color: '#fff'
+                                }
+                            },
+                            axisLine: {
+                                show: false
+                            }
+                        }],
+                        xAxis: [{
+                            type: 'value',
+                            axisLabel: {
+                                show: false
+                            },
+                            axisLine: {
+                                show: false
+                            },
+                            splitLine: {
+                                show: false
+                            }
+                        }],
+                        series: [{
+                            type: 'bar',
+                            barWidth: 14,
+                            data: [option1_third_value_used],
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideBottomRight',
+                                    formatter: '{c}' + "/" + option1_third_value,
+                                    distance: 0,
+                                    offset: [30, -20],
+                                    color: '#fff',
+                                    fontSize: 16,
+                                    padding: [5, 15, 10, 15],
+                                    backgroundColor: {
+                                        image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAAA+CAYAAAD5wvNAAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA0xpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjQ3NTQ1RkVGOUM1MTFFOEJCQTdENzhFNjM5MzM3NkYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjQ3NTQ1RkRGOUM1MTFFOEJCQTdENzhFNjM5MzM3NkYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOmE5M2UxZjIxLTQyMmYtMTE3Yy05MTVlLWVhNzA0NDUwYzIzOSIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOmE5M2UxZjIxLTQyMmYtMTE3Yy05MTVlLWVhNzA0NDUwYzIzOSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PvulhDwAAAQ3SURBVHja7J1JaBRBGIX/iZEQN1CjwVxUcL+4hUnUU8SDHjQiiqJR0EOCYMAtIG4HRQXBBUQkXgQxxoOieJZ4UzO4oAe3CKJoQI2IGhUTZHz/dI12mul090xcJvU+ePSkpqsTXr1Ud81Ud8UW1SZFYuJgtsn0z+Iqd+2TFPHWGY1tFVSJ96ZgOx5lo7AdDBX9OmbMczx3mas8076BZQUhfoe3ns+xve/7/X6JcpyIZRK17u+2+I7tF5S/w+vneP0YuoXX16G33mMk5kkkCiV7RkLroNXQbE/Tk39HkdEIaDK00JTr//kd6Dx0FnqfzcELsqgzBjoCvYCOQuUMS14QM22lbfYSOgGV/cnAaG/UAD2FtkKD2QZ5yyBoE/QkfkMaoIF9HZiJerqDDkND6He/YYhp0wRCM62vAlMN3YZm0t9+ywyoNX5TluYamFroEjSMnlrR21xEaGqzDcxGqBEaQC+tQdu6MX4r1faRArPEXEUTOzkRb01lIFRgpkJN7Fms72maEJqpQYHR4VUzR0LEZKA5nug55PYGZjM0nV4Rg2Zhi19g9FO/vfSIeNiDXqYsU2B28lREfE5Nu7yBKYE20Bviw3r0MiXuwNRAxfSF+FBsMtIjMIT0xpp0YEZDs+gHCWC2XvxqYOYL57OQYDQjVRqYCnpBQlKugZlCH0hIJmtgJtAHEpKJGphS+kBCUqqBGUofSEiGFtADEgUGhjAwhIEhDAzJQ7o0MJ/pAwnJZw3MG/pAQvJBA/OMPpCQtGlgHtMHEpInGphW+kBCckcDo08mStILEoBmpCV90XuXfpAA7ibi0p7+HOYc/SAB6KPOxB2Yb/SE+KDZOOsOTAd0hr4QH87gdNThDoxyAOqkN8RDp8mGeAPTDu2jP8TDfr3YzRQY5Th0jx4Rg2bhmLvAG5huaCX0iV5Zj34pvQq9S3dvgVHaoLXQD3pmLdr2NYmK1DOZJSgwylWonr5ZSz3CcjXTG71NoDoF1bGnsa5nqUtUptpeogZGOQ0t5zWNNcPnFYk5qTaXbAOjXBFnUQOOnvov96EKhOVy0I5h5/TqhXClOI+u4lcI/Qdty91QPDFXHoapEGUSeBd0UJyFKnRs/oV+5y1foZPQJATlANQVtmI2dw28Fmf5m3Fmq4s2cT7N/096gS1ts7HiLH/zKupBclmRrcP0NCq9ob9KnGfN6NOjnSX8nCcwDmRb/VW6zQWss4SfyCNxZlXqRLmcJ/wX9tEfqX/IBaN84RC0I8dj6Opm22xKo803sulziZtyqK91t9tmms2B0XO6Ppv4WhZ1W0zdJANjFzo6qJZod07o/Odlpq4wMHYOMRdLuBv6dB9d1vejrWYxMA46olhktrnsw8BYhPYeC3x6j84IvRADYxEPMlyfZHOdw8BYhHsElB5JtdAWh0JakBH9jGW4OJ9UN9GO3/wUYAAaXtVsjsG1HQAAAABJRU5ErkJggg=='
+                                    }
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
+                                        offset: 0,
+                                        color: '#57eabf' // 0% 处的颜色
+                                    }, {
+                                        offset: 1,
+                                        color: '#2563f9' // 100% 处的颜色
+                                    }], false),
+                                    barBorderRadius: 14
+                                }
+                            }
+                        }, {
+                            type: "bar",
+                            barWidth: 14,
+                            xAxisIndex: 0,
+                            barGap: "-100%",
+                            data: [option1_third_value],
+                            itemStyle: {
+                                normal: {
+                                    color: "#444a58",
+                                    barBorderRadius: 14
+                                }
+                            },
+                            zlevel: -1
+                        }]
+                    };
+                    echarts.init(document.getElementById('echarts_third_leftTop')).setOption(option1_third); //三页左上角echarts
+                }, 3000);
+                //车辆类型
+                var dataStyle = {
+                    normal: {
+                        label: {
+                            show: false
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        shadowBlur: 0,
+                        shadowColor: '#203665'
+                    }
+                };
+                option2_third = {
+                    // backgroundColor: "#20263f",
+                    series: [{
+                        name: '第一个圆环',
+                        type: 'pie',
+                        clockWise: false,
+                        radius: [50, 55],
+                        itemStyle: dataStyle,
+                        hoverAnimation: false,
+                        center: ['15%', '50%'],
+                        data: [{
+                            value: resp.data.carInfoType.employeeNum,
+                            label: {
+                                normal: {
+                                    rich: {
+                                        a: {
+                                            color: '#00ADFF',
+                                            align: 'center',
+                                            fontSize: 20,
+                                            fontWeight: "bold"
+                                        },
+                                        b: {
+                                            color: '#fff',
+                                            align: 'center',
+                                            fontSize: 16
+                                        }
+                                    },
+                                    formatter: function (params) {
+                                        return "{a|" + params.value + "}";
+                                    },
+                                    position: 'center',
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '14',
+                                        fontWeight: 'normal',
+                                        color: '#fff'
+                                    }
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#2c6cc4',
+                                    shadowColor: '#2c6cc4',
+                                    shadowBlur: 0
+                                }
+                            }
+                        }, {
+                            value: 1000,
+                            name: 'invisible',
+                            itemStyle: {
+                                normal: {
+                                    color: '#24375c'
+                                },
+                                emphasis: {
+                                    color: '#24375c'
+                                }
+                            }
+                        }]
+                    }, {
+                        name: '第二个圆环',
+                        type: 'pie',
+                        clockWise: false,
+                        radius: [50, 55],
+                        itemStyle: dataStyle,
+                        hoverAnimation: false,
+                        center: ['50%', '50%'],
+                        data: [{
+                            value: resp.data.carInfoType.personNum,
+                            label: {
+                                normal: {
+                                    rich: {
+                                        a: {
+                                            color: '#00FFFF',
+                                            align: 'center',
+                                            fontSize: 20,
+                                            fontWeight: "bold"
+                                        },
+                                        b: {
+                                            color: '#fff',
+                                            align: 'center',
+                                            fontSize: 16
+                                        }
+                                    },
+                                    formatter: function (params) {
+                                        return "{a|" + params.value + "}";
+                                    },
+                                    position: 'center',
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '14',
+                                        fontWeight: 'normal',
+                                        color: '#fff'
+                                    }
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#00FFFF',
+                                    shadowColor: '#00FFFF',
+                                    shadowBlur: 0
+                                }
+                            }
+                        }, {
+                            value: 100,
+                            name: 'invisible',
+                            itemStyle: {
+                                normal: {
+                                    color: '#24375c'
+                                },
+                                emphasis: {
+                                    color: '#24375c'
+                                }
+                            }
+                        }]
+                    }, {
+                        name: '第三个圆环',
+                        type: 'pie',
+                        clockWise: false,
+                        radius: [50, 55],
+                        itemStyle: dataStyle,
+                        hoverAnimation: false,
+                        center: ['85%', '50%'],
+                        data: [{
+                            value: resp.data.carInfoType.temporaryNum,
+                            label: {
+                                normal: {
+                                    rich: {
+                                        a: {
+                                            color: '#FF6767',
+                                            align: 'center',
+                                            fontSize: 20,
+                                            fontWeight: "bold"
+                                        },
+                                        b: {
+                                            color: '#fff',
+                                            align: 'center',
+                                            fontSize: 16
+                                        }
+                                    },
+                                    formatter: function (params) {
+                                        return "{a|" + params.value + "}";//"{b|缺报统计}\n\n"+"{a|"+params.value+"个}"+"\n\n{b|增长2%}";
+                                    },
+                                    position: 'center',
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '14',
+                                        fontWeight: 'normal',
+                                        color: '#fff'
+                                    }
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#FF6767',
+                                    shadowColor: '#FF6767',
+                                    shadowBlur: 0
+                                }
+                            }
+                        }, {
+                            value: 1000,
+                            name: 'invisible',
+                            itemStyle: {
+                                normal: {
+                                    color: '#24375c'
+                                },
+                                emphasis: {
+                                    color: '#24375c'
+                                }
+                            }
+                        }]
+                    }]
+                }
+                echarts.init(document.getElementById('echarts_third_leftMid')).setOption(option2_third); //三页中echarts
+            }
+        })
+    }
+    setTimeout(() => {
+        car_load_data()
+    }, 3000);
+    setInterval(() => {
+        car_load_data()
+    }, 30000);
+
     //车辆进出记录
     function car_in_out() {
         $.ajax({
@@ -1083,7 +1251,9 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
             }
         })
     }
-    car_in_out()
+    setTimeout(() => {
+        car_in_out()
+    }, 3000);
     setInterval(() => {
         car_in_out()
     }, 30000);
@@ -1260,286 +1430,294 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
     }
     car_use_rate()
 
-    $.ajax({
-        url: "http://58.16.56.202:9000/smart-bldg/big/screen/personFloor",
-        headers: { 'Auth-Token': token },
-        success: function (resp) {
-            //楼层总人数
-            console.log(resp)
-            let person_arr = []
-            person_arr.push(resp.data.personFloor.A6)
-            person_arr.push(resp.data.personFloor.B6)
-            person_arr.push(resp.data.personFloor.B8)
-            person_arr.push(resp.data.personFloor.rest)
+    function person_infloor_load() {
+        $.ajax({
+            url: "http://58.16.56.202:9000/smart-bldg/big/screen/personFloor",
+            headers: { 'Auth-Token': token },
+            success: function (resp) {
+                //楼层总人数
+                console.log(resp)
+                let person_arr = []
+                person_arr.push(resp.data.personFloor.A6)
+                person_arr.push(resp.data.personFloor.B6)
+                person_arr.push(resp.data.personFloor.B8)
+                person_arr.push(resp.data.personFloor.rest)
 
-            // 第二页图表
-            option1_second = {
-                // backgroundColor: 'black',
-                angleAxis: {
-                    type: "value",
-                    min: 0,
-                    max: 70,
-                    axisLine: {
-                        show: false
+                // 第二页图表
+                option1_second = {
+                    // backgroundColor: 'black',
+                    angleAxis: {
+                        type: "value",
+                        min: 0,
+                        max: 70,
+                        axisLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        splitLine: {
+                            show: false
+                        },
+                        axisLabel: {
+                            show: false
+                        }
                     },
-                    axisTick: {
-                        show: false
+                    radiusAxis: {
+                        type: "category",
+                        data: ["A6", "B6", "B8", "其它"],
+                        z: 100,
+                        axisLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLabel: {
+                            show: true,
+                            margin: 6,
+                            fontSize: 10,
+                            formatter: function (value, index) {
+                                var list = person_arr;
+                                return list[index] + "人";
+                            },
+                            textStyle: {
+                                color: "#96F5F6"
+                            },
+                            interval: 0
+                        }
                     },
-                    splitLine: {
-                        show: false
+                    polar: {
+                        center: ["51%", "40%"]
                     },
-                    axisLabel: {
-                        show: false
-                    }
-                },
-                radiusAxis: {
-                    type: "category",
-                    data: ["A6", "B6", "B8", "其它"],
-                    z: 100,
-                    axisLine: {
-                        show: false
+                    tooltip: {
+                        show: true
                     },
-                    axisTick: {
-                        show: false
-                    },
-                    axisLabel: {
+                    series: [
+                        {
+                            type: "bar",
+                            barWidth: "30%",
+                            data: [15],
+                            coordinateSystem: "polar",
+                            name: "A6",
+                            stack: "a",
+                            roundCap: true,
+                            itemStyle: {
+                                color: "#BFA27C",
+                                barBorderRadius: 5
+                            },
+                            showBackground: true,
+                            backgroundStyle: {
+                                color: "#27333F",
+                                barBorderRadius: 50
+                            }
+                        },
+                        {
+                            type: "bar",
+                            data: [0, 28, 0, 0],
+                            coordinateSystem: "polar",
+                            name: "B6",
+                            stack: "a",
+                            roundCap: true,
+                            itemStyle: {
+                                color: "#328CD9"
+                            },
+                            showBackground: true,
+                            backgroundStyle: {
+                                color: "#27333F"
+                            }
+                        },
+                        {
+                            type: "bar",
+                            data: [0, 0, 45, 0],
+                            coordinateSystem: "polar",
+                            name: "B8",
+                            stack: "a",
+                            roundCap: true,
+                            itemStyle: {
+                                color: "#1FB4A7",
+                                barBorderRadius: 5
+                            },
+                            showBackground: true,
+                            backgroundStyle: {
+                                color: "#27333F"
+                            }
+                        },
+                        {
+                            type: "bar",
+                            data: [0, 0, 0, 65],
+                            coordinateSystem: "polar",
+                            name: "其它",
+                            stack: "a",
+                            roundCap: true,
+                            itemStyle: {
+                                color: "#424CB9",
+                                barBorderRadius: 5
+                            },
+                            showBackground: true,
+                            backgroundStyle: {
+                                color: "#27333F"
+                            }
+                        }
+                    ],
+                    legend: {
+                        bottom: 6,
+                        icon: "circle",
+                        itemHeight: 10,
                         show: true,
-                        margin: 6,
-                        fontSize: 10,
-                        formatter: function (value, index) {
-                            var list = person_arr;
-                            return list[index] + "人";
-                        },
+                        data: ["A6", "B6", "B8", "其它"],
+                        selectedMode: false,
                         textStyle: {
-                            color: "#96F5F6"
-                        },
-                        interval: 0
-                    }
-                },
-                polar: {
-                    center: ["51%", "40%"]
-                },
-                tooltip: {
-                    show: true
-                },
-                series: [
-                    {
-                        type: "bar",
-                        barWidth: "30%",
-                        data: [15],
-                        coordinateSystem: "polar",
-                        name: "A6",
-                        stack: "a",
-                        roundCap: true,
-                        itemStyle: {
-                            color: "#BFA27C",
-                            barBorderRadius: 5
-                        },
-                        showBackground: true,
-                        backgroundStyle: {
-                            color: "#27333F",
-                            barBorderRadius: 50
+                            color: "#96F5F6",
+                            fontSize: 8
                         }
-                    },
-                    {
-                        type: "bar",
-                        data: [0, 28, 0, 0],
-                        coordinateSystem: "polar",
-                        name: "B6",
-                        stack: "a",
-                        roundCap: true,
-                        itemStyle: {
-                            color: "#328CD9"
-                        },
-                        showBackground: true,
-                        backgroundStyle: {
-                            color: "#27333F"
-                        }
-                    },
-                    {
-                        type: "bar",
-                        data: [0, 0, 45, 0],
-                        coordinateSystem: "polar",
-                        name: "B8",
-                        stack: "a",
-                        roundCap: true,
-                        itemStyle: {
-                            color: "#1FB4A7",
-                            barBorderRadius: 5
-                        },
-                        showBackground: true,
-                        backgroundStyle: {
-                            color: "#27333F"
-                        }
-                    },
-                    {
-                        type: "bar",
-                        data: [0, 0, 0, 65],
-                        coordinateSystem: "polar",
-                        name: "其它",
-                        stack: "a",
-                        roundCap: true,
-                        itemStyle: {
-                            color: "#424CB9",
-                            barBorderRadius: 5
-                        },
-                        showBackground: true,
-                        backgroundStyle: {
-                            color: "#27333F"
-                        }
-                    }
-                ],
-                legend: {
-                    bottom: 6,
-                    icon: "circle",
-                    itemHeight: 10,
-                    show: true,
-                    data: ["A6", "B6", "B8", "其它"],
-                    selectedMode: false,
-                    textStyle: {
-                        color: "#96F5F6",
-                        fontSize: 8
                     }
                 }
-            }
 
-            echarts.init(document.getElementById('echarts_second_leftTop')).setOption(option1_second); //二页左上角echarts
-            //今日人流量统计
-            option2_second = {
-                // backgroundColor: '#00265f',
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'shadow'
-                    }
-                },
-                legend: {
-                    data: ['进', '出'],
-                    align: 'right',
-                    right: 10,
-                    textStyle: {
-                        color: "#fff"
-                    },
-                    itemWidth: 10,
-                    itemHeight: 10,
-                    itemGap: 35
-                },
-                // grid: {
-                //     left: '3%',
-                //     right: '4%',
-                //     bottom: '3%',
-                //     containLabel: true
-                // },
-                xAxis: [{
-                    type: 'category',
-                    data: resp.data.peopleCounting.time,
-                    axisLine: {
-                        show: true,
-                        lineStyle: {
-                            color: "#063374",
-                            width: 1,
-                            type: "solid"
+                echarts.init(document.getElementById('echarts_second_leftTop')).setOption(option1_second); //二页左上角echarts
+                //今日人流量统计
+                option2_second = {
+                    // backgroundColor: '#00265f',
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
                         }
-                    }, nameTextStyle: {
-                        fontWeight: 200,
-                        fontSize: 12
                     },
-                    axisTick: {
-                        show: false,
-                    },
-                    axisLabel: {
-                        show: true,
+                    legend: {
+                        data: ['进', '出'],
+                        align: 'right',
+                        right: 10,
                         textStyle: {
-                            color: "#00c7ff",
+                            color: "#fff"
+                        },
+                        itemWidth: 10,
+                        itemHeight: 10,
+                        itemGap: 35
+                    },
+                    // grid: {
+                    //     left: '3%',
+                    //     right: '4%',
+                    //     bottom: '3%',
+                    //     containLabel: true
+                    // },
+                    xAxis: [{
+                        type: 'category',
+                        data: resp.data.peopleCounting.time,
+                        axisLine: {
+                            show: true,
+                            lineStyle: {
+                                color: "#063374",
+                                width: 1,
+                                type: "solid"
+                            }
+                        }, nameTextStyle: {
+                            fontWeight: 200,
                             fontSize: 12
                         },
-                        interval: 0,
-                        formatter: function (params) {
-                            var newParamsName = ""; // 最终拼接成的字符串
-                            var paramsNameNumber = params.length; // 实际标签的个数
-                            var provideNumber = 6; // 每行能显示的字的个数
-                            var rowNumber = Math.ceil(paramsNameNumber / provideNumber); // 换行的话，需要显示几行，向上取整
-                            /**
-                             * 判断标签的个数是否大于规定的个数， 如果大于，则进行换行处理 如果不大于，即等于或小于，就返回原标签
-                             */
-                            // 条件等同于rowNumber>1
-                            if (paramsNameNumber > provideNumber) {
-                                /** 循环每一行,p表示行 */
-                                for (var p = 0; p < rowNumber; p++) {
-                                    var tempStr = ""; // 表示每一次截取的字符串
-                                    var start = p * provideNumber; // 开始截取的位置
-                                    var end = start + provideNumber; // 结束截取的位置
-                                    // 此处特殊处理最后一行的索引值
-                                    if (p == rowNumber - 1) {
-                                        // 最后一次不换行
-                                        tempStr = params.substring(start, paramsNameNumber);
-                                    } else {
-                                        // 每一次拼接字符串并换行
-                                        tempStr = params.substring(start, end) + "\n";
-                                    }
-                                    newParamsName += tempStr; // 最终拼成的字符串
-                                }
-
-                            } else {
-                                // 将旧标签的值赋给新标签
-                                newParamsName = params;
-                            }
-                            //将最终的字符串返回
-                            return newParamsName
-                        }
-                    },
-                }],
-                yAxis: [{
-                    type: 'value',
-                    axisLabel: {
-                        formatter: '{value}'
-                    },
-                    axisTick: {
-                        show: false,
-                    },
-                    axisLine: {
-                        show: false,
-                        lineStyle: {
-                            color: "#00c7ff",
-                            width: 1,
-                            type: "solid"
+                        axisTick: {
+                            show: false,
                         },
-                    },
-                    splitLine: {
-                        lineStyle: {
-                            color: "#063374",
-                        }
-                    }
-                }],
-                series: [{
-                    name: '进',
-                    type: 'bar',
-                    data: resp.data.peopleCounting.in,
-                    barWidth: 5, //柱子宽度
-                    // barGap: 1, //柱子之间间距
-                    itemStyle: {
-                        normal: {
-                            color: '#008AFF',
-                            opacity: 1,
-                        }
-                    }
-                }, {
-                    name: '出',
-                    type: 'bar',
-                    data: resp.data.peopleCounting.out,
-                    barWidth: 5,
-                    // barGap: 1,
-                    itemStyle: {
-                        normal: {
-                            color: '#FF9000'
-                        }
-                    }
-                }]
-            };
-            echarts.init(document.getElementById('echarts_second_leftBottom')).setOption(option2_second); //二页左上角echarts
-        }
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                                color: "#00c7ff",
+                                fontSize: 12
+                            },
+                            interval: 0,
+                            formatter: function (params) {
+                                var newParamsName = ""; // 最终拼接成的字符串
+                                var paramsNameNumber = params.length; // 实际标签的个数
+                                var provideNumber = 6; // 每行能显示的字的个数
+                                var rowNumber = Math.ceil(paramsNameNumber / provideNumber); // 换行的话，需要显示几行，向上取整
+                                /**
+                                 * 判断标签的个数是否大于规定的个数， 如果大于，则进行换行处理 如果不大于，即等于或小于，就返回原标签
+                                 */
+                                // 条件等同于rowNumber>1
+                                if (paramsNameNumber > provideNumber) {
+                                    /** 循环每一行,p表示行 */
+                                    for (var p = 0; p < rowNumber; p++) {
+                                        var tempStr = ""; // 表示每一次截取的字符串
+                                        var start = p * provideNumber; // 开始截取的位置
+                                        var end = start + provideNumber; // 结束截取的位置
+                                        // 此处特殊处理最后一行的索引值
+                                        if (p == rowNumber - 1) {
+                                            // 最后一次不换行
+                                            tempStr = params.substring(start, paramsNameNumber);
+                                        } else {
+                                            // 每一次拼接字符串并换行
+                                            tempStr = params.substring(start, end) + "\n";
+                                        }
+                                        newParamsName += tempStr; // 最终拼成的字符串
+                                    }
 
-    });
+                                } else {
+                                    // 将旧标签的值赋给新标签
+                                    newParamsName = params;
+                                }
+                                //将最终的字符串返回
+                                return newParamsName
+                            }
+                        },
+                    }],
+                    yAxis: [{
+                        type: 'value',
+                        axisLabel: {
+                            formatter: '{value}'
+                        },
+                        axisTick: {
+                            show: false,
+                        },
+                        axisLine: {
+                            show: false,
+                            lineStyle: {
+                                color: "#00c7ff",
+                                width: 1,
+                                type: "solid"
+                            },
+                        },
+                        splitLine: {
+                            lineStyle: {
+                                color: "#063374",
+                            }
+                        }
+                    }],
+                    series: [{
+                        name: '进',
+                        type: 'bar',
+                        data: resp.data.peopleCounting.in,
+                        barWidth: 5, //柱子宽度
+                        // barGap: 1, //柱子之间间距
+                        itemStyle: {
+                            normal: {
+                                color: '#008AFF',
+                                opacity: 1,
+                            }
+                        }
+                    }, {
+                        name: '出',
+                        type: 'bar',
+                        data: resp.data.peopleCounting.out,
+                        barWidth: 5,
+                        // barGap: 1,
+                        itemStyle: {
+                            normal: {
+                                color: '#FF9000'
+                            }
+                        }
+                    }]
+                };
+                echarts.init(document.getElementById('echarts_second_leftBottom')).setOption(option2_second); //二页左上角echarts
+            }
+
+        });
+    }
+    setTimeout(() => {
+        person_infloor_load()
+    }, 3000);
+    setInterval(() => {
+        person_infloor_load()
+    }, 30000);
     // $.get("http://58.16.56.202:9000/smart-bldg/big/screen/personFloor", { 'Auth-Token': token }, function (resp) {
     //     console.log(resp)
 

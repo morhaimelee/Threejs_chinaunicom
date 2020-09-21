@@ -689,10 +689,10 @@ li {
 }
 
 #echarts_first_leftBottom {
-    width   : 410px;
-    height  : 260px;
+    width   : 450px;
+    height  : 450px;
     position: absolute;
-    top     : 50px;
+    top     : 20px;
 }
 
 /* 右上角时间 */
