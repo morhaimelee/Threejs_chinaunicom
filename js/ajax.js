@@ -366,6 +366,7 @@ function layer_show(clk_icon_classname) {
 
 $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId: 101878570, appKey: 'FA04063DE2339340D4E36114FA5E8EEB', timeStamp: timestamp }, function (resp) {
     token = resp.data.token
+    console.log(token)
     //首屏监控切换
     $.ajax({
         url: "http://58.16.56.202:9000/smart-bldg/big/screen/monitorEquipmentOperation",
@@ -733,6 +734,16 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
         headers: { 'Auth-Token': token },
         success: function (resp) {
             console.log(resp)
+            //人员状况
+            $('#company_person ul li').eq(0).html(resp.data.personnelStatus.employeeNum[0])
+            $('#company_person ul li').eq(1).html(resp.data.personnelStatus.employeeNum[1])
+            $('#company_person ul li').eq(2).html(resp.data.personnelStatus.employeeNum[2])
+            $('#company_person ul li').eq(3).html(resp.data.personnelStatus.employeeNum[3])
+            $('#visitor_person ul li').eq(0).html(resp.data.personnelStatus.personNum[0])
+            $('#visitor_person ul li').eq(1).html(resp.data.personnelStatus.personNum[1])
+            $('#visitor_person ul li').eq(2).html(resp.data.personnelStatus.personNum[2])
+            $('#visitor_person ul li').eq(3).html(resp.data.personnelStatus.personNum[3])
+
             $('#visitors_enter1 li img').eq(0).attr('src', resp.data.personEnterRealTime[0].recordImage)
             $('#visitors_enter1 li').eq(1).html('姓名：' + resp.data.personEnterRealTime[0].personName)
             $('#visitors_enter1 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[0].deviceName)
@@ -747,6 +758,10 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
             $('#visitors_enter3 li').eq(1).html('姓名：' + resp.data.personEnterRealTime[6].personName)
             $('#visitors_enter3 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[6].deviceName)
             $('#visitors_enter3 li').eq(3).html('进入时间：' + resp.data.personEnterRealTime[6].swingTime)
+
+            $('.visitor-sys ul li').eq(0).html(resp.data.personRealTime.totalNum)
+            $('.visitor-sys ul li').eq(1).html(resp.data.personRealTime.currentNum)
+            $('.visitor-sys ul li').eq(2).html(resp.data.personRealTime.notYetNum)
 
             $('.visitor-list ul li').eq(0).children().eq(0).html(resp.data.personEnterDetail[0].personName)
             $('.visitor-list ul li').eq(0).children().eq(1).html(resp.data.personEnterDetail[0].accessName)
@@ -1257,78 +1272,137 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
             person_arr.push(resp.data.personFloor.B8)
             person_arr.push(resp.data.personFloor.rest)
 
-            console.log(person_arr)
             // 第二页图表
             option1_second = {
-                // backgroundColor: "#ffffff",
-                color: ["#37A2DA"],
-                radar: {
-                    shape: 'circle',
-                    name: {
-                        textStyle: {
-                            color: '#FFFFFF',
-                        }
+                // backgroundColor: 'black',
+                angleAxis: {
+                    type: "value",
+                    min: 0,
+                    max: 70,
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
                     },
                     splitLine: {
-                        lineStyle: {
-                            color: [
-                                'rgba(86,130,245,0.2)', 'rgba(54,77，202,0.2)',
-                                'rgba(86,130,245,0.2)', 'rgba(54,77，202,0.2)',
-                                'rgba(86,130,245,0.2)', 'rgba(54,77，202,0.2)',
-                            ].reverse()
-                        }
+                        show: false
                     },
-                    splitArea: {
-                        areaStyle: {
-                            color: [
-                                "rgba(0, 104, 183, 0.3)",
-                                "rgba(0, 104, 183, 0.5)",
-                                "rgba(0, 255, 255, 0.4)"
-                            ],
-                            shadowColor: 'rgba(0, 0, 0, 0.3)'
-                        }
-                    },
-                    axisLine: {
-                        lineStyle: {
-                            color: 'rgba(86,130,245,0.2)'
-                        }
-                    },
-                    indicator: [{
-                        name: 'A6',
-                        max: 150
-                    },
-                    {
-                        name: 'B6',
-                        max: 150
-                    },
-                    {
-                        name: 'B8',
-                        max: 150
-                    },
-                    {
-                        name: '其它',
-                        max: 500
+                    axisLabel: {
+                        show: false
                     }
-                    ]
                 },
-                series: [{
-                    type: 'radar',
-                    data: [{
-                        value: person_arr,
-                        name: '人数',
-                        itemStyle: {
-                            normal: {
-                                color: 'rgba(0, 255, 255, 0.4)'
-                            }
+                radiusAxis: {
+                    type: "category",
+                    data: ["A6", "B6", "B8", "其它"],
+                    z: 100,
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: true,
+                        margin: 6,
+                        fontSize: 10,
+                        formatter: function (value, index) {
+                            var list = person_arr;
+                            return list[index] + "人";
                         },
-                        areaStyle: {
-                            normal: {
-                                color: 'rgba(0, 255, 255, 0.4)'
-                            }
+                        textStyle: {
+                            color: "#96F5F6"
+                        },
+                        interval: 0
+                    }
+                },
+                polar: {
+                    center: ["51%", "40%"]
+                },
+                tooltip: {
+                    show: true
+                },
+                series: [
+                    {
+                        type: "bar",
+                        barWidth: "30%",
+                        data: [15],
+                        coordinateSystem: "polar",
+                        name: "A6",
+                        stack: "a",
+                        roundCap: true,
+                        itemStyle: {
+                            color: "#BFA27C",
+                            barBorderRadius: 5
+                        },
+                        showBackground: true,
+                        backgroundStyle: {
+                            color: "#27333F",
+                            barBorderRadius: 50
                         }
-                    }]
-                }]
+                    },
+                    {
+                        type: "bar",
+                        data: [0, 28, 0, 0],
+                        coordinateSystem: "polar",
+                        name: "B6",
+                        stack: "a",
+                        roundCap: true,
+                        itemStyle: {
+                            color: "#328CD9"
+                        },
+                        showBackground: true,
+                        backgroundStyle: {
+                            color: "#27333F"
+                        }
+                    },
+                    {
+                        type: "bar",
+                        data: [0, 0, 45, 0],
+                        coordinateSystem: "polar",
+                        name: "B8",
+                        stack: "a",
+                        roundCap: true,
+                        itemStyle: {
+                            color: "#1FB4A7",
+                            barBorderRadius: 5
+                        },
+                        showBackground: true,
+                        backgroundStyle: {
+                            color: "#27333F"
+                        }
+                    },
+                    {
+                        type: "bar",
+                        data: [0, 0, 0, 65],
+                        coordinateSystem: "polar",
+                        name: "其它",
+                        stack: "a",
+                        roundCap: true,
+                        itemStyle: {
+                            color: "#424CB9",
+                            barBorderRadius: 5
+                        },
+                        showBackground: true,
+                        backgroundStyle: {
+                            color: "#27333F"
+                        }
+                    }
+                ],
+                legend: {
+                    bottom: 6,
+                    icon: "circle",
+                    itemHeight: 10,
+                    show: true,
+                    data: ["A6", "B6", "B8", "其它"],
+                    selectedMode: false,
+                    textStyle: {
+                        color: "#96F5F6",
+                        fontSize: 8
+                    }
+                }
             }
+
             echarts.init(document.getElementById('echarts_second_leftTop')).setOption(option1_second); //二页左上角echarts
             //今日人流量统计
             option2_second = {

@@ -217,16 +217,16 @@
   <!-- 左侧设备菜单 -->
   <div class="equipment-list">
     <ul>
-      <li id="video_list" class="video_list"></li>
-      <li id="waterTank_list" class="waterTank_list"></li>
+      <li id="video_list" class="video_list" title="摄像头"></li>
+      <li id="waterTank_list" class="waterTank_list" title="水箱"></li>
       <!-- <li id="fire_list" class="fire_list"></li> -->
-      <li id="smoke_list" class="smoke_list"></li>
-      <li id="gate_list" class="gate_list"></li>
-      <li id="trashCan_list" class="trashCan_list"></li>
-      <li id="hole_cover_list" class="hole_cover_list"></li>
+      <li id="smoke_list" class="smoke_list" title="烟感"></li>
+      <li id="gate_list" class="gate_list" title="门闸"></li>
+      <li id="trashCan_list" class="trashCan_list" title="垃圾桶"></li>
+      <li id="hole_cover_list" class="hole_cover_list" title="井盖"></li>
       <!-- <li id="park_list"></li> -->
-      <li id="AOCN_list" class="AOCN_list"></li>
-      <li id="meter_list" class="meter_list"></li>
+      <li id="AOCN_list" class="AOCN_list" title="空开"></li>
+      <li id="meter_list" class="meter_list" title="水电表"></li>
     </ul>
   </div>
   <!-- 右上时间&天气 -->
@@ -1595,7 +1595,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let other_1floor
+              let other_1floor = 'flag'
               load_other_arr.push(other_1floor)
             }
           }
@@ -1614,7 +1614,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let other_2floor
+              let other_2floor = 'flag'
               load_other_arr.push(other_2floor)
             }
           }
@@ -1633,7 +1633,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let other_3floor
+              let other_3floor = 'flag'
               load_other_arr.push(other_3floor)
             }
           }
@@ -1652,7 +1652,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let other_4floor
+              let other_4floor = 'flag'
               load_other_arr.push(other_4floor)
             }
           }
@@ -1671,7 +1671,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let other_5floor
+              let other_5floor = 'flag'
               load_other_arr.push(other_5floor)
             }
           }
@@ -1690,7 +1690,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let other_6floor
+              let other_6floor = 'flag'
               load_other_arr.push(other_6floor)
             }
           }
@@ -1709,7 +1709,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let other_7floor
+              let other_7floor = 'flag'
               load_other_arr.push(other_7floor)
             }
           }
@@ -1728,7 +1728,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let other_8floor
+              let other_8floor = 'flag'
               load_other_arr.push(other_8floor)
             }
           }
@@ -1747,16 +1747,17 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             if (percentComplete == 100) {
-              let other_8floor
-              load_other_arr.push(other_8floor)
+              let other_9floor = 'flag'
+              load_other_arr.push(other_9floor)
+              $('#in_ex_floor').show()
             }
           }
         })
     }
-    if (load_other_arr.length == 9) {
-      console.log(load_other_arr)
-      $('#bottomFloor').show()
-    }
+    // if (load_other_arr.length == 9) {
+    //   console.log(load_other_arr)
+    //   $('#bottomFloor').show()
+    // }
     //隐藏模型
     function hiddenObject(obj) {
       let selectedObject = scene.getObjectByName(obj)
@@ -2186,6 +2187,7 @@
       // tween9.play()
       // tween10.play()
       // }
+      $('#bottomFloor').show()
 
       $('#in_ex_floor').hide()
     })
@@ -2468,6 +2470,7 @@
     }
     //返回主场景
     $('#back_all').on('click', function () {
+      floor_tag = 'f0'
       back_to_home()
       $('.Icon').hide()
       $('.Layer').hide()
@@ -2541,6 +2544,7 @@
       $('#hole_cover_list').show()
       //取消左侧icon
       hidden_all_Icon()
+      hidden_all_model(0)
       $('#video_list').removeClass('video_list_in')
       $('#waterTank_list').removeClass('waterTank_list_in')
       $('#smoke_list').removeClass('smoke_list_in')
