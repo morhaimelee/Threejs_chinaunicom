@@ -139,7 +139,7 @@
       width: 18.5px;
       height: 23.5px;
       position: absolute;
-      background: url('./assets/imgs/水箱.png') center center no-repeat;
+      background: url('./assets/imgs/垃圾桶.png') center center no-repeat;
       background-size: 100% auto;
       cursor: pointer;
       display: none;
@@ -149,7 +149,7 @@
       width: 18.5px;
       height: 23.5px;
       position: absolute;
-      background: url('./assets/imgs/水箱-异常.png') center center no-repeat;
+      background: url('./assets/imgs/井盖.png') center center no-repeat;
       background-size: 100% auto;
       cursor: pointer;
       display: none;
@@ -856,6 +856,7 @@
     //创建控件对象  相机对象camera作为参数   控件可以监听鼠标的变化，改变相机对象的属性
     // controls = new THREE.OrbitControls(camera, renderer.domElement);
 
+    let load_floor_arr = [] //楼层加载arr
     function initStats() {
       stats = new Stats()
       document.body.appendChild(stats.dom)
@@ -1131,7 +1132,7 @@
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
             console.log(Math.round(percentComplete, 2) + '% downloaded');
-            document.getElementById('progress').innerText = '数据加载中...';
+            document.getElementById('progress').innerText = '系统初始化中...';
             if (percentComplete == 100) {
               // $('#progress').hide()
               document.getElementById('progress').innerText = '';
@@ -1180,7 +1181,6 @@
       //   // repeat.set(1, 1)
       // });
 
-
       GLTFLoader_Floor1 = new THREE.GLTFLoader();
       GLTFLoader_Floor1.setDRACOLoader(dracoLoader)
       GLTFLoader_Floor1.load('./assets/inside_gltf/1floor/房间Draco.gltf', function (obj) {
@@ -1203,7 +1203,16 @@
           }
         })
         model_floor1.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let load_1floor
+              load_floor_arr.push(load_1floor)
+            }
+          }
+        })
 
 
       GLTFLoader_Floor2 = new THREE.GLTFLoader();
@@ -1227,7 +1236,16 @@
           }
         })
         model_floor2.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let load_2floor
+              load_floor_arr.push(load_2floor)
+            }
+          }
+        })
 
       GLTFLoader_Floor3 = new THREE.GLTFLoader();
       GLTFLoader_Floor3.setDRACOLoader(dracoLoader)
@@ -1251,7 +1269,16 @@
           }
         })
         model_floor3.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let load_3floor
+              load_floor_arr.push(load_3floor)
+            }
+          }
+        })
 
       GLTFLoader_Floor4 = new THREE.GLTFLoader();
       GLTFLoader_Floor4.setDRACOLoader(dracoLoader)
@@ -1275,7 +1302,16 @@
           }
         })
         model_floor4.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let load_4floor
+              load_floor_arr.push(load_4floor)
+            }
+          }
+        })
 
       GLTFLoader_Floor5 = new THREE.GLTFLoader();
       GLTFLoader_Floor5.setDRACOLoader(dracoLoader)
@@ -1298,7 +1334,16 @@
           }
         })
         model_floor5.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let load_5floor
+              load_floor_arr.push(load_5floor)
+            }
+          }
+        })
 
       GLTFLoader_Floor6 = new THREE.GLTFLoader();
       GLTFLoader_Floor6.setDRACOLoader(dracoLoader)
@@ -1324,14 +1369,22 @@
           }
         })
         model_floor6.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let load_6floor
+              load_floor_arr.push(load_6floor)
+            }
+          }
+        })
 
       GLTFLoader_Floor7 = new THREE.GLTFLoader();
       GLTFLoader_Floor7.setDRACOLoader(dracoLoader)
       GLTFLoader_Floor7.load('./assets/inside_gltf/7floor/房间Draco.gltf', function (obj) {
         model_floor7 = obj.scene
         scene.add(obj.scene)
-        console.log(obj)
         obj.scene.name = "7floor"
         obj.scene.traverse(function (child) {
           if (child.name == "地面") { // && child instanceof THREE.Mesh
@@ -1350,7 +1403,16 @@
           }
         })
         model_floor7.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let load_7floor
+              load_floor_arr.push(load_7floor)
+            }
+          }
+        })
 
 
       GLTFLoader_Floor8 = new THREE.GLTFLoader();
@@ -1358,7 +1420,6 @@
       GLTFLoader_Floor8.load('./assets/inside_gltf/8floor/房间Draco.gltf', function (obj) {
         model_floor8 = obj.scene
         scene.add(obj.scene)
-        console.log(obj)
         obj.scene.name = "8floor"
         obj.scene.traverse(function (child) {
           // console.log(child)
@@ -1378,7 +1439,16 @@
           }
         })
         model_floor8.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let load_8floor
+              load_floor_arr.push(load_8floor)
+            }
+          }
+        })
 
       GLTFLoader_Floor9 = new THREE.GLTFLoader();
       GLTFLoader_Floor9.setDRACOLoader(dracoLoader)
@@ -1411,9 +1481,20 @@
             console.log(Math.round(percentComplete, 2) + '% downloaded');
             document.getElementById('progress').innerText = "数据加载中" + Math.round(percentComplete, 2) + '%' + "  最低要求4核8G以上配置运行此系统";
             if (percentComplete == 100) {
+              let load_9floor
+              load_floor_arr.push(load_9floor)
               setTimeout(() => {
                 $('#progress').hide()
               }, 3000);
+              load1otherModel()
+              load2otherModel()
+              load3otherModel()
+              load4otherModel()
+              load5otherModel()
+              load6otherModel()
+              load7otherModel()
+              load8otherModel()
+              load9otherModel()
             }
           }
         })
@@ -1428,6 +1509,10 @@
       $('#meter_list').hide()
     }
 
+    // if (load_floor_arr.length == 9) {
+    //     console.log(load_floor_arr)
+    //     $('#in_ex_floor').show()
+    //   }
     // 点击隐藏
     // var moonDiv = document.createElement('div');
     // moonDiv.className = 'label';
@@ -1496,6 +1581,7 @@
     var test = 'model_video'
     let model_position
 
+    let load_other_arr = []
     function load1otherModel() {
       GLTFLoader_Floor1_other = new THREE.GLTFLoader();
       GLTFLoader_Floor1_other.setDRACOLoader(dracoLoader)
@@ -1504,7 +1590,16 @@
         obj.scene.name = '1other'
         scene.add(obj.scene)
         model_other1.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let other_1floor
+              load_other_arr.push(other_1floor)
+            }
+          }
+        })
     }
     function load2otherModel() {
       GLTFLoader_Floor2_other = new THREE.GLTFLoader();
@@ -1514,7 +1609,16 @@
         obj.scene.name = '2other'
         scene.add(obj.scene)
         model_other2.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let other_2floor
+              load_other_arr.push(other_2floor)
+            }
+          }
+        })
     }
     function load3otherModel() {
       GLTFLoader_Floor3_other = new THREE.GLTFLoader();
@@ -1524,7 +1628,16 @@
         obj.scene.name = '3other'
         scene.add(obj.scene)
         model_other3.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let other_3floor
+              load_other_arr.push(other_3floor)
+            }
+          }
+        })
     }
     function load4otherModel() {
       GLTFLoader_Floor4_other = new THREE.GLTFLoader();
@@ -1534,7 +1647,16 @@
         obj.scene.name = '4other'
         scene.add(obj.scene)
         model_other4.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let other_4floor
+              load_other_arr.push(other_4floor)
+            }
+          }
+        })
     }
     function load5otherModel() {
       GLTFLoader_Floor5_other = new THREE.GLTFLoader();
@@ -1544,7 +1666,16 @@
         obj.scene.name = '5other'
         scene.add(obj.scene)
         model_other5.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let other_5floor
+              load_other_arr.push(other_5floor)
+            }
+          }
+        })
     }
     function load6otherModel() {
       GLTFLoader_Floor6_other = new THREE.GLTFLoader();
@@ -1554,7 +1685,16 @@
         obj.scene.name = '6other'
         scene.add(obj.scene)
         model_other6.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let other_6floor
+              load_other_arr.push(other_6floor)
+            }
+          }
+        })
     }
     function load7otherModel() {
       GLTFLoader_Floor7_other = new THREE.GLTFLoader();
@@ -1564,7 +1704,16 @@
         obj.scene.name = '7other'
         scene.add(obj.scene)
         model_other7.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let other_7floor
+              load_other_arr.push(other_7floor)
+            }
+          }
+        })
     }
     function load8otherModel() {
       GLTFLoader_Floor8_other = new THREE.GLTFLoader();
@@ -1574,7 +1723,16 @@
         obj.scene.name = '8other'
         scene.add(obj.scene)
         model_other8.visible = false
-      })
+      },
+        function (xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            if (percentComplete == 100) {
+              let other_8floor
+              load_other_arr.push(other_8floor)
+            }
+          }
+        })
     }
     function load9otherModel() {
       GLTFLoader_Floor9_other = new THREE.GLTFLoader();
@@ -1588,12 +1746,16 @@
         function (xhr) {
           if (xhr.lengthComputable) {
             var percentComplete = xhr.loaded / xhr.total * 100;
-            console.log(Math.round(percentComplete, 2) + '% downloaded');
             if (percentComplete == 100) {
-              $('#bottomFloor').show()
+              let other_8floor
+              load_other_arr.push(other_8floor)
             }
           }
         })
+    }
+    if (load_other_arr.length == 9) {
+      console.log(load_other_arr)
+      $('#bottomFloor').show()
     }
     //隐藏模型
     function hiddenObject(obj) {
@@ -1712,7 +1874,7 @@
 
       loadModel('./assets/inside_gltf/设备/井盖.gltf', 'hole_cover_f0_1', 0, 'show', -0.549, 0.001, -0.001)
       loadModel('./assets/inside_gltf/设备/井盖.gltf', 'hole_cover_f0_2', 0, 'show', -3.827, -0.001, -4.112)
-      loadModel('./assets/inside_gltf/设备/井盖.gltf', 'hole_cover_f0_3', 0, 'show', 12.249, 0.218, -4.414)
+      loadModel('./assets/inside_gltf/设备/井盖.gltf', 'hole_cover_f0_3', 0, 'show', 11.249, 0.218, -4.414)
       loadModel('./assets/inside_gltf/设备/井盖.gltf', 'hole_cover_f0_4', 0, 'show', 7.732, 0.110, 1.787)
       // initStats() //加载性能监视
       animate()
@@ -1954,15 +2116,6 @@
         y: -6.49,
         z: -9.06
       })
-      load1otherModel()
-      load2otherModel()
-      load3otherModel()
-      load4otherModel()
-      load5otherModel()
-      load6otherModel()
-      load7otherModel()
-      load8otherModel()
-      load9otherModel()
 
       // if (model_floor1.position.y != 0) {
       //   return

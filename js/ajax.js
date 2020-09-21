@@ -373,8 +373,8 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
         success: function (resp) {
             console.log(resp.data)
             setTimeout(() => {
-                let videoSrc = resp.data[19].url
-                $('#equip_name').html(resp.data[19].name)
+                let videoSrc = resp.data[18].url
+                $('#equip_name').html(resp.data[18].name)
                 let arr_name = []
                 let arr_url = []
                 // $.each(resp.data, function (i, value) {
