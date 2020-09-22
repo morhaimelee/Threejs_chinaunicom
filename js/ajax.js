@@ -1264,171 +1264,219 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
             headers: { 'Auth-Token': token },
             success: function (resp) {
                 console.log(resp)
+                var data = {
+                    time: resp.data.time,
+                    used: resp.data.used
+                }
                 option3_third = {
-                    // backgroundColor: "#0f375f",
-                    xAxis: {
-                        type: 'category',
-                        data: resp.data.time,
-                        axisLine: { //  改变x轴颜色
-                            lineStyle: {
-                                color: '#26D9FF'
-                            }
-                        },
-                        axisLabel: { //  改变x轴字体颜色和大小
-                            textStyle: {
-                                color: '#7c8893',
-                                fontSize: 12
-                            },
-                            interval: 0,
-                            formatter: function (params) {
-                                var newParamsName = ""; // 最终拼接成的字符串
-                                var paramsNameNumber = params.length; // 实际标签的个数
-                                var provideNumber = 6; // 每行能显示的字的个数
-                                var rowNumber = Math.ceil(paramsNameNumber / provideNumber); // 换行的话，需要显示几行，向上取整
-                                /**
-                                 * 判断标签的个数是否大于规定的个数， 如果大于，则进行换行处理 如果不大于，即等于或小于，就返回原标签
-                                 */
-                                // 条件等同于rowNumber>1
-                                if (paramsNameNumber > provideNumber) {
-                                    /** 循环每一行,p表示行 */
-                                    for (var p = 0; p < rowNumber; p++) {
-                                        var tempStr = ""; // 表示每一次截取的字符串
-                                        var start = p * provideNumber; // 开始截取的位置
-                                        var end = start + provideNumber; // 结束截取的位置
-                                        // 此处特殊处理最后一行的索引值
-                                        if (p == rowNumber - 1) {
-                                            // 最后一次不换行
-                                            tempStr = params.substring(start, paramsNameNumber);
-                                        } else {
-                                            // 每一次拼接字符串并换行
-                                            tempStr = params.substring(start, end) + "\n";
-                                        }
-                                        newParamsName += tempStr; // 最终拼成的字符串
-                                    }
-
-                                } else {
-                                    // 将旧标签的值赋给新标签
-                                    newParamsName = params;
-                                }
-                                //将最终的字符串返回
-                                return newParamsName
-                            }
-                        },
-                        axisTick: {
-                            show: false
-                        },
-                        splitLine: {
-                            show: false,
-                            lineStyle: {
-                                color: ['#315070'],
-                                width: 1,
-                                type: 'solid'
-                            }
+                    backgroundColor: '#080b30',
+                    legend: {
+                        color: ["#17B4FA", "#47D8BE", "#F9A589"],
+                        data: ['停车场占用率'],
+                        left: 'center',
+                        // top: "8%",
+                        textStyle: {
+                            color: "#ffffff"
                         }
                     },
-                    yAxis: {
-                        type: 'value',
-                        axisLine: { //  改变y轴颜色
-                            show: false,
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
                             lineStyle: {
-                                color: '#26D9FF'
-                            }
-                        },
-                        axisLabel: { //  改变y轴字体颜色和大小
-                            //formatter: '{value} m³ ', //  给y轴添加单位
-                            textStyle: {
-                                color: "rgba(250,250,250,0.6)",
-                                fontSize: 12
+                                color: {
+                                    type: 'linear',
+                                    x: 0,
+                                    y: 0,
+                                    x2: 0,
+                                    y2: 1,
+                                    colorStops: [{
+                                        offset: 0,
+                                        color: 'rgba(0, 255, 233,0)'
+                                    }, {
+                                        offset: 0.5,
+                                        color: 'rgba(255, 255, 255,1)',
+                                    }, {
+                                        offset: 1,
+                                        color: 'rgba(0, 255, 233,0)'
+                                    }],
+                                    global: false
+                                }
                             },
                         },
-                        axisTick: {
+                    },
+                    // grid: {
+                    //     top: '15%',
+                    //     left: '5%',
+                    //     right: '5%',
+                    //     bottom: '15%',
+                    //     // containLabel: true
+                    // },
+                    xAxis: [{
+                        type: 'category',
+                        axisLine: {
+                            show: true,
+                            lineStyle: {
+                                color: '#9581F5'
+                            },
+                        },
+                        splitArea: {
+                            // show: true,
+                            color: '#f00',
+                            lineStyle: {
+                                color: '#f00'
+                            },
+                        },
+                        // axisLabel: {
+                        //     color: '#fff',
+                        //     formatter: function (params) {
+                        //         var newParamsName = ""; // 最终拼接成的字符串
+                        //         var paramsNameNumber = params.length; // 实际标签的个数
+                        //         var provideNumber = 6; // 每行能显示的字的个数
+                        //         var rowNumber = Math.ceil(paramsNameNumber / provideNumber); // 换行的话，需要显示几行，向上取整
+                        //         /**
+                        //          * 判断标签的个数是否大于规定的个数， 如果大于，则进行换行处理 如果不大于，即等于或小于，就返回原标签
+                        //          */
+                        //         // 条件等同于rowNumber>1
+                        //         if (paramsNameNumber > provideNumber) {
+                        //             /** 循环每一行,p表示行 */
+                        //             for (var p = 0; p < rowNumber; p++) {
+                        //                 var tempStr = ""; // 表示每一次截取的字符串
+                        //                 var start = p * provideNumber; // 开始截取的位置
+                        //                 var end = start + provideNumber; // 结束截取的位置
+                        //                 // 此处特殊处理最后一行的索引值
+                        //                 if (p == rowNumber - 1) {
+                        //                     // 最后一次不换行
+                        //                     tempStr = params.substring(start, paramsNameNumber);
+                        //                 } else {
+                        //                     // 每一次拼接字符串并换行
+                        //                     tempStr = params.substring(start, end) + "\n";
+                        //                 }
+                        //                 newParamsName += tempStr; // 最终拼成的字符串
+                        //             }
+
+                        //         } else {
+                        //             // 将旧标签的值赋给新标签
+                        //             newParamsName = params;
+                        //         }
+                        //         //将最终的字符串返回
+                        //         return newParamsName
+                        //     }
+                        // },
+                        splitLine: {
                             show: false
                         },
+                        boundaryGap: false,
+                        data: resp.data.time,
+                    }],
+
+                    yAxis: [{
+                        type: 'value',
+                        min: 0,
+                        max: 100,
+                        // splitNumber: 4,
                         splitLine: {
                             show: true,
                             lineStyle: {
-                                color: ['#315070'],
-                                width: 1,
-                                type: 'solid'
+                                color: 'rgba(255,255,255,0.1)'
                             }
-                        }
-                    },
+                        },
+                        axisLine: {
+                            show: true,
+                            lineStyle: {
+                                color: '#9581F5'
+                            },
+                        },
+                        axisLabel: {
+                            show: true,
+                            margin: 20,
+                            textStyle: {
+                                color: '#d1e6eb'
+                            }, formatter: function (params) {
+                                return params + '%'
+                            }
+                        },
+                        axisTick: {
+                            show: true,
+                        },
+                    }],
                     series: [{
-                        smooth: true,
-                        symbol: 'circle',
-                        symbolSize: 5,
-                        markPoint: {
-                            symbol: "circle"
-                        },
-                        // markLine:{
-                        //     symbol:"none",
-                        //     label:{
-                        //         normal:{
-                        //             color:"#fff",
-                        //             backgroundColor: 'rgba(228,0,54,70)',
-                        //             fontSize:16,
-                        //             padding: 4,
-                        //             borderRadius:4,
-                        //             show:true,
-                        //             position:'start',
-                        //             distance:4
-                        //         }
-                        //     },
-                        //     lineStyle:{
-                        //         type:"solid",
-                        //         color:'rgba(228,0,54,60)',
-                        //         width:2
-                        //     },
-                        //     data: [{
-                        //         yAxis: 400
-                        //     }]
-                        // },
-                        data: resp.data.used,
+                        name: '停车占用率',
                         type: 'line',
-                        itemStyle: {
-                            normal: {
-                                label: {
-                                    show: true,
-                                    color: "#fff",
-                                    fontSize: 12
-                                },
-                                color: "#294E8F",
-                                borderColor: "3D7EEB",
-                                borderWidth: 2,
-                            }
-                        },
+                        // smooth: true, //是否平滑
+                        showAllSymbol: true,
+                        // symbol: 'image://./static/images/guang-circle.png',
+                        symbol: 'circle',
+                        symbolSize: 6,
                         lineStyle: {
                             normal: {
-                                width: 2,
-                                color: "#327BFA",
-                                shadowColor: "#3D7EEB",
-                                shadowBlur: 10
-                            }
+                                color: "#6c50f3",
+                                shadowColor: 'rgba(0, 0, 0, .3)',
+                                shadowBlur: 0,
+                                shadowOffsetY: 5,
+                                shadowOffsetX: 5,
+                            },
+                        },
+                        label: {
+                            show: true,
+                            position: 'top',
+                            textStyle: {
+                                color: '#6c50f3',
+                            },
+                            // normal: {
+                            //     show: true,
+                            //     position: "top",
+                            //     formatter: [
+                            //         ' {a|{c}%}',
+                            //     ].join(','),
+                            //     rich: {
+                            //         a: {
+                            //             color: '#fff',
+                            //             align: 'center',
+                            //         },
+                            //     }
+                            // }
+                        },
+                        itemStyle: {
+                            color: "#6c50f3",
+                            borderColor: "#fff",
+                            borderWidth: 3,
+                            shadowColor: 'rgba(0, 0, 0, .3)',
+                            shadowBlur: 0,
+                            shadowOffsetY: 2,
+                            shadowOffsetX: 2,
+                        },
+                        tooltip: {
+                            show: true,
+                            formatter: '{b}<br />{a0}: {c0}%<br />{a1}: {c1}%'
                         },
                         areaStyle: {
-                            color: {
-                                type: 'linear',
-                                x: 0,
-                                y: 0,
-                                x2: 0,
-                                y2: 1,
-                                colorStops: [{
-                                    offset: 0.5,
-                                    color: 'rgba(61,126,235,0.5)' // 0% 处的颜色
-                                }, {
+                            normal: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: 'rgba(108,80,243,0.3)'
+                                },
+                                {
                                     offset: 1,
-                                    color: 'rgba(61,126,235,0)' // 100% 处的颜色
-                                }],
-                                global: false // 缺省为 false
+                                    color: 'rgba(108,80,243,0)'
+                                }
+                                ], false),
+                                shadowColor: 'rgba(108,80,243, 0.9)',
+                                shadowBlur: 20
                             }
-                        }
+                        },
+                        data: resp.data.used
                     }]
                 };
                 echarts.init(document.getElementById('echarts_third_rightTop')).setOption(option3_third); //三页右上echarts
             }
         })
     }
-    car_use_rate()
+    setTimeout(() => {
+        car_use_rate()
+    }, 3000);
+    setInterval(() => {
+        car_use_rate()
+    }, 30000);
 
     function person_infloor_load() {
         $.ajax({
@@ -1497,7 +1545,7 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                         {
                             type: "bar",
                             barWidth: "30%",
-                            data: [15],
+                            data: [resp.data.personFloor.A6],
                             coordinateSystem: "polar",
                             name: "A6",
                             stack: "a",
@@ -1514,7 +1562,7 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                         },
                         {
                             type: "bar",
-                            data: [0, 28, 0, 0],
+                            data: [0, resp.data.personFloor.B6, 0, 0],
                             coordinateSystem: "polar",
                             name: "B6",
                             stack: "a",
@@ -1529,7 +1577,7 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                         },
                         {
                             type: "bar",
-                            data: [0, 0, 45, 0],
+                            data: [0, 0, resp.data.personFloor.B8, 0],
                             coordinateSystem: "polar",
                             name: "B8",
                             stack: "a",
@@ -1545,7 +1593,7 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                         },
                         {
                             type: "bar",
-                            data: [0, 0, 0, 65],
+                            data: [0, 0, 0, resp.data.personFloor.rest],
                             coordinateSystem: "polar",
                             name: "其它",
                             stack: "a",
@@ -1577,54 +1625,51 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                 echarts.init(document.getElementById('echarts_second_leftTop')).setOption(option1_second); //二页左上角echarts
                 //今日人流量统计
                 option2_second = {
-                    // backgroundColor: '#00265f',
+                    // backgroundColor: '#031A32',
                     tooltip: {
-                        trigger: 'axis',
+                        trigger: "axis",
                         axisPointer: {
-                            type: 'shadow'
+                            type: "shadow",
+                            label: {
+                                show: true
+                            }
                         }
                     },
-                    legend: {
-                        data: ['进', '出'],
-                        align: 'right',
-                        right: 10,
-                        textStyle: {
-                            color: "#fff"
-                        },
-                        itemWidth: 10,
-                        itemHeight: 10,
-                        itemGap: 35
-                    },
                     // grid: {
-                    //     left: '3%',
-                    //     right: '4%',
-                    //     bottom: '3%',
-                    //     containLabel: true
+                    //     left: "4%",
+                    //     top: "18%",
+                    //     right: "5%",
+                    //     bottom: "22%"
                     // },
-                    xAxis: [{
-                        type: 'category',
+                    legend: {
+                        data: ["进", "出"],
+                        top: "4%",
+                        textStyle: {
+                            color: "#1FC3CE",
+                            fontSize: 12
+                        }
+                    },
+                    xAxis: {
                         data: resp.data.peopleCounting.time,
                         axisLine: {
-                            show: true,
+                            show: true, //隐藏X轴轴线
                             lineStyle: {
-                                color: "#063374",
-                                width: 1,
-                                type: "solid"
+                                color: "#3d5269",
+                                width: 1
                             }
-                        }, nameTextStyle: {
-                            fontWeight: 200,
-                            fontSize: 12
                         },
                         axisTick: {
-                            show: false,
+                            show: true, //隐藏X轴刻度
+                            alignWithLabel: true
                         },
                         axisLabel: {
                             show: true,
                             textStyle: {
-                                color: "#00c7ff",
-                                fontSize: 12
+                                color: "#396A87", //X轴文字颜色
+                                fontSize: 10
                             },
                             interval: 0,
+                            // rotate: 30,
                             formatter: function (params) {
                                 var newParamsName = ""; // 最终拼接成的字符串
                                 var paramsNameNumber = params.length; // 实际标签的个数
@@ -1658,55 +1703,78 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                                 //将最终的字符串返回
                                 return newParamsName
                             }
-                        },
-                    }],
+                        }
+                    },
                     yAxis: [{
-                        type: 'value',
-                        axisLabel: {
-                            formatter: '{value}'
-                        },
-                        axisTick: {
-                            show: false,
-                        },
-                        axisLine: {
-                            show: false,
-                            lineStyle: {
-                                color: "#00c7ff",
-                                width: 1,
-                                type: "solid"
-                            },
+                        type: "value",
+                        name: "人数",
+                        nameTextStyle: {
+                            color: "#396A87",
+                            fontSize: 12
                         },
                         splitLine: {
+                            show: true,
                             lineStyle: {
-                                color: "#063374",
+                                width: 1,
+                                color: "#ffffff"
+                            }
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLine: {
+                            show: false
+                        },
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                                color: "#396A87",
+                                fontSize: 12
                             }
                         }
                     }],
                     series: [{
-                        name: '进',
-                        type: 'bar',
-                        data: resp.data.peopleCounting.in,
-                        barWidth: 5, //柱子宽度
-                        // barGap: 1, //柱子之间间距
+                        name: "进",
+                        type: "bar",
+                        barWidth: 8,
                         itemStyle: {
                             normal: {
-                                color: '#008AFF',
-                                opacity: 1,
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: "#00FFFF"
+                                },
+                                {
+                                    offset: 1,
+                                    color: "#0080FF"
+                                }
+                                ])
                             }
-                        }
-                    }, {
-                        name: '出',
-                        type: 'bar',
-                        data: resp.data.peopleCounting.out,
-                        barWidth: 5,
-                        // barGap: 1,
+                        },
+                        data: resp.data.peopleCounting.in
+                    },
+                    {
+                        name: "出",
+                        type: "bar",
+                        barWidth: 8,
                         itemStyle: {
                             normal: {
-                                color: '#FF9000'
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: "#E29052"
+                                },
+                                {
+                                    offset: 1,
+                                    color: "#FA5A53"
+                                }
+                                ])
                             }
-                        }
-                    }]
-                };
+                        },
+                        data: resp.data.peopleCounting.out
+                    },
+
+                    ]
+                }
+
                 echarts.init(document.getElementById('echarts_second_leftBottom')).setOption(option2_second); //二页左上角echarts
             }
 
