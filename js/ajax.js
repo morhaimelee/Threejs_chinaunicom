@@ -901,15 +901,15 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                 $('#visitors_enter1 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[0].deviceName)
                 $('#visitors_enter1 li').eq(3).html('进入时间：' + resp.data.personEnterRealTime[0].swingTime)
 
-                $('#visitors_enter2 li img').eq(0).attr('src', resp.data.personEnterRealTime[3].recordImage)
-                $('#visitors_enter2 li').eq(1).html('姓名：' + resp.data.personEnterRealTime[3].personName)
-                $('#visitors_enter2 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[3].deviceName)
-                $('#visitors_enter2 li').eq(3).html('进入时间：' + resp.data.personEnterRealTime[3].swingTime)
+                $('#visitors_enter2 li img').eq(0).attr('src', resp.data.personEnterRealTime[1].recordImage)
+                $('#visitors_enter2 li').eq(1).html('姓名：' + resp.data.personEnterRealTime[1].personName)
+                $('#visitors_enter2 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[1].deviceName)
+                $('#visitors_enter2 li').eq(3).html('进入时间：' + resp.data.personEnterRealTime[1].swingTime)
 
-                $('#visitors_enter3 li img').eq(0).attr('src', resp.data.personEnterRealTime[6].recordImage)
-                $('#visitors_enter3 li').eq(1).html('姓名：' + resp.data.personEnterRealTime[6].personName)
-                $('#visitors_enter3 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[6].deviceName)
-                $('#visitors_enter3 li').eq(3).html('进入时间：' + resp.data.personEnterRealTime[6].swingTime)
+                $('#visitors_enter3 li img').eq(0).attr('src', resp.data.personEnterRealTime[2].recordImage)
+                $('#visitors_enter3 li').eq(1).html('姓名：' + resp.data.personEnterRealTime[2].personName)
+                $('#visitors_enter3 li').eq(2).html('通过门禁：' + resp.data.personEnterRealTime[2].deviceName)
+                $('#visitors_enter3 li').eq(3).html('进入时间：' + resp.data.personEnterRealTime[2].swingTime)
 
                 $('.visitor-sys ul li').eq(0).html(resp.data.personRealTime.totalNum)
                 $('.visitor-sys ul li').eq(1).html(resp.data.personRealTime.currentNum)
@@ -930,10 +930,10 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                 $('.visitor-list ul li').eq(2).children().eq(2).html(resp.data.personEnterDetail[2].timeStart)
                 $('.visitor-list ul li').eq(2).children().eq(3).html(resp.data.personEnterDetail[2].status)
 
-                $('.visitor-list ul li').eq(3).children().eq(0).html(resp.data.personEnterDetail[3].personName)
-                $('.visitor-list ul li').eq(3).children().eq(1).html(resp.data.personEnterDetail[3].accessName)
-                $('.visitor-list ul li').eq(3).children().eq(2).html(resp.data.personEnterDetail[3].timeStart)
-                $('.visitor-list ul li').eq(3).children().eq(3).html(resp.data.personEnterDetail[3].status)
+                // $('.visitor-list ul li').eq(3).children().eq(0).html(resp.data.personEnterDetail[3].personName)
+                // $('.visitor-list ul li').eq(3).children().eq(1).html(resp.data.personEnterDetail[3].accessName)
+                // $('.visitor-list ul li').eq(3).children().eq(2).html(resp.data.personEnterDetail[3].timeStart)
+                // $('.visitor-list ul li').eq(3).children().eq(3).html(resp.data.personEnterDetail[3].status)
             }
         })
     }
@@ -1244,7 +1244,7 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
             url: "http://58.16.56.202:9000/smart-bldg/big/screen/carInAndOutRecords",
             headers: { 'Auth-Token': token },
             success: function (resp) {
-                // console.log(resp.data)
+                console.log(resp.data)
                 let records_data = resp.data.slice(0, 10)
                 var html = template("records_temp", { record: records_data })
                 document.getElementById('records_list').innerHTML = html
@@ -1269,7 +1269,7 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                     used: resp.data.used
                 }
                 option3_third = {
-                    backgroundColor: '#080b30',
+                    // backgroundColor: '#080b30',
                     legend: {
                         color: ["#17B4FA", "#47D8BE", "#F9A589"],
                         data: ['停车场占用率'],
@@ -1304,19 +1304,19 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                             },
                         },
                     },
-                    // grid: {
-                    //     top: '15%',
-                    //     left: '5%',
-                    //     right: '5%',
-                    //     bottom: '15%',
-                    //     // containLabel: true
-                    // },
+                    grid: {
+                        top: '15%',
+                        // left: '-5%',
+                        // right: '5%',
+                        bottom: '15%',
+                        //     // containLabel: true
+                    },
                     xAxis: [{
                         type: 'category',
                         axisLine: {
                             show: true,
                             lineStyle: {
-                                color: '#9581F5'
+                                color: '#2c6cc4'
                             },
                         },
                         splitArea: {
@@ -1383,14 +1383,14 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                         axisLine: {
                             show: true,
                             lineStyle: {
-                                color: '#9581F5'
+                                color: '#2c6cc4'
                             },
                         },
                         axisLabel: {
                             show: true,
-                            margin: 20,
+                            // margin: 20,
                             textStyle: {
-                                color: '#d1e6eb'
+                                color: '#2c6cc4'
                             }, formatter: function (params) {
                                 return params + '%'
                             }
@@ -1403,13 +1403,13 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                         name: '停车占用率',
                         type: 'line',
                         // smooth: true, //是否平滑
-                        showAllSymbol: true,
+                        showAllSymbol: false,
                         // symbol: 'image://./static/images/guang-circle.png',
                         symbol: 'circle',
                         symbolSize: 6,
                         lineStyle: {
                             normal: {
-                                color: "#6c50f3",
+                                color: "#2c6cc4",
                                 shadowColor: 'rgba(0, 0, 0, .3)',
                                 shadowBlur: 0,
                                 shadowOffsetY: 5,
@@ -1420,24 +1420,24 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                             show: true,
                             position: 'top',
                             textStyle: {
-                                color: '#6c50f3',
+                                color: '#2c6cc4',
                             },
-                            // normal: {
-                            //     show: true,
-                            //     position: "top",
-                            //     formatter: [
-                            //         ' {a|{c}%}',
-                            //     ].join(','),
-                            //     rich: {
-                            //         a: {
-                            //             color: '#fff',
-                            //             align: 'center',
-                            //         },
-                            //     }
-                            // }
+                            normal: {
+                                show: true,
+                                position: "top",
+                                formatter: [
+                                    ' {a|{c}%}',
+                                ].join(','),
+                                rich: {
+                                    a: {
+                                        color: '#2c6cc4',
+                                        align: 'center',
+                                    },
+                                }
+                            }
                         },
                         itemStyle: {
-                            color: "#6c50f3",
+                            color: "#2c6cc4",
                             borderColor: "#fff",
                             borderWidth: 3,
                             shadowColor: 'rgba(0, 0, 0, .3)',
@@ -1446,8 +1446,9 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                             shadowOffsetX: 2,
                         },
                         tooltip: {
-                            show: true,
-                            formatter: '{b}<br />{a0}: {c0}%<br />{a1}: {c1}%'
+                            show: true
+                            // formatter: '{c}%'
+                            // formatter: '{b} <br/> {c}%'//'{b}' + '时' + '<br />{a}: {c}' + '%'//<br />{a1}: {c1}
                         },
                         areaStyle: {
                             normal: {
@@ -1665,7 +1666,7 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                         axisLabel: {
                             show: true,
                             textStyle: {
-                                color: "#396A87", //X轴文字颜色
+                                color: "#ffffff", //X轴文字颜色
                                 fontSize: 10
                             },
                             interval: 0,
@@ -1709,7 +1710,7 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                         type: "value",
                         name: "人数",
                         nameTextStyle: {
-                            color: "#396A87",
+                            color: "#ffffff",
                             fontSize: 12
                         },
                         splitLine: {
@@ -1728,7 +1729,7 @@ $.post("http://58.16.56.202:9000/smart-bldg/big/screen/oauth/getToken", { appId:
                         axisLabel: {
                             show: true,
                             textStyle: {
-                                color: "#396A87",
+                                color: "#ffffff",
                                 fontSize: 12
                             }
                         }
